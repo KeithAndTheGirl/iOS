@@ -54,7 +54,7 @@
 	[self addSubview:_backgroundView];
 
 	_selectedItemBackgroundView = [[KATGTabBarSelectedItemBackgroundView alloc] init];
-	[self addSubview:_selectedItemBackgroundView];
+//	[self addSubview:_selectedItemBackgroundView];
 
 	_itemContainerView = [[UIView alloc] init];
 	_itemContainerView.backgroundColor = [UIColor clearColor];

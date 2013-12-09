@@ -24,9 +24,11 @@
 @class TDCollectionView;
 
 typedef NS_ENUM(NSUInteger, KATGSection) {
-	KATGSectionSchedule,
+	KATGSectionArchive,
 	KATGSectionLive,
-	KATGSectionArchive
+	KATGSectionSchedule,
+	KATGSectionYoutube,
+	KATGSectionAbout
 };
 
 @interface KATGMainDataSource : NSObject

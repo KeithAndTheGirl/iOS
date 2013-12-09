@@ -146,15 +146,21 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	// Setup the tab bar
 	NSMutableArray *items = [NSMutableArray new];
 	
-	KATGTabBarTabItem *archiveItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"schedule-tab-icon.png"] title:NSLocalizedString(@"Schedule", nil)];
-	[items addObject:archiveItem];
+	KATGTabBarTabItem *scheduleItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"archive-tab-icon.png"] title:NSLocalizedString(@"Episodes", nil)];
+	[items addObject:scheduleItem];
 	
 	KATGTabBarTabItem *liveItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"live-tab-icon.png"] title:NSLocalizedString(@"Live", nil)];
 	[items addObject:liveItem];
 	
-	KATGTabBarTabItem *scheduleItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"archive-tab-icon.png"] title:NSLocalizedString(@"Episodes", nil)];
-	[items addObject:scheduleItem];
+	KATGTabBarTabItem *archiveItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"schedule-tab-icon.png"] title:NSLocalizedString(@"Schedule", nil)];
+	[items addObject:archiveItem];
+    
+	KATGTabBarTabItem *youTubeItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"gear"] title:NSLocalizedString(@"_YouTube_", nil)];
+	[items addObject:youTubeItem];
 	
+    KATGTabBarTabItem *aboutItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"gear"] title:NSLocalizedString(@"_About_", nil)];
+	[items addObject:aboutItem];
+    
 	self.tabBar.tabItems = items;
 
 #if 0
@@ -538,23 +544,9 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	
 	NSIndexPath *indexPath = nil;
 	
-	switch ((KATGSection)index)
-	{
-		case KATGSectionSchedule:
-			// Schedule
-			indexPath = [NSIndexPath indexPathForItem:0 inSection:KATGSectionSchedule];
-			break;
-		case KATGSectionLive:
-			// Live
-			indexPath = [NSIndexPath indexPathForItem:0 inSection:KATGSectionLive];
-			break;
-		case KATGSectionArchive:
-			// Archive
-			indexPath = [NSIndexPath indexPathForItem:0 inSection:KATGSectionArchive];
-			break;
-	}
+    indexPath = [NSIndexPath indexPathForItem:0 inSection:index];
 	
-	[self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
+	[self.collectionView scrollToItemAtIndexPath:indexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
 	self.mainDataSource.collectionViewScrollingAnimationInProgress = true;
 }
 

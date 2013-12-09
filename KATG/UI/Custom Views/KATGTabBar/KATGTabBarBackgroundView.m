@@ -38,7 +38,8 @@
 - (void)drawRect:(CGRect)rect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	
+	CGContextDrawImage(context, self.bounds, [[UIImage imageNamed:@"TabBarBackground.png"] CGImage]);
+    /*
 	UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:self.corners cornerRadii:CGSizeMake(self.cornerRadius, self.cornerRadius)];
 	[maskPath addClip];
 	
@@ -53,6 +54,7 @@
 	CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
 	CGGradientRelease(gradient);
 	CGColorSpaceRelease(colorspace);
+     */
 }
 
 @end

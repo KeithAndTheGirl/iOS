@@ -1,8 +1,8 @@
 //
-//  KATGScheduleCell.m
+//  KATGYoutubeCell.m
 //  KATG
 //
-//  Created by Timothy Donnelly on 12/8/12.
+//  Created by Nicolas Rostov on 12/9/13.
 //  Copyright (c) 2012 Doug Russell. All rights reserved.
 //  
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,20 +18,19 @@
 //  limitations under the License.
 //  
 
-#import "KATGScheduleCell.h"
+#import "KATGYoutubeCell.h"
 #import "KATGContentContainerView.h"
 #import "KATGScheduleItemTableViewCell.h"
 
-NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTableViewCellIdentifier";
+NSString *const kKATGYoutubeTableViewCellIdentifier = @"kKATGYoutubeTableViewCellIdentifier";
 
-@interface KATGScheduleCell () <UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) KATGContentContainerView *containerView;
+@interface KATGYoutubeCell () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UITableView *tableView;
 
 @end
 
-@implementation KATGScheduleCell
+@implementation KATGYoutubeCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -42,9 +41,11 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 		_tableView.allowsSelection = NO;
 		_tableView.rowHeight = 64.0f;
 		_tableView.separatorColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
-		[_tableView registerClass:[KATGScheduleItemTableViewCell class] forCellReuseIdentifier:kKATGScheduleItemTableViewCellIdentifier];
+		[_tableView registerClass:[KATGScheduleItemTableViewCell class] forCellReuseIdentifier:kKATGYoutubeTableViewCellIdentifier];
 		_tableView.backgroundColor = [UIColor clearColor];
 		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
 		[self.contentView addSubview:_tableView];
 	}
 	return self;
@@ -65,7 +66,20 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
-	self.containerView.frame = self.contentView.bounds;
 }
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return 5;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kKATGYoutubeTableViewCellIdentifier forIndexPath:indexPath];
+	cell.textLabel.text = @"Youtube cell";
+	return cell;
+}
+
 
 @end

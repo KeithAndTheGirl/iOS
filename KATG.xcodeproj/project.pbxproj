@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		017C920D185561B400E33003 /* TabBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920B185561B400E33003 /* TabBarBackground.png */; };
+		017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920C185561B400E33003 /* TabBarBackground@2x.png */; };
+		017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92101855EA9700E33003 /* KATGYoutubeCell.m */; };
+		017C92141855F48000E33003 /* KATGAboutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92131855F48000E33003 /* KATGAboutCell.m */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
 		227017CA16521B5C004E4B0B /* KATGSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 227017C916521B5C004E4B0B /* KATGSearchBar.m */; };
@@ -160,6 +164,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		017C920B185561B400E33003 /* TabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground.png; sourceTree = "<group>"; };
+		017C920C185561B400E33003 /* TabBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarBackground@2x.png"; sourceTree = "<group>"; };
+		017C920F1855EA9700E33003 /* KATGYoutubeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYoutubeCell.h; path = "View Controllers/KATGYoutubeCell.h"; sourceTree = "<group>"; };
+		017C92101855EA9700E33003 /* KATGYoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeCell.m; path = "View Controllers/KATGYoutubeCell.m"; sourceTree = "<group>"; };
+		017C92121855F48000E33003 /* KATGAboutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAboutCell.h; path = "View Controllers/KATGAboutCell.h"; sourceTree = "<group>"; };
+		017C92131855F48000E33003 /* KATGAboutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAboutCell.m; path = "View Controllers/KATGAboutCell.m"; sourceTree = "<group>"; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
 		22192ED116745FF000D2B1C1 /* TDCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCollectionView.h; path = TDCollectionView/TDCollectionView.h; sourceTree = "<group>"; };
@@ -628,6 +638,10 @@
 		229A79D01674374B00792258 /* Main Collection View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				017C92121855F48000E33003 /* KATGAboutCell.h */,
+				017C92131855F48000E33003 /* KATGAboutCell.m */,
+				017C920F1855EA9700E33003 /* KATGYoutubeCell.h */,
+				017C92101855EA9700E33003 /* KATGYoutubeCell.m */,
 				228F940E1651FDD0006A1A05 /* KATGArchiveCell.h */,
 				228F940F1651FDD0006A1A05 /* KATGArchiveCell.m */,
 				229A79D1167437B000792258 /* KATGScheduleCell.h */,
@@ -1007,6 +1021,8 @@
 		9115C10C172E13E5002942B6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				017C920B185561B400E33003 /* TabBarBackground.png */,
+				017C920C185561B400E33003 /* TabBarBackground@2x.png */,
 				9115C10D172E13E5002942B6 /* archive-tab-icon.png */,
 				9115C10E172E13E5002942B6 /* archive-tab-icon@2x.png */,
 				9115C10F172E13E5002942B6 /* gear.png */,
@@ -1106,6 +1122,7 @@
 			files = (
 				9108996F15EAE15500FB57C3 /* InfoPlist.strings in Resources */,
 				229A79CB16742D8C00792258 /* KATGMainViewController.xib in Resources */,
+				017C920D185561B400E33003 /* TabBarBackground.png in Resources */,
 				9115C119172E13E5002942B6 /* Default-568h@2x.png in Resources */,
 				9115C11A172E13E5002942B6 /* main-bg.png in Resources */,
 				9115C11B172E13E5002942B6 /* main-bg@2x.png in Resources */,
@@ -1135,6 +1152,7 @@
 				228D43F31731830B00FA94FE /* live-mic@2x.png in Resources */,
 				228D43FD1731DB3600FA94FE /* cigarette-smoke.png in Resources */,
 				228D44021732113B00FA94FE /* bubble.png in Resources */,
+				017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */,
 				228D44041732177C00FA94FE /* light-bubble.png in Resources */,
 				9131561217717CE000475CAE /* Entitlements.plist in Resources */,
 				91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */,
@@ -1180,6 +1198,7 @@
 				91089D1715EAE58800FB57C3 /* ESArrayPropertyMap.m in Sources */,
 				91089D1815EAE58800FB57C3 /* ESBOOLPropertyMap.m in Sources */,
 				91089D1915EAE58800FB57C3 /* ESDoublePropertyMap.m in Sources */,
+				017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */,
 				91089D1A15EAE58800FB57C3 /* ESEpochDatePropertyMap.m in Sources */,
 				91089D1B15EAE58800FB57C3 /* ESFloatPropertyMap.m in Sources */,
 				91089D1C15EAE58800FB57C3 /* ESIntPropertyMap.m in Sources */,
@@ -1208,6 +1227,7 @@
 				228F94101651FDD0006A1A05 /* KATGArchiveCell.m in Sources */,
 				228F9414165207EC006A1A05 /* KATGShowViewController.m in Sources */,
 				227017CA16521B5C004E4B0B /* KATGSearchBar.m in Sources */,
+				017C92141855F48000E33003 /* KATGAboutCell.m in Sources */,
 				229EC8CE16704F6600FB899A /* KATGDataStore.m in Sources */,
 				229EC8D5167060DC00FB899A /* KATGShow.m in Sources */,
 				229EC8D81670639300FB899A /* KATGImage.m in Sources */,

@@ -30,6 +30,8 @@
 #import "KATGScheduleCell.h"
 #import "KATGSHowView.h"
 #import "KATGLiveCell.h"
+#import "KATGYoutubeCell.h"
+#import "KATGAboutCell.h"
 
 #import "KATGScheduledEvent.h"
 
@@ -41,6 +43,8 @@ static CGFloat const kKATGCollectionViewColumnMargin = 16.0f;
 static NSString *const kKATGScheduleCellIdentifier = @"kKATGScheduleCellIdentifier";
 static NSString *const kKATGLiveCellIdentifier = @"kKATGLiveCellIdentifier";
 static NSString *const kKATGArchiveCellIdentifier = @"kKATGArchiveCellIdentifier";
+static NSString *const kKATGYoutubeCellIdentifier = @"kKATGYoutubeCellIdentifier";
+static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 
 @interface KATGMainDataSource () <KATGMainResultsControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITableViewDataSource, UITableViewDelegate>
 
@@ -121,12 +125,14 @@ static NSString *const kKATGArchiveCellIdentifier = @"kKATGArchiveCellIdentifier
 		[_mainCollectionView registerClass:[KATGScheduleCell class] forCellWithReuseIdentifier:kKATGScheduleCellIdentifier];
 		[_mainCollectionView registerClass:[KATGLiveCell class] forCellWithReuseIdentifier:kKATGLiveCellIdentifier];
 		[_mainCollectionView registerClass:[KATGArchiveCell class] forCellWithReuseIdentifier:kKATGArchiveCellIdentifier];
+		[_mainCollectionView registerClass:[KATGYoutubeCell class] forCellWithReuseIdentifier:kKATGYoutubeCellIdentifier];
+		[_mainCollectionView registerClass:[KATGAboutCell class] forCellWithReuseIdentifier:kKATGAboutCellIdentifier];
 	}
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-	return 3;
+	return 5;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -143,6 +149,10 @@ static NSString *const kKATGArchiveCellIdentifier = @"kKATGArchiveCellIdentifier
 				return [self.resultsController.shows count];
 			}
 			return 0;
+        case KATGSectionYoutube:
+            return 1;
+        case KATGSectionAbout:
+            return 1;
 		default:
 			return 0;
 	}
@@ -170,6 +180,12 @@ static NSString *const kKATGArchiveCellIdentifier = @"kKATGArchiveCellIdentifier
 			cell = archiveCell;
 			break;
 		}
+        case KATGSectionYoutube:
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGYoutubeCellIdentifier forIndexPath:indexPath];
+			break;
+        case KATGSectionAbout:
+            cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGAboutCellIdentifier forIndexPath:indexPath];
+			break;
 	}
 	return cell;
 }
@@ -192,14 +208,14 @@ static NSString *const kKATGArchiveCellIdentifier = @"kKATGArchiveCellIdentifier
 	CGFloat margin = kKATGCollectionViewColumnMargin*2.0f;
 	switch ((KATGSection)indexPath.section)
 	{
+		case KATGSectionYoutube:
+		case KATGSectionAbout:
 		case KATGSectionSchedule:
-			cellSize = CGSizeMake(rect.size.width - margin, rect.size.height - margin);
-			break;
 		case KATGSectionLive:
-			cellSize = CGSizeMake(rect.size.width - margin, rect.size.height - margin);
+			cellSize = CGSizeMake(rect.size.width, rect.size.height);
 			break;
 		case KATGSectionArchive:
-			cellSize = CGSizeMake(rect.size.width - margin, 120.0f);
+			cellSize = CGSizeMake(rect.size.width, 120.0f);
 			break;
 		default:
 			NSParameterAssert(NO);
@@ -212,6 +228,8 @@ static NSString *const kKATGArchiveCellIdentifier = @"kKATGArchiveCellIdentifier
 {
 	switch ((KATGSection)section)
 	{
+        case KATGSectionAbout:
+		case KATGSectionYoutube:
 		case KATGSectionSchedule:
 		case KATGSectionLive:
 			return UIEdgeInsetsMake(0.0f, kKATGCollectionViewColumnMargin, 0.0f, kKATGCollectionViewColumnMargin);
