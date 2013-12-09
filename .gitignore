@@ -1,1 +1,7 @@
-DerivedData
+build/*
+.DS_Store
+*.pbxuser
+*.mode1v3
+*.pyc
+*.xcworkspace
+xcuserdata
