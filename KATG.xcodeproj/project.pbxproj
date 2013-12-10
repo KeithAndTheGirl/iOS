@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0111A7651856998800A3F8D5 /* Application-iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7641856998800A3F8D5 /* Application-iPhone.xib */; };
+		0111A76718569D6200A3F8D5 /* Episodes.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76618569D6200A3F8D5 /* Episodes.png */; };
+		0111A76918569D9D00A3F8D5 /* Episodes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76818569D9D00A3F8D5 /* Episodes@2x.png */; };
+		0111A76C18569F2400A3F8D5 /* Live.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76A18569F2400A3F8D5 /* Live.png */; };
+		0111A76D18569F2400A3F8D5 /* Live@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76B18569F2400A3F8D5 /* Live@2x.png */; };
+		0111A7741856A08600A3F8D5 /* About.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76E1856A08600A3F8D5 /* About.png */; };
+		0111A7751856A08600A3F8D5 /* About@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76F1856A08600A3F8D5 /* About@2x.png */; };
+		0111A7761856A08600A3F8D5 /* Schedule.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7701856A08600A3F8D5 /* Schedule.png */; };
+		0111A7771856A08600A3F8D5 /* Schedule@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7711856A08600A3F8D5 /* Schedule@2x.png */; };
+		0111A7781856A08600A3F8D5 /* Youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7721856A08600A3F8D5 /* Youtube.png */; };
+		0111A7791856A08600A3F8D5 /* Youtube@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7731856A08600A3F8D5 /* Youtube@2x.png */; };
 		017C920D185561B400E33003 /* TabBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920B185561B400E33003 /* TabBarBackground.png */; };
 		017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920C185561B400E33003 /* TabBarBackground@2x.png */; };
 		017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92101855EA9700E33003 /* KATGYoutubeCell.m */; };
@@ -164,6 +175,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0111A7641856998800A3F8D5 /* Application-iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Application-iPhone.xib"; sourceTree = "<group>"; };
+		0111A76618569D6200A3F8D5 /* Episodes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Episodes.png; sourceTree = "<group>"; };
+		0111A76818569D9D00A3F8D5 /* Episodes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Episodes@2x.png"; sourceTree = "<group>"; };
+		0111A76A18569F2400A3F8D5 /* Live.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Live.png; sourceTree = "<group>"; };
+		0111A76B18569F2400A3F8D5 /* Live@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Live@2x.png"; sourceTree = "<group>"; };
+		0111A76E1856A08600A3F8D5 /* About.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = About.png; sourceTree = "<group>"; };
+		0111A76F1856A08600A3F8D5 /* About@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "About@2x.png"; sourceTree = "<group>"; };
+		0111A7701856A08600A3F8D5 /* Schedule.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Schedule.png; sourceTree = "<group>"; };
+		0111A7711856A08600A3F8D5 /* Schedule@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Schedule@2x.png"; sourceTree = "<group>"; };
+		0111A7721856A08600A3F8D5 /* Youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Youtube.png; sourceTree = "<group>"; };
+		0111A7731856A08600A3F8D5 /* Youtube@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Youtube@2x.png"; sourceTree = "<group>"; };
 		017C920B185561B400E33003 /* TabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground.png; sourceTree = "<group>"; };
 		017C920C185561B400E33003 /* TabBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarBackground@2x.png"; sourceTree = "<group>"; };
 		017C920F1855EA9700E33003 /* KATGYoutubeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYoutubeCell.h; path = "View Controllers/KATGYoutubeCell.h"; sourceTree = "<group>"; };
@@ -520,6 +542,7 @@
 			isa = PBXGroup;
 			children = (
 				229A79CA16742D8C00792258 /* KATGMainViewController.xib */,
+				0111A7641856998800A3F8D5 /* Application-iPhone.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -1021,6 +1044,16 @@
 		9115C10C172E13E5002942B6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				0111A76E1856A08600A3F8D5 /* About.png */,
+				0111A76F1856A08600A3F8D5 /* About@2x.png */,
+				0111A7701856A08600A3F8D5 /* Schedule.png */,
+				0111A7711856A08600A3F8D5 /* Schedule@2x.png */,
+				0111A7721856A08600A3F8D5 /* Youtube.png */,
+				0111A7731856A08600A3F8D5 /* Youtube@2x.png */,
+				0111A76A18569F2400A3F8D5 /* Live.png */,
+				0111A76B18569F2400A3F8D5 /* Live@2x.png */,
+				0111A76818569D9D00A3F8D5 /* Episodes@2x.png */,
+				0111A76618569D6200A3F8D5 /* Episodes.png */,
 				017C920B185561B400E33003 /* TabBarBackground.png */,
 				017C920C185561B400E33003 /* TabBarBackground@2x.png */,
 				9115C10D172E13E5002942B6 /* archive-tab-icon.png */,
@@ -1123,11 +1156,15 @@
 				9108996F15EAE15500FB57C3 /* InfoPlist.strings in Resources */,
 				229A79CB16742D8C00792258 /* KATGMainViewController.xib in Resources */,
 				017C920D185561B400E33003 /* TabBarBackground.png in Resources */,
+				0111A7751856A08600A3F8D5 /* About@2x.png in Resources */,
 				9115C119172E13E5002942B6 /* Default-568h@2x.png in Resources */,
+				0111A76D18569F2400A3F8D5 /* Live@2x.png in Resources */,
 				9115C11A172E13E5002942B6 /* main-bg.png in Resources */,
 				9115C11B172E13E5002942B6 /* main-bg@2x.png in Resources */,
 				9115C11C172E13E5002942B6 /* pause.png in Resources */,
 				9115C11D172E13E5002942B6 /* pause@2x.png in Resources */,
+				0111A7791856A08600A3F8D5 /* Youtube@2x.png in Resources */,
+				0111A7741856A08600A3F8D5 /* About.png in Resources */,
 				9115C11E172E13E5002942B6 /* play.png in Resources */,
 				9115C11F172E13E5002942B6 /* play@2x.png in Resources */,
 				9115C120172E13E5002942B6 /* skip-back.png in Resources */,
@@ -1137,9 +1174,11 @@
 				9115C124172E13E5002942B6 /* archive-tab-icon.png in Resources */,
 				9115C125172E13E5002942B6 /* archive-tab-icon@2x.png in Resources */,
 				9115C126172E13E5002942B6 /* gear.png in Resources */,
+				0111A7761856A08600A3F8D5 /* Schedule.png in Resources */,
 				9115C127172E13E5002942B6 /* gear@2x.png in Resources */,
 				9115C128172E13E5002942B6 /* live-tab-icon.png in Resources */,
 				9115C129172E13E5002942B6 /* live-tab-icon@2x.png in Resources */,
+				0111A7651856998800A3F8D5 /* Application-iPhone.xib in Resources */,
 				9115C12A172E13E5002942B6 /* schedule-tab-icon.png in Resources */,
 				9115C12B172E13E5002942B6 /* schedule-tab-icon@2x.png in Resources */,
 				9115C12C172E13E5002942B6 /* search.png in Resources */,
@@ -1150,10 +1189,12 @@
 				9115C14A172E1752002942B6 /* Default-Portrait~ipad.png in Resources */,
 				228D43F21731830B00FA94FE /* live-mic.png in Resources */,
 				228D43F31731830B00FA94FE /* live-mic@2x.png in Resources */,
+				0111A7781856A08600A3F8D5 /* Youtube.png in Resources */,
 				228D43FD1731DB3600FA94FE /* cigarette-smoke.png in Resources */,
 				228D44021732113B00FA94FE /* bubble.png in Resources */,
 				017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */,
 				228D44041732177C00FA94FE /* light-bubble.png in Resources */,
+				0111A76718569D6200A3F8D5 /* Episodes.png in Resources */,
 				9131561217717CE000475CAE /* Entitlements.plist in Resources */,
 				91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */,
 				91F45A17177F881D0091AFDA /* icon72@2x.png in Resources */,
@@ -1164,7 +1205,10 @@
 				91F45A1C177F881D0091AFDA /* icon57.png in Resources */,
 				91F45A1D177F881D0091AFDA /* icon50@2x.png in Resources */,
 				91F45A1E177F881D0091AFDA /* icon50.png in Resources */,
+				0111A7771856A08600A3F8D5 /* Schedule@2x.png in Resources */,
 				91F45A1F177F881D0091AFDA /* icon29.png in Resources */,
+				0111A76C18569F2400A3F8D5 /* Live.png in Resources */,
+				0111A76918569D9D00A3F8D5 /* Episodes@2x.png in Resources */,
 				91F45A20177F881D0091AFDA /* icon29@2x.png in Resources */,
 				91F45A21177F881D0091AFDA /* iTunesArtwork in Resources */,
 				91EC31B4177FCF0C00151999 /* Default-Portrait@2x~ipad.png in Resources */,

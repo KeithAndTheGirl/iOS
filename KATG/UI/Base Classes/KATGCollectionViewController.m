@@ -44,6 +44,8 @@
 		_collectionView.backgroundColor = [UIColor clearColor];
 		_collectionView.delegate = self;
 		_collectionView.dataSource = self;
+        _collectionView.scrollEnabled = NO;
+        _collectionView.userInteractionEnabled = NO;
 		_collectionView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		[self.view insertSubview:_collectionView atIndex:0];
 	}

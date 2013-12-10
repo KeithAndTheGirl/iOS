@@ -188,7 +188,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		return;
 	}
-	[self.navigationBar setItems:@[self.navigationItem] animated:NO];
+//	[self.navigationBar setItems:@[self.navigationItem] animated:NO];
 	if ([[KATGPlaybackManager sharedManager] currentShow])
 	{
 		// [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Now Playing" style:UIBarButtonItemStyleBordered target:self action:@selector(nowPlaying:)] animated:YES];
@@ -203,7 +203,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 		[self.navigationItem setRightBarButtonItem:nil animated:YES];
 	}
 	
-	self.navigationItem.title = @"KATG";
+//	self.navigationItem.title = @"KATG";
 }
 
 - (void)viewWillAppear:(BOOL)animated
