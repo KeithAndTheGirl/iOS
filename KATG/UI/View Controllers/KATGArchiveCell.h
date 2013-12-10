@@ -19,13 +19,14 @@
 //  
 
 #import <UIKit/UIKit.h>
+#import "KATGMainViewController.h"
 
 @class KATGShowView, KATGShowMetaView, KATGShow;
 
-@interface KATGArchiveCell : UICollectionViewCell
+@interface KATGArchiveCell : UICollectionViewCell <UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) KATGShowView *showView;
-
-- (void)configureWithShow:(KATGShow *)show;
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSArray *shows;
+@property (nonatomic, assign) KATGMainViewController *controller;
 
 @end

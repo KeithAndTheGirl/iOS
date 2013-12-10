@@ -44,8 +44,8 @@
 		_collectionView.backgroundColor = [UIColor clearColor];
 		_collectionView.delegate = self;
 		_collectionView.dataSource = self;
-        _collectionView.scrollEnabled = NO;
-        _collectionView.userInteractionEnabled = NO;
+//        _collectionView.scrollEnabled = NO;
+//        _collectionView.userInteractionEnabled = NO;
 		_collectionView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
 		[self.view insertSubview:_collectionView atIndex:0];
 	}
@@ -59,10 +59,6 @@
 }
 
 #pragma mark - Collection View
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    
-}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {

@@ -31,6 +31,8 @@ extern NSString *const KATGGuestGuestIDAttributeName;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * guest_id;
 @property (nonatomic, retain) NSString * link_url;
+@property (nonatomic, retain) NSString * picture_url;
+@property (nonatomic, retain) NSString * picture_url_large;
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSSet *shows;
 @property (nonatomic, retain) KATGImage *image;

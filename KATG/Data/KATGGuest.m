@@ -28,6 +28,8 @@ NSString *const KATGGuestGuestIDAttributeName = @"guest_id";
 @dynamic name;
 @dynamic guest_id;
 @dynamic link_url;
+@dynamic picture_url;
+@dynamic picture_url_large;
 @dynamic desc;
 @dynamic shows;
 @dynamic image;
@@ -53,6 +55,8 @@ NSString *const KATGGuestGuestIDAttributeName = @"guest_id";
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"RealName" outputKey:@"name"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Description" outputKey:@"desc"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Url1" outputKey:@"link_url"]];
+		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"PictureUrl" outputKey:@"picture_url"]];
+		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"PictureUrlLarge" outputKey:@"picture_url_large"]];
 	}
 }
 

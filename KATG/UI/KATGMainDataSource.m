@@ -39,7 +39,7 @@
 
 #import "KATGDataStore.h"
 
-static CGFloat const kKATGCollectionViewColumnMargin = 16.0f;
+static CGFloat const kKATGCollectionViewColumnMargin = 0;
 static NSString *const kKATGScheduleCellIdentifier = @"kKATGScheduleCellIdentifier";
 static NSString *const kKATGLiveCellIdentifier = @"kKATGLiveCellIdentifier";
 static NSString *const kKATGArchiveCellIdentifier = @"kKATGArchiveCellIdentifier";
@@ -144,11 +144,7 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionLive:
 			return 1;
 		case KATGSectionArchive:
-			if ([self.resultsController.shows count])
-			{
-				return [self.resultsController.shows count];
-			}
-			return 0;
+			return 1;
         case KATGSectionYoutube:
             return 1;
         case KATGSectionAbout:
@@ -174,9 +170,10 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionArchive:
 		{
 			KATGArchiveCell *archiveCell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGArchiveCellIdentifier forIndexPath:indexPath];
-			KATGShow *show = self.resultsController.shows[indexPath.item];
-			[archiveCell configureWithShow:show];
-			archiveCell.showView.footerHeight = 120.0f - archiveCell.showView.headerHeight;
+//			KATGShow *show = self.resultsController.shows[indexPath.item];
+			archiveCell.shows = self.resultsController.shows;
+            archiveCell.controller = self.mainViewController;
+//			archiveCell.showView.footerHeight = 120.0f - archiveCell.showView.headerHeight;
 			cell = archiveCell;
 			break;
 		}
@@ -205,17 +202,15 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 {
 	CGSize cellSize;
 	CGRect rect = collectionView.bounds;
-	CGFloat margin = kKATGCollectionViewColumnMargin*2.0f;
+//	CGFloat margin = kKATGCollectionViewColumnMargin*2.0f;
 	switch ((KATGSection)indexPath.section)
 	{
 		case KATGSectionYoutube:
 		case KATGSectionAbout:
 		case KATGSectionSchedule:
 		case KATGSectionLive:
-			cellSize = CGSizeMake(rect.size.width, rect.size.height);
-			break;
 		case KATGSectionArchive:
-			cellSize = CGSizeMake(rect.size.width, 120.0f);
+			cellSize = CGSizeMake(rect.size.width, rect.size.height);
 			break;
 		default:
 			NSParameterAssert(NO);
@@ -232,9 +227,8 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionYoutube:
 		case KATGSectionSchedule:
 		case KATGSectionLive:
-			return UIEdgeInsetsMake(0.0f, kKATGCollectionViewColumnMargin, 0.0f, kKATGCollectionViewColumnMargin);
 		case KATGSectionArchive:
-			return UIEdgeInsetsMake(kKATGCollectionViewColumnMargin, kKATGCollectionViewColumnMargin, kKATGCollectionViewColumnMargin, kKATGCollectionViewColumnMargin);
+			return UIEdgeInsetsMake(0, 0, 0, 0);
 		default:
 			NSParameterAssert(NO);
 			return UIEdgeInsetsZero;

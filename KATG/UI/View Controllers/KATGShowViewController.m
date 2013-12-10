@@ -126,7 +126,6 @@ typedef enum {
 	self.showView.isAccessibilityElement = NO;
 	[self.view addSubview:self.showView];
 	self.showView.frame = self.view.bounds;
-	[self.showView.closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
 
 	self.tableView = [[UITableView alloc] initWithFrame:self.showView.contentView.bounds style:UITableViewStylePlain];
 	self.tableView.delegate = self;
@@ -142,8 +141,8 @@ typedef enum {
 	
 	[self.showView.contentView addSubview:self.tableView];
 
-	self.controlsView = [[KATGShowControlsView alloc] initWithFrame:self.showView.footerView.bounds];
-	[self.showView.footerView addSubview:self.controlsView];
+	self.controlsView = [[KATGShowControlsView alloc] initWithFrame:CGRectNull];
+//	[self.showView.footerView addSubview:self.controlsView];
 	self.controlsView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	[self.controlsView.skipBackButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.controlsView.playButton addTarget:self action:@selector(playButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -190,9 +189,9 @@ typedef enum {
 		[guestNames appendString:@"(no guests)"];
 	}
 
-	self.showView.showMetaFirstColumn.text = guestNames;
+	self.showView.showGuestsLabel.text = guestNames;
 
-	self.showView.showMetaSecondColumn.text = [self.show formattedTimestamp];
+	self.showView.showTimeLabel.text = [self.show formattedTimestamp];
 
 	[self.showView setNeedsLayout];
 	[self updateControlStates];
@@ -405,24 +404,22 @@ typedef enum {
 		case KATGShowViewControllerInterfaceStateCollapsed:
 			self.showView.frame = self.collapsedShowViewRect;
 			self.tableView.alpha = 0.0f;
-			self.showView.showMetaView.alpha = 1.0f;
-			self.showView.footerHeight = self.collapsedFooterHeight;
-			self.showView.headerHeight = self.collapsedHeaderHeight;
+//			self.showView.showMetaView.alpha = 1.0f;
+//			self.showView.footerHeight = self.collapsedFooterHeight;
+//			self.showView.headerHeight = self.collapsedHeaderHeight;
 			self.showView.closeButtonVisible = NO;
-			self.showView.closeButton.alpha = 0.0f;
-			self.showView.footerShadowView.alpha = 0.0f;
+//			self.showView.footerShadowView.alpha = 0.0f;
 			self.controlsView.alpha = 0.0f;
 			break;
 
 		case KATGShowViewControllerInterfaceStateExpanded:
 			self.showView.frame = self.view.bounds;
 			self.tableView.alpha = 1.0f;
-			self.showView.showMetaView.alpha = 0.0f;
-			self.showView.footerHeight = self.expandedFooterHeight;
-			self.showView.headerHeight = self.expandedHeaderHeight;
+//			self.showView.showMetaView.alpha = 0.0f;
+//			self.showView.footerHeight = self.expandedFooterHeight;
+//			self.showView.headerHeight = self.expandedHeaderHeight;
 			self.showView.closeButtonVisible = YES;
-			self.showView.closeButton.alpha = 1.0f;
-			self.showView.footerShadowView.alpha = 1.0f;
+//			self.showView.footerShadowView.alpha = 1.0f;
 			self.controlsView.alpha = 1.0f;
 			break;
 	}

@@ -351,7 +351,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	
 	[self addDimmingViewForModalWithDuration:0.5f];
 
-	KATGShowView *showView = cell.showView;
+	KATGShowView *showView = nil;//cell.showView;
 	
 	KATGShowViewController *showViewController = [KATGShowViewController new];
 	showViewController.delegate = self;
@@ -359,7 +359,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	self.currentlyPresentedShowViewController = showViewController;
 	
 	// Prepare the show view controller for presentation
-	showViewController.collapsedFooterHeight = showView.footerHeight;
+//	showViewController.collapsedFooterHeight = showView.footerHeight;
 	
 	[showViewController willMoveToParentViewController:self];
 	[self addChildViewController:showViewController];
@@ -404,7 +404,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 		return;
 	}
 	
-	KATGShowView *showView = cell.showView;
+	KATGShowView *showView = nil;//cell.showView;
 	
 	// find the starting rect for the show view within the view controller. Because a transform is involved, use bounds and calculate the center
 	CGRect showViewRect = showView.bounds;

@@ -22,24 +22,27 @@
 
 #import <UIKit/UIKit.h>
 #import "KATGContentContainerView.h"
+#import "KATGShow.h"
+#import "KATGTabBarStyledImageView.h"
 
 @class KATGButton;
 
-@interface KATGShowView : KATGContentContainerView
+@interface KATGShowView : UITableViewCell
 
 // Located in the header
-@property (strong, readonly) UILabel *showNumberLabel;
-@property (strong, readonly) UILabel *showTitleLabel;
-@property (strong, readonly) KATGButton *closeButton;
+@property (strong, nonatomic) IBOutlet UILabel *showNumberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *showTitleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *arrowNext;
 
 // Text columns in the footer (used for collapsed state)
-@property (strong, nonatomic) UIView *showMetaView;
-@property (strong, nonatomic, readonly) UILabel *showMetaFirstColumn;
-@property (strong, nonatomic, readonly) UILabel *showMetaSecondColumn;
-@property (strong, nonatomic, readonly) UILabel *showMetaThirdColumn;
+@property (strong, nonatomic) IBOutlet UILabel *showGuestsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *noGuestsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *showTimeLabel;
 
 // This determines if the close button's width is taken into account when laying
 // out the items in the header.
 @property (nonatomic, getter=isCloseButtonVisible) BOOL closeButtonVisible;
+
+- (void)configureWithShow:(KATGShow *)show;
 
 @end

@@ -25,6 +25,8 @@
 #import "TDRoundedShadowView.h"
 #import "KATGButton.h"
 
+NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
+
 @interface KATGArchiveCell ()
 @end
 
@@ -35,75 +37,62 @@
 	self = [super initWithFrame:frame];
 	if (self) 
 	{
-		_showView = [[KATGShowView alloc] initWithFrame:CGRectZero];
-		_showView.closeButtonVisible = NO;
-		_showView.closeButton.alpha = 0.0f;
-		_showView.footerShadowView.alpha = 0.0f;
-		[self.contentView addSubview:_showView];
-		
+		_tableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStylePlain];
+		_tableView.allowsSelection = YES;
+		_tableView.rowHeight = 120.0f;
+		_tableView.separatorColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
+        [_tableView registerNib:[UINib nibWithNibName:@"KATGShowCell" bundle:nil] forCellReuseIdentifier:kKATGShowCellIdentifier];
+		_tableView.backgroundColor = [UIColor clearColor];
+		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        _tableView.dataSource = self;
+        _tableView.delegate = self;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
+        _tableView.scrollIndicatorInsets = _tableView.contentInset;
+		[self.contentView addSubview:_tableView];
 	}
 	return self;
+}
+
+- (void)dealloc
+{
+	_tableView.delegate = nil;
+	_tableView.dataSource = nil;
 }
 
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
-	self.showView.frame = self.bounds;
 }
 
-- (void)configureWithShow:(KATGShow *)show
+- (void)prepareForReuse
 {
-	self.showView.showNumberLabel.text = [show.number stringValue];
-	self.showView.showTitleLabel.text = show.title;
-	
-	NSMutableString *guestNames = [NSMutableString new];
-	for (NSUInteger i = 0; i < MIN(4, [show.sortedGuests count]); i++)
-	{
-		KATGGuest *guest = show.sortedGuests[i];
-		if (i > 0)
-		{
-			[guestNames appendString:@"\n"];
-		}
-		if (i == 3)
-		{
-			[guestNames appendString:@"..."];
-		}
-		else
-		{
-			[guestNames appendFormat:@"%@", guest.name];
-		}
-	}
-	if (guestNames.length == 0)
-	{
-		[guestNames appendString:@"(no guests)"];
-	}
-	self.showView.showMetaFirstColumn.text = [guestNames copy];
-	
-	self.showView.showMetaSecondColumn.text = [show formattedTimestamp];
-	
-	[self.showView setNeedsLayout];
+	[super prepareForReuse];
+	[self.tableView reloadData];
 }
 
-#pragma mark - Accessibility
 
-- (BOOL)isAccessibilityElement
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return NO;
+	return [self.shows count];
 }
 
-- (NSInteger)accessibilityElementCount
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return 1;
+	KATGShowView *cell = [tableView dequeueReusableCellWithIdentifier:kKATGShowCellIdentifier forIndexPath:indexPath];
+	[cell configureWithShow:self.shows[indexPath.row]];
+	return cell;
 }
 
-- (id)accessibilityElementAtIndex:(NSInteger)index
-{
-	return self.showView;
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    KATGShow *show = self.shows[indexPath.row];
+    NSArray *images = [[show valueForKeyPath:@"Guests.picture_url"] allObjects];
+    if([images count] > 0)
+        return 116;
+    return 68;
 }
 
-- (NSInteger)indexOfAccessibilityElement:(id)element
-{
-	return 0;
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.controller presentShow:self.shows[indexPath.row] fromArchiveCell:self];
 }
 
 @end
