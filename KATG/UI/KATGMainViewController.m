@@ -146,19 +146,19 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	// Setup the tab bar
 	NSMutableArray *items = [NSMutableArray new];
 	
-	KATGTabBarTabItem *scheduleItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Episodes.png"] title:NSLocalizedString(@"Episodes", nil)];
+	KATGTabBarTabItem *scheduleItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Episodes.png"] title:NSLocalizedString(@"EPISODES", nil)];
 	[items addObject:scheduleItem];
 	
-	KATGTabBarTabItem *liveItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Live.png"] title:NSLocalizedString(@"Live", nil)];
+	KATGTabBarTabItem *liveItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Live.png"] title:NSLocalizedString(@"LIVE", nil)];
 	[items addObject:liveItem];
 	
-	KATGTabBarTabItem *archiveItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Schedule.png"] title:NSLocalizedString(@"Schedule", nil)];
+	KATGTabBarTabItem *archiveItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Schedule.png"] title:NSLocalizedString(@"SCHEDULE", nil)];
 	[items addObject:archiveItem];
     
-	KATGTabBarTabItem *youTubeItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Youtube.png"] title:NSLocalizedString(@"_YouTube_", nil)];
+	KATGTabBarTabItem *youTubeItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"Youtube.png"] title:NSLocalizedString(@"YOUTUBE", nil)];
 	[items addObject:youTubeItem];
 	
-    KATGTabBarTabItem *aboutItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"About.png"] title:NSLocalizedString(@"_About_", nil)];
+    KATGTabBarTabItem *aboutItem = [[KATGTabBarTabItem alloc] initWithImage:[UIImage imageNamed:@"About.png"] title:NSLocalizedString(@"ABOUT", nil)];
 	[items addObject:aboutItem];
     
 	self.tabBar.tabItems = items;
@@ -213,6 +213,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		[self.collectionView setContentOffset:CGPointZero];
 	}
+    [self.tabBar selectTabItemAtIndex:0];
 }
 
 #pragma mark - Keyboard
