@@ -22,6 +22,8 @@
 #import "KATGTabBar.h"
 #import "KATGTabBarStyledImageView.h"
 
+#define TINT_COLOR [UIColor colorWithRed:120./255 green:194./255 blue:106./255 alpha:1]
+
 #define IMAGE_SIZE 24.0f
 #define IMAGE_TOP_MARGIN 4.0f
 
@@ -89,8 +91,8 @@
 	self.titleLabel.textColor = (self.state == KATGTabBarTabItemStateSelected) ? [UIColor colorWithWhite:0.8f alpha:1.0f] : [UIColor colorWithWhite:0.4f alpha:1.0f];
 	
 	self.styledImageView.frame = CGRectMake((self.view.bounds.size.width - IMAGE_SIZE)/2, IMAGE_TOP_MARGIN, IMAGE_SIZE, IMAGE_SIZE);
-	self.styledImageView.topGradientColor = (self.state == KATGTabBarTabItemStateSelected) ? [UIColor colorWithWhite:0.9f alpha:1.0f] : [UIColor colorWithWhite:0.5f alpha:1.0f];
-	self.styledImageView.bottomGradientColor = (self.state == KATGTabBarTabItemStateSelected) ? [UIColor colorWithWhite:0.8f alpha:1.0f] : [UIColor colorWithWhite:0.4f alpha:1.0f];
+	self.styledImageView.topGradientColor = (self.state == KATGTabBarTabItemStateSelected) ? TINT_COLOR : [UIColor colorWithWhite:0.5f alpha:1.0f];
+	self.styledImageView.bottomGradientColor = (self.state == KATGTabBarTabItemStateSelected) ? TINT_COLOR : [UIColor colorWithWhite:0.4f alpha:1.0f];
 	
 }
 

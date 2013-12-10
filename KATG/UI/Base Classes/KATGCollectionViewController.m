@@ -60,6 +60,10 @@
 
 #pragma mark - Collection View
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+}
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
 	return 0;

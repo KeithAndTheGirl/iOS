@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0111A7651856998800A3F8D5 /* Application-iPhone.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7641856998800A3F8D5 /* Application-iPhone.xib */; };
 		0111A76718569D6200A3F8D5 /* Episodes.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76618569D6200A3F8D5 /* Episodes.png */; };
 		0111A76918569D9D00A3F8D5 /* Episodes@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76818569D9D00A3F8D5 /* Episodes@2x.png */; };
 		0111A76C18569F2400A3F8D5 /* Live.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A76A18569F2400A3F8D5 /* Live.png */; };
@@ -175,7 +174,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0111A7641856998800A3F8D5 /* Application-iPhone.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Application-iPhone.xib"; sourceTree = "<group>"; };
 		0111A76618569D6200A3F8D5 /* Episodes.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Episodes.png; sourceTree = "<group>"; };
 		0111A76818569D9D00A3F8D5 /* Episodes@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Episodes@2x.png"; sourceTree = "<group>"; };
 		0111A76A18569F2400A3F8D5 /* Live.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Live.png; sourceTree = "<group>"; };
@@ -542,7 +540,6 @@
 			isa = PBXGroup;
 			children = (
 				229A79CA16742D8C00792258 /* KATGMainViewController.xib */,
-				0111A7641856998800A3F8D5 /* Application-iPhone.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -1178,7 +1175,6 @@
 				9115C127172E13E5002942B6 /* gear@2x.png in Resources */,
 				9115C128172E13E5002942B6 /* live-tab-icon.png in Resources */,
 				9115C129172E13E5002942B6 /* live-tab-icon@2x.png in Resources */,
-				0111A7651856998800A3F8D5 /* Application-iPhone.xib in Resources */,
 				9115C12A172E13E5002942B6 /* schedule-tab-icon.png in Resources */,
 				9115C12B172E13E5002942B6 /* schedule-tab-icon@2x.png in Resources */,
 				9115C12C172E13E5002942B6 /* search.png in Resources */,

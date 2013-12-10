@@ -51,8 +51,6 @@
 	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Doug Russell (Code) Keith and The Girl (Content)</string>
-	<key>NSMainNibFile</key>
-	<string>Application-iPhone</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
