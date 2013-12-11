@@ -778,6 +778,16 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 		NSParameterAssert(guest);
 		if (guest)
 		{
+            NSDictionary *imageDictionary = @{@"media_url": guestDict[@"PictureUrlLarge"],
+                                              @"description": guestDict[@"Description"],
+                                              @"title": guestDict[@"RealName"]};
+            KATGImage *image = [self fetchOrInsertImageWithShow:show url:imageDictionary[@"media_url"] context:context];
+            if (image)
+            {
+                [image configureWithDictionary:imageDictionary];
+            }
+            guest.image = image;
+            
 			[guest configureWithDictionary:guestDict];
 			[guest addShowsObject:show];
 			[show addGuestsObject:guest];

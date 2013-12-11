@@ -110,55 +110,6 @@
 	{
 		CGContextSaveGState(context);
 		
-		// Arrow
-		
-		CGRect arrowRect = rect;
-		arrowRect = CGRectInset(arrowRect, 4.0f, 4.0f);
-		
-		if (arrowRect.size.width > arrowRect.size.height)
-		{
-			arrowRect.origin.x += (arrowRect.size.width - arrowRect.size.height) / 2;
-			arrowRect.size.width = arrowRect.size.height;
-		}
-		else if (arrowRect.size.height > arrowRect.size.width)
-		{
-			arrowRect.origin.y += (arrowRect.size.height - arrowRect.size.width) / 2;
-			arrowRect.size.height = arrowRect.size.width;
-		}
-		
-		// Arrow Path		
-		CGFloat arrowTailHeight = arrowRect.size.height * 0.5f;
-		UIBezierPath *arrowPath = [UIBezierPath bezierPath];
-		[arrowPath moveToPoint:CGPointMake(CGRectGetMinX(arrowRect) + arrowRect.size.width/4,
-																			CGRectGetMinY(arrowRect) + 0.0f)];
-		[arrowPath addLineToPoint:CGPointMake(CGRectGetMaxX(arrowRect) - arrowRect.size.width/4,
-																					CGRectGetMinY(arrowRect) + 0.0f)];
-		[arrowPath addLineToPoint:CGPointMake(CGRectGetMaxX(arrowRect) - arrowRect.size.width/4,
-																					CGRectGetMinY(arrowRect) + arrowTailHeight)];
-		[arrowPath addLineToPoint:CGPointMake(CGRectGetMaxX(arrowRect),
-																					CGRectGetMinY(arrowRect) + arrowTailHeight)];
-		[arrowPath addLineToPoint:CGPointMake(CGRectGetMidX(arrowRect),
-																					CGRectGetMaxY(arrowRect))];
-		[arrowPath addLineToPoint:CGPointMake(CGRectGetMinX(arrowRect),
-																					CGRectGetMinY(arrowRect) + arrowTailHeight)];
-		[arrowPath addLineToPoint:CGPointMake(CGRectGetMinX(arrowRect) + arrowRect.size.width/4,
-																					CGRectGetMinY(arrowRect) + arrowTailHeight)];
-		[arrowPath addLineToPoint:CGPointMake(CGRectGetMinX(arrowRect) + arrowRect.size.width/4,
-																					CGRectGetMinY(arrowRect))];
-		[arrowPath closePath];
-		[arrowPath addClip];
-		
-		
-		[self.downloadArrowColor setFill];
-		[[UIBezierPath bezierPathWithRect:arrowRect] fill];
-		
-		UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectInset(arrowRect, -40.0f, -40.0f)];
-		[shadowPath appendPath:arrowPath];
-		shadowPath.usesEvenOddFillRule = YES;
-		CGContextSetShadowWithColor(context, CGSizeMake(0.0f, 1.0f), 2.0f, [[UIColor colorWithWhite:0.0f alpha:1.0f] CGColor]);
-		[[UIColor colorWithWhite:0.0f alpha:0.2f] setFill];
-		[shadowPath fill];
-		
 		CGContextRestoreGState(context);
 	}
 	else if (self.currentState == KATGDownloadProgressViewStateDownloaded)

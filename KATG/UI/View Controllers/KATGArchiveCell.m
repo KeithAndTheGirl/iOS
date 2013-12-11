@@ -92,6 +92,7 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.controller presentShow:self.shows[indexPath.row] fromArchiveCell:self];
 }
 

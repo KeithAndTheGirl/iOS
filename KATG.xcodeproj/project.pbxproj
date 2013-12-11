@@ -37,6 +37,17 @@
 		012B4F331857A38400B59FC5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012B4F321857A38400B59FC5 /* Security.framework */; };
 		012FED781857A9920073AEAA /* ArrowNext.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED771857A9920073AEAA /* ArrowNext.png */; };
 		012FED7A1857AA010073AEAA /* ArrowNext@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED791857AA010073AEAA /* ArrowNext@2x.png */; };
+		012FED7C1857C0000073AEAA /* KATGShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012FED7B1857C0000073AEAA /* KATGShowViewController.xib */; };
+		012FED7F1857C4B80073AEAA /* ShowHeaderBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED7D1857C4B80073AEAA /* ShowHeaderBackground.png */; };
+		012FED801857C4B80073AEAA /* ShowHeaderBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED7E1857C4B80073AEAA /* ShowHeaderBackground@2x.png */; };
+		012FED831857C5870073AEAA /* CloseButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED811857C5870073AEAA /* CloseButton.png */; };
+		012FED841857C5870073AEAA /* CloseButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED821857C5870073AEAA /* CloseButton@2x.png */; };
+		012FED871857DA7F0073AEAA /* DownloadShowButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED851857DA7F0073AEAA /* DownloadShowButton.png */; };
+		012FED881857DA7F0073AEAA /* DownloadShowButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED861857DA7F0073AEAA /* DownloadShowButton@2x.png */; };
+		012FED8B1857DC850073AEAA /* DownloadIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED891857DC850073AEAA /* DownloadIcon.png */; };
+		012FED8C1857DC850073AEAA /* DownloadIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FED8A1857DC850073AEAA /* DownloadIcon@2x.png */; };
+		012FEE161857E6A40073AEAA /* ControlsBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FEE141857E6A40073AEAA /* ControlsBackground.png */; };
+		012FEE171857E6A40073AEAA /* ControlsBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 012FEE151857E6A40073AEAA /* ControlsBackground@2x.png */; };
 		017C920D185561B400E33003 /* TabBarBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920B185561B400E33003 /* TabBarBackground.png */; };
 		017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920C185561B400E33003 /* TabBarBackground@2x.png */; };
 		017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92101855EA9700E33003 /* KATGYoutubeCell.m */; };
@@ -204,7 +215,7 @@
 		0111A7711856A08600A3F8D5 /* Schedule@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Schedule@2x.png"; sourceTree = "<group>"; };
 		0111A7721856A08600A3F8D5 /* Youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Youtube.png; sourceTree = "<group>"; };
 		0111A7731856A08600A3F8D5 /* Youtube@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Youtube@2x.png"; sourceTree = "<group>"; };
-		012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KATGShowCell.xib; sourceTree = "<group>"; };
+		012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGShowCell.xib; path = ../KATGShowCell.xib; sourceTree = "<group>"; };
 		012B4EFF1857A2ED00B59FC5 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		012B4F001857A2ED00B59FC5 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		012B4F011857A2ED00B59FC5 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -242,6 +253,17 @@
 		012B4F321857A38400B59FC5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		012FED771857A9920073AEAA /* ArrowNext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ArrowNext.png; path = "Supporting Files/Images/ArrowNext.png"; sourceTree = "<group>"; };
 		012FED791857AA010073AEAA /* ArrowNext@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ArrowNext@2x.png"; path = "Supporting Files/Images/ArrowNext@2x.png"; sourceTree = "<group>"; };
+		012FED7B1857C0000073AEAA /* KATGShowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGShowViewController.xib; path = "KATG/Supporting Files/XIBs/KATGShowViewController.xib"; sourceTree = SOURCE_ROOT; };
+		012FED7D1857C4B80073AEAA /* ShowHeaderBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ShowHeaderBackground.png; path = "Supporting Files/Images/ShowHeaderBackground.png"; sourceTree = "<group>"; };
+		012FED7E1857C4B80073AEAA /* ShowHeaderBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ShowHeaderBackground@2x.png"; path = "Supporting Files/Images/ShowHeaderBackground@2x.png"; sourceTree = "<group>"; };
+		012FED811857C5870073AEAA /* CloseButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CloseButton.png; path = "Supporting Files/Images/CloseButton.png"; sourceTree = "<group>"; };
+		012FED821857C5870073AEAA /* CloseButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CloseButton@2x.png"; path = "Supporting Files/Images/CloseButton@2x.png"; sourceTree = "<group>"; };
+		012FED851857DA7F0073AEAA /* DownloadShowButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DownloadShowButton.png; path = "Supporting Files/Images/DownloadShowButton.png"; sourceTree = "<group>"; };
+		012FED861857DA7F0073AEAA /* DownloadShowButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DownloadShowButton@2x.png"; path = "Supporting Files/Images/DownloadShowButton@2x.png"; sourceTree = "<group>"; };
+		012FED891857DC850073AEAA /* DownloadIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = DownloadIcon.png; path = "Supporting Files/Images/DownloadIcon.png"; sourceTree = "<group>"; };
+		012FED8A1857DC850073AEAA /* DownloadIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "DownloadIcon@2x.png"; path = "Supporting Files/Images/DownloadIcon@2x.png"; sourceTree = "<group>"; };
+		012FEE141857E6A40073AEAA /* ControlsBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ControlsBackground.png; path = "Supporting Files/Images/ControlsBackground.png"; sourceTree = "<group>"; };
+		012FEE151857E6A40073AEAA /* ControlsBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ControlsBackground@2x.png"; path = "Supporting Files/Images/ControlsBackground@2x.png"; sourceTree = "<group>"; };
 		017C920B185561B400E33003 /* TabBarBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarBackground.png; sourceTree = "<group>"; };
 		017C920C185561B400E33003 /* TabBarBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarBackground@2x.png"; sourceTree = "<group>"; };
 		017C920F1855EA9700E33003 /* KATGYoutubeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYoutubeCell.h; path = "View Controllers/KATGYoutubeCell.h"; sourceTree = "<group>"; };
@@ -648,7 +670,6 @@
 			isa = PBXGroup;
 			children = (
 				229A79CA16742D8C00792258 /* KATGMainViewController.xib */,
-				012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -760,6 +781,7 @@
 				22A3199316EBF4C2007C7776 /* Full Screen Images */,
 				228F9412165207EC006A1A05 /* KATGShowViewController.h */,
 				228F9413165207EC006A1A05 /* KATGShowViewController.m */,
+				012FED7B1857C0000073AEAA /* KATGShowViewController.xib */,
 			);
 			name = "Show Details";
 			sourceTree = "<group>";
@@ -792,6 +814,7 @@
 			children = (
 				229EC8F6167175F200FB899A /* KATGShowView.h */,
 				22D07DC71676287C004EBEBB /* KATGShowView.m */,
+				012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */,
 			);
 			name = KATGShowView;
 			sourceTree = "<group>";
@@ -821,6 +844,16 @@
 		22AFD3E2164970B4007A88F4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				012FEE141857E6A40073AEAA /* ControlsBackground.png */,
+				012FEE151857E6A40073AEAA /* ControlsBackground@2x.png */,
+				012FED891857DC850073AEAA /* DownloadIcon.png */,
+				012FED8A1857DC850073AEAA /* DownloadIcon@2x.png */,
+				012FED851857DA7F0073AEAA /* DownloadShowButton.png */,
+				012FED861857DA7F0073AEAA /* DownloadShowButton@2x.png */,
+				012FED811857C5870073AEAA /* CloseButton.png */,
+				012FED821857C5870073AEAA /* CloseButton@2x.png */,
+				012FED7D1857C4B80073AEAA /* ShowHeaderBackground.png */,
+				012FED7E1857C4B80073AEAA /* ShowHeaderBackground@2x.png */,
 				012FED771857A9920073AEAA /* ArrowNext.png */,
 				012FED791857AA010073AEAA /* ArrowNext@2x.png */,
 				228D43EF173182E700FA94FE /* Live */,
@@ -1268,21 +1301,28 @@
 				017C920D185561B400E33003 /* TabBarBackground.png in Resources */,
 				012FED7A1857AA010073AEAA /* ArrowNext@2x.png in Resources */,
 				0111A7751856A08600A3F8D5 /* About@2x.png in Resources */,
+				012FED841857C5870073AEAA /* CloseButton@2x.png in Resources */,
 				9115C119172E13E5002942B6 /* Default-568h@2x.png in Resources */,
 				0111A76D18569F2400A3F8D5 /* Live@2x.png in Resources */,
 				9115C11A172E13E5002942B6 /* main-bg.png in Resources */,
 				9115C11B172E13E5002942B6 /* main-bg@2x.png in Resources */,
 				9115C11C172E13E5002942B6 /* pause.png in Resources */,
+				012FED7F1857C4B80073AEAA /* ShowHeaderBackground.png in Resources */,
 				9115C11D172E13E5002942B6 /* pause@2x.png in Resources */,
 				0111A7791856A08600A3F8D5 /* Youtube@2x.png in Resources */,
 				0111A7741856A08600A3F8D5 /* About.png in Resources */,
 				9115C11E172E13E5002942B6 /* play.png in Resources */,
 				9115C11F172E13E5002942B6 /* play@2x.png in Resources */,
 				012FED781857A9920073AEAA /* ArrowNext.png in Resources */,
+				012FED8B1857DC850073AEAA /* DownloadIcon.png in Resources */,
 				9115C120172E13E5002942B6 /* skip-back.png in Resources */,
 				9115C121172E13E5002942B6 /* skip-back@2x.png in Resources */,
 				9115C122172E13E5002942B6 /* skip-forward.png in Resources */,
+				012FEE161857E6A40073AEAA /* ControlsBackground.png in Resources */,
 				9115C123172E13E5002942B6 /* skip-forward@2x.png in Resources */,
+				012FED7C1857C0000073AEAA /* KATGShowViewController.xib in Resources */,
+				012FED881857DA7F0073AEAA /* DownloadShowButton@2x.png in Resources */,
+				012FEE171857E6A40073AEAA /* ControlsBackground@2x.png in Resources */,
 				9115C124172E13E5002942B6 /* archive-tab-icon.png in Resources */,
 				9115C125172E13E5002942B6 /* archive-tab-icon@2x.png in Resources */,
 				9115C126172E13E5002942B6 /* gear.png in Resources */,
@@ -1295,6 +1335,7 @@
 				9115C12B172E13E5002942B6 /* schedule-tab-icon@2x.png in Resources */,
 				9115C12C172E13E5002942B6 /* search.png in Resources */,
 				9115C12D172E13E5002942B6 /* search@2x.png in Resources */,
+				012FED801857C4B80073AEAA /* ShowHeaderBackground@2x.png in Resources */,
 				9115C12E172E13E5002942B6 /* x.png in Resources */,
 				9115C12F172E13E5002942B6 /* x@2x.png in Resources */,
 				9115C137172E1439002942B6 /* Default@2x~iphone.png in Resources */,
@@ -1306,6 +1347,7 @@
 				228D44021732113B00FA94FE /* bubble.png in Resources */,
 				017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */,
 				228D44041732177C00FA94FE /* light-bubble.png in Resources */,
+				012FED8C1857DC850073AEAA /* DownloadIcon@2x.png in Resources */,
 				0111A76718569D6200A3F8D5 /* Episodes.png in Resources */,
 				9131561217717CE000475CAE /* Entitlements.plist in Resources */,
 				91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */,
@@ -1313,7 +1355,9 @@
 				91F45A18177F881D0091AFDA /* icon72.png in Resources */,
 				91F45A19177F881D0091AFDA /* icon60@2x.png in Resources */,
 				91F45A1A177F881D0091AFDA /* icon60.png in Resources */,
+				012FED871857DA7F0073AEAA /* DownloadShowButton.png in Resources */,
 				91F45A1B177F881D0091AFDA /* icon57@2x.png in Resources */,
+				012FED831857C5870073AEAA /* CloseButton.png in Resources */,
 				91F45A1C177F881D0091AFDA /* icon57.png in Resources */,
 				91F45A1D177F881D0091AFDA /* icon50@2x.png in Resources */,
 				91F45A1E177F881D0091AFDA /* icon50.png in Resources */,
@@ -1520,7 +1564,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1532,7 +1576,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

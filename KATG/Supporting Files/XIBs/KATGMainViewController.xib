@@ -20,10 +20,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" image="main-bg.png" translatesAutoresizingMaskIntoConstraints="NO" id="99">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="18" userLabel="UI Container view">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -72,10 +68,6 @@
             <constraints>
                 <constraint firstItem="18" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="25"/>
                 <constraint firstItem="18" firstAttribute="trailing" secondItem="1" secondAttribute="trailing" id="28"/>
-                <constraint firstItem="99" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="104"/>
-                <constraint firstAttribute="trailing" secondItem="99" secondAttribute="trailing" id="105"/>
-                <constraint firstAttribute="bottom" secondItem="99" secondAttribute="bottom" id="109"/>
-                <constraint firstItem="99" firstAttribute="top" secondItem="1" secondAttribute="top" id="111"/>
                 <constraint firstItem="18" firstAttribute="top" secondItem="1" secondAttribute="top" id="217"/>
                 <constraint firstItem="18" firstAttribute="bottom" secondItem="1" secondAttribute="bottom" id="218"/>
             </constraints>
@@ -83,7 +75,4 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>
     </objects>
-    <resources>
-        <image name="main-bg.png" width="320" height="568"/>
-    </resources>
 </document>

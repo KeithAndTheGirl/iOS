@@ -31,7 +31,6 @@
 #import "KATGShowImagesTableViewCell.h"
 #import "KATGShowSectionTitleCell.h"
 #import "KATGDownloadEpisodeCell.h"
-#import "KATGShowControlsView.h"
 #import "KATGPlaybackManager.h"
 #import "KATGDataStore.h"
 #import "KATGImagesViewController.h"
@@ -47,9 +46,9 @@ static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContex
 #define kKATGShowDetailsSectionDownloadCellIdentifier @"kKATGShowDetailsSectionDownloadCellIdentifier"
 
 typedef enum {
+	KATGShowDetailsSectionGuests,
 	KATGShowDetailsSectionDescription,
 	KATGShowDetailsSectionImages,
-	KATGShowDetailsSectionGuests,
 	KATGShowDetailsSectionDownload,
 } KATGShowDetailsSection;
 
@@ -59,9 +58,6 @@ typedef enum {
 {
 	BOOL positionSliderIsDragging;
 }
-
-@property (nonatomic) UITableView *tableView;
-@property (nonatomic) KATGShowControlsView *controlsView;
 
 @property (nonatomic) KATGShow *show;
 @property (nonatomic) bool shouldReloadDescription;
@@ -98,9 +94,6 @@ typedef enum {
 	self = [super init];
 	if (self)
 	{
-		self.navigationItem.title = NSLocalizedString(@"Episode", nil);
-		_collapsedFooterHeight = _collapsedHeaderHeight = _expandedHeaderHeight = 44.0f;
-		_expandedFooterHeight = 96.0f;
 		[self addPlaybackManagerKVO];
 		[self addReachabilityKVO];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
@@ -112,8 +105,8 @@ typedef enum {
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
-	[self removePlaybackManagerKVO];
-	[self removeReachabilityKVO];
+//	[self removePlaybackManagerKVO];
+//	[self removeReachabilityKVO];
 }
 
 #pragma mark -
@@ -122,28 +115,13 @@ typedef enum {
 {
 	[super viewDidLoad];
 
-	self.showView = [[KATGShowView alloc] initWithFrame:CGRectZero];
-	self.showView.isAccessibilityElement = NO;
-	[self.view addSubview:self.showView];
-	self.showView.frame = self.view.bounds;
-
-	self.tableView = [[UITableView alloc] initWithFrame:self.showView.contentView.bounds style:UITableViewStylePlain];
-	self.tableView.delegate = self;
-	self.tableView.dataSource = self;
-	self.tableView.backgroundColor = [UIColor clearColor];
-	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-
 	[self.tableView registerClass:[KATGShowGuestCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierGuests];
 	[self.tableView registerClass:[KATGShowImagesTableViewCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierImages];
 	[self.tableView registerClass:[KATGShowDescriptionCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierDescription];
 	[self.tableView registerClass:[KATGShowSectionTitleCell class] forCellReuseIdentifier:kKATGShowDetailsSectionTitleCellIdentifier];
 	[self.tableView registerClass:[KATGDownloadEpisodeCell class] forCellReuseIdentifier:kKATGShowDetailsSectionDownloadCellIdentifier];
 	
-	[self.showView.contentView addSubview:self.tableView];
 
-	self.controlsView = [[KATGShowControlsView alloc] initWithFrame:CGRectNull];
-//	[self.showView.footerView addSubview:self.controlsView];
-	self.controlsView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	[self.controlsView.skipBackButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.controlsView.playButton addTarget:self action:@selector(playButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.controlsView.skipForwardButton addTarget:self action:@selector(forwardButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -160,18 +138,10 @@ typedef enum {
 {
 	[super viewWillAppear:animated];
 
-	if ([self.navigationController.viewControllers objectAtIndex:0] == self)
-	{
-		self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close:)];
-	}
-	else
-	{
-		self.navigationItem.rightBarButtonItem = nil;
-	}
-
-	self.showView.showNumberLabel.text = [self.show.number stringValue];
-	self.showView.showTitleLabel.text = self.show.title;
-
+    self.showTitleLabel.text = self.show.title;
+	self.showNumberLabel.text = [NSString stringWithFormat:@"EPISODE %@", self.show.number];
+    self.showTimeLabel.text = [self.show formattedTimestamp];
+    
 	NSMutableString *guestNames = [[NSMutableString alloc] init];
 	if ([self.show.sortedGuests count])
 	{
@@ -189,19 +159,12 @@ typedef enum {
 		[guestNames appendString:@"(no guests)"];
 	}
 
-	self.showView.showGuestsLabel.text = guestNames;
-
-	self.showView.showTimeLabel.text = [self.show formattedTimestamp];
-
-	[self.showView setNeedsLayout];
 	[self updateControlStates];
-
-	UIAccessibilityPostNotification(UIAccessibilityScreenChangedNotification, self.showView.showTitleLabel);
 }
 
 #pragma mark - Actions
 
-- (void)close:(id)sender
+- (IBAction)close:(id)sender
 {
 	if (self.presentingViewController)
 	{
@@ -222,12 +185,11 @@ typedef enum {
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSArray *guests = [[self.show valueForKeyPath:@"Guests.name"] allObjects];
+    
 	switch ((KATGShowDetailsSection)section) {
 		case KATGShowDetailsSectionGuests:
-			if ([self.show.guests count])
-			{
-				return [self.show.guests count] + 1;
-			}
+            return [guests count]?2:0;
 		case KATGShowDetailsSectionDescription:
 		case KATGShowDetailsSectionImages:
 			return 2;
@@ -243,11 +205,15 @@ typedef enum {
 	if (indexPath.row == 0 && indexPath.section != KATGShowDetailsSectionDownload)
 	{
 		KATGShowSectionTitleCell *titleCell = [tableView dequeueReusableCellWithIdentifier:kKATGShowDetailsSectionTitleCellIdentifier forIndexPath:indexPath];
-		switch ((KATGShowDetailsSection)indexPath.section) 
+        
+        NSArray *guests = [[self.show valueForKeyPath:@"Guests.name"] allObjects];
+		switch ((KATGShowDetailsSection)indexPath.section)
 		{
 			case KATGShowDetailsSectionGuests:
 				titleCell.showTopRule = YES;
-				titleCell.sectionTitleLabel.text = NSLocalizedString(@"Guests", nil);
+				titleCell.sectionTitleLabel.text = [NSString stringWithFormat:@"%@: %@",
+                                                    NSLocalizedString(@"Guests", nil),
+                                                    [guests componentsJoinedByString:@", "]];
 				break;
 			case KATGShowDetailsSectionDescription:
 				titleCell.showTopRule = NO;
@@ -270,16 +236,17 @@ typedef enum {
 	{
 		case KATGShowDetailsSectionGuests:
 		{
-			KATGShowGuestCell *guestCell = [tableView dequeueReusableCellWithIdentifier:kKATGShowDetailsSectionCellIdentifierGuests forIndexPath:indexPath];
-			if ([self.show.guests count])
-			{
-				guestCell.textLabel.text = [[self.show.sortedGuests objectAtIndex:(indexPath.row - 1)] name];
-			}
-			else
-			{
-				guestCell.textLabel.text = NSLocalizedString(@"(no guests)", nil);
-			}
-			cell = guestCell;
+            NSArray *guests = self.show.sortedGuests;
+            NSMutableArray *images = [NSMutableArray array];
+            for (KATGGuest *g in guests) {
+                KATGImage *img = g.image;
+                [images addObject:img];
+            }
+            
+            KATGShowImagesTableViewCell *imagesCell = [tableView dequeueReusableCellWithIdentifier:kKATGShowDetailsSectionCellIdentifierImages forIndexPath:indexPath];
+            imagesCell.images = images;
+            imagesCell.delegate = self;
+            cell = imagesCell;
 			break;
 		}
 
@@ -337,11 +304,6 @@ typedef enum {
 	return cell;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-{
-	return [UIView new];
-}
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	switch ((KATGShowDetailsSection)indexPath.section) {
@@ -350,7 +312,7 @@ typedef enum {
 			{
 				return 44.0f;
 			}
-			return 24.0f;
+			return 110.0f;
 		case KATGShowDetailsSectionDescription:
 			if (indexPath.row == 0)
 			{
@@ -374,11 +336,6 @@ typedef enum {
 	}
 }
 
-- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	return NO;
-}
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	if (indexPath.section != KATGShowDetailsSectionGuests || indexPath.row == 0)
@@ -387,50 +344,6 @@ typedef enum {
 	}
 	UIViewController *guestViewController = [[UIViewController alloc] init];
 	[self.navigationController pushViewController:guestViewController animated:YES];
-}
-
-#pragma mark - Rotation
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-	self.interfaceState = self.interfaceState;
-}
-
-#pragma mark - Interface state
-
-- (void)setInterfaceState:(KATGShowViewControllerInterfaceState)interfaceState
-{
-	switch (interfaceState) {
-		case KATGShowViewControllerInterfaceStateCollapsed:
-			self.showView.frame = self.collapsedShowViewRect;
-			self.tableView.alpha = 0.0f;
-//			self.showView.showMetaView.alpha = 1.0f;
-//			self.showView.footerHeight = self.collapsedFooterHeight;
-//			self.showView.headerHeight = self.collapsedHeaderHeight;
-			self.showView.closeButtonVisible = NO;
-//			self.showView.footerShadowView.alpha = 0.0f;
-			self.controlsView.alpha = 0.0f;
-			break;
-
-		case KATGShowViewControllerInterfaceStateExpanded:
-			self.showView.frame = self.view.bounds;
-			self.tableView.alpha = 1.0f;
-//			self.showView.showMetaView.alpha = 0.0f;
-//			self.showView.footerHeight = self.expandedFooterHeight;
-//			self.showView.headerHeight = self.expandedHeaderHeight;
-			self.showView.closeButtonVisible = YES;
-//			self.showView.footerShadowView.alpha = 1.0f;
-			self.controlsView.alpha = 1.0f;
-			break;
-	}
-
-	//Make sure the tableview always stays at its largest size (otherwise content jumps during transitions)
-	self.tableView.frame = CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, self.view.bounds.size.height - self.expandedFooterHeight - self.expandedHeaderHeight);
-
-	_interfaceState = interfaceState;
-
-	[self.showView layoutIfNeeded];
-	[self.tableView layoutSubviews];
 }
 
 #pragma mark - playback
@@ -581,6 +494,7 @@ typedef enum {
 	{
 		self.controlsView.currentState = KATGAudioPlayerStateDone;
 	}
+    [self.controlsView setNeedsLayout];
 }
 
 #pragma mark - Data updates
@@ -726,8 +640,11 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 {
 	KATGImagesViewController *imagesViewController = [[KATGImagesViewController alloc] initWithNibName:nil bundle:nil];
 	imagesViewController.delegate = self;
-	imagesViewController.images = imagesCell.images;
-	[imagesViewController willMoveToParentViewController:self];
+	imagesViewController.images = [self.show.images sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]];
+    
+    //imagesCell.images;
+	
+    [imagesViewController willMoveToParentViewController:self];
 	[self addChildViewController:imagesViewController];
 	[self.view addSubview:imagesViewController.view];
 	imagesViewController.view.frame = self.view.bounds;
@@ -738,7 +655,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 								   animations:^{
 //									   weakSelf.showView.transform = CGAffineTransformMakeScale(0.8f, 0.8f);
 								   } completion:^{
-									   self.showView.transform = CGAffineTransformIdentity;
+
 								   }];
 }
 

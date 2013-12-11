@@ -19,6 +19,7 @@
 //  
 
 #import "KATGViewController.h"
+#import "KATGShowControlsView.h"
 
 @class KATGShow, KATGShowViewController, KATGShowView;
 
@@ -26,33 +27,18 @@
 - (void)closeShowViewController:(KATGShowViewController *)showViewController;
 @end
 
-// Used to configure the view during transitions
-typedef enum {
-	KATGShowViewControllerInterfaceStateExpanded,
-	KATGShowViewControllerInterfaceStateCollapsed
-} KATGShowViewControllerInterfaceState;
-
-@interface KATGShowViewController : KATGViewController
+@interface KATGShowViewController : UIViewController
 
 @property (nonatomic, readonly) KATGShow *show;
 @property (nonatomic) NSManagedObjectID	*showObjectID;
-
-// the KATGShowView is traded between the details view controller and the cells in the main UI during transitions.
-@property (strong, nonatomic) KATGShowView *showView;
-
 @property (weak, nonatomic) id<KATGShowViewControllerDelegate> delegate;
 
-@property (strong, nonatomic, readonly) UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UILabel *showNumberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *showTitleLabel;
+@property (strong, nonatomic) IBOutlet UILabel *showTimeLabel;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet KATGShowControlsView *controlsView;
 
-// Set this to switch between expanded and collapsed states (for transitioning between this view controller and the cells in the main UI)
-@property (nonatomic, readonly) KATGShowViewControllerInterfaceState interfaceState;
-- (void)setInterfaceState:(KATGShowViewControllerInterfaceState)interfaceState;
-
-@property (nonatomic) CGFloat collapsedFooterHeight;
-@property (nonatomic) CGFloat collapsedHeaderHeight;
-@property (nonatomic) CGFloat expandedFooterHeight;
-@property (nonatomic) CGFloat expandedHeaderHeight;
-
-@property (nonatomic) CGRect collapsedShowViewRect;
+- (IBAction)close:(id)sender;
 
 @end

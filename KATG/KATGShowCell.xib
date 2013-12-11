@@ -35,7 +35,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Guest:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CqR-aB-faQ">
-                        <rect key="frame" x="10" y="42" width="42" height="15"/>
+                        <rect key="frame" x="10" y="42" width="68" height="15"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="10"/>
                         <nil key="highlightedColor"/>
@@ -47,13 +47,6 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(no guests)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1t4-sA-jOr">
-                        <rect key="frame" x="10" y="42" width="168" height="15"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="10"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ArrowNext.png" translatesAutoresizingMaskIntoConstraints="NO" id="Fxw-ct-Fdq">
                         <rect key="frame" x="290" y="23" width="21" height="21"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -62,7 +55,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="arrowNext" destination="Fxw-ct-Fdq" id="BYg-bd-KLq"/>
-                <outlet property="noGuestsLabel" destination="1t4-sA-jOr" id="z95-cJ-RRc"/>
+                <outlet property="guestLabel" destination="CqR-aB-faQ" id="RET-eB-Oaj"/>
                 <outlet property="showGuestsLabel" destination="Rzn-lN-0Jg" id="dhQ-1W-aBb"/>
                 <outlet property="showNumberLabel" destination="ujK-Yo-IES" id="iUT-K0-1Pz"/>
                 <outlet property="showTimeLabel" destination="GBP-YQ-XFe" id="VJI-9o-BTM"/>

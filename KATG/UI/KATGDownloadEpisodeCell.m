@@ -37,7 +37,13 @@
 		self.showTopRule = YES;
 		
 		_downloadButton = [KATGButton new];
-		_downloadButton.buttonStyle = KATGButtonStyleSecondary;
+		_downloadButton.backgroundColor = [UIColor colorWithRed:243./255 green:245./255 blue:246./255 alpha:1];
+        
+		[_downloadButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		_downloadButton.titleLabel.shadowOffset = CGSizeMake(0.0f, 0.0f);
+        
+        [_downloadButton setTintColor:[UIColor blackColor]];
+        _downloadButton.titleLabel.textColor = [UIColor blackColor];
 		[_downloadButton addTarget:self action:@selector(downloadButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 		
 		_downloadProgressView = [[KATGDownloadProgressView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 28.0f, 28.0f)];
@@ -58,7 +64,7 @@
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
-	self.downloadButton.frame = CGRectMake(10.0f, 20.0f, self.contentView.bounds.size.width - 20.0f, self.contentView.bounds.size.height - 20.0f);
+	self.downloadButton.frame = CGRectMake(50.0f, 10.0f, self.contentView.bounds.size.width - 100.0f, self.contentView.bounds.size.height - 20.0f);
 }
 
 - (void)downloadButtonPressed:(id)sender
@@ -81,21 +87,26 @@
 		case KATGDownloadEpisodeCellStateActive:
 			self.downloadButton.enabled = YES;
 			_downloadProgressView.currentState = KATGDownloadProgressViewStateNotDownloaded;
-			[self.downloadButton setTitle:@"Download This Episode" forState:UIControlStateNormal];
+			[self.downloadButton setTitle:@"Download To Listen Later" forState:UIControlStateNormal];
+            [self.downloadButton setImage:[UIImage imageNamed:@"DownloadIcon.png"] forState:UIControlStateNormal];
+            self.downloadButton.imageEdgeInsets = UIEdgeInsetsMake(0, -8, 0, 0);
 			break;
 		case KATGDownloadEpisodeCellStateDownloading:
 			self.downloadButton.enabled = YES;
 			_downloadProgressView.currentState = KATGDownloadProgressViewStateDownloading;
 			[self.downloadButton setTitle:@"Cancel Download" forState:UIControlStateNormal];
+            [self.downloadButton setImage:nil forState:UIControlStateNormal];
 			break;
 		case KATGDownloadEpisodeCellStateDownloaded:
 			self.downloadButton.enabled = NO;
 			_downloadProgressView.currentState = KATGDownloadProgressViewStateDownloaded;
-			[self.downloadButton setTitle:@"Downloaded" forState:UIControlStateNormal];
+            [self.downloadButton setTitle:@"Downloaded" forState:UIControlStateNormal];
+            [self.downloadButton setImage:nil forState:UIControlStateNormal];
 			break;
 		case KATGDownloadEpisodeCellStateDisabled:
 			self.downloadButton.enabled = NO;
 			_downloadProgressView.currentState = KATGDownloadProgressViewStateNotDownloaded;
+            [self.downloadButton setImage:nil forState:UIControlStateNormal];            
 			[self.downloadButton setTitle:@"Download Not Available" forState:UIControlStateNormal];
 			break;
 		default:

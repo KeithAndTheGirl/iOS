@@ -308,7 +308,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	KATGShow *show = self.currentlyPresentedShowViewController.show;
 	NSParameterAssert(show);
 	NSIndexPath *showIndexPath = [NSIndexPath indexPathForItem:[self.mainDataSource.shows indexOfObject:show] inSection:KATGSectionArchive];
-	[self.collectionView scrollToItemAtIndexPath:showIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
+//	[self.collectionView scrollToItemAtIndexPath:showIndexPath atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:NO];
 	[self closeActiveShowToArchiveCell:(KATGArchiveCell *)[self.collectionView cellForItemAtIndexPath:showIndexPath]];
 }
 
@@ -344,23 +344,22 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)presentShow:(KATGShow *)show fromArchiveCell:(KATGArchiveCell *)cell
 {
-	if (self.currentlyPresentedShowViewController)
-	{
-		return;
-	}
-	
 	[self addDimmingViewForModalWithDuration:0.5f];
-
-	KATGShowView *showView = nil;//cell.showView;
-	
-	KATGShowViewController *showViewController = [KATGShowViewController new];
+	KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
 	showViewController.delegate = self;
 	showViewController.showObjectID = [show objectID];
 	self.currentlyPresentedShowViewController = showViewController;
 	
+    [self presentViewController:self.currentlyPresentedShowViewController
+                       animated:YES
+                     completion:^{
+                         
+                     }];
+    return;
+    
 	// Prepare the show view controller for presentation
 //	showViewController.collapsedFooterHeight = showView.footerHeight;
-	
+/*
 	[showViewController willMoveToParentViewController:self];
 	[self addChildViewController:showViewController];
 	[self.view addSubview:showViewController.view];
@@ -395,44 +394,48 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 							 [showViewController didMoveToParentViewController:self];
 						 }];
 	});
+ */
 }
 
 - (void)closeActiveShowToArchiveCell:(KATGArchiveCell *)cell
 {
-	if (!self.currentlyPresentedShowViewController)
-	{
-		return;
-	}
-	
-	KATGShowView *showView = nil;//cell.showView;
-	
-	// find the starting rect for the show view within the view controller. Because a transform is involved, use bounds and calculate the center
-	CGRect showViewRect = showView.bounds;
-	CGPoint center = [self.currentlyPresentedShowViewController.view convertPoint:showView.center fromView:showView.superview];
-	showViewRect.origin.x = center.x - (showViewRect.size.width/2);
-	showViewRect.origin.y = center.y - (showViewRect.size.height/2);
-	self.currentlyPresentedShowViewController.collapsedShowViewRect = showViewRect;
-	
-	NSArray *visibleCells = [self.collectionView visibleCells];
-	self.collectionView.hidden = NO;
-	
-	[self.currentlyPresentedShowViewController willMoveToParentViewController:nil];
-	[self removeDimmingViewForModalWithDuration:0.5f];
-	
-	[UIView animateWithDuration:0.5f delay:0.0f options:0
-					 animations:^{
-						 for (UICollectionViewCell *cell in visibleCells)
-						 {
-							 cell.transform = CGAffineTransformIdentity;
-						 }
-						 [self.currentlyPresentedShowViewController setInterfaceState:KATGShowViewControllerInterfaceStateCollapsed];
-					 }
-					 completion:^(BOOL finished) {
-						 self.currentlyPresentedShowViewController.delegate = nil;
-						 [self.currentlyPresentedShowViewController.view removeFromSuperview];
-						 [self.currentlyPresentedShowViewController didMoveToParentViewController:nil];
-						 self.currentlyPresentedShowViewController = nil;
-					 }];
+    [self dismissViewControllerAnimated:self.currentlyPresentedShowViewController completion:^{
+        
+    }];
+//	if (!self.currentlyPresentedShowViewController)
+//	{
+//		return;
+//	}
+//	
+//	KATGShowView *showView = nil;//cell.showView;
+//	
+//	// find the starting rect for the show view within the view controller. Because a transform is involved, use bounds and calculate the center
+//	CGRect showViewRect = showView.bounds;
+//	CGPoint center = [self.currentlyPresentedShowViewController.view convertPoint:showView.center fromView:showView.superview];
+//	showViewRect.origin.x = center.x - (showViewRect.size.width/2);
+//	showViewRect.origin.y = center.y - (showViewRect.size.height/2);
+//	self.currentlyPresentedShowViewController.collapsedShowViewRect = showViewRect;
+//	
+//	NSArray *visibleCells = [self.collectionView visibleCells];
+//	self.collectionView.hidden = NO;
+//	
+//	[self.currentlyPresentedShowViewController willMoveToParentViewController:nil];
+//	[self removeDimmingViewForModalWithDuration:0.5f];
+//	
+//	[UIView animateWithDuration:0.5f delay:0.0f options:0
+//					 animations:^{
+//						 for (UICollectionViewCell *cell in visibleCells)
+//						 {
+//							 cell.transform = CGAffineTransformIdentity;
+//						 }
+//						 [self.currentlyPresentedShowViewController setInterfaceState:KATGShowViewControllerInterfaceStateCollapsed];
+//					 }
+//					 completion:^(BOOL finished) {
+//						 self.currentlyPresentedShowViewController.delegate = nil;
+//						 [self.currentlyPresentedShowViewController.view removeFromSuperview];
+//						 [self.currentlyPresentedShowViewController didMoveToParentViewController:nil];
+//						 self.currentlyPresentedShowViewController = nil;
+//					 }];
 }
 
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
@@ -514,9 +517,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		return;
 	}
-	KATGShowViewController *showViewController = [KATGShowViewController new];
+	KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
 	showViewController.showObjectID = [show objectID];
-	[showViewController setInterfaceState:KATGShowViewControllerInterfaceStateExpanded];
 	[self presentViewController:showViewController animated:YES completion:NULL];
 }
 

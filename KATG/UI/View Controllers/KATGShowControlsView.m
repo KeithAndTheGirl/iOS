@@ -37,11 +37,7 @@
 
 @implementation KATGShowControlsView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) 
-	{
+- (void)awakeFromNib {
 		_skipBackButton = [[KATGControlButton alloc] initWithFrame:CGRectZero];
 		_skipBackButton.accessibilityLabel = NSLocalizedString(@"Rewind 15 seconds", nil);
 		[_skipBackButton setImage:[UIImage imageNamed:@"skip-back"] forState:UIControlStateNormal];
@@ -67,8 +63,6 @@
 		[self addSubview:_loadingIndicator];
 		
 		self.accessibilityElements = @[_skipBackButton, _playButton, _skipForwardButton, _positionSlider];
-    }
-    return self;
 }
 
 - (void)layoutSubviews

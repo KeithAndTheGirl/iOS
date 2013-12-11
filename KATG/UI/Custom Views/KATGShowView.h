@@ -36,7 +36,7 @@
 
 // Text columns in the footer (used for collapsed state)
 @property (strong, nonatomic) IBOutlet UILabel *showGuestsLabel;
-@property (strong, nonatomic) IBOutlet UILabel *noGuestsLabel;
+@property (strong, nonatomic) IBOutlet UILabel *guestLabel;
 @property (strong, nonatomic) IBOutlet UILabel *showTimeLabel;
 
 // This determines if the close button's width is taken into account when laying

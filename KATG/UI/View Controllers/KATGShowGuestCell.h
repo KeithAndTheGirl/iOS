@@ -21,6 +21,8 @@
 #import <UIKit/UIKit.h>
 #import "KATGShowCell.h"
 
-@interface KATGShowGuestCell : KATGShowCell
+@interface KATGShowGuestCell : UITableViewCell
+
+-(void)setImages:(NSArray*)imagesUrls;
 
 @end

@@ -19,18 +19,22 @@
 //  
 
 #import "KATGShowGuestCell.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation KATGShowGuestCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) 
-	{
-		self.textLabel.font = [UIFont systemFontOfSize:12.0f];
-		self.textLabel.textColor = [UIColor darkGrayColor];
+-(void)setImages:(NSArray*)imagesUrls {
+    for(UIView *v in [self.contentView subviews])
+        if(v.tag == 111)
+            [v removeFromSuperview];
+    for(int i=0; i<[imagesUrls count]; i++) {
+        UIImageView *imgView = [[UIImageView alloc] initWithFrame:
+                                CGRectMake(10+i*110, 5, 100, 100)];
+        [self.contentView addSubview:imgView];
+        imgView.tag = 111;
+        imgView.contentMode = UIViewContentModeScaleAspectFit;
+        [imgView setImageWithURL:[NSURL URLWithString:imagesUrls[i]]];
     }
-    return self;
 }
 
 @end
