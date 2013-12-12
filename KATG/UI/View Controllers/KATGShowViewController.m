@@ -89,19 +89,6 @@ typedef enum {
 
 @implementation KATGShowViewController
 
-- (id)init
-{
-	self = [super init];
-	if (self)
-	{
-		[self addPlaybackManagerKVO];
-		[self addReachabilityKVO];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReturned:) name:kKATGReachabilityIsReachableNotification object:nil];
-	}
-	return self;
-}
-
 - (void)dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
@@ -115,6 +102,10 @@ typedef enum {
 {
 	[super viewDidLoad];
     
+    [self addPlaybackManagerKVO];
+    [self addReachabilityKVO];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReturned:) name:kKATGReachabilityIsReachableNotification object:nil];
     
     self.tableView.tableHeaderView = self.showHeaderView;
     
