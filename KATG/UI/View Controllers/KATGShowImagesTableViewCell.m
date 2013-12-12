@@ -23,8 +23,8 @@
 #import "KATGImageCache.h"
 #import "KATGImage.h"
 
-#define SIDE_MARGIN 20.0f
-#define VERTICAL_MARGIN 4.0f
+#define SIDE_MARGIN 0.0f
+#define VERTICAL_MARGIN 0.0f
 #define INTER_IMAGE_GAP 10.0f
 
 static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
@@ -42,9 +42,12 @@ static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
 	{
 		UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
 		flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-		flowLayout.minimumInteritemSpacing = 0.0f;
-		flowLayout.minimumLineSpacing = 0.0f;
-		_collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds collectionViewLayout:flowLayout];
+		flowLayout.minimumInteritemSpacing = 10.0f;
+		flowLayout.minimumLineSpacing = 10.0f;
+        flowLayout.itemSize = CGSizeMake(94, 94);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 0);
+        
+		_collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds  collectionViewLayout:flowLayout];
 		_collectionView.delegate = self;
 		_collectionView.dataSource = self;
 		_collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -87,11 +90,11 @@ static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
 	}];
 	return cell;
 }
-
+/*
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	CGFloat size = collectionView.frame.size.height - (VERTICAL_MARGIN*2);
-	return CGSizeMake(size, size);
+//	CGFloat size = collectionView.frame.size.height - (VERTICAL_MARGIN*2);
+	return CGSizeMake(94, 94);
 }
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
@@ -106,14 +109,14 @@ static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-	return CGSizeMake(SIDE_MARGIN, collectionView.frame.size.height);
+	return CGSizeMake(SIDE_MARGIN, SIDE_MARGIN);
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForFooterInSection:(NSInteger)section
 {
-	return CGSizeMake(SIDE_MARGIN, collectionView.frame.size.height);
+	return CGSizeMake(SIDE_MARGIN, SIDE_MARGIN);
 }
-
+*/
 - (void)setImages:(NSArray *)images
 {
 	NSParameterAssert([NSThread isMainThread]);

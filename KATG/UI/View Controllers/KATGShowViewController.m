@@ -320,7 +320,8 @@ typedef enum {
 			}
 			else if ([self.show.images count])
 			{
-				return 92.0f;
+                int rows = ceil([self.show.images count]/3.);
+				return 124*rows;
 			}
 			return 24.0f;
 		case KATGShowDetailsSectionDownload:
