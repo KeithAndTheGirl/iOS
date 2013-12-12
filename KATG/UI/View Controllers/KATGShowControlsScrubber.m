@@ -55,6 +55,7 @@
 		
 		[self setMinimumTrackImage:[UIImage new] forState:UIControlStateNormal];
 		[self setMaximumTrackImage:[UIImage new] forState:UIControlStateNormal];
+        [self setThumbImage:[UIImage imageNamed:@"SliderThumb.png"] forState:UIControlStateNormal];
 		
 		[self updateAccessibilityValue];
 	}
