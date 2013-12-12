@@ -53,7 +53,7 @@
 		_skipForwardButton.rightBorderWidth = 0.0f;
 		[self addSubview:_skipForwardButton];
 		
-		_playButton.bottomBorderWidth = _skipBackButton.bottomBorderWidth = _skipForwardButton.bottomBorderWidth = 1.0f / [[UIScreen mainScreen] scale];
+		_playButton.bottomBorderWidth = _skipBackButton.bottomBorderWidth = _skipForwardButton.bottomBorderWidth = 0.0f / [[UIScreen mainScreen] scale];
 		
 		_positionSlider = [[KATGShowControlsScrubber alloc] initWithFrame:CGRectZero];
 		[self addSubview:_positionSlider];

@@ -33,6 +33,7 @@
 @property (nonatomic) NSManagedObjectID	*showObjectID;
 @property (weak, nonatomic) id<KATGShowViewControllerDelegate> delegate;
 
+@property (strong, nonatomic) IBOutlet UIView *showHeaderView;
 @property (strong, nonatomic) IBOutlet UILabel *showNumberLabel;
 @property (strong, nonatomic) IBOutlet UILabel *showTitleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *showTimeLabel;

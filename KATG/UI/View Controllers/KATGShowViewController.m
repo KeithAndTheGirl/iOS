@@ -114,7 +114,10 @@ typedef enum {
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-
+    
+    
+    self.tableView.tableHeaderView = self.showHeaderView;
+    
 	[self.tableView registerClass:[KATGShowGuestCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierGuests];
 	[self.tableView registerClass:[KATGShowImagesTableViewCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierImages];
 	[self.tableView registerClass:[KATGShowDescriptionCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierDescription];

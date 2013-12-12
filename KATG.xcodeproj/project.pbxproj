@@ -1561,11 +1561,13 @@
 		9108999215EAE15500FB57C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolas Rostov (XAZ9P6TUJV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "A8AA1A3C-DE4E-4757-A231-E43BD0110512";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1573,11 +1575,13 @@
 		9108999315EAE15500FB57C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolas Rostov (XAZ9P6TUJV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "A8AA1A3C-DE4E-4757-A231-E43BD0110512";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

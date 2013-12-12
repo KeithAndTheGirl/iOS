@@ -29,7 +29,7 @@
 	{
 		[self setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
 		
-		_leftBorderWidth = _rightBorderWidth = 1.0f / [[UIScreen mainScreen] scale];
+		_leftBorderWidth = _rightBorderWidth = 0.0f / [[UIScreen mainScreen] scale];
 		_topBorderWidth = _bottomBorderWidth = 0.0f;
 		
 		_leftBorderColor = _topBorderColor = [UIColor colorWithWhite:1.0f alpha:0.7f];
