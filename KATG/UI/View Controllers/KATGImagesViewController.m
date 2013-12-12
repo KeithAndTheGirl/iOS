@@ -32,7 +32,8 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 
 @interface KATGImagesViewController () <UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, KATGFullScreenImageCellDelegate, UIActionSheetDelegate>
 @property (nonatomic) UICollectionView *collectionView;
-@property (nonatomic) UINavigationBar *navigationBar;
+@property (nonatomic) UIButton *closeButton;
+@property (nonatomic) UIButton *saveButton;
 @property (nonatomic) UIView *backgroundView;
 @property (nonatomic) UIActionSheet *actionSheet;
 @end
@@ -68,22 +69,25 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 	[self.collectionView registerClass:[KATGFullScreenImageCell class] forCellWithReuseIdentifier:fullScreenImageCellIdentifier];
 	[self.view addSubview:self.collectionView];
 	
-	KATGButton *closeButton = [[KATGButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 60.0f, 44.0f)];
-	[closeButton setTitle:@"Done" forState:UIControlStateNormal];
-	closeButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
-	[closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
-	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:closeButton]];
+	self.closeButton = [[UIButton alloc] initWithFrame:CGRectMake(250.0f, 20.0f, 60.0f, 36.0f)];
+    _closeButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    [_closeButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
+    [_closeButton.layer setBorderWidth:0.5];
+    [_closeButton.layer setCornerRadius:4];
+	[_closeButton setTitle:@"Done" forState:UIControlStateNormal];
+	_closeButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
+	[_closeButton addTarget:self action:@selector(close) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_closeButton];
 	
-	KATGButton *saveButton = [[KATGButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 60.0f, 44.0f)];
-	[saveButton setTitle:@"Save" forState:UIControlStateNormal];
-	saveButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
-	[saveButton addTarget:self action:@selector(disclosureButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-	[self.navigationItem setLeftBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:saveButton]];
-	
-	self.navigationBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.view.bounds.size.width, 44.0f)];
-	self.navigationBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-	[self.navigationBar pushNavigationItem:self.navigationItem animated:NO];
-	[self.view addSubview:self.navigationBar];	
+	self.saveButton = [[UIButton alloc] initWithFrame:CGRectMake(10.0f, 20.0f, 60.0f, 36.0f)];
+    _saveButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    [_saveButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
+    [_saveButton.layer setBorderWidth:0.5];
+    [_saveButton.layer setCornerRadius:4];
+	[_saveButton setTitle:@"Save" forState:UIControlStateNormal];
+	_saveButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
+	[_saveButton addTarget:self action:@selector(disclosureButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_saveButton];
 }
 
 - (void)transitionFromImage:(KATGImage *)image inImageView:(UIImageView *)imageView animations:(void(^)())animations completion:(void(^)())completion;
@@ -130,21 +134,23 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 	
 	self.backgroundView.alpha = 0.0f;
 	
-	[self.view bringSubviewToFront:self.navigationBar];
+//	[self.view bringSubviewToFront:self.navigationBar];
 
-	self.navigationBar.alpha = 0.0f;
+	self.closeButton.alpha = 0.0f;
+    self.saveButton.alpha = 0.0f;
 	CGFloat navigationBarScale = initialRect.size.width / self.view.bounds.size.width;
-	self.navigationBar.transform = CGAffineTransformMakeScale(navigationBarScale, navigationBarScale);
-	self.navigationBar.center = CGPointMake(CGRectGetMidX(initialRect), CGRectGetMinY(initialRect) - (navigationBarScale*44.0f));
+//	self.navigationBar.transform = CGAffineTransformMakeScale(navigationBarScale, navigationBarScale);
+//	self.navigationBar.center = CGPointMake(CGRectGetMidX(initialRect), CGRectGetMinY(initialRect) - (navigationBarScale*44.0f));
 	[self updateTitleWithImage:image];
 	
 	[UIView animateWithDuration:0.4f
 						  delay:0.0f
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
-						 self.navigationBar.alpha = 1.0f;
-						 self.navigationBar.transform = CGAffineTransformIdentity;
-						 self.navigationBar.center = CGPointMake(CGRectGetMidX(self.view.bounds), 22.0f);
+						 self.closeButton.alpha = 1.0f;
+                         self.saveButton.alpha = 1.0f;
+//						 self.navigationBar.transform = CGAffineTransformIdentity;
+//						 self.navigationBar.center = CGPointMake(CGRectGetMidX(self.view.bounds), 22.0f);
 						 transitionContainerView.frame = self.view.bounds;
 						 transitionImageView.bounds = newImageRect;
 						 transitionImageView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
@@ -303,7 +309,8 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 	}
 	
 	self.collectionView.hidden = YES;
-	[self.view bringSubviewToFront:self.navigationBar];	
+	[self.view bringSubviewToFront:self.closeButton];
+	[self.view bringSubviewToFront:self.saveButton];
 	[self setNavigationBarVisible:NO animated:YES];
 	
 	UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, NSLocalizedString(@"Dismissing image gallery", nil));
@@ -312,10 +319,11 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
 						 
-						 self.navigationBar.alpha = 0.0f;
-						 CGFloat navigationBarScale = collapseTargetFrame.size.width / self.view.bounds.size.width;
-						 self.navigationBar.transform = CGAffineTransformMakeScale(navigationBarScale, navigationBarScale);
-						 self.navigationBar.center = CGPointMake(CGRectGetMidX(collapseTargetFrame), CGRectGetMinY(collapseTargetFrame) - (navigationBarScale*44.0f));
+						 self.closeButton.alpha = 0.0f;
+						 self.saveButton.alpha = 0.0f;
+//						 CGFloat navigationBarScale = collapseTargetFrame.size.width / self.view.bounds.size.width;
+//						 self.navigationBar.transform = CGAffineTransformMakeScale(navigationBarScale, navigationBarScale);
+//						 self.navigationBar.center = CGPointMake(CGRectGetMidX(collapseTargetFrame), CGRectGetMinY(collapseTargetFrame) - (navigationBarScale*44.0f));
 						 
 						 transitionContainerView.frame = collapseTargetFrame;
 						 transitionImageView.bounds = newImageBounds;
@@ -333,26 +341,32 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 {
 	if (animated)
 	{
-		if (visible && self.navigationBar.hidden)
+		if (visible && self.saveButton.hidden)
 		{
-			self.navigationBar.hidden = NO;
-			self.navigationBar.alpha = 0.0f;
+			self.closeButton.hidden = NO;
+			self.saveButton.hidden = NO;
+			self.closeButton.alpha = 0.0f;
+			self.saveButton.alpha = 0.0f;
 		}
 		
 		[UIView animateWithDuration:0.2f
 						 animations:^{
-							 self.navigationBar.alpha = visible ? 1.0f : 0.0f;
+							 self.closeButton.alpha = visible ? 1.0f : 0.0f;
+							 self.saveButton.alpha = visible ? 1.0f : 0.0f;
 						 } completion:^(BOOL finished) {
 							 if (!visible)
 							 {
-								 self.navigationBar.hidden = YES;
+								 self.closeButton.hidden = YES;
+								 self.saveButton.hidden = YES;
 							 }
 						 }];
 	}
 	else
 	{
-		self.navigationBar.hidden = !visible;
-		self.navigationBar.alpha = 1.0f;
+		self.closeButton.hidden = !visible;
+		self.saveButton.hidden = !visible;
+		self.closeButton.alpha = 1.0f;
+		self.saveButton.alpha = 1.0f;
 	}
 }
 
@@ -360,7 +374,7 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 
 - (void)didTapFullScreenImageCell:(KATGFullScreenImageCell *)cell
 {
-	[self setNavigationBarVisible:(self.navigationBar.hidden) animated:YES];
+	[self setNavigationBarVisible:(self.saveButton.hidden) animated:YES];
 }
 
 - (BOOL)katg_performAccessibilityEscape
