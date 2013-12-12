@@ -85,6 +85,8 @@ extern NSString *const KATGDataStoreEventsDidChangeNotification;
 //
 - (id<KATGDownloadToken>)downloadEpisodeAudio:(KATGShow *)show progress:(void (^)(CGFloat progress))progress completion:(void (^)(NSError *error))completion;
 
+- (void)removeDownloadedEpisodeAudio:(KATGShow *)show;
+
 //
 - (void)downloadEvents;
 

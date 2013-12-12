@@ -98,9 +98,9 @@
             [self.downloadButton setImage:nil forState:UIControlStateNormal];
 			break;
 		case KATGDownloadEpisodeCellStateDownloaded:
-			self.downloadButton.enabled = NO;
+			self.downloadButton.enabled = YES;
 			_downloadProgressView.currentState = KATGDownloadProgressViewStateDownloaded;
-            [self.downloadButton setTitle:@"Downloaded" forState:UIControlStateNormal];
+            [self.downloadButton setTitle:@"Delete this download" forState:UIControlStateNormal];
             [self.downloadButton setImage:nil forState:UIControlStateNormal];
 			break;
 		case KATGDownloadEpisodeCellStateDisabled:

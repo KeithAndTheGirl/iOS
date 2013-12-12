@@ -473,6 +473,21 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 	return token;
 }
 
+- (void)removeDownloadedEpisodeAudio:(KATGShow *)show {
+    if (show.file_url) {
+        [[NSFileManager defaultManager] removeItemAtPath:show.file_url error:nil];
+        show.downloaded = @NO;
+        [self saveChildContext:self.childContext completion:^(NSError *saveError) {
+            CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
+                if (saveError)
+                {
+                    EpisodeAudioLog(@"Core Data Error %@", saveError);
+                }
+            });
+        }];
+    }
+}
+
 - (void)downloadEvents
 {
 	EventsLog(@"Download Events");

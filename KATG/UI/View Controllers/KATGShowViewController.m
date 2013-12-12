@@ -730,6 +730,10 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 //		self.shouldReloadDownload = true;
 //		[self queueReload];
 	}
+    else if(cell.state == KATGDownloadEpisodeCellStateDownloaded) {
+		cell.state = KATGDownloadEpisodeCellStateActive;
+        [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:self.show];
+    }
 }
 
 #pragma mark - UIActionSheetDelegate
