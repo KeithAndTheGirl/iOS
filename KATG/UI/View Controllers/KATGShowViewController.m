@@ -91,9 +91,6 @@ typedef enum {
 
 - (void)dealloc
 {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
-//	[self removePlaybackManagerKVO];
-//	[self removeReachabilityKVO];
 }
 
 #pragma mark -
@@ -102,8 +99,6 @@ typedef enum {
 {
 	[super viewDidLoad];
     
-    [self addPlaybackManagerKVO];
-    [self addReachabilityKVO];
     
     self.tableView.tableHeaderView = self.showHeaderView;
     self.tableView.scrollsToTop = YES;
@@ -156,12 +151,19 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReturned:) name:kKATGReachabilityIsReachableNotification object:nil];
+
+    [self addPlaybackManagerKVO];
+    [self addReachabilityKVO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kKATGReachabilityIsReachableNotification object:nil];
+    
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
+    	[self removePlaybackManagerKVO];
+    	[self removeReachabilityKVO];
 }
 
 #pragma mark - Actions
