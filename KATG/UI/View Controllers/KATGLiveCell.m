@@ -46,8 +46,17 @@
 #pragma mark - 
 
 -(void)awakeFromNib {
-    [self.upcomingView removeFromSuperview];
-    [self.contentView addSubview:self.upcomingView];
+    [self.internalView removeFromSuperview];
+    [self.contentView addSubview:self.internalView];
+    CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
+    CGFloat contentHeight = self.contentView.frame.size.height;
+    CGFloat height = contentHeight - self.internalView.frame.size.height;
+    if(screenHeight > 480)
+        height -= 56;
+    
+    self.internalView.frame = CGRectMake(0, height, self.contentView.frame.size.width, self.internalView.frame.size.height);
+    
+    self.contentView.backgroundColor = [UIColor blackColor];
     
     [_countLabelHours.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
     [_countLabelHours.layer setBorderWidth:0.5];
@@ -65,22 +74,20 @@
     [_feedbackButton.layer setBorderWidth:0.5];
     [_feedbackButton.layer setCornerRadius:4];
     
+    _loadingIndicator.alpha = 0;
+    
 #if DEBUG
-        //        _liveToggleButton.hidden = NO;
+    _liveToggleButton.hidden = NO;
 #endif
-		_loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-		_loadingIndicator.color = [UIColor katg_titleTextColor];
-        [self.contentView addSubview:_loadingIndicator];
-        
-		self.currentAudioPlayerState = KATGAudioPlayerStateUnknown;
-		
-		_target = [KATGTimerTarget alloc];
-		_target.target = self;
-		
-		_timer = [NSTimer timerWithTimeInterval:1.0f target:_target selector:@selector(updateCounter) userInfo:nil repeats:YES];		
-		[[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-		
-		[self addPlaybackManagerKVO];
+    self.currentAudioPlayerState = KATGAudioPlayerStateUnknown;
+    
+    _target = [KATGTimerTarget alloc];
+    _target.target = self;
+    
+    _timer = [NSTimer timerWithTimeInterval:1.0f target:_target selector:@selector(updateCounter) userInfo:nil repeats:YES];
+    [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+    
+    [self addPlaybackManagerKVO];
 }
 
 - (void)dealloc
@@ -92,7 +99,6 @@
 - (void)prepareForReuse
 {
 	[super prepareForReuse];
-	[self.refreshControl endRefreshing];
 }
 
 #pragma mark - 
@@ -302,17 +308,6 @@
 {
 	_scheduledEvent = scheduledEvent;
 	self.timestamp = scheduledEvent.timestamp;
-/*
-	NSDictionary *smallTextAttrs = @{
-		NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
-		NSForegroundColorAttributeName : [UIColor lightGrayColor]
-	};
-	
-	NSDictionary *largeTextAttrs = @{
-		NSFontAttributeName : [UIFont boldSystemFontOfSize:18.0f],
-		NSForegroundColorAttributeName : [UIColor darkGrayColor]
-	};
-*/
 	NSString *subtitle = _scheduledEvent.subtitle;
 	self.nextShowLabel.text = [NSString stringWithFormat:@"Featuring %@", subtitle];
 	[self layoutLiveMode];
@@ -327,7 +322,7 @@
 
 - (void)endRefreshing
 {
-	[self.refreshControl endRefreshing];
+//	[self.refreshControl endRefreshing];
 }
 
 @end

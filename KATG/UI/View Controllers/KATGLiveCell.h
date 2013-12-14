@@ -34,7 +34,7 @@
 @property (strong, nonatomic) KATGScheduledEvent *scheduledEvent;
 @property (weak, nonatomic) id<KATGLiveCellDelegate> liveShowDelegate;
 
-@property (nonatomic) IBOutlet UIView *upcomingView;
+@property (nonatomic) IBOutlet UIView *internalView;
 @property (nonatomic) IBOutlet UILabel *titleLabel;
 @property (nonatomic) IBOutlet UILabel *nextShowLabel;
 @property (nonatomic) IBOutlet UIView *timerSection;
@@ -47,16 +47,10 @@
 @property (nonatomic) KATGTimerTarget *target;
 @property (nonatomic) NSTimer *timer;
 
-@property (nonatomic) IBOutlet UIImageView *micImageView;
-//@property (nonatomic) KATGCigaretteSmokeView *smokeView;
-//@property (nonatomic) KATGBeerBubblesView *lightBubblesView;
-
 @property (nonatomic) IBOutlet UIButton *playButton;
 @property (nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 @property (nonatomic) IBOutlet UIButton *liveToggleButton;
-
-@property (nonatomic) IBOutlet UIRefreshControl *refreshControl;
 
 - (IBAction)playButtonTapped:(id)sender;
 - (IBAction)toggleLive:(id)sender;

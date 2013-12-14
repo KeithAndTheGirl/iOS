@@ -45,6 +45,14 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 		[_tableView registerClass:[KATGScheduleItemTableViewCell class] forCellReuseIdentifier:kKATGScheduleItemTableViewCellIdentifier];
 		_tableView.backgroundColor = [UIColor clearColor];
 		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
+            _tableView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
+            _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
+        }
+        else {
+            _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
+            _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 56, 0);
+        }
 		[self.contentView addSubview:_tableView];
 	}
 	return self;

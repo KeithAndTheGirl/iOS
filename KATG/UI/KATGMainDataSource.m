@@ -142,13 +142,9 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 	switch ((KATGSection)section)
 	{
 		case KATGSectionSchedule:
-			return 1;
 		case KATGSectionLive:
-			return 1;
 		case KATGSectionArchive:
-			return 1;
         case KATGSectionYoutube:
-            return 1;
         case KATGSectionAbout:
             return 1;
 		default:
@@ -211,19 +207,10 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionAbout:
 		case KATGSectionSchedule:
 		case KATGSectionArchive:
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
-                cellSize = CGSizeMake(rect.size.width, rect.size.height);
-            }
-            else {
-                cellSize = CGSizeMake(rect.size.width, rect.size.height+20);
-            }
-			break;
 		case KATGSectionLive:
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
-                cellSize = CGSizeMake(rect.size.width, rect.size.height+20);
-            }
-            else {
-                cellSize = CGSizeMake(rect.size.width, rect.size.height+40);
+            cellSize = [[UIScreen mainScreen] bounds].size;
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.) {
+                cellSize.height -= 20;
             }
 			break;
 		default:
@@ -241,16 +228,8 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionYoutube:
 		case KATGSectionSchedule:
 		case KATGSectionArchive:
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
-                return UIEdgeInsetsMake(0, 0, 0, 0);
-            }
-            else {
-                return UIEdgeInsetsMake(-20, 0, 0, 0);
-            }
-            break;
 		case KATGSectionLive:
             return UIEdgeInsetsMake(-20, 0, 0, 0);
-            break;
 		default:
 			NSParameterAssert(NO);
 			return UIEdgeInsetsZero;
@@ -366,7 +345,7 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		
 		KATGSection targetSection = [collectionView closestSectionForContentOffset:scrollView.contentOffset];
 		NSParameterAssert(self.mainViewController);
-		[self.mainViewController.tabBar selectTabItemAtIndex:targetSection animated:YES];
+//		[self.mainViewController.tabBar selectTabItemAtIndex:targetSection animated:YES];
 	}
 }
 

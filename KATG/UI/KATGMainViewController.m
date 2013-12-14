@@ -128,7 +128,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	[self setNeedsStatusBarAppearanceUpdate];
+    if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
+        [self setNeedsStatusBarAppearanceUpdate];
     
 	[[KATGDataStore sharedStore] downloadAllEpisodes];
 	[[KATGDataStore sharedStore] downloadEvents];
@@ -546,7 +547,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)tabBar:(KATGTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index wasTapped:(BOOL)wasTapped
 {
-	[self setNeedsStatusBarAppearanceUpdate];
+    if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
+        [self setNeedsStatusBarAppearanceUpdate];
 	if (!wasTapped)
 	{
 		return;
