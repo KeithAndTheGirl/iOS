@@ -12,6 +12,16 @@
 
 @interface KATGLiveShowFeedbackViewController : KATGViewController
 @property (weak, nonatomic) id<KATGLiveShowFeedbackViewControllerDelegate> delegate;
+
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *locationTextField;
+@property (weak, nonatomic) IBOutlet UITextView *messagesTextView;
+@property (weak, nonatomic) IBOutlet UIButton *sendButton;
+
+- (IBAction)send:(id)sender;
+- (IBAction)close:(id)sender;
+
 @end
 
 @protocol KATGLiveShowFeedbackViewControllerDelegate <NSObject>

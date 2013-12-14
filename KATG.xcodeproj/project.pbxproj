@@ -56,6 +56,7 @@
 		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
 		01952348185CA71300B744E1 /* StopLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952344185CA71300B744E1 /* StopLiveButton.png */; };
 		01952349185CA71300B744E1 /* StopLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952345185CA71300B744E1 /* StopLiveButton@2x.png */; };
+		019568B8185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019568B7185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib */; };
 		01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */; };
 		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
@@ -283,6 +284,7 @@
 		01952343185CA71300B744E1 /* PlayLiveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayLiveButton@2x.png"; path = "Supporting Files/Images/Live/PlayLiveButton@2x.png"; sourceTree = "<group>"; };
 		01952344185CA71300B744E1 /* StopLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StopLiveButton.png; path = "Supporting Files/Images/Live/StopLiveButton.png"; sourceTree = "<group>"; };
 		01952345185CA71300B744E1 /* StopLiveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopLiveButton@2x.png"; path = "Supporting Files/Images/Live/StopLiveButton@2x.png"; sourceTree = "<group>"; };
+		019568B7185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveShowFeedbackViewController.xib; path = "KATG/Supporting Files/XIBs/KATGLiveShowFeedbackViewController.xib"; sourceTree = SOURCE_ROOT; };
 		01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveCell.xib; path = "Custom Views/KATGLiveCell.xib"; sourceTree = "<group>"; };
 		01D0CE14185C17C600EB88B3 /* LiveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LiveBackground.png; path = "Supporting Files/Images/Live/LiveBackground.png"; sourceTree = "<group>"; };
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
@@ -1157,6 +1159,7 @@
 			children = (
 				228D44051732B9D000FA94FE /* KATGLiveShowFeedbackViewController.h */,
 				228D44061732B9D000FA94FE /* KATGLiveShowFeedbackViewController.m */,
+				019568B7185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib */,
 			);
 			name = "Live Show";
 			sourceTree = "<group>";
@@ -1388,6 +1391,7 @@
 				91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */,
 				91F45A17177F881D0091AFDA /* icon72@2x.png in Resources */,
 				91F45A18177F881D0091AFDA /* icon72.png in Resources */,
+				019568B8185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib in Resources */,
 				91F45A19177F881D0091AFDA /* icon60@2x.png in Resources */,
 				91F45A1A177F881D0091AFDA /* icon60.png in Resources */,
 				012FED871857DA7F0073AEAA /* DownloadShowButton.png in Resources */,

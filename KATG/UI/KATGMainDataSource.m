@@ -343,7 +343,7 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 			return;
 		}
 		
-		KATGSection targetSection = [collectionView closestSectionForContentOffset:scrollView.contentOffset];
+//		KATGSection targetSection = [collectionView closestSectionForContentOffset:scrollView.contentOffset];
 		NSParameterAssert(self.mainViewController);
 //		[self.mainViewController.tabBar selectTabItemAtIndex:targetSection animated:YES];
 	}

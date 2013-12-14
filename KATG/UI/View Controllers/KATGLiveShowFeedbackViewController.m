@@ -12,57 +12,32 @@
 #import "KATGContentContainerView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface KATGLiveShowFeedbackViewController ()
-@property (weak, nonatomic) KATGContentContainerView *containerView;
-@property (weak, nonatomic) KATGButton *doneButton;
-@property (weak, nonatomic) UITextField *nameTextField;
-@property (weak, nonatomic) UITextField *locationTextField;
-@property (weak, nonatomic) UITextView *messagesTextView;
-@property (weak, nonatomic) KATGButton *sendButton;
-@end
-
 @implementation KATGLiveShowFeedbackViewController
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.)
+        self.view.layer.sublayerTransform = CATransform3DMakeTranslation(0, -20, 0);
 	
-	KATGContentContainerView *container = [[KATGContentContainerView alloc] initWithFrame:CGRectZero];
-	[self.view addSubview:container];
-	self.containerView = container;
+	[_nameTextField.layer setBorderColor:[[UIColor colorWithWhite:0.5 alpha:0.75] CGColor]];
+    [_nameTextField.layer setBorderWidth:0.5];
+    [_nameTextField.layer setCornerRadius:4];
 	
-	UITextField *nameTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-	nameTextField.borderStyle = UITextBorderStyleRoundedRect;
-	nameTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"name"];
-	[self.containerView.contentView addSubview:nameTextField];
-	self.nameTextField = nameTextField;
+	[_locationTextField.layer setBorderColor:[[UIColor colorWithWhite:0.5 alpha:0.75] CGColor]];
+    [_locationTextField.layer setBorderWidth:0.5];
+    [_locationTextField.layer setCornerRadius:4];
 	
-	UITextField *locationTextField = [[UITextField alloc] initWithFrame:CGRectZero];
-	locationTextField.borderStyle = UITextBorderStyleRoundedRect;
-	locationTextField.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"location"];
-	[self.containerView.contentView addSubview:locationTextField];
-	self.locationTextField = locationTextField;
-	
-	UITextView *messagesTextView = [[UITextView alloc] initWithFrame:CGRectZero];
-	messagesTextView.layer.cornerRadius = 8.0f;
-	messagesTextView.contentInset = UIEdgeInsetsMake(4.0f, 4.0f, 4.0f, 4.0f);
-	[self.containerView.contentView addSubview:messagesTextView];
-	self.messagesTextView = messagesTextView;
-	
-	KATGButton *doneButton = [[KATGButton alloc] initWithFrame:CGRectZero];
-	[doneButton setTitle:@"Done" forState:UIControlStateNormal];
-	doneButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
-	doneButton.accessibilityLabel = NSLocalizedString(@"Double tap to close feedback", nil);
-	[doneButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
-	[container.headerView addSubview:doneButton];
-	self.doneButton = doneButton;
-	
-	KATGButton *sendButton = [[KATGButton alloc] initWithFrame:CGRectMake(4.0f, 0.0f, 60.0f, 44.0f)];
-	[sendButton setTitle:@"Send" forState:UIControlStateNormal];
-	sendButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
-	[sendButton addTarget:self action:@selector(send:) forControlEvents:UIControlEventTouchUpInside];
-	[self.containerView.headerView addSubview:sendButton];
-	self.sendButton = sendButton;
+	[_messagesTextView.layer setBorderColor:[[UIColor colorWithWhite:0.5 alpha:0.75] CGColor]];
+    [_messagesTextView.layer setBorderWidth:0.5];
+    [_messagesTextView.layer setCornerRadius:4];
+    
+    _nameTextField.layer.sublayerTransform = CATransform3DMakeTranslation(4, 0, 0);
+    _locationTextField.layer.sublayerTransform = CATransform3DMakeTranslation(4, 0, 0);
+    _messagesTextView.layer.sublayerTransform = CATransform3DMakeTranslation(2, 0, 0);
+    
+    _nameTextField.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"name"];
+    _locationTextField.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"location"];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -71,33 +46,7 @@
 	[self.messagesTextView becomeFirstResponder];
 }
 
-#define kFeedbackMargin 10.0f
-
-- (void)viewDidLayoutSubviews
-{
-	[super viewDidLayoutSubviews];
-	CGRect bounds = self.view.bounds;
-	self.containerView.frame = bounds;
-	[self.containerView layoutSubviews];
-	bounds = self.containerView.contentView.bounds;
-	CGFloat textFieldWidth = (bounds.size.width - kFeedbackMargin * 3.0f) / 2.0f;
-	self.nameTextField.frame = CGRectMake(kFeedbackMargin, kFeedbackMargin, textFieldWidth, 30.0f);
-	self.locationTextField.frame = CGRectMake(kFeedbackMargin * 2.0f + textFieldWidth, kFeedbackMargin, textFieldWidth, 30.0f);
-	CGFloat y = kFeedbackMargin + CGRectGetMaxY(self.locationTextField.frame);
-	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-	{
-		self.messagesTextView.frame = CGRectMake(kFeedbackMargin, y, bounds.size.width - kFeedbackMargin * 2.0f, CGRectGetHeight(bounds) - y - kFeedbackMargin);
-	}
-	else
-	{
-		self.messagesTextView.frame = CGRectMake(kFeedbackMargin, y, bounds.size.width - kFeedbackMargin * 2.0f, 140.0f);
-	}
-	CGRect buttonFrame = self.sendButton.frame;
-	buttonFrame.origin.x = CGRectGetMaxX(self.containerView.headerView.bounds) - buttonFrame.size.width - 4.0f;
-	self.doneButton.frame = buttonFrame;
-}
-
-- (void)close:(id)sender
+- (IBAction)close:(id)sender
 {
 	if (self.presentingViewController)
 	{
@@ -109,7 +58,7 @@
 	}
 }
 
-- (void)send:(id)sender
+- (IBAction)send:(id)sender
 {
 	NSString *name = self.nameTextField.text;
 	NSString *location = self.locationTextField.text;

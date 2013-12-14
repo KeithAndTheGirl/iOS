@@ -248,7 +248,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
 						 self.uiContainerViewBottomSpaceConstraint.constant = frame.size.height;
-						 [self.view layoutIfNeeded];
+//						 [self.view layoutIfNeeded];
 					 } completion:^(BOOL finished) {
 						 
 					 }];
@@ -267,7 +267,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 						options:UIViewAnimationOptionCurveEaseInOut
 					 animations:^{
 						 self.uiContainerViewBottomSpaceConstraint.constant = 0.0f;
-						 [self.view layoutIfNeeded];
+//						 [self.view layoutIfNeeded];
 					 } completion:^(BOOL finished) {
 						 
 					 }];
@@ -799,7 +799,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)liveShowFeedbackButtonTapped:(KATGLiveCell *)cell
 {
-	UIViewController *controller = [KATGLiveShowFeedbackViewController new];
+	UIViewController *controller = [[KATGLiveShowFeedbackViewController alloc] initWithNibName:@"KATGLiveShowFeedbackViewController" bundle:nil];
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
 	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 	{
 		controller.modalPresentationStyle = UIModalPresentationFormSheet;
