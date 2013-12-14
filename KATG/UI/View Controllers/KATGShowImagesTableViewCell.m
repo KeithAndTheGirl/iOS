@@ -41,7 +41,7 @@ static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
 	if (self)
 	{
 		UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-		flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+		flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
 		flowLayout.minimumInteritemSpacing = 10.0f;
 		flowLayout.minimumLineSpacing = 10.0f;
         flowLayout.itemSize = CGSizeMake(94, 94);
