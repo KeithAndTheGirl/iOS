@@ -50,7 +50,7 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
         _tableView.scrollsToTop = YES;
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
         _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 56, 0);
-        if([_tableView canPerformAction:@selector(separatorInset:) withSender:self]) {
+        if([_tableView canPerformAction:@selector(setSeparatorInset:) withSender:self]) {
             _tableView.separatorInset = UIEdgeInsetsZero;
         }
         else {
