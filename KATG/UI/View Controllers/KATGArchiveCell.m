@@ -49,6 +49,7 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
         _tableView.scrollIndicatorInsets = _tableView.contentInset;
         _tableView.scrollsToTop = YES;
+        _tableView.separatorInset = UIEdgeInsetsZero;
 		[self.contentView addSubview:_tableView];
 	}
 	return self;
@@ -88,8 +89,8 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
     KATGShow *show = self.shows[indexPath.row];
     NSArray *images = [[show valueForKeyPath:@"Guests.picture_url"] allObjects];
     if([images count] > 0)
-        return 116;
-    return 68;
+        return 126;
+    return 76;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
