@@ -35,6 +35,7 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 @property (nonatomic) UIButton *closeButton;
 @property (nonatomic) UIButton *saveButton;
 @property (nonatomic) UIView *backgroundView;
+@property (nonatomic) UILabel *titleLabel;
 @property (nonatomic) UIActionSheet *actionSheet;
 @end
 
@@ -88,6 +89,13 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 	_saveButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
 	[_saveButton addTarget:self action:@selector(disclosureButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_saveButton];
+    
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 370.0f, 310.0f, 56.0f)];
+    self.titleLabel.numberOfLines = 4;
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.textColor = [UIColor whiteColor];
+    [self.view addSubview:self.titleLabel];
 }
 
 - (void)transitionFromImage:(KATGImage *)image inImageView:(UIImageView *)imageView animations:(void(^)())animations completion:(void(^)())completion;
@@ -235,7 +243,7 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 
 - (void)updateTitleWithImage:(KATGImage *)image
 {
-	self.navigationItem.title = image.title;
+	self.titleLabel.text = image.title;
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
