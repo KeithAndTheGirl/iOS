@@ -74,8 +74,6 @@
     [_feedbackButton.layer setBorderWidth:0.5];
     [_feedbackButton.layer setCornerRadius:4];
     
-    _loadingIndicator.alpha = 0;
-    
 #if DEBUG
     _liveToggleButton.hidden = NO;
 #endif
@@ -219,9 +217,7 @@
 	}
 }
 
-- (void)setCurrentAudioPlayerState:(KATGAudioPlayerState)currentAudioPlayerState
-{
-	_currentAudioPlayerState = currentAudioPlayerState;
+-(void)updateViewState {
 	if (_currentAudioPlayerState == KATGAudioPlayerStateLoading)
 	{
 		[self.loadingIndicator startAnimating];
@@ -230,7 +226,7 @@
 	{
 		[self.loadingIndicator stopAnimating];
 	}
-	switch (currentAudioPlayerState)
+	switch (_currentAudioPlayerState)
 	{
 		case KATGAudioPlayerStateDone:
 		{
@@ -269,6 +265,12 @@
 			break;
 		}
 	}
+}
+
+- (void)setCurrentAudioPlayerState:(KATGAudioPlayerState)currentAudioPlayerState
+{
+    _currentAudioPlayerState = currentAudioPlayerState;
+    [self performSelector:@selector(updateViewState) withObject:nil afterDelay:0.2];
 }
 
 #pragma mark - KATGPlaybackManager
