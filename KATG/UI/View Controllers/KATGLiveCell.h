@@ -34,6 +34,7 @@
 @property (strong, nonatomic) KATGScheduledEvent *scheduledEvent;
 @property (weak, nonatomic) id<KATGLiveCellDelegate> liveShowDelegate;
 
+- (IBAction)toggleLive:(id)sender;
 - (void)setLiveMode:(bool)liveMode animated:(BOOL)animated;
 - (void)endRefreshing;
 

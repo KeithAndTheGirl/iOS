@@ -52,6 +52,9 @@
 		017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920C185561B400E33003 /* TabBarBackground@2x.png */; };
 		017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92101855EA9700E33003 /* KATGYoutubeCell.m */; };
 		017C92141855F48000E33003 /* KATGAboutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92131855F48000E33003 /* KATGAboutCell.m */; };
+		01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */; };
+		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
+		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
 		01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AD1859B230002AF906 /* SliderThumb.png */; };
 		01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
@@ -272,6 +275,9 @@
 		017C92101855EA9700E33003 /* KATGYoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeCell.m; path = "View Controllers/KATGYoutubeCell.m"; sourceTree = "<group>"; };
 		017C92121855F48000E33003 /* KATGAboutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAboutCell.h; path = "View Controllers/KATGAboutCell.h"; sourceTree = "<group>"; };
 		017C92131855F48000E33003 /* KATGAboutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAboutCell.m; path = "View Controllers/KATGAboutCell.m"; sourceTree = "<group>"; };
+		01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveCell.xib; path = "Custom Views/KATGLiveCell.xib"; sourceTree = "<group>"; };
+		01D0CE14185C17C600EB88B3 /* LiveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LiveBackground.png; path = "Supporting Files/Images/Live/LiveBackground.png"; sourceTree = "<group>"; };
+		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
 		01EAC4AD1859B230002AF906 /* SliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderThumb.png; sourceTree = "<group>"; };
 		01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SliderThumb@2x.png"; sourceTree = "<group>"; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
@@ -752,6 +758,8 @@
 		228D43EF173182E700FA94FE /* Live */ = {
 			isa = PBXGroup;
 			children = (
+				01D0CE14185C17C600EB88B3 /* LiveBackground.png */,
+				01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */,
 				228D44031732177C00FA94FE /* light-bubble.png */,
 				228D44011732113B00FA94FE /* bubble.png */,
 				228D43FC1731DB3600FA94FE /* cigarette-smoke.png */,
@@ -805,6 +813,7 @@
 				2280C525167917F100C76D6D /* KATGScheduleItemTableViewCell.m */,
 				229A79D4167437BC00792258 /* KATGLiveCell.h */,
 				229A79D5167437BC00792258 /* KATGLiveCell.m */,
+				01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */,
 				228D43FE17320E2E00FA94FE /* KATGBeerBubblesView.h */,
 				228D43FF17320E2F00FA94FE /* KATGBeerBubblesView.m */,
 				228D43F91731D8C600FA94FE /* KATGCigaretteSmokeView.h */,
@@ -1323,6 +1332,7 @@
 				012FED8B1857DC850073AEAA /* DownloadIcon.png in Resources */,
 				9115C120172E13E5002942B6 /* skip-back.png in Resources */,
 				9115C121172E13E5002942B6 /* skip-back@2x.png in Resources */,
+				01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */,
 				9115C122172E13E5002942B6 /* skip-forward.png in Resources */,
 				01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */,
 				012FEE161857E6A40073AEAA /* ControlsBackground.png in Resources */,
@@ -1330,6 +1340,7 @@
 				012FED7C1857C0000073AEAA /* KATGShowViewController.xib in Resources */,
 				012FED881857DA7F0073AEAA /* DownloadShowButton@2x.png in Resources */,
 				012FEE171857E6A40073AEAA /* ControlsBackground@2x.png in Resources */,
+				01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */,
 				9115C124172E13E5002942B6 /* archive-tab-icon.png in Resources */,
 				9115C125172E13E5002942B6 /* archive-tab-icon@2x.png in Resources */,
 				9115C126172E13E5002942B6 /* gear.png in Resources */,
@@ -1342,6 +1353,7 @@
 				9115C12B172E13E5002942B6 /* schedule-tab-icon@2x.png in Resources */,
 				9115C12C172E13E5002942B6 /* search.png in Resources */,
 				9115C12D172E13E5002942B6 /* search@2x.png in Resources */,
+				01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */,
 				012FED801857C4B80073AEAA /* ShowHeaderBackground@2x.png in Resources */,
 				9115C12E172E13E5002942B6 /* x.png in Resources */,
 				9115C12F172E13E5002942B6 /* x@2x.png in Resources */,

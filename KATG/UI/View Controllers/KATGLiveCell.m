@@ -42,25 +42,27 @@
 
 @interface KATGLiveCell ()
 @property (nonatomic) KATGContentContainerView *containerView;
-@property (nonatomic) UILabel *titleLabel;
-@property (nonatomic) UILabel *nextShowLabel;
-@property (nonatomic) UILabel *countLabel;
-@property (nonatomic) UILabel *onAirLabel;
+@property (nonatomic) IBOutlet UILabel *titleLabel;
+@property (nonatomic) IBOutlet UILabel *nextShowLabel;
+@property (nonatomic) IBOutlet UILabel *countLabelHours;
+@property (nonatomic) IBOutlet UILabel *countLabelMinutes;
+@property (nonatomic) IBOutlet UILabel *countLabelSeconds;
+@property (nonatomic) IBOutlet UILabel *onAirLabel;
 
-@property (nonatomic) KATGButton *feedbackButton;
-@property (nonatomic) KATGTimerTarget *target;
+@property (nonatomic) IBOutlet KATGButton *feedbackButton;
+@property (nonatomic) IBOutlet KATGTimerTarget *target;
 @property (nonatomic) NSTimer *timer;
 
-@property (nonatomic) UIImageView *micImageView;
-@property (nonatomic) KATGCigaretteSmokeView *smokeView;
-@property (nonatomic) KATGBeerBubblesView *lightBubblesView;
+@property (nonatomic) IBOutlet UIImageView *micImageView;
+//@property (nonatomic) KATGCigaretteSmokeView *smokeView;
+//@property (nonatomic) KATGBeerBubblesView *lightBubblesView;
 
-@property (nonatomic) KATGControlButton *playButton;
-@property (nonatomic) UIActivityIndicatorView *loadingIndicator;
+@property (nonatomic) IBOutlet KATGControlButton *playButton;
+@property (nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
-@property (nonatomic) KATGButton *liveToggleButton;
+@property (nonatomic) IBOutlet UIButton *liveToggleButton;
 
-@property (nonatomic) UIRefreshControl *refreshControl;
+@property (nonatomic) IBOutlet UIRefreshControl *refreshControl;
 
 @end
 
@@ -68,11 +70,8 @@
 
 #pragma mark - 
 
-- (instancetype)initWithFrame:(CGRect)frame
-{
-	self = [super initWithFrame:frame];
-	if (self) 
-	{
+-(void)awakeFromNib {
+        /*
 		_containerView = [[KATGContentContainerView alloc] initWithFrame:CGRectZero];
 		_containerView.footerHeight = 8.0f;
 		[self.contentView addSubview:_containerView];
@@ -92,14 +91,24 @@
 		_titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		_titleLabel.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 		[_containerView.headerView addSubview:_titleLabel];
-		
+		*/
+        
+        [_countLabelHours.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
+        [_countLabelHours.layer setBorderWidth:0.5];
+        [_countLabelHours.layer setCornerRadius:4];
+        
+        [_countLabelMinutes.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
+        [_countLabelMinutes.layer setBorderWidth:0.5];
+        [_countLabelMinutes.layer setCornerRadius:4];
+        
+        [_countLabelSeconds.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
+        [_countLabelSeconds.layer setBorderWidth:0.5];
+        [_countLabelSeconds.layer setCornerRadius:4];
+        
 #if DEBUG
-		_liveToggleButton = [[KATGButton alloc] initWithFrame:CGRectMake(4.0f, 4.0f, 60.0f, 36.0f)];
-		[_liveToggleButton setTitle:@"DbgLv" forState:UIControlStateNormal];
-		[_liveToggleButton addTarget:self action:@selector(toggleLive:) forControlEvents:UIControlEventTouchUpInside];
-		[_containerView.headerView addSubview:_liveToggleButton];
+//        _liveToggleButton.hidden = NO;
 #endif
-		
+		/*
 		_micImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"live-mic.png"]];
 		_micImageView.alpha = 0.1f;
 		CGRect micFrame = CGRectZero;
@@ -159,7 +168,7 @@
 		_playButton.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		[_playButton addTarget:self action:@selector(playButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
 		[_containerView.footerView addSubview:_playButton];
-		
+*/		
 		_loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
 		_loadingIndicator.color = [UIColor katg_titleTextColor];
 		[_containerView.footerView addSubview:_loadingIndicator];
@@ -173,8 +182,6 @@
 		[[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
 		
 		[self addPlaybackManagerKVO];
-	}
-	return self;
 }
 
 - (void)dealloc
@@ -215,32 +222,29 @@
 	self.feedbackButton.alpha = liveMode ? 1.0f : 0.0f;
 	
 	self.feedbackButton.bounds = CGRectMake(0.0f, 0.0f, self.containerView.contentView.bounds.size.width - 20.0f, 44.0f);
-	
+/*
 	CGPoint feedbackButtonCenter;
 	feedbackButtonCenter.x = self.containerView.contentView.bounds.size.width / 2.0f;
 	feedbackButtonCenter.y = liveMode ? self.containerView.contentView.bounds.size.height - self.feedbackButton.bounds.size.height/2 - 20.0f : self.containerView.bounds.size.height + self.feedbackButton.bounds.size.height/2;
 	self.feedbackButton.center = feedbackButtonCenter;
 	self.nextShowLabel.bounds = CGRectMake(0.0f, 0.0f, self.containerView.contentView.bounds.size.width, 60.0f);
 	self.nextShowLabel.center = CGPointMake(self.containerView.contentView.bounds.size.width/2, self.nextShowLabel.bounds.size.height/2 + (liveMode ? 0.0f : 20.0f));
-	
+*/
 	CGRect countLabelRect = CGRectMake(0.0f, self.containerView.contentView.bounds.size.height - (liveMode ? 120.0f : 60.0f), self.containerView.contentView.bounds.size.width, 40.0f);
 	
 	if (liveMode)
 	{
 		self.onAirLabel.frame = countLabelRect;
 		countLabelRect.origin.x -= self.containerView.bounds.size.width;
-		self.countLabel.frame = countLabelRect;
 	}
 	else
 	{
-		self.countLabel.frame = countLabelRect;
 		countLabelRect.origin.x += self.containerView.bounds.size.width;
 		self.onAirLabel.frame = countLabelRect;
 	}
 	
-	self.countLabel.alpha = liveMode ? 0.0f : 1.0f;
 	self.onAirLabel.alpha = liveMode ? 1.0f : 0.0f;
-	
+	/*
 	CGPoint smokeCenter = [self.smokeView.superview convertPoint:CGPointZero fromView:self.micImageView];
 	CGPoint bubbleCenter = smokeCenter;
 	
@@ -251,7 +255,7 @@
 	bubbleCenter.x += 161.0f;
 	bubbleCenter.y += 6.0f;
 	self.lightBubblesView.center = bubbleCenter;
-	
+	*/
 	self.loadingIndicator.center = self.playButton.center;
 }
 
@@ -264,8 +268,9 @@
 		return;
 	}
 	NSDateComponents *components = [self currentComponents];
-	NSString *countdown = [NSString stringWithFormat:@"%d : %02d : %02d", components.hour, components.minute, components.second];
-	self.countLabel.text = countdown;
+	self.countLabelHours.text = [NSString stringWithFormat:@"%d", components.hour];
+	self.countLabelMinutes.text = [NSString stringWithFormat:@"%02d", components.minute];
+	self.countLabelSeconds.text = [NSString stringWithFormat:@"%02d", components.second];
 	self.nextShowLabel.accessibilityLabel = [NSString stringWithFormat:NSLocalizedString(@"The next show will begin in %d hours %d minutes %d seconds", nil), components.hour, components.minute, components.second];
 }
 
@@ -278,7 +283,9 @@
 
 - (void)setCountLabelDefaultText
 {
-	self.countLabel.text = @"00 : 00 : 00";
+    self.countLabelHours.text = @"00";
+	self.countLabelMinutes.text = @"00";
+	self.countLabelSeconds.text = @"00";
 }
 
 - (void)setTimestamp:(NSDate *)timestamp
@@ -316,7 +323,7 @@
 					 }];
 }
 
-- (void)toggleLive:(id)sender
+- (IBAction)toggleLive:(id)sender
 {
 	[self setLiveMode:!_liveMode animated:YES];
 }
@@ -432,7 +439,7 @@
 {
 	_scheduledEvent = scheduledEvent;
 	self.timestamp = scheduledEvent.timestamp;
-	
+/*
 	NSDictionary *smallTextAttrs = @{
 		NSFontAttributeName : [UIFont systemFontOfSize:12.0f],
 		NSForegroundColorAttributeName : [UIColor lightGrayColor]
@@ -442,17 +449,9 @@
 		NSFontAttributeName : [UIFont boldSystemFontOfSize:18.0f],
 		NSForegroundColorAttributeName : [UIColor darkGrayColor]
 	};
-	
+*/
 	NSString *subtitle = _scheduledEvent.subtitle;
-	NSMutableAttributedString *nextShowText = nil;
-	if ([subtitle length])
-	{
-		nextShowText = [[NSMutableAttributedString alloc] init];
-		[nextShowText appendAttributedString:[[NSAttributedString alloc] initWithString:@"Featuring\n" attributes:smallTextAttrs]];
-		[nextShowText appendAttributedString:[[NSAttributedString alloc] initWithString:self.scheduledEvent.subtitle attributes:largeTextAttrs]];
-	}
-	
-	self.nextShowLabel.attributedText = nextShowText;
+	self.nextShowLabel.text = [NSString stringWithFormat:@"Featuring %@", subtitle];
 	[self layoutLiveMode];
 }
 

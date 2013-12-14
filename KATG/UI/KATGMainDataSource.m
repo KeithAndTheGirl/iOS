@@ -123,7 +123,9 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		_mainCollectionView.delegate = self;
 		
 		[_mainCollectionView registerClass:[KATGScheduleCell class] forCellWithReuseIdentifier:kKATGScheduleCellIdentifier];
-		[_mainCollectionView registerClass:[KATGLiveCell class] forCellWithReuseIdentifier:kKATGLiveCellIdentifier];
+//		[_mainCollectionView registerClass:[KATGLiveCell class] forCellWithReuseIdentifier:kKATGLiveCellIdentifier];
+        [_mainCollectionView registerNib:[UINib nibWithNibName:@"KATGLiveCell" bundle:nil]
+              forCellWithReuseIdentifier:kKATGLiveCellIdentifier];
 		[_mainCollectionView registerClass:[KATGArchiveCell class] forCellWithReuseIdentifier:kKATGArchiveCellIdentifier];
 		[_mainCollectionView registerClass:[KATGYoutubeCell class] forCellWithReuseIdentifier:kKATGYoutubeCellIdentifier];
 		[_mainCollectionView registerClass:[KATGAboutCell class] forCellWithReuseIdentifier:kKATGAboutCellIdentifier];
