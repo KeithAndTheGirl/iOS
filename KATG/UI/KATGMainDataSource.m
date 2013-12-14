@@ -210,7 +210,12 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionSchedule:
 		case KATGSectionLive:
 		case KATGSectionArchive:
-			cellSize = CGSizeMake(rect.size.width, rect.size.height);
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
+                cellSize = CGSizeMake(rect.size.width, rect.size.height);
+            }
+            else {
+                cellSize = CGSizeMake(rect.size.width, rect.size.height+20);
+            }
 			break;
 		default:
 			NSParameterAssert(NO);
@@ -228,7 +233,12 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionSchedule:
 		case KATGSectionLive:
 		case KATGSectionArchive:
-			return UIEdgeInsetsMake(0, 0, 0, 0);
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
+                return UIEdgeInsetsMake(0, 0, 0, 0);
+            }
+            else {
+                return UIEdgeInsetsMake(-20, 0, 0, 0);
+            }
 		default:
 			NSParameterAssert(NO);
 			return UIEdgeInsetsZero;

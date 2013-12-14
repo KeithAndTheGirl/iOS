@@ -46,10 +46,16 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _tableView.dataSource = self;
         _tableView.delegate = self;
-        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
         _tableView.scrollIndicatorInsets = _tableView.contentInset;
         _tableView.scrollsToTop = YES;
-        _tableView.separatorInset = UIEdgeInsetsZero;
+        _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
+        _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 56, 0);
+        if([_tableView canPerformAction:@selector(separatorInset:) withSender:self]) {
+            _tableView.separatorInset = UIEdgeInsetsZero;
+        }
+        else {
+
+        }
 		[self.contentView addSubview:_tableView];
 	}
 	return self;
