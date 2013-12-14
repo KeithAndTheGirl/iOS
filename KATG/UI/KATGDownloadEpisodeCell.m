@@ -23,7 +23,6 @@
 #import "KATGDownloadProgressView.h"
 
 @interface KATGDownloadEpisodeCell ()
-@property (strong, nonatomic) KATGButton *downloadButton;
 @property (strong, nonatomic) KATGDownloadProgressView *downloadProgressView;
 @end
 

@@ -29,6 +29,8 @@ typedef NS_ENUM(NSUInteger, KATGDownloadEpisodeCellState) {
 	KATGDownloadEpisodeCellStateDisabled,
 };
 
+@class KATGButton;
+
 @protocol KATGDownloadEpisodeCellDelegate;
 
 @interface KATGDownloadEpisodeCell : KATGShowCell
@@ -36,6 +38,7 @@ typedef NS_ENUM(NSUInteger, KATGDownloadEpisodeCellState) {
 @property (weak, nonatomic) id<KATGDownloadEpisodeCellDelegate> delegate;
 @property (nonatomic) KATGDownloadEpisodeCellState state;
 @property (nonatomic) CGFloat progress;
+@property (strong, nonatomic) KATGButton *downloadButton;
 
 @end
 

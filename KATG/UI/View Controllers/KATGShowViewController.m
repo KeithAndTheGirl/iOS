@@ -104,8 +104,6 @@ typedef enum {
     
     [self addPlaybackManagerKVO];
     [self addReachabilityKVO];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReturned:) name:kKATGReachabilityIsReachableNotification object:nil];
     
     self.tableView.tableHeaderView = self.showHeaderView;
     self.tableView.scrollsToTop = YES;
@@ -155,6 +153,15 @@ typedef enum {
 	}
 
 	[self updateControlStates];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReturned:) name:kKATGReachabilityIsReachableNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:kKATGReachabilityIsReachableNotification object:nil];
 }
 
 #pragma mark - Actions
@@ -292,6 +299,14 @@ typedef enum {
 			{
 				downloadCell.state = KATGDownloadEpisodeCellStateDisabled;
 			}
+            
+            if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
+                [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading) {
+                downloadCell.downloadButton.enabled = NO;
+            }
+            else {
+                downloadCell.downloadButton.enabled = YES;
+            }
 			cell = downloadCell;
 			break;
 		}
@@ -427,6 +442,11 @@ typedef enum {
 
 - (void)playButtonPressed:(id)sender
 {
+    if (self.downloadToken)
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Playback Unavailable" message:@"Playback is not available while downloading." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+		return;
+    }
 	if (![[KATGDataStore sharedStore] isReachableViaWifi] && ![self.show.downloaded boolValue])
 	{
 		[[[UIAlertView alloc] initWithTitle:@"Streaming Unavailable" message:@"Streaming is not available over a cellular connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
@@ -436,6 +456,7 @@ typedef enum {
 	{
 		[[KATGPlaybackManager sharedManager] configureWithShow:self.show];
 		[[KATGPlaybackManager sharedManager] play];
+        [self updateControlStates];
 		return;
 	}
 	if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
@@ -446,6 +467,7 @@ typedef enum {
 	{
 		[[KATGPlaybackManager sharedManager] play];
 	}
+    [self updateControlStates];
 }
 
 - (void)backButtonPressed:(id)sender
@@ -491,6 +513,16 @@ typedef enum {
 		self.controlsView.currentState = KATGAudioPlayerStateDone;
 	}
     [self.controlsView setNeedsLayout];
+    
+    //disable download/delete show button if playing
+    KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGShowDetailsSectionDownload]];
+    if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading) {
+        downloadCell.downloadButton.enabled = NO;
+    }
+    else {
+        downloadCell.downloadButton.enabled = YES;
+    }
 }
 
 #pragma mark - Data updates
@@ -686,6 +718,12 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 	{
 		cell.state = KATGDownloadEpisodeCellStateDownloading;
 		cell.progress = 0.0f;
+        
+        //  Disable playback
+        if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+            [[KATGPlaybackManager sharedManager] pause];
+        }
+        
 		typeof(*self) *weakSelf = self;
 		void (^progress)(CGFloat progress) = ^(CGFloat progress) {
 			NSParameterAssert([NSThread isMainThread]);
