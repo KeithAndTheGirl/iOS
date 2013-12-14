@@ -77,7 +77,6 @@ static NSString *KATGCreateBase64StringFromData(NSData *inData)
 #pragma mark - Send Registration
 - (void)sendToken
 {
-	[UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 	
 	NSURLRequest *request = [self sendRequest];
 	
@@ -87,6 +86,7 @@ static NSString *KATGCreateBase64StringFromData(NSData *inData)
 		connection = [NSURLConnection connectionWithRequest:request delegate:self];
 		if (connection != nil)
 		{
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 			self.tokenConnection = connection;
 			[self.tokenConnection start];
 		}
