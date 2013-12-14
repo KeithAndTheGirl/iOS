@@ -210,13 +210,20 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionYoutube:
 		case KATGSectionAbout:
 		case KATGSectionSchedule:
-		case KATGSectionLive:
 		case KATGSectionArchive:
             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
                 cellSize = CGSizeMake(rect.size.width, rect.size.height);
             }
             else {
                 cellSize = CGSizeMake(rect.size.width, rect.size.height+20);
+            }
+			break;
+		case KATGSectionLive:
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
+                cellSize = CGSizeMake(rect.size.width, rect.size.height+20);
+            }
+            else {
+                cellSize = CGSizeMake(rect.size.width, rect.size.height+40);
             }
 			break;
 		default:
@@ -233,7 +240,6 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
         case KATGSectionAbout:
 		case KATGSectionYoutube:
 		case KATGSectionSchedule:
-		case KATGSectionLive:
 		case KATGSectionArchive:
             if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
                 return UIEdgeInsetsMake(0, 0, 0, 0);
@@ -241,6 +247,10 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
             else {
                 return UIEdgeInsetsMake(-20, 0, 0, 0);
             }
+            break;
+		case KATGSectionLive:
+            return UIEdgeInsetsMake(-20, 0, 0, 0);
+            break;
 		default:
 			NSParameterAssert(NO);
 			return UIEdgeInsetsZero;

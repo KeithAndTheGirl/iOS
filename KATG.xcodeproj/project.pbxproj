@@ -52,6 +52,10 @@
 		017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920C185561B400E33003 /* TabBarBackground@2x.png */; };
 		017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92101855EA9700E33003 /* KATGYoutubeCell.m */; };
 		017C92141855F48000E33003 /* KATGAboutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92131855F48000E33003 /* KATGAboutCell.m */; };
+		01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952342185CA71300B744E1 /* PlayLiveButton.png */; };
+		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
+		01952348185CA71300B744E1 /* StopLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952344185CA71300B744E1 /* StopLiveButton.png */; };
+		01952349185CA71300B744E1 /* StopLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952345185CA71300B744E1 /* StopLiveButton@2x.png */; };
 		01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */; };
 		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
@@ -275,6 +279,10 @@
 		017C92101855EA9700E33003 /* KATGYoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeCell.m; path = "View Controllers/KATGYoutubeCell.m"; sourceTree = "<group>"; };
 		017C92121855F48000E33003 /* KATGAboutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAboutCell.h; path = "View Controllers/KATGAboutCell.h"; sourceTree = "<group>"; };
 		017C92131855F48000E33003 /* KATGAboutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAboutCell.m; path = "View Controllers/KATGAboutCell.m"; sourceTree = "<group>"; };
+		01952342185CA71300B744E1 /* PlayLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayLiveButton.png; path = "Supporting Files/Images/Live/PlayLiveButton.png"; sourceTree = "<group>"; };
+		01952343185CA71300B744E1 /* PlayLiveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayLiveButton@2x.png"; path = "Supporting Files/Images/Live/PlayLiveButton@2x.png"; sourceTree = "<group>"; };
+		01952344185CA71300B744E1 /* StopLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StopLiveButton.png; path = "Supporting Files/Images/Live/StopLiveButton.png"; sourceTree = "<group>"; };
+		01952345185CA71300B744E1 /* StopLiveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopLiveButton@2x.png"; path = "Supporting Files/Images/Live/StopLiveButton@2x.png"; sourceTree = "<group>"; };
 		01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveCell.xib; path = "Custom Views/KATGLiveCell.xib"; sourceTree = "<group>"; };
 		01D0CE14185C17C600EB88B3 /* LiveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LiveBackground.png; path = "Supporting Files/Images/Live/LiveBackground.png"; sourceTree = "<group>"; };
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
@@ -758,6 +766,10 @@
 		228D43EF173182E700FA94FE /* Live */ = {
 			isa = PBXGroup;
 			children = (
+				01952342185CA71300B744E1 /* PlayLiveButton.png */,
+				01952343185CA71300B744E1 /* PlayLiveButton@2x.png */,
+				01952344185CA71300B744E1 /* StopLiveButton.png */,
+				01952345185CA71300B744E1 /* StopLiveButton@2x.png */,
 				01D0CE14185C17C600EB88B3 /* LiveBackground.png */,
 				01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */,
 				228D44031732177C00FA94FE /* light-bubble.png */,
@@ -1318,6 +1330,7 @@
 				0111A7751856A08600A3F8D5 /* About@2x.png in Resources */,
 				012FED841857C5870073AEAA /* CloseButton@2x.png in Resources */,
 				9115C119172E13E5002942B6 /* Default-568h@2x.png in Resources */,
+				01952348185CA71300B744E1 /* StopLiveButton.png in Resources */,
 				0111A76D18569F2400A3F8D5 /* Live@2x.png in Resources */,
 				9115C11A172E13E5002942B6 /* main-bg.png in Resources */,
 				9115C11B172E13E5002942B6 /* main-bg@2x.png in Resources */,
@@ -1365,6 +1378,8 @@
 				228D43FD1731DB3600FA94FE /* cigarette-smoke.png in Resources */,
 				228D44021732113B00FA94FE /* bubble.png in Resources */,
 				017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */,
+				01952349185CA71300B744E1 /* StopLiveButton@2x.png in Resources */,
+				01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */,
 				01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */,
 				228D44041732177C00FA94FE /* light-bubble.png in Resources */,
 				012FED8C1857DC850073AEAA /* DownloadIcon@2x.png in Resources */,
@@ -1378,6 +1393,7 @@
 				012FED871857DA7F0073AEAA /* DownloadShowButton.png in Resources */,
 				91F45A1B177F881D0091AFDA /* icon57@2x.png in Resources */,
 				012FED831857C5870073AEAA /* CloseButton.png in Resources */,
+				01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */,
 				91F45A1C177F881D0091AFDA /* icon57.png in Resources */,
 				91F45A1D177F881D0091AFDA /* icon50@2x.png in Resources */,
 				91F45A1E177F881D0091AFDA /* icon50.png in Resources */,

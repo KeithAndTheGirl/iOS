@@ -195,6 +195,10 @@
 	[self selectTabItem:item animated:NO];
 }
 
+-(NSInteger)selectedIndex {
+    return [self.tabItems indexOfObject:self.selectedItem];
+}
+
 - (void)selectTabItem:(KATGTabBarTabItem *)item animated:(BOOL)animated wasTapped:(BOOL)wasTapped
 {
 	if (![self.delegate tabBar:self shouldSelectItemAtIndex:[self.tabItems indexOfObject:item] wasTapped:wasTapped])

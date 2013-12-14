@@ -50,5 +50,6 @@ typedef NS_ENUM(NSUInteger, KATGTabBarInterfaceLuminosity) {
 - (void)selectTabItem:(KATGTabBarTabItem *)item animated:(BOOL)animated;
 - (void)selectTabItemAtIndex:(NSInteger)index;
 - (void)selectTabItemAtIndex:(NSInteger)index animated:(BOOL)animated;
+-(NSInteger)selectedIndex;
 
 @end

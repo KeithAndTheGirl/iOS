@@ -118,11 +118,18 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 }
 
 #pragma mark - View Life Cycle
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    if([self.tabBar selectedIndex] == 1)
+        return UIStatusBarStyleLightContent;
+    else
+        return UIStatusBarStyleDefault;
+}
 
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	
+	[self setNeedsStatusBarAppearanceUpdate];
+    
 	[[KATGDataStore sharedStore] downloadAllEpisodes];
 	[[KATGDataStore sharedStore] downloadEvents];
 	
@@ -211,7 +218,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		[self.collectionView setContentOffset:CGPointZero];
 	}
-    [self.tabBar selectTabItemAtIndex:0];
+    if([self.tabBar selectedIndex] == NSNotFound)
+        [self.tabBar selectTabItemAtIndex:0];
 }
 
 #pragma mark - Keyboard
@@ -538,6 +546,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)tabBar:(KATGTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index wasTapped:(BOOL)wasTapped
 {
+	[self setNeedsStatusBarAppearanceUpdate];
 	if (!wasTapped)
 	{
 		return;
