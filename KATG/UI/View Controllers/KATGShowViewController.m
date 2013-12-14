@@ -673,7 +673,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 {
 	KATGImagesViewController *imagesViewController = [[KATGImagesViewController alloc] initWithNibName:nil bundle:nil];
 	imagesViewController.delegate = self;
-	imagesViewController.images = [self.show.images sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]];
+	imagesViewController.images = imagesCell.images;
     
     //imagesCell.images;
 	
@@ -705,6 +705,13 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 {
 	KATGShowImagesTableViewCell *imagesCell = (KATGShowImagesTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionImages]];
 	NSInteger index = [imagesCell.images indexOfObject:image];
+    if(imagesCell == nil || index == NSNotFound) {
+        KATGShowImagesTableViewCell *guestCell = (KATGShowImagesTableViewCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionGuests]];
+        index = [guestCell.images indexOfObject:image];
+        [guestCell scrollToImageAtIndex:index animated:NO];
+        [guestCell layoutIfNeeded];
+        return [guestCell viewForImageAtIndex:index];
+    }
 	[imagesCell scrollToImageAtIndex:index animated:NO];
 	[imagesCell layoutIfNeeded];
 	return [imagesCell viewForImageAtIndex:index];
