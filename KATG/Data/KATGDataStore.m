@@ -796,7 +796,18 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
             NSDictionary *imageDictionary = @{@"media_url": guestDict[@"PictureUrlLarge"],
                                               @"description": guestDict[@"Description"],
                                               @"title": guestDict[@"RealName"]};
-            KATGImage *image = [self fetchOrInsertImageWithShow:show url:imageDictionary[@"media_url"] context:context];
+            
+            // This block creates Guest's Image and adds to show images
+//            KATGImage *image = [self fetchOrInsertImageWithShow:show url:imageDictionary[@"media_url"] context:context];
+   
+            // This block creates Guest's Image, but doesn't add to show images
+            NSFetchRequest *request = [NSFetchRequest new];
+            request.fetchLimit = 1;
+            NSEntityDescription *entity = [NSEntityDescription entityForName:[KATGImage katg_entityName] inManagedObjectContext:context];
+            request.entity = entity;
+            request.predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", KATGImageMediaURLAttributeName, imageDictionary[@"media_url"]];
+            KATGImage *image = [NSEntityDescription insertNewObjectForEntityForName:[KATGImage katg_entityName] inManagedObjectContext:context];
+            ////
             if (image)
             {
                 [image configureWithDictionary:imageDictionary];
