@@ -109,7 +109,6 @@ typedef enum {
     
     self.tableView.tableHeaderView = self.showHeaderView;
     self.tableView.scrollsToTop = YES;
-    self.tableView.
     
 	[self.tableView registerClass:[KATGShowGuestCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierGuests];
 	[self.tableView registerClass:[KATGShowImagesTableViewCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierImages];

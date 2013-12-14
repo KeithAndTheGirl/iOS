@@ -38,8 +38,8 @@
 
     NSArray *guests = [[show valueForKeyPath:@"Guests.name"] allObjects];
 	self.showGuestsLabel.text = [guests componentsJoinedByString:@", "];
-    self.guestLabel.text = [guests count]>0?@"Gusts:":@"(no guests)";
-    self.guestLabel.font = [guests count]>0?[UIFont boldSystemFontOfSize:10]:[UIFont systemFontOfSize:10];
+    self.guestLabel.hidden = [guests count] == 0;
+    self.showGuestsLabel.hidden = [guests count] == 0;
 	self.showTimeLabel.text = [show formattedTimestamp];
 	
     for(UIView *v in [self.contentView subviews])
