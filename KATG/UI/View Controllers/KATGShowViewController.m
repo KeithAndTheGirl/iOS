@@ -337,7 +337,8 @@ typedef enum {
 			else if ([self.show.images count])
 			{
                 int rows = ceil([self.show.images count]/3.);
-				return 124*rows;
+                NSLog(@"images %i; rows %i", [self.show.images count], rows);
+				return 104*rows;
 			}
 			return 24.0f;
 		case KATGShowDetailsSectionDownload:
