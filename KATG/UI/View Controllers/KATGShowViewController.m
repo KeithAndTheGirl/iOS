@@ -220,6 +220,7 @@ typedef enum {
 			case KATGShowDetailsSectionDescription:
 				titleCell.showTopRule = NO;
 				titleCell.sectionTitleLabel.text = NSLocalizedString(@"Description", nil);
+                titleCell.contentView.backgroundColor = [UIColor colorWithRed:243./255 green:244./255 blue:246./255 alpha:1];
 				break;
 			case KATGShowDetailsSectionImages:
 				titleCell.showTopRule = YES;
@@ -265,6 +266,7 @@ typedef enum {
 			}
 			//descCell.descriptionLabel.text = kKATGDescriptionDummyText;
 			cell = descCell;
+            cell.contentView.backgroundColor = [UIColor colorWithRed:243./255 green:244./255 blue:246./255 alpha:1];
 			break;
 		}
 		case KATGShowDetailsSectionImages:
