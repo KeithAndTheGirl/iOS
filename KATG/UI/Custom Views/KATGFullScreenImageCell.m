@@ -93,6 +93,8 @@
 - (void)setupImageInScrollView
 {
 	CGSize imageSize = self.imageView.image.size;
+    if(imageSize.width == 0 || imageSize.height == 0)
+        return;
 	self.scrollView.contentSize = imageSize;
 	CGRect imageViewRect = CGRectZero;
 	imageViewRect.size = imageSize;
