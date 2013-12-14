@@ -188,22 +188,20 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		return;
 	}
-//	[self.navigationBar setItems:@[self.navigationItem] animated:NO];
 	if ([[KATGPlaybackManager sharedManager] currentShow])
 	{
-		// [self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithTitle:@"Now Playing" style:UIBarButtonItemStyleBordered target:self action:@selector(nowPlaying:)] animated:YES];
 		KATGButton *nowPlayingButton = [[KATGButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 44.0f)];
 		[nowPlayingButton setTitle:@"Now Playing" forState:UIControlStateNormal];
 		nowPlayingButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
 		[nowPlayingButton addTarget:self action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
-		[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithCustomView:nowPlayingButton]];		
+        
+        KATGArchiveCell *cell = (KATGArchiveCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGSectionArchive]];
+        cell.tableView.tableHeaderView = nowPlayingButton;
 	}
 	else
 	{
 		[self.navigationItem setRightBarButtonItem:nil animated:YES];
 	}
-	
-//	self.navigationItem.title = @"KATG";
 }
 
 - (void)viewWillAppear:(BOOL)animated
