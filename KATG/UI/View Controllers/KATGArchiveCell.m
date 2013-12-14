@@ -48,6 +48,7 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
         _tableView.delegate = self;
         _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
         _tableView.scrollIndicatorInsets = _tableView.contentInset;
+        _tableView.scrollsToTop = YES;
 		[self.contentView addSubview:_tableView];
 	}
 	return self;
