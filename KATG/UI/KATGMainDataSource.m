@@ -327,8 +327,7 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	KATGScheduledEvent *event = [self.resultsController.events objectAtIndex:indexPath.row];
-	return [KATGScheduleItemTableViewCell heightForScheduledEvent:event forWidth:tableView.bounds.size.width];
+    return 75;
 }
 
 #pragma mark - Scroll View

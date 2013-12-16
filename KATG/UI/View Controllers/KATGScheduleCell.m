@@ -42,7 +42,8 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 		_tableView.allowsSelection = NO;
 		_tableView.rowHeight = 64.0f;
 		_tableView.separatorColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
-		[_tableView registerClass:[KATGScheduleItemTableViewCell class] forCellReuseIdentifier:kKATGScheduleItemTableViewCellIdentifier];
+//		[_tableView registerClass:[KATGScheduleItemTableViewCell class] forCellReuseIdentifier:kKATGScheduleItemTableViewCellIdentifier];
+        [_tableView registerNib:[UINib nibWithNibName:@"KATGScheduleItemTableViewCell" bundle:nil] forCellReuseIdentifier:kKATGScheduleItemTableViewCellIdentifier];
 		_tableView.backgroundColor = [UIColor clearColor];
 		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {

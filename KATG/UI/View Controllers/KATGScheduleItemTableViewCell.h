@@ -26,16 +26,16 @@
 
 @interface KATGScheduleItemTableViewCell : UITableViewCell
 
-@property (nonatomic, readonly) UILabel *episodeNameLabel;
-@property (nonatomic, readonly) UILabel *episodeGuestLabel;
-@property (nonatomic, readonly) UILabel *episodeDateLabel;
-@property (nonatomic, readonly) UILabel *episodeTimeLabel;
+@property (nonatomic)IBOutlet UILabel *episodeNameLabel;
+@property (nonatomic)IBOutlet UILabel *episodeGuestLabel;
+@property (nonatomic)IBOutlet UILabel *episodeGuestLabelCaption;
+@property (nonatomic)IBOutlet UILabel *episodeDateLabel;
+@property (nonatomic)IBOutlet UILabel *episodeTimeLabel;
 
 @property (weak, nonatomic) id<KATGScheduleItemTableViewCellDelegate> longPressDelegate;
 @property (nonatomic) NSUInteger index;
 
 - (void)configureWithScheduledEvent:(KATGScheduledEvent *)scheduledEvent;
-+ (CGFloat)heightForScheduledEvent:(KATGScheduledEvent *)scheduledEvent forWidth:(CGFloat)width;
 
 @end
 

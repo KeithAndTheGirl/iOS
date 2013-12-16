@@ -57,6 +57,7 @@
 		01952348185CA71300B744E1 /* StopLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952344185CA71300B744E1 /* StopLiveButton.png */; };
 		01952349185CA71300B744E1 /* StopLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952345185CA71300B744E1 /* StopLiveButton@2x.png */; };
 		019568B8185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019568B7185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib */; };
+		0198AA35185F3C240063947C /* KATGScheduleItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */; };
 		01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */; };
 		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
@@ -285,6 +286,7 @@
 		01952344185CA71300B744E1 /* StopLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StopLiveButton.png; path = "Supporting Files/Images/Live/StopLiveButton.png"; sourceTree = "<group>"; };
 		01952345185CA71300B744E1 /* StopLiveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "StopLiveButton@2x.png"; path = "Supporting Files/Images/Live/StopLiveButton@2x.png"; sourceTree = "<group>"; };
 		019568B7185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveShowFeedbackViewController.xib; path = "KATG/Supporting Files/XIBs/KATGLiveShowFeedbackViewController.xib"; sourceTree = SOURCE_ROOT; };
+		0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGScheduleItemTableViewCell.xib; path = "Custom Views/KATGScheduleItemTableViewCell.xib"; sourceTree = "<group>"; };
 		01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveCell.xib; path = "Custom Views/KATGLiveCell.xib"; sourceTree = "<group>"; };
 		01D0CE14185C17C600EB88B3 /* LiveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LiveBackground.png; path = "Supporting Files/Images/Live/LiveBackground.png"; sourceTree = "<group>"; };
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
@@ -825,6 +827,7 @@
 				229A79D2167437B000792258 /* KATGScheduleCell.m */,
 				2280C524167917F000C76D6D /* KATGScheduleItemTableViewCell.h */,
 				2280C525167917F100C76D6D /* KATGScheduleItemTableViewCell.m */,
+				0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */,
 				229A79D4167437BC00792258 /* KATGLiveCell.h */,
 				229A79D5167437BC00792258 /* KATGLiveCell.m */,
 				01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */,
@@ -1346,6 +1349,7 @@
 				9115C11F172E13E5002942B6 /* play@2x.png in Resources */,
 				012FED781857A9920073AEAA /* ArrowNext.png in Resources */,
 				012FED8B1857DC850073AEAA /* DownloadIcon.png in Resources */,
+				0198AA35185F3C240063947C /* KATGScheduleItemTableViewCell.xib in Resources */,
 				9115C120172E13E5002942B6 /* skip-back.png in Resources */,
 				9115C121172E13E5002942B6 /* skip-back@2x.png in Resources */,
 				01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */,
