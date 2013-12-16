@@ -12,6 +12,8 @@
 #import "KATGContentContainerView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#define TEXTVIEW_PLACEHOLDER @"Comment"
+
 @implementation KATGLiveShowFeedbackViewController
 
 - (void)viewDidLoad
@@ -38,12 +40,20 @@
     
     _nameTextField.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"name"];
     _locationTextField.text = [[NSUserDefaults standardUserDefaults] valueForKey:@"location"];
+    
+    _messagesTextView.textColor = [UIColor lightGrayColor];
+    _messagesTextView.text = TEXTVIEW_PLACEHOLDER;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[self.messagesTextView becomeFirstResponder];
+    if([self.nameTextField.text length] > 0) {
+        [self.messagesTextView becomeFirstResponder];
+    }
+    else {
+        [self.nameTextField becomeFirstResponder];
+    }
 }
 
 - (IBAction)close:(id)sender
@@ -92,6 +102,7 @@
 				else
 				{
 					strongSelf.messagesTextView.text = @"";
+                    [strongSelf textViewShouldEndEditing:strongSelf.messagesTextView];
 					UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, NSLocalizedString(@"feedback sent", nil));
 				}
 				strongSelf.nameTextField.enabled = YES;
@@ -100,6 +111,25 @@
 			});
 		}
 	}];
+}
+
+#pragma mark UITextViewDelegate
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    if (textView.textColor == [UIColor lightGrayColor]) {
+        textView.text = @"";
+        textView.textColor = [UIColor blackColor];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    if([textView.text length] == 0) {
+        _messagesTextView.textColor = [UIColor lightGrayColor];
+        _messagesTextView.text = TEXTVIEW_PLACEHOLDER;
+    }
+    return YES;
 }
 
 @end
