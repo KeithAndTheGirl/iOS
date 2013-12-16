@@ -455,7 +455,7 @@ typedef enum {
     }
 	if (![[KATGDataStore sharedStore] isReachableViaWifi] && ![self.show.downloaded boolValue])
 	{
-		[[[UIAlertView alloc] initWithTitle:@"Streaming Unavailable" message:@"Streaming is not available over a cellular connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+		[[[UIAlertView alloc] initWithTitle:@"Streaming Unavailable" message:@"Please connected to the internet via WiFi in order to listen." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 		return;
 	}
 	if (![self isCurrentShow])
