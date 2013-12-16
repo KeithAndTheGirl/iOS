@@ -195,8 +195,9 @@ typedef enum {
 		case KATGShowDetailsSectionGuests:
             return [guests count]?2:0;
 		case KATGShowDetailsSectionDescription:
+            return [self.show.desc length]?2:0;
 		case KATGShowDetailsSectionImages:
-			return 2;
+			return [self.show.images count]?2:0;
 		case KATGShowDetailsSectionDownload:
 			return 1;
 	}
