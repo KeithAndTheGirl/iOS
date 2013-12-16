@@ -83,7 +83,7 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 @property (nonatomic) NSURL *baseURL;
 
 // Polling timer
-@property (nonatomic) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *timer;
 
 // Download tracking
 @property (nonatomic) NSMutableDictionary *urlToTokenMap;
@@ -276,7 +276,7 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 
 - (void)startPolling
 {
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:3600 target:self selector:@selector(pollForData:) userInfo:nil repeats:YES];
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(pollForData:) userInfo:nil repeats:YES];
 	[self.timer fire];
 }
 

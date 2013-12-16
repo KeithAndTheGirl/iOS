@@ -798,6 +798,20 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	NSParameterAssert([NSThread isMainThread]);
 	KATGLiveCell *cell = (KATGLiveCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGSectionLive]];
 	[cell setLiveMode:[[KATGDataStore sharedStore] isShowLive] animated:YES];
+    
+    KATGTabBarItem *liveBarItem = self.tabBar.tabItems[1];
+    if([[KATGDataStore sharedStore] isShowLive]) {
+        UIView *redView = [[UIView alloc]initWithFrame:CGRectMake(42, 4, 6, 6)];
+        redView.tag = 111;
+        [redView.layer setBorderColor:[[UIColor redColor] CGColor]];
+        [redView.layer setCornerRadius:4];
+        [redView.layer setBorderWidth:4];
+        redView.backgroundColor = [UIColor redColor];
+        [liveBarItem.view addSubview:redView];
+    }
+    else {
+        [[liveBarItem.view viewWithTag:111] removeFromSuperview];
+    }
 }
 
 @end
