@@ -212,17 +212,6 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	}
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-	[super viewWillAppear:animated];
-	if (![self.presentedViewController isBeingDismissed])
-	{
-		[self.collectionView setContentOffset:CGPointZero];
-	}
-    if([self.tabBar selectedIndex] == NSNotFound)
-        [self.tabBar selectTabItemAtIndex:0];
-}
-
 #pragma mark - Keyboard
 
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -533,16 +522,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (BOOL)tabBar:(KATGTabBar *)tabBar shouldSelectItemAtIndex:(NSInteger)index wasTapped:(BOOL)wasTapped
 {
-	switch ((KATGSection)index)
-	{
-		case KATGSectionArchive:
-			if (![self.mainDataSource.shows count])
-			{
-				return NO;
-			}
-		default:
-			return YES;
-	}
+    return YES;
 }
 
 - (void)tabBar:(KATGTabBar *)tabBar didSelectItemAtIndex:(NSInteger)index wasTapped:(BOOL)wasTapped
