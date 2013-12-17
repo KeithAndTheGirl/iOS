@@ -138,7 +138,6 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 	
 	[self configureTabBar];
-	[self configureNavBar];
 	
 	self.mainDataSource.mainCollectionView = self.collectionView;
 	self.mainDataSource.mainViewController = self;
@@ -147,6 +146,12 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		NSLog(@"%@", error);
 	}
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self configureNavBar];
 }
 
 - (void)configureTabBar
@@ -196,19 +201,22 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		return;
 	}
-	if ([[KATGPlaybackManager sharedManager] currentShow])
+    
+    KATGArchiveCell *cell = (KATGArchiveCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGSectionArchive]];
+    
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
 	{
 		KATGButton *nowPlayingButton = [[KATGButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 44.0f)];
 		[nowPlayingButton setTitle:@"Now Playing" forState:UIControlStateNormal];
 		nowPlayingButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
 		[nowPlayingButton addTarget:self action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
         
-        KATGArchiveCell *cell = (KATGArchiveCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGSectionArchive]];
         cell.tableView.tableHeaderView = nowPlayingButton;
 	}
 	else
 	{
-		[self.navigationItem setRightBarButtonItem:nil animated:YES];
+		cell.tableView.tableHeaderView = nil;
 	}
 }
 
