@@ -219,6 +219,7 @@ typedef enum {
 				titleCell.sectionTitleLabel.text = [NSString stringWithFormat:@"%@: %@",
                                                     NSLocalizedString(@"Guests", nil),
                                                     [guests componentsJoinedByString:@", "]];
+                titleCell.contentView.backgroundColor = [UIColor whiteColor];
 				break;
 			case KATGShowDetailsSectionDescription:
 				titleCell.showTopRule = NO;
@@ -228,10 +229,12 @@ typedef enum {
 			case KATGShowDetailsSectionImages:
 				titleCell.showTopRule = YES;
 				titleCell.sectionTitleLabel.text = NSLocalizedString(@"Images", nil);
+                titleCell.contentView.backgroundColor = [UIColor whiteColor];
 				break;
 			case KATGShowDetailsSectionDownload:
 				titleCell.showTopRule = YES;
 				titleCell.sectionTitleLabel.text = NSLocalizedString(@"", nil);
+                titleCell.contentView.backgroundColor = [UIColor whiteColor];
 				break;
 		}
 		return titleCell;
@@ -253,6 +256,7 @@ typedef enum {
             imagesCell.images = images;
             imagesCell.delegate = self;
             cell = imagesCell;
+            cell.contentView.backgroundColor = [UIColor whiteColor];
 			break;
 		}
 
@@ -279,6 +283,7 @@ typedef enum {
 				imagesCell.images = [self.show.images sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"index" ascending:YES]]];
 				imagesCell.delegate = self;
 				cell = imagesCell;
+                cell.contentView.backgroundColor = [UIColor whiteColor];
 			}
 			else
 			{
@@ -286,6 +291,7 @@ typedef enum {
 				titleCell.showTopRule = NO;
 				titleCell.sectionTitleLabel.text = NSLocalizedString(@"(no images)", nil);
 				cell = titleCell;
+                cell.contentView.backgroundColor = [UIColor whiteColor];
 			}
 			break;
 		case KATGShowDetailsSectionDownload:
@@ -313,6 +319,7 @@ typedef enum {
                 downloadCell.downloadButton.enabled = YES;
             }
 			cell = downloadCell;
+            cell.contentView.backgroundColor = [UIColor whiteColor];
 			break;
 		}
 	}
