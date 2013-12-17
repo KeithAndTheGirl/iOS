@@ -177,6 +177,7 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		}
         case KATGSectionYoutube:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGYoutubeCellIdentifier forIndexPath:indexPath];
+            ((KATGYoutubeCell*)cell).hostController = self.mainViewController;
 			break;
         case KATGSectionAbout:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGAboutCellIdentifier forIndexPath:indexPath];

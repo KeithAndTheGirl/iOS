@@ -24,6 +24,7 @@ extern NSString *const kKATGYoutubeTableViewCellIdentifier;
 
 @interface KATGYoutubeCell : UICollectionViewCell
 
+@property (nonatomic, weak) UIViewController *hostController;
 @property (nonatomic, readonly) UITableView *tableView;
 
 @end

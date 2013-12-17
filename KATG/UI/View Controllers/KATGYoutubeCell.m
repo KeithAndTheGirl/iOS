@@ -20,13 +20,18 @@
 
 #import "KATGYoutubeCell.h"
 #import "KATGContentContainerView.h"
-#import "KATGScheduleItemTableViewCell.h"
+#import "KATGYouTubeTableCell.h"
+#import "AFNetworking.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-NSString *const kKATGYoutubeTableViewCellIdentifier = @"kKATGYoutubeTableViewCellIdentifier";
+NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 @interface KATGYoutubeCell () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSArray *channelItems;
+
+-(void)reload;
 
 @end
 
@@ -38,14 +43,20 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"kKATGYoutubeTableViewCel
 	if (self) 
 	{
 		_tableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStylePlain];
-		_tableView.allowsSelection = NO;
-		_tableView.rowHeight = 64.0f;
+		_tableView.allowsSelection = YES;
+		_tableView.rowHeight = 66.0f;
 		_tableView.separatorColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
-		[_tableView registerClass:[KATGScheduleItemTableViewCell class] forCellReuseIdentifier:kKATGYoutubeTableViewCellIdentifier];
+		[_tableView registerNib:[UINib nibWithNibName:@"KATGYouTubeTableCell" bundle:nil]
+         forCellReuseIdentifier:kKATGYoutubeTableViewCellIdentifier];
 		_tableView.backgroundColor = [UIColor clearColor];
 		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        
+        if([_tableView canPerformAction:@selector(setSeparatorInset:) withSender:self]) {
+            _tableView.separatorInset = UIEdgeInsetsZero;
+        }
+        
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
             _tableView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
             _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
@@ -55,6 +66,8 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"kKATGYoutubeTableViewCel
             _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 56, 0);
         }
 		[self.contentView addSubview:_tableView];
+        
+        [self reload];
 	}
 	return self;
 }
@@ -76,18 +89,46 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"kKATGYoutubeTableViewCel
 	[super layoutSubviews];
 }
 
+// gdata.youtube.com/feeds/api/users/keithandthegirl/uploads?&v=2&max-results=50&alt=jsonc
+-(void)reload {
+    AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc]
+                                     initWithBaseURL:[NSURL URLWithString:@"http://gdata.youtube.com"]];
+
+    NSString *getPath = @"feeds/api/users/keithandthegirl/uploads";
+    NSDictionary *parameters = @{@"v": @"2",
+                                 @"max-results": @"50",
+                                 @"alt": @"jsonc"};
+    //  Start a request
+    [session GET:getPath
+   parameters:parameters
+      success:^(NSURLSessionDataTask *task, id responseObject) {
+          
+          self.channelItems = responseObject[@"data"][@"items"];
+          [self.tableView reloadData];
+      } failure:^(NSURLSessionDataTask *task, NSError *error) {
+          NSLog(@"%@", [error description]);
+      }];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 5;
+	return [self.channelItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kKATGYoutubeTableViewCellIdentifier forIndexPath:indexPath];
-	cell.textLabel.text = @"Youtube cell";
-	return cell;
+	KATGYouTubeTableCell *cell = [tableView dequeueReusableCellWithIdentifier:kKATGYoutubeTableViewCellIdentifier forIndexPath:indexPath];
+	[cell configureWithDictionary:self.channelItems[indexPath.row]];
+    return cell;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSDictionary *item = self.channelItems[indexPath.row];
+    NSString *urlString = item[@"player"][@"mobile"];
+    NSURL *videoURL = [NSURL URLWithString:urlString];
+    [[UIApplication sharedApplication] openURL:videoURL];
+}
 
 @end
