@@ -141,14 +141,10 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 	self.collectionView.hidden = YES;
 	
 	self.backgroundView.alpha = 0.0f;
-	
-//	[self.view bringSubviewToFront:self.navigationBar];
 
 	self.closeButton.alpha = 0.0f;
     self.saveButton.alpha = 0.0f;
-	CGFloat navigationBarScale = initialRect.size.width / self.view.bounds.size.width;
-//	self.navigationBar.transform = CGAffineTransformMakeScale(navigationBarScale, navigationBarScale);
-//	self.navigationBar.center = CGPointMake(CGRectGetMidX(initialRect), CGRectGetMinY(initialRect) - (navigationBarScale*44.0f));
+    self.titleLabel.alpha = 0.0f;
 	[self updateTitleWithImage:image];
 	
 	[UIView animateWithDuration:0.4f
@@ -157,8 +153,8 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 					 animations:^{
 						 self.closeButton.alpha = 1.0f;
                          self.saveButton.alpha = 1.0f;
-//						 self.navigationBar.transform = CGAffineTransformIdentity;
-//						 self.navigationBar.center = CGPointMake(CGRectGetMidX(self.view.bounds), 22.0f);
+                         self.titleLabel.alpha = 1.0f;
+                         
 						 transitionContainerView.frame = self.view.bounds;
 						 transitionImageView.bounds = newImageRect;
 						 transitionImageView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
@@ -329,9 +325,7 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 						 
 						 self.closeButton.alpha = 0.0f;
 						 self.saveButton.alpha = 0.0f;
-//						 CGFloat navigationBarScale = collapseTargetFrame.size.width / self.view.bounds.size.width;
-//						 self.navigationBar.transform = CGAffineTransformMakeScale(navigationBarScale, navigationBarScale);
-//						 self.navigationBar.center = CGPointMake(CGRectGetMidX(collapseTargetFrame), CGRectGetMinY(collapseTargetFrame) - (navigationBarScale*44.0f));
+                         self.titleLabel.alpha = 0.0f;
 						 
 						 transitionContainerView.frame = collapseTargetFrame;
 						 transitionImageView.bounds = newImageBounds;
@@ -353,19 +347,23 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 		{
 			self.closeButton.hidden = NO;
 			self.saveButton.hidden = NO;
+            self.titleLabel.hidden = NO;
 			self.closeButton.alpha = 0.0f;
 			self.saveButton.alpha = 0.0f;
+            self.titleLabel.alpha = 0.0f;
 		}
 		
 		[UIView animateWithDuration:0.2f
 						 animations:^{
 							 self.closeButton.alpha = visible ? 1.0f : 0.0f;
 							 self.saveButton.alpha = visible ? 1.0f : 0.0f;
+                             self.titleLabel.alpha = visible ? 1.0f : 0.0f;
 						 } completion:^(BOOL finished) {
 							 if (!visible)
 							 {
 								 self.closeButton.hidden = YES;
 								 self.saveButton.hidden = YES;
+                                 self.titleLabel.hidden = YES;
 							 }
 						 }];
 	}
@@ -373,8 +371,10 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 	{
 		self.closeButton.hidden = !visible;
 		self.saveButton.hidden = !visible;
+        self.titleLabel.hidden = !visible;
 		self.closeButton.alpha = 1.0f;
 		self.saveButton.alpha = 1.0f;
+        self.titleLabel.alpha = 1.0f;
 	}
 }
 
