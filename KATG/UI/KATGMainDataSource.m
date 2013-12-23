@@ -200,8 +200,6 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 	CGSize cellSize;
-	CGRect rect = collectionView.bounds;
-//	CGFloat margin = kKATGCollectionViewColumnMargin*2.0f;
 	switch ((KATGSection)indexPath.section)
 	{
 		case KATGSectionYoutube:
@@ -209,10 +207,7 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionSchedule:
 		case KATGSectionArchive:
 		case KATGSectionLive:
-            cellSize = [[UIScreen mainScreen] bounds].size;
-            if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.) {
-                cellSize.height -= 20;
-            }
+            cellSize = self.mainViewController.view.frame.size;
 			break;
 		default:
 			NSParameterAssert(NO);
@@ -257,9 +252,10 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionSchedule:
 			self.eventsTableView = nil;
 			break;
-		case KATGSectionLive:
-			break;
 		case KATGSectionArchive:
+		case KATGSectionLive:
+		case KATGSectionYoutube:
+		case KATGSectionAbout:
 			break;
 	}
 }

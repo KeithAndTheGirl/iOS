@@ -153,6 +153,11 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
     [self configureNavBar];
 }
 
+- (void)viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    [self.collectionView reloadData];
+}
+
 - (void)configureTabBar
 {
 	// Setup the tab bar
