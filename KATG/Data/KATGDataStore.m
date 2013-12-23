@@ -991,13 +991,17 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 	{
 		if (completion)
 		{
-			completion([NSError errorWithDomain:@"KATGFeedbackErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"Invalid input", nil)}]);
+			completion([NSError errorWithDomain:@"KATGFeedbackErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"Must include a comment", nil)}]);
 		}
 		return;
 	}
-	if (name == nil)
+	if (name == nil || [name length] == 0)
 	{
-		name = @"";
+        if (completion)
+		{
+			completion([NSError errorWithDomain:@"KATGFeedbackErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"Must include a name", nil)}]);
+		}
+        return;
 	}
 	if (location == nil)
 	{
