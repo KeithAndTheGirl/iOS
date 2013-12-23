@@ -312,7 +312,10 @@
 	_scheduledEvent = scheduledEvent;
 	self.timestamp = scheduledEvent.timestamp;
 	NSString *subtitle = _scheduledEvent.subtitle;
-	self.nextShowLabel.text = [NSString stringWithFormat:@"Featuring %@", subtitle];
+    if([subtitle length] > 0)
+        self.nextShowLabel.text = [NSString stringWithFormat:@"Featuring %@", subtitle];
+    else
+        self.nextShowLabel.text = @"";
 	[self layoutLiveMode];
 }
 
