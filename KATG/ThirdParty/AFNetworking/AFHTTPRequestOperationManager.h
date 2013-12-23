@@ -228,6 +228,12 @@
                          success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
+- (AFHTTPRequestOperation *)POST:(NSString *)URLString
+                      parameters:(NSDictionary *)parameters
+                     cachePolicy:(NSURLRequestCachePolicy)cachePolicy
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 /**
  Creates and runs an `AFHTTPRequestOperation` with a multipart `POST` request.
 

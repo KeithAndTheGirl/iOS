@@ -92,6 +92,6 @@ extern NSString *const KATGDataStoreEventsDidChangeNotification;
 - (void)downloadEvents;
 
 //
-- (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(NSError *))completion;
+- (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(BOOL, NSArray *))completion;
 
 @end

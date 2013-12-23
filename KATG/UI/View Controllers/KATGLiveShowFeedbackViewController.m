@@ -86,31 +86,23 @@
 	self.messagesTextView.editable = NO;
     self.sendButton.enabled = NO;
 	__weak typeof(*self) *weakSelf = self;
-	[[KATGDataStore sharedStore] submitFeedback:name location:location comment:message completion:^(NSError *error) {
+	[[KATGDataStore sharedStore] submitFeedback:name location:location comment:message completion:^(BOOL error, NSArray *response) {
 		__weak typeof(*weakSelf) *strongSelf = weakSelf;
         strongSelf.sendButton.enabled = YES;
 		if (strongSelf)
 		{
 			dispatch_async(dispatch_get_main_queue(), ^(void) {
-				if (error)
-				{
-					UIAlertView *alertView = [[UIAlertView alloc]
-                                              initWithTitle:NSLocalizedString(@"Error", nil)
-                                              message:[error localizedDescription]
-                                              //NSLocalizedString(@"There was an error sending feedback, please check your connection and try again.", nil)
-                                              delegate:nil
-                                              cancelButtonTitle:@"Dismiss"
-                                              otherButtonTitles:nil];
-					[alertView show];
-				}
-				else
-				{
+                UIAlertView *alertView = [[UIAlertView alloc]
+                                          initWithTitle:error?@"Error":@"Success"
+                                          message:[response componentsJoinedByString:@", "]
+                                          delegate:nil
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles:nil];
+                [alertView show];
+                if(!error) {
 					strongSelf.messagesTextView.text = @"";
-                    [strongSelf textViewShouldEndEditing:strongSelf.messagesTextView];
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Success", nil) message:NSLocalizedString(@"Feedback was sent successfully.", nil) delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
-					[alertView show];
-					UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, NSLocalizedString(@"feedback sent", nil));
-				}
+                }
+                UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, NSLocalizedString(@"feedback sent", nil));
 				strongSelf.nameTextField.enabled = YES;
 				strongSelf.locationTextField.enabled = YES;
 				strongSelf.messagesTextView.editable = YES;

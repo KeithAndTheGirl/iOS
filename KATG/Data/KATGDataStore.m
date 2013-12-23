@@ -37,6 +37,8 @@
 
 #import "NSMutableURLRequest+ESNetworking.h"
 
+#import "AFNetworking.h"
+
 #if DEBUG && 0
 #define EventsLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -989,59 +991,34 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 
 #pragma mark - Feedback
 
-- (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(NSError *))completion
+- (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(BOOL,NSArray*))completion
 {
-    NSMutableArray *messages = [NSMutableArray array];
-	if (![comment length]) {
-        [messages addObject:@"Must include a comment"];
-        comment = @"";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"HiddenVoxbackId" : @"3", @"HiddenMixerCode" : @"IEOSE"}];
+    if ([comment length] > 0) {
+        [parameters setObject:comment forKey:@"Comment"];
 	}
-	if (name == nil || [name length] == 0) {
-        [messages addObject:@"Must include a name"];
-        name = @"";
+	if  ([name length] > 0) {
+        [parameters setObject:name forKey:@"Name"];
 	}
-    if([messages count] && completion) {
-        completion([NSError errorWithDomain:@"KATGFeedbackErrorDomain"
-                                       code:0
-                                   userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString([messages componentsJoinedByString:@", "], nil)}
-                    ]);
-        return;
-    }
-	if (location == nil) {
-		location = @"";
+	if ([location length] > 0) {
+        [parameters setObject:location forKey:@"Location"];
 	}
-	NSURL *url = [NSURL URLWithString:kFeedbackURL];
-	NSParameterAssert(url);
-	// No preflight check since all feedback submissions will have the same URL
-	NSMutableURLRequest *request = [NSMutableURLRequest postRequestWithURL:url body:@{@"Name" : [name copy], @"Location" : [location copy], @"Comment" : [comment copy], @"Send+Comment" : @"ButtonSubmit", @"3" : @"HiddenVoxbackId", @"IEOSE" : @"HiddenMixerCode",}];
-	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
-	id networkWork = ^id<NSObject>(ESHTTPOperation *op, NSError *__autoreleasing *error) {
-#if DEBUG
-		NSString *responseString = [[NSString alloc] initWithData:op.responseBody encoding:NSUTF8StringEncoding];
-		return responseString;
-#else
-		return nil;
-#endif 
-	};
-	id networkCompletion = ^(ESHTTPOperation *op) {
-		if (op.error)
-		{
-			if (completion)
-			{
-				completion(op.error);
-			}
-		}
-		else
-		{
-			if (completion)
-			{
-				completion(nil);
-			}
-		}
-	};
-	ESHTTPOperation *op = [ESHTTPOperation newHTTPOperationWithRequest:request work:networkWork completion:networkCompletion];
-	NSParameterAssert(op);
-	[self.networkQueue addOperation:op];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.attackwork.com"]];
+    [manager POST:@"Voxback/Comment-Form-Iframe.aspx?VoxbackId=3&MixerCode=IEOSE&response-api=yes"
+       parameters:parameters
+      cachePolicy:NSURLRequestReloadIgnoringCacheData
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSLog(@"%@", responseObject);
+              if(completion) {
+                  completion([responseObject[@"error"] boolValue], responseObject[@"response"]);
+              }
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              NSLog(@"%@", [error description]);
+              if(completion) {
+                  completion(YES, @[@"Error sending feedback"]);
+              }
+          }];
 }
 
 @end
