@@ -27,6 +27,7 @@
 #import "KATGBeerBubblesView.h"
 #import "KATGPlaybackManager.h"
 #import "UIColor+KATGColors.h"
+#import "KATGDataStore.h"
 
 @interface KATGTimerTarget : NSProxy
 @property (weak, nonatomic) id target;
@@ -192,7 +193,7 @@
 
 - (IBAction)toggleLive:(id)sender
 {
-	[self setLiveMode:!_liveMode animated:YES];
+    [[KATGDataStore sharedStore] setTestLiveMode:!_liveMode];
 }
 
 #pragma mark - Playback controls

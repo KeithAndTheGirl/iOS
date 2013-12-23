@@ -56,6 +56,7 @@ extern NSString *const kKATGDataStoreIsShowLiveKey;
 // And notifications on change
 extern NSString *const KATGDataStoreIsShowLiveDidChangeNotification;
 - (BOOL)isShowLive;
+- (void)setTestLiveMode:(BOOL)value;
 
 // Events updated
 // This shouldn't be needed, but working around an occasional failure on first load for now

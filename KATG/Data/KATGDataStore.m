@@ -947,6 +947,10 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 	return self.live;
 }
 
+- (void)setTestLiveMode:(BOOL)value {
+    self.live = value;
+}
+
 - (void)setLive:(BOOL)live
 {
 	NSParameterAssert([NSThread isMainThread]);
