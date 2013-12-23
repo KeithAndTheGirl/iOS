@@ -88,7 +88,7 @@
 	__weak typeof(*self) *weakSelf = self;
 	[[KATGDataStore sharedStore] submitFeedback:name location:location comment:message completion:^(NSError *error) {
 		__weak typeof(*weakSelf) *strongSelf = weakSelf;
-        weakSelf.sendButton.enabled = YES;
+        strongSelf.sendButton.enabled = YES;
 		if (strongSelf)
 		{
 			dispatch_async(dispatch_get_main_queue(), ^(void) {
@@ -114,6 +114,8 @@
 				strongSelf.nameTextField.enabled = YES;
 				strongSelf.locationTextField.enabled = YES;
 				strongSelf.messagesTextView.editable = YES;
+                
+                [strongSelf.messagesTextView becomeFirstResponder];
 			});
 		}
 	}];

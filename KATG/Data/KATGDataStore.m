@@ -991,24 +991,23 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 
 - (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(NSError *))completion
 {
-	if (![comment length])
-	{
-		if (completion)
-		{
-			completion([NSError errorWithDomain:@"KATGFeedbackErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"Must include a comment", nil)}]);
-		}
-		return;
+    NSMutableArray *messages = [NSMutableArray array];
+	if (![comment length]) {
+        [messages addObject:@"Must include a comment"];
+        comment = @"";
 	}
-	if (name == nil || [name length] == 0)
-	{
-        if (completion)
-		{
-			completion([NSError errorWithDomain:@"KATGFeedbackErrorDomain" code:0 userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString(@"Must include a name", nil)}]);
-		}
+	if (name == nil || [name length] == 0) {
+        [messages addObject:@"Must include a name"];
+        name = @"";
+	}
+    if([messages count] && completion) {
+        completion([NSError errorWithDomain:@"KATGFeedbackErrorDomain"
+                                       code:0
+                                   userInfo:@{NSLocalizedDescriptionKey : NSLocalizedString([messages componentsJoinedByString:@", "], nil)}
+                    ]);
         return;
-	}
-	if (location == nil)
-	{
+    }
+	if (location == nil) {
 		location = @"";
 	}
 	NSURL *url = [NSURL URLWithString:kFeedbackURL];
