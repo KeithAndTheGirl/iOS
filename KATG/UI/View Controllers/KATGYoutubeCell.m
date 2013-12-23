@@ -23,6 +23,7 @@
 #import "KATGYouTubeTableCell.h"
 #import "AFNetworking.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "KATGYouTubeViewController.h"
 
 NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
@@ -91,23 +92,19 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 // gdata.youtube.com/feeds/api/users/keithandthegirl/uploads?&v=2&max-results=50&alt=jsonc
 -(void)reload {
-    AFHTTPSessionManager *session = [[AFHTTPSessionManager alloc]
-                                     initWithBaseURL:[NSURL URLWithString:@"http://gdata.youtube.com"]];
-
-    NSString *getPath = @"feeds/api/users/keithandthegirl/uploads";
     NSDictionary *parameters = @{@"v": @"2",
                                  @"max-results": @"50",
                                  @"alt": @"jsonc"};
-    //  Start a request
-    [session GET:getPath
-   parameters:parameters
-      success:^(NSURLSessionDataTask *task, id responseObject) {
-          
-          self.channelItems = responseObject[@"data"][@"items"];
-          [self.tableView reloadData];
-      } failure:^(NSURLSessionDataTask *task, NSError *error) {
-          NSLog(@"%@", [error description]);
-      }];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://gdata.youtube.com"]];
+    [manager GET:@"feeds/api/users/keithandthegirl/uploads"
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             self.channelItems = responseObject[@"data"][@"items"];
+             [self.tableView reloadData];
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"%@", [error description]);
+         }];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -126,9 +123,14 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     NSDictionary *item = self.channelItems[indexPath.row];
-    NSString *urlString = item[@"player"][@"mobile"];
-    NSURL *videoURL = [NSURL URLWithString:urlString];
-    [[UIApplication sharedApplication] openURL:videoURL];
+    KATGYouTubeViewController *youtubeController = [[KATGYouTubeViewController alloc] init];
+    youtubeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+     [self.hostController presentViewController:youtubeController animated:YES completion:^{
+         
+     }];
+    
+        youtubeController.dataDictionary = item;
 }
+
 
 @end

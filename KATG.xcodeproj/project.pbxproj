@@ -65,6 +65,8 @@
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
 		01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AD1859B230002AF906 /* SliderThumb.png */; };
 		01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */; };
+		01F7832518680B1900A85EA4 /* KATGYouTubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */; };
+		01F7832618680B1900A85EA4 /* KATGYouTubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
 		227017CA16521B5C004E4B0B /* KATGSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 227017C916521B5C004E4B0B /* KATGSearchBar.m */; };
@@ -297,6 +299,9 @@
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
 		01EAC4AD1859B230002AF906 /* SliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderThumb.png; sourceTree = "<group>"; };
 		01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SliderThumb@2x.png"; sourceTree = "<group>"; };
+		01F7832218680B1900A85EA4 /* KATGYouTubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYouTubeViewController.h; path = "View Controllers/KATGYouTubeViewController.h"; sourceTree = "<group>"; };
+		01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeViewController.m; path = "View Controllers/KATGYouTubeViewController.m"; sourceTree = "<group>"; };
+		01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeViewController.xib; path = "View Controllers/KATGYouTubeViewController.xib"; sourceTree = "<group>"; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
 		22192ED116745FF000D2B1C1 /* TDCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCollectionView.h; path = TDCollectionView/TDCollectionView.h; sourceTree = "<group>"; };
@@ -829,6 +834,9 @@
 				0198AB92186077320063947C /* KATGYouTubeTableCell.h */,
 				0198AB93186077320063947C /* KATGYouTubeTableCell.m */,
 				0198AB95186077850063947C /* KATGYouTubeTableCell.xib */,
+				01F7832218680B1900A85EA4 /* KATGYouTubeViewController.h */,
+				01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */,
+				01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */,
 				228F940E1651FDD0006A1A05 /* KATGArchiveCell.h */,
 				228F940F1651FDD0006A1A05 /* KATGArchiveCell.m */,
 				229A79D1167437B000792258 /* KATGScheduleCell.h */,
@@ -1388,6 +1396,7 @@
 				9115C137172E1439002942B6 /* Default@2x~iphone.png in Resources */,
 				9115C14A172E1752002942B6 /* Default-Portrait~ipad.png in Resources */,
 				228D43F21731830B00FA94FE /* live-mic.png in Resources */,
+				01F7832618680B1900A85EA4 /* KATGYouTubeViewController.xib in Resources */,
 				228D43F31731830B00FA94FE /* live-mic@2x.png in Resources */,
 				0111A7781856A08600A3F8D5 /* Youtube.png in Resources */,
 				228D43FD1731DB3600FA94FE /* cigarette-smoke.png in Resources */,
@@ -1499,6 +1508,7 @@
 				22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */,
 				22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */,
 				22D07DC81676287C004EBEBB /* KATGShowView.m in Sources */,
+				01F7832518680B1900A85EA4 /* KATGYouTubeViewController.m in Sources */,
 				012B4F221857A2ED00B59FC5 /* AFHTTPRequestOperation.m in Sources */,
 				22C508411676ED2800D44217 /* KATGShowDescriptionCell.m in Sources */,
 				22C5084E1676EE4800D44217 /* KATGShowGuestCell.m in Sources */,

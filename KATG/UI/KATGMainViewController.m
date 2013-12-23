@@ -150,7 +150,6 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [self configureNavBar];
 }
 
@@ -317,43 +316,13 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 }
 
 #pragma mark - Show presentation
-
-- (void)addDimmingViewForModalWithDuration:(NSTimeInterval)duration
-{	
-	if (!self.modalPresentationDimmerView)
-	{
-		self.modalPresentationDimmerView = [UIView new];
-		self.modalPresentationDimmerView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-		self.modalPresentationDimmerView.backgroundColor = [UIColor blackColor];
-	}
-	self.modalPresentationDimmerView.frame = self.view.bounds;
-	[self.view addSubview:self.modalPresentationDimmerView];
-	self.modalPresentationDimmerView.alpha = 0.0f;
-	
-	[UIView animateWithDuration:duration
-					 animations:^{
-						 self.modalPresentationDimmerView.alpha = 1.0f;
-					 } completion:NULL];
-}
-
-- (void)removeDimmingViewForModalWithDuration:(NSTimeInterval)duration
-{	
-	[UIView animateWithDuration:duration
-					 animations:^{
-						 self.modalPresentationDimmerView.alpha = 0.0f;
-					 } completion:^(BOOL finished) {
-						 [self.modalPresentationDimmerView removeFromSuperview];
-					 }];
-}
-
 - (void)presentShow:(KATGShow *)show fromArchiveCell:(KATGArchiveCell *)cell
 {
-	[self addDimmingViewForModalWithDuration:0.5f];
 	KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
 	showViewController.delegate = self;
 	showViewController.showObjectID = [show objectID];
 	self.currentlyPresentedShowViewController = showViewController;
-	
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:self.currentlyPresentedShowViewController
                        animated:YES
                      completion:^{
@@ -440,18 +409,6 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 //						 [self.currentlyPresentedShowViewController didMoveToParentViewController:nil];
 //						 self.currentlyPresentedShowViewController = nil;
 //					 }];
-}
-
-- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
-{
-	[self addDimmingViewForModalWithDuration:flag ? 0.3f : 0.0f];
-	[super presentViewController:viewControllerToPresent animated:flag completion:completion];
-}
-
-- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
-{
-	[self removeDimmingViewForModalWithDuration:flag ? 0.3f : 0.0f];
-	[super dismissViewControllerAnimated:flag completion:completion];
 }
 
 #pragma mark - 
