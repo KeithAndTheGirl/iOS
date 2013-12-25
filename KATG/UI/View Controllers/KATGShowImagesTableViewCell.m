@@ -42,12 +42,14 @@ static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
 	{
 		UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
 		flowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
-		flowLayout.minimumInteritemSpacing = 10.0f;
-		flowLayout.minimumLineSpacing = 10.0f;
-        flowLayout.itemSize = CGSizeMake(94, 94);
-        flowLayout.sectionInset = UIEdgeInsetsMake(0, 10, 0, 0);
+
+
+        flowLayout.itemSize = CGSizeMake(92, 92);
+        flowLayout.sectionInset = UIEdgeInsetsMake(0, 2, 0, 0);
         
-		_collectionView = [[UICollectionView alloc] initWithFrame:self.contentView.bounds  collectionViewLayout:flowLayout];
+		_collectionView = [[UICollectionView alloc] initWithFrame:
+                          CGRectInset(self.contentView.bounds, 10, 0)
+                                             collectionViewLayout:flowLayout];
 		_collectionView.delegate = self;
 		_collectionView.dataSource = self;
 		_collectionView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
