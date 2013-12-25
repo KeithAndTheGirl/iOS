@@ -629,7 +629,7 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 				CFStringTrimWhitespace((__bridge CFMutableStringRef)mutableLine);
 				if ([mutableLine length])
 				{
-					[noteLines appendFormat:@" • %@\n", line];
+					[noteLines appendFormat:@" — %@\n\n", line];
 				}
 			}];
 			if ([noteLines length])
