@@ -420,6 +420,18 @@ typedef enum {
 	}
 	if (![self isCurrentShow])
 	{
+/*        Float64 currentTime = [self.show.playState.lastPlaybackTime floatValue];
+        if (isnan(currentTime))
+        {
+            currentTime = 0.0;
+        }
+        Float64 duration = [self.show.playState.duration floatValue];
+        if (isnan(duration))
+        {
+            duration = 1.0;
+        }
+        self.controlsView.positionSlider.value = currentTime;
+        self.controlsView.positionSlider.maximumValue = duration; */
 		return;
 	}
 	if ([keyPath isEqualToString:KATGCurrentTimeObserverKey])

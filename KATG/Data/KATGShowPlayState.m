@@ -11,6 +11,7 @@
 
 @implementation KATGShowPlayState
 @dynamic lastPlaybackTime;
+@dynamic duration;
 @dynamic show;
 
 + (NSString *)katg_entityName

@@ -16,6 +16,7 @@
 + (NSString *)katg_entityName;
 
 @property (nonatomic, retain) NSNumber *lastPlaybackTime;
+@property (nonatomic, retain) NSNumber *duration;
 @property (nonatomic, retain) KATGShow *show;
 
 @end

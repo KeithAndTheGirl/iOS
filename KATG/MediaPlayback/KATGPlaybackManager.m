@@ -311,6 +311,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	NSManagedObjectContext *context = [store childContext];
 	NSManagedObjectID *objectID = [self.currentShow objectID];
 	Float64 time = [self currentTimeInSeconds];
+	Float64 duration = [self durationInSeconds];
 	[context performBlock:^{
 		NSError *fetchError;
 		KATGShow *show = (KATGShow *)[context existingObjectWithID:objectID error:&fetchError];
@@ -322,6 +323,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 				show.playState.show = show;
 			}
 			show.playState.lastPlaybackTime = @(time);
+			show.playState.duration = @(duration);
 			[store saveChildContext:context completion:nil];
 		}
 	}];
