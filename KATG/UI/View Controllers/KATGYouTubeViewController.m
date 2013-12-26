@@ -7,6 +7,7 @@
 //
 
 #import "KATGYouTubeViewController.h"
+#import "KATGPlaybackManager.h"
 
 @implementation KATGYouTubeViewController
 
@@ -21,6 +22,10 @@
         [self setNeedsStatusBarAppearanceUpdate];
     
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    
+    if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+		[[KATGPlaybackManager sharedManager] pause];
+	}
 }
 
 - (void)didReceiveMemoryWarning {
