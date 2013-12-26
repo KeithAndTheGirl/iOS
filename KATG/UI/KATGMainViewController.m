@@ -276,6 +276,10 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 #pragma mark - Rotation
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];

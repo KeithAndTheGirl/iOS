@@ -34,6 +34,10 @@
     return UIStatusBarStyleLightContent;
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 -(void)setDataDictionary:(NSDictionary *)dataDictionary {
     _dataDictionary = dataDictionary;
     

@@ -98,6 +98,10 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
     [self.view addSubview:self.titleLabel];
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)transitionFromImage:(KATGImage *)image inImageView:(UIImageView *)imageView animations:(void(^)())animations completion:(void(^)())completion;
 {
 	CGSize imageSize = imageView.image.size;

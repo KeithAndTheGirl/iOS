@@ -117,6 +117,10 @@
 	}];
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 #pragma mark UITextViewDelegate
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView
 {

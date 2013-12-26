@@ -171,6 +171,11 @@ typedef enum {
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
 }
+
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 #pragma mark - Actions
 
 - (IBAction)close:(id)sender
