@@ -50,10 +50,9 @@
     [self.internalView removeFromSuperview];
     [self.contentView addSubview:self.internalView];
     CGFloat screenHeight = [[UIScreen mainScreen] bounds].size.height;
-    CGFloat contentHeight = self.contentView.frame.size.height;
-    CGFloat height = contentHeight - self.internalView.frame.size.height;
+    CGFloat height = 0;
     if(screenHeight > 480)
-        height -= 56;
+        height = 52;
     
     self.internalView.frame = CGRectMake(0, height, self.contentView.frame.size.width, self.internalView.frame.size.height);
     
