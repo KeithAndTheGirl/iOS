@@ -125,6 +125,8 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+    if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
+        [self setNeedsStatusBarAppearanceUpdate];
 
     self.showTitleLabel.text = self.show.title;
 	self.showNumberLabel.text = [NSString stringWithFormat:@"EPISODE %@", self.show.number];
@@ -166,6 +168,9 @@ typedef enum {
     	[self removeReachabilityKVO];
 }
 
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
+}
 #pragma mark - Actions
 
 - (IBAction)close:(id)sender

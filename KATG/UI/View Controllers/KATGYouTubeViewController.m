@@ -16,6 +16,9 @@
     [closeButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
     [closeButton.layer setBorderWidth:0.5];
     [closeButton.layer setCornerRadius:4];
+    
+    if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
+        [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,6 +28,10 @@
 
 -(IBAction)closeAction:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 -(void)setDataDictionary:(NSDictionary *)dataDictionary {
