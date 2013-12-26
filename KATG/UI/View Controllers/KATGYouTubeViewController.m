@@ -8,6 +8,7 @@
 
 #import "KATGYouTubeViewController.h"
 #import "KATGPlaybackManager.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 @implementation KATGYouTubeViewController
 
@@ -28,6 +29,75 @@
 	}
 }
 
+- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
+    if (receivedEvent.type == UIEventTypeRemoteControl) {
+        switch (receivedEvent.subtype) {
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+                break;
+            case UIEventSubtypeRemoteControlPreviousTrack:
+                break;
+            case UIEventSubtypeRemoteControlNextTrack:
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    NSMutableDictionary *episodeInfo = [NSMutableDictionary dictionary];
+	episodeInfo[MPMediaItemPropertyArtist] = @"Keith and The Girl";
+	episodeInfo[MPMediaItemPropertyPodcastTitle] = @"Keith and The Girl";
+	episodeInfo[MPMediaItemPropertyMediaType] = @(MPMediaTypePodcast);
+		episodeInfo[MPMediaItemPropertyTitle] = self.dataDictionary[@"title"];
+		episodeInfo[MPMediaItemPropertyPlaybackDuration] = self.dataDictionary[@"duration"];
+	UIImage *image = [UIImage imageNamed:@"iTunesArtwork"];
+	if (image)
+	{
+		MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+		if (artwork)
+		{
+			episodeInfo[MPMediaItemPropertyArtwork] = artwork;
+		}
+	}
+	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:episodeInfo];
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self becomeFirstResponder];
+    
+    
+    webView.allowsInlineMediaPlayback=YES;
+    webView.mediaPlaybackRequiresUserAction=NO;
+    webView.mediaPlaybackAllowsAirPlay=YES;
+    webView.scrollView.bounces=NO;
+    
+    NSString *linkObj= [NSString stringWithFormat:@"http://www.youtube.com/v/%@", self.dataDictionary[@"id"]];
+    NSLog(@"linkObj1_________________%@",linkObj);
+    NSString *embedHTML = @"\
+    <html><head>\
+    <style type=\"text/css\">\
+    body {\
+    background-color: black;color: black;}\\</style>\\</head><body style=\"margin:0\">\\<embed webkit-playsinline id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" \\width=\"320\" height=\"320\"></embed>\\</body></html>";
+    
+    NSString *html = [NSString stringWithFormat:embedHTML, linkObj];
+    [webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://youtube.com"]];
+
+    nameLabel.text = self.dataDictionary[@"title"];
+    dateLabel.text = self.dataDictionary[@"recorded"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
+    [self resignFirstResponder];
+    [super viewWillDisappear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -43,29 +113,6 @@
 
 - (BOOL)shouldAutorotate {
     return NO;
-}
-
--(void)setDataDictionary:(NSDictionary *)dataDictionary {
-    _dataDictionary = dataDictionary;
-    
-    webView.allowsInlineMediaPlayback=YES;
-    webView.mediaPlaybackRequiresUserAction=NO;
-    webView.mediaPlaybackAllowsAirPlay=YES;
-    webView.scrollView.bounces=NO;
-    
-    NSString *linkObj= [NSString stringWithFormat:@"http://www.youtube.com/v/%@", dataDictionary[@"id"]];
-    NSLog(@"linkObj1_________________%@",linkObj);
-    NSString *embedHTML = @"\
-    <html><head>\
-    <style type=\"text/css\">\
-    body {\
-    background-color: black;color: black;}\\</style>\\</head><body style=\"margin:0\">\\<embed webkit-playsinline id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" \\width=\"320\" height=\"320\"></embed>\\</body></html>";
-    
-    NSString *html = [NSString stringWithFormat:embedHTML, linkObj];
-    [webView loadHTMLString:html baseURL:nil];
-    
-    nameLabel.text = dataDictionary[@"title"];
-    dateLabel.text = dataDictionary[@"recorded"];
 }
 
 #pragma mark UIWebViewDelegate

@@ -282,7 +282,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 {
 	if (self.isApplicationActive)
 	{
-		KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
+//		KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
 	}
 	else
 	{
