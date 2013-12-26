@@ -994,21 +994,14 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 - (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(BOOL,NSArray*))completion
 {
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"HiddenVoxbackId" : @"3", @"HiddenMixerCode" : @"IEOSE"}];
-    if ([comment length] > 0) {
-        [parameters setObject:comment forKey:@"Comment"];
-	}
-	if  ([name length] > 0) {
-        [parameters setObject:name forKey:@"Name"];
-	}
-	if ([location length] > 0) {
-        [parameters setObject:location forKey:@"Location"];
-	}
+    [parameters setObject:comment?comment:@"" forKey:@"Comment"];
+    [parameters setObject:name?name:@"" forKey:@"Name"];
+    [parameters setObject:location?location:@"" forKey:@"Location"];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.attackwork.com"]];
     [manager POST:@"Voxback/Comment-Form-Iframe.aspx?VoxbackId=3&MixerCode=IEOSE&response-api=yes"
        parameters:parameters
       cachePolicy:NSURLRequestReloadIgnoringCacheData
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
-              NSLog(@"%@", responseObject);
               if(completion) {
                   completion([responseObject[@"error"] boolValue], responseObject[@"response"]);
               }

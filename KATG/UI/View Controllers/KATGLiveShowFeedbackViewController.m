@@ -48,6 +48,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
+    self.spinnerView.hidden = YES;
     if([self.nameTextField.text length] > 0) {
         [self.messagesTextView becomeFirstResponder];
     }
@@ -85,10 +86,13 @@
 	self.locationTextField.enabled = NO;
 	self.messagesTextView.editable = NO;
     self.sendButton.enabled = NO;
+    self.spinnerView.hidden = NO;
+    
 	__weak typeof(*self) *weakSelf = self;
 	[[KATGDataStore sharedStore] submitFeedback:name location:location comment:message completion:^(BOOL error, NSArray *response) {
 		__weak typeof(*weakSelf) *strongSelf = weakSelf;
         strongSelf.sendButton.enabled = YES;
+        strongSelf.spinnerView.hidden = YES;
 		if (strongSelf)
 		{
 			dispatch_async(dispatch_get_main_queue(), ^(void) {

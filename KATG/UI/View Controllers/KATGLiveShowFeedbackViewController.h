@@ -18,6 +18,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *locationTextField;
 @property (weak, nonatomic) IBOutlet UITextView *messagesTextView;
 @property (weak, nonatomic) IBOutlet UIButton *sendButton;
+@property (weak, nonatomic) IBOutlet UIView *spinnerView;
 
 - (IBAction)send:(id)sender;
 - (IBAction)close:(id)sender;
