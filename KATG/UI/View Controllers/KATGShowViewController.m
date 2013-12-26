@@ -316,7 +316,7 @@ typedef enum {
 			{
 				[self downloadButtonPressed:downloadCell];
 			}
-			else if (![[KATGDataStore sharedStore] isReachableViaWifi])
+			else if (![[KATGDataStore sharedStore] isReachable])
 			{
 				downloadCell.state = KATGDownloadEpisodeCellStateDisabled;
 			}
@@ -410,12 +410,12 @@ typedef enum {
 
 - (void)addReachabilityKVO
 {
-	[[KATGDataStore sharedStore] addObserver:self forKeyPath:kKATGDataStoreIsReachableViaWifiKey options:0 context:KATGReachabilityObserverContext];
+	[[KATGDataStore sharedStore] addObserver:self forKeyPath:kKATGDataStoreIsReachableKey options:0 context:KATGReachabilityObserverContext];
 }
 
 - (void)removeReachabilityKVO
 {
-	[[KATGDataStore sharedStore] removeObserver:self forKeyPath:kKATGDataStoreIsReachableViaWifiKey context:KATGReachabilityObserverContext];
+	[[KATGDataStore sharedStore] removeObserver:self forKeyPath:kKATGDataStoreIsReachableKey context:KATGReachabilityObserverContext];
 }
 
 #pragma mark - KVO
@@ -481,9 +481,9 @@ typedef enum {
         [[[UIAlertView alloc] initWithTitle:@"Playback Unavailable" message:@"Playback is not available while downloading." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 		return;
     }
-	if (![[KATGDataStore sharedStore] isReachableViaWifi] && ![self.show.downloaded boolValue])
+	if (![[KATGDataStore sharedStore] isReachable] && ![self.show.downloaded boolValue])
 	{
-		[[[UIAlertView alloc] initWithTitle:@"Streaming Unavailable" message:@"Please connected to the internet via WiFi in order to listen." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+		[[[UIAlertView alloc] initWithTitle:@"Streaming Unavailable" message:@"Please connected to the internet in order to listen." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 		return;
 	}
 	if (![self isCurrentShow])

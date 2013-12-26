@@ -44,8 +44,8 @@ extern NSString * const KATGDataStoreConnectivityFailureNotification;
 - (void)pollForData;
 
 // Observable
-extern NSString *const kKATGDataStoreIsReachableViaWifiKey;
-- (BOOL)isReachableViaWifi;
+extern NSString *const kKATGDataStoreIsReachableKey;
+- (BOOL)isReachable;
 
 // This is an indicator that as of the last check in with the server,
 // the show is believed to be live. It is not a guarantee that

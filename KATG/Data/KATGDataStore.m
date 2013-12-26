@@ -63,7 +63,7 @@
 #define EpisodeAudioLog(fmt, ...) 
 #endif //DEBUG
 
-NSString *const kKATGDataStoreIsReachableViaWifiKey = @"isReachableViaWifi";
+NSString *const kKATGDataStoreIsReachableKey = @"isReachable";
 
 NSString * const KATGDataStoreConnectivityRestoredNotification = @"KATGDataStoreConnectivityRestoredNotification";
 NSString * const KATGDataStoreConnectivityFailureNotification = @"KATGDataStoreConnectivityFailureNotification";
@@ -92,7 +92,7 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 
 // Reachability
 @property (nonatomic) Reachability *reachabilityForConnectionType;
-@property (nonatomic, getter=isReachableViaWifi) BOOL reachableViaWifi;
+@property (nonatomic, getter=isReachable) BOOL reachable;
 @property (nonatomic) KATGReachabilityOperation *reachabilityOp;
 
 //
@@ -256,21 +256,21 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 {
 	NSParameterAssert([NSThread isMainThread]);
 	NSParameterAssert([[note object] isEqual:self.reachabilityForConnectionType]);
-	self.reachableViaWifi = [self.reachabilityForConnectionType isReachableViaWiFi];
+	self.reachable = [self.reachabilityForConnectionType isReachable];
 }
 
-+ (BOOL)automaticallyNotifiesObserversOfReachableViaWifi
++ (BOOL)automaticallyNotifiesObserversOfReachable
 {
 	return NO;
 }
 
-- (void)setReachableViaWifi:(BOOL)reachableViaWifi
+- (void)setReachable:(BOOL)reachable
 {
-	if (_reachableViaWifi != reachableViaWifi)
+	if (_reachable != reachable)
 	{
-		[self willChangeValueForKey:kKATGDataStoreIsReachableViaWifiKey];
-		_reachableViaWifi = reachableViaWifi;
-		[self didChangeValueForKey:kKATGDataStoreIsReachableViaWifiKey];
+		[self willChangeValueForKey:kKATGDataStoreIsReachableKey];
+		_reachable = reachable;
+		[self didChangeValueForKey:kKATGDataStoreIsReachableKey];
 	}
 }
 
