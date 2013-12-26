@@ -19,6 +19,8 @@
     
     if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
         [self setNeedsStatusBarAppearanceUpdate];
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
 }
 
 - (void)didReceiveMemoryWarning {
