@@ -11,26 +11,9 @@
 	<key>CFBundleGetInfoString</key>
 	<string></string>
 	<key>CFBundleIcons</key>
-	<dict>
-		<key>CFBundlePrimaryIcon</key>
-		<dict>
-			<key>CFBundleIconFiles</key>
-			<array>
-				<string>icon29.png</string>
-				<string>icon29@2x.png</string>
-				<string>icon50.png</string>
-				<string>icon50@2x.png</string>
-				<string>icon57.png</string>
-				<string>icon57@2x.png</string>
-				<string>icon60.png</string>
-				<string>icon60@2x.png</string>
-				<string>icon72.png</string>
-				<string>icon72@2x.png</string>
-			</array>
-			<key>UIPrerenderedIcon</key>
-			<false/>
-		</dict>
-	</dict>
+	<dict/>
+	<key>CFBundleIcons~ipad</key>
+	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>com.KATG</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -55,6 +38,8 @@
 	<array>
 		<string>audio</string>
 	</array>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

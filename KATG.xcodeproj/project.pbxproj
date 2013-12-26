@@ -60,6 +60,7 @@
 		0198AA35185F3C240063947C /* KATGScheduleItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */; };
 		0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198AB93186077320063947C /* KATGYouTubeTableCell.m */; };
 		0198AB96186077850063947C /* KATGYouTubeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AB95186077850063947C /* KATGYouTubeTableCell.xib */; };
+		01BCE80C186C208600F096EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BCE80B186C208600F096EF /* Images.xcassets */; };
 		01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */; };
 		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
@@ -294,6 +295,7 @@
 		0198AB92186077320063947C /* KATGYouTubeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYouTubeTableCell.h; path = "View Controllers/KATGYouTubeTableCell.h"; sourceTree = "<group>"; };
 		0198AB93186077320063947C /* KATGYouTubeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeTableCell.m; path = "View Controllers/KATGYouTubeTableCell.m"; sourceTree = "<group>"; };
 		0198AB95186077850063947C /* KATGYouTubeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeTableCell.xib; path = "View Controllers/KATGYouTubeTableCell.xib"; sourceTree = "<group>"; };
+		01BCE80B186C208600F096EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveCell.xib; path = "Custom Views/KATGLiveCell.xib"; sourceTree = "<group>"; };
 		01D0CE14185C17C600EB88B3 /* LiveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LiveBackground.png; path = "Supporting Files/Images/Live/LiveBackground.png"; sourceTree = "<group>"; };
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
@@ -984,6 +986,7 @@
 				910899BD15EAE44C00FB57C3 /* Data */,
 				91089D7D15EAEAD600FB57C3 /* MediaPlayback */,
 				910899C115EAE58600FB57C3 /* ThirdParty */,
+				01BCE80B186C208600F096EF /* Images.xcassets */,
 				9108996B15EAE15500FB57C3 /* Supporting Files */,
 			);
 			path = KATG;
@@ -1319,7 +1322,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = KATG;
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Doug Russell";
 			};
 			buildConfigurationList = 9108995815EAE15500FB57C3 /* Build configuration list for PBXProject "KATG" */;
@@ -1412,6 +1415,7 @@
 				9131561217717CE000475CAE /* Entitlements.plist in Resources */,
 				91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */,
 				91F45A17177F881D0091AFDA /* icon72@2x.png in Resources */,
+				01BCE80C186C208600F096EF /* Images.xcassets in Resources */,
 				91F45A18177F881D0091AFDA /* icon72.png in Resources */,
 				019568B8185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib in Resources */,
 				91F45A19177F881D0091AFDA /* icon60@2x.png in Resources */,
@@ -1625,6 +1629,8 @@
 		9108999215EAE15500FB57C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolas Rostov (XAZ9P6TUJV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
@@ -1639,6 +1645,8 @@
 		9108999315EAE15500FB57C3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Nicolas Rostov (XAZ9P6TUJV)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
