@@ -56,6 +56,7 @@
 #import "KATGAlertPanel.h"
 #import "KATGButton.h"
 
+
 #if DEBUG && 0
 #define RemoteEventsLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
@@ -128,6 +129,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    
     if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
         [self setNeedsStatusBarAppearanceUpdate];
     

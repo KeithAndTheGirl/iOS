@@ -23,6 +23,7 @@
 #import "KATGMainViewController.h"
 #import "UIColor+KATGColors.h"
 #import "KATGPushRegistration.h"
+#import "KATGWelcomeViewController.h"
 
 @protocol KATGNavBar7 <NSObject>
 
@@ -43,7 +44,7 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 	self.window.backgroundColor = [UIColor blackColor];
 	[self setupAppearance];
-	self.window.rootViewController = [KATGMainViewController new];
+	self.window.rootViewController = [[KATGMainViewController alloc] init];
 	[self.window makeKeyAndVisible];
 	
 	CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
@@ -85,6 +86,17 @@
 									 UITextAttributeFont:[UIFont boldSystemFontOfSize:0.0f]
 	 }];
 	
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"run_count"] intValue];
+    if(i < 3) {
+        KATGWelcomeViewController *welcomeController = [[KATGWelcomeViewController alloc] initWithNibName:@"KATGWelcomeViewController" bundle:nil];
+        welcomeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        [self.window.rootViewController presentViewController:welcomeController animated:NO completion:^{
+            [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:i+1] forKey:@"run_count"];
+        }];
+    }
 }
 
 @end
