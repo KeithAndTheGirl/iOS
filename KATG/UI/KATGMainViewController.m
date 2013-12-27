@@ -211,9 +211,9 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	if ([[KATGPlaybackManager sharedManager] currentShow] &&
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
 	{
-		KATGButton *nowPlayingButton = [[KATGButton alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 100.0f, 44.0f)];
-		[nowPlayingButton setTitle:@"Now Playing" forState:UIControlStateNormal];
-		nowPlayingButton.contentEdgeInsets = UIEdgeInsetsMake(4.0f, 0.0f, 4.0f, 0.0f);
+		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+		nowPlayingButton.frame = CGRectMake(0.0f, 0.0f, 320.0f, 48.0f);
 		[nowPlayingButton addTarget:self action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
         
         cell.tableView.tableHeaderView = nowPlayingButton;
@@ -539,9 +539,9 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    [self configureNavBar];
 	if (context == KATGCurrentShowObserverContext)
 	{
-		[self configureNavBar];
 	}
 	else if (context == KATGIsLiveObserverContext)
 	{

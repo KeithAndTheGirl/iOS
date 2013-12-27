@@ -61,6 +61,8 @@
 		0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198AB93186077320063947C /* KATGYouTubeTableCell.m */; };
 		0198AB96186077850063947C /* KATGYouTubeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AB95186077850063947C /* KATGYouTubeTableCell.xib */; };
 		01BCE80C186C208600F096EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BCE80B186C208600F096EF /* Images.xcassets */; };
+		01BCE80F186CFEA000F096EF /* NowPlaying.png in Resources */ = {isa = PBXBuildFile; fileRef = 01BCE80D186CFEA000F096EF /* NowPlaying.png */; };
+		01BCE810186CFEA000F096EF /* NowPlaying@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01BCE80E186CFEA000F096EF /* NowPlaying@2x.png */; };
 		01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */; };
 		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
@@ -296,6 +298,8 @@
 		0198AB93186077320063947C /* KATGYouTubeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeTableCell.m; path = "View Controllers/KATGYouTubeTableCell.m"; sourceTree = "<group>"; };
 		0198AB95186077850063947C /* KATGYouTubeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeTableCell.xib; path = "View Controllers/KATGYouTubeTableCell.xib"; sourceTree = "<group>"; };
 		01BCE80B186C208600F096EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		01BCE80D186CFEA000F096EF /* NowPlaying.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = NowPlaying.png; path = "Supporting Files/Images/NowPlaying.png"; sourceTree = "<group>"; };
+		01BCE80E186CFEA000F096EF /* NowPlaying@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "NowPlaying@2x.png"; path = "Supporting Files/Images/NowPlaying@2x.png"; sourceTree = "<group>"; };
 		01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveCell.xib; path = "Custom Views/KATGLiveCell.xib"; sourceTree = "<group>"; };
 		01D0CE14185C17C600EB88B3 /* LiveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LiveBackground.png; path = "Supporting Files/Images/Live/LiveBackground.png"; sourceTree = "<group>"; };
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
@@ -892,6 +896,8 @@
 		22AFD3E2164970B4007A88F4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				01BCE80D186CFEA000F096EF /* NowPlaying.png */,
+				01BCE80E186CFEA000F096EF /* NowPlaying@2x.png */,
 				012FEE141857E6A40073AEAA /* ControlsBackground.png */,
 				012FEE151857E6A40073AEAA /* ControlsBackground@2x.png */,
 				012FED891857DC850073AEAA /* DownloadIcon.png */,
@@ -1386,6 +1392,7 @@
 				0111A7761856A08600A3F8D5 /* Schedule.png in Resources */,
 				9115C127172E13E5002942B6 /* gear@2x.png in Resources */,
 				9115C128172E13E5002942B6 /* live-tab-icon.png in Resources */,
+				01BCE80F186CFEA000F096EF /* NowPlaying.png in Resources */,
 				9115C129172E13E5002942B6 /* live-tab-icon@2x.png in Resources */,
 				012B4EFD18577F8400B59FC5 /* KATGShowCell.xib in Resources */,
 				9115C12A172E13E5002942B6 /* schedule-tab-icon.png in Resources */,
@@ -1433,6 +1440,7 @@
 				0111A76918569D9D00A3F8D5 /* Episodes@2x.png in Resources */,
 				91F45A20177F881D0091AFDA /* icon29@2x.png in Resources */,
 				91F45A21177F881D0091AFDA /* iTunesArtwork in Resources */,
+				01BCE810186CFEA000F096EF /* NowPlaying@2x.png in Resources */,
 				91EC31B4177FCF0C00151999 /* Default-Portrait@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
