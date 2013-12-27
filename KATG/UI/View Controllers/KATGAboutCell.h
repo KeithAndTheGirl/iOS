@@ -22,8 +22,16 @@
 
 extern NSString *const kKATGAboutTableViewCellIdentifier;
 
-@interface KATGAboutCell : UICollectionViewCell
+@interface KATGAboutCell : UICollectionViewCell {
+    IBOutlet UIView *content;
+    UIScrollView *scrollView;
+}
 
-@property (nonatomic, readonly) UITableView *tableView;
+-(IBAction)facebookAction:(id)sender;
+-(IBAction)twitterAction:(id)sender;
+-(IBAction)keithAction:(id)sender;
+-(IBAction)chemdaAction:(id)sender;
+-(IBAction)guideAction:(id)sender;
+
 
 @end

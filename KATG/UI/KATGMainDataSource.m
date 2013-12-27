@@ -128,7 +128,8 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
               forCellWithReuseIdentifier:kKATGLiveCellIdentifier];
 		[_mainCollectionView registerClass:[KATGArchiveCell class] forCellWithReuseIdentifier:kKATGArchiveCellIdentifier];
 		[_mainCollectionView registerClass:[KATGYoutubeCell class] forCellWithReuseIdentifier:kKATGYoutubeCellIdentifier];
-		[_mainCollectionView registerClass:[KATGAboutCell class] forCellWithReuseIdentifier:kKATGAboutCellIdentifier];
+//		[_mainCollectionView registerClass:[KATGAboutCell class] forCellWithReuseIdentifier:kKATGAboutCellIdentifier];
+        [_mainCollectionView registerNib:[UINib nibWithNibName:@"KATGAboutCell" bundle:nil] forCellWithReuseIdentifier:kKATGAboutCellIdentifier];
 	}
 }
 

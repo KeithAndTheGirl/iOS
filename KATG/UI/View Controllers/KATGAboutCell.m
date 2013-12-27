@@ -22,72 +22,59 @@
 #import "KATGContentContainerView.h"
 #import "KATGScheduleItemTableViewCell.h"
 
-NSString *const kKATGAboutTableViewCellIdentifier = @"kKATGAboutTableViewCellIdentifier";
-
-@interface KATGAboutCell () <UITableViewDataSource, UITableViewDelegate>
-@property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UITableView *tableView;
-
-@end
-
 @implementation KATGAboutCell
 
-- (id)initWithFrame:(CGRect)frame
-{
-	self = [super initWithFrame:frame];
-	if (self) 
-	{
-		_tableView = [[UITableView alloc] initWithFrame:self.contentView.bounds style:UITableViewStylePlain];
-		_tableView.allowsSelection = NO;
-		_tableView.rowHeight = 64.0f;
-		_tableView.separatorColor = [UIColor colorWithWhite:0.8f alpha:1.0f];
-		[_tableView registerClass:[KATGScheduleItemTableViewCell class] forCellReuseIdentifier:kKATGAboutTableViewCellIdentifier];
-		_tableView.backgroundColor = [UIColor clearColor];
-		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        _tableView.dataSource = self;
-        _tableView.delegate = self;
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
-            _tableView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
-            _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
-        }
-        else {
-            _tableView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
-            _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 56, 0);
-        }
-		[self.contentView addSubview:_tableView];
-	}
-	return self;
+-(void)awakeFromNib {
+    [content removeFromSuperview];
+    
+    scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    [self.contentView addSubview:scrollView];
+    [scrollView addSubview:content];
+    scrollView.contentSize = content.frame.size;
+    scrollView.autoresizingMask = 15;
+    self.autoresizingMask = 15;
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
+        scrollView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
+        scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
+        scrollView.contentOffset = CGPointMake(0, -20);
+    }
+    else {
+        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 56, 0);
+        scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 56, 0);
+    }    
 }
 
-- (void)dealloc
-{
-	_tableView.delegate = nil;
-	_tableView.dataSource = nil;
+-(void)layoutSubviews {
+    [super layoutSubviews];
+    scrollView.frame = self.bounds;
+    content.frame = CGRectMake(0, 0, content.frame.size.width, content.frame.size.height);
 }
 
-- (void)prepareForReuse
-{
+- (void)prepareForReuse {
 	[super prepareForReuse];
-	[self.tableView reloadData];
+    NSLog(@"%@", NSStringFromCGRect(scrollView.frame));
 }
 
-- (void)layoutSubviews
-{
-	[super layoutSubviews];
+#pragma mark Actions
+-(IBAction)facebookAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://facebook.com/keithandthegirl"]];
 }
 
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-	return 15;
+-(IBAction)twitterAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/keithandthegirl"]];
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kKATGAboutTableViewCellIdentifier forIndexPath:indexPath];
-	cell.textLabel.text = @"About cell";
-	return cell;
+-(IBAction)keithAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.keithandthegirl.com/hosts.aspx#keith"]];
 }
 
+-(IBAction)chemdaAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.keithandthegirl.com/hosts.aspx#chemda"]];
+}
+
+-(IBAction)guideAction:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://ultimatepodcastingguide.com/"]];
+}
 
 @end

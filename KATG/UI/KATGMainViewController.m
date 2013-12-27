@@ -119,7 +119,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 #pragma mark - View Life Cycle
 -(UIStatusBarStyle)preferredStatusBarStyle {
-    if([self.tabBar selectedIndex] == 1)
+    if([self.tabBar selectedIndex] == KATGSectionLive || [self.tabBar selectedIndex] == KATGSectionAbout)
         return UIStatusBarStyleLightContent;
     else
         return UIStatusBarStyleDefault;
