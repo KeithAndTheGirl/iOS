@@ -33,6 +33,7 @@
         <attribute name="downloaded" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="episode_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="file_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="forum_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="media_url" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>

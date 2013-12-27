@@ -53,6 +53,7 @@ extern NSString *const KATGShowEpisodeIDAttributeName;
 @property (nonatomic, retain) NSNumber * episode_id;
 @property (nonatomic, retain) NSString * desc;
 @property (nonatomic, retain) NSString * media_url;
+@property (nonatomic, retain) NSString * forum_url;
 @property (nonatomic, retain) NSNumber * number;
 @property (nonatomic, retain) NSDate * timestamp;
 @property (nonatomic, retain) NSNumber * access;

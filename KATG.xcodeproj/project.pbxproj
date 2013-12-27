@@ -17,6 +17,9 @@
 		0111A7771856A08600A3F8D5 /* Schedule@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7711856A08600A3F8D5 /* Schedule@2x.png */; };
 		0111A7781856A08600A3F8D5 /* Youtube.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7721856A08600A3F8D5 /* Youtube.png */; };
 		0111A7791856A08600A3F8D5 /* Youtube@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0111A7731856A08600A3F8D5 /* Youtube@2x.png */; };
+		01199AEC186D7EDF003CFF16 /* KATGForumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01199AEB186D7EDF003CFF16 /* KATGForumCell.m */; };
+		01199AEF186D814F003CFF16 /* comments.png in Resources */ = {isa = PBXBuildFile; fileRef = 01199AED186D814F003CFF16 /* comments.png */; };
+		01199AF0186D814F003CFF16 /* comments@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01199AEE186D814F003CFF16 /* comments@2x.png */; };
 		012B4EFD18577F8400B59FC5 /* KATGShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */; };
 		012B4F221857A2ED00B59FC5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4F001857A2ED00B59FC5 /* AFHTTPRequestOperation.m */; };
 		012B4F231857A2ED00B59FC5 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4F021857A2ED00B59FC5 /* AFHTTPRequestOperationManager.m */; };
@@ -262,6 +265,10 @@
 		0111A7711856A08600A3F8D5 /* Schedule@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Schedule@2x.png"; sourceTree = "<group>"; };
 		0111A7721856A08600A3F8D5 /* Youtube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Youtube.png; sourceTree = "<group>"; };
 		0111A7731856A08600A3F8D5 /* Youtube@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Youtube@2x.png"; sourceTree = "<group>"; };
+		01199AEA186D7EDF003CFF16 /* KATGForumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGForumCell.h; sourceTree = "<group>"; };
+		01199AEB186D7EDF003CFF16 /* KATGForumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGForumCell.m; sourceTree = "<group>"; };
+		01199AED186D814F003CFF16 /* comments.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = comments.png; path = "Supporting Files/Images/comments.png"; sourceTree = "<group>"; };
+		01199AEE186D814F003CFF16 /* comments@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "comments@2x.png"; path = "Supporting Files/Images/comments@2x.png"; sourceTree = "<group>"; };
 		012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGShowCell.xib; path = ../KATGShowCell.xib; sourceTree = "<group>"; };
 		012B4EFF1857A2ED00B59FC5 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		012B4F001857A2ED00B59FC5 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
@@ -798,6 +805,8 @@
 				22C508501676F3D500D44217 /* KATGShowSectionTitleCell.m */,
 				22D6BBDC171629A100A48B35 /* KATGDownloadEpisodeCell.h */,
 				22D6BBDD171629A100A48B35 /* KATGDownloadEpisodeCell.m */,
+				01199AEA186D7EDF003CFF16 /* KATGForumCell.h */,
+				01199AEB186D7EDF003CFF16 /* KATGForumCell.m */,
 				228D43E91730737A00FA94FE /* KATGShowCell.h */,
 				228D43EA1730737A00FA94FE /* KATGShowCell.m */,
 				228D43EC173073AB00FA94FE /* KATGInsetView.h */,
@@ -956,6 +965,8 @@
 		22AFD3E2164970B4007A88F4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				01199AED186D814F003CFF16 /* comments.png */,
+				01199AEE186D814F003CFF16 /* comments@2x.png */,
 				01BCE830186D1D6F00F096EF /* get_started.png */,
 				01BCE831186D1D6F00F096EF /* get_started@2x.png */,
 				01BCE832186D1D6F00F096EF /* indicators1.png */,
@@ -1467,6 +1478,7 @@
 				0111A7791856A08600A3F8D5 /* Youtube@2x.png in Resources */,
 				0111A7741856A08600A3F8D5 /* About.png in Resources */,
 				9115C11E172E13E5002942B6 /* play.png in Resources */,
+				01199AF0186D814F003CFF16 /* comments@2x.png in Resources */,
 				9115C11F172E13E5002942B6 /* play@2x.png in Resources */,
 				012FED781857A9920073AEAA /* ArrowNext.png in Resources */,
 				012FED8B1857DC850073AEAA /* DownloadIcon.png in Resources */,
@@ -1491,6 +1503,7 @@
 				9115C126172E13E5002942B6 /* gear.png in Resources */,
 				0111A7761856A08600A3F8D5 /* Schedule.png in Resources */,
 				9115C127172E13E5002942B6 /* gear@2x.png in Resources */,
+				01199AEF186D814F003CFF16 /* comments.png in Resources */,
 				9115C128172E13E5002942B6 /* live-tab-icon.png in Resources */,
 				01BCE80F186CFEA000F096EF /* NowPlaying.png in Resources */,
 				9115C129172E13E5002942B6 /* live-tab-icon@2x.png in Resources */,
@@ -1613,6 +1626,7 @@
 				22AF5B9A161018F1007EA381 /* KATGChatViewController.m in Sources */,
 				227270F51648BFB7006E4FB7 /* KATGTabBar.m in Sources */,
 				012B4F311857A2ED00B59FC5 /* UIWebView+AFNetworking.m in Sources */,
+				01199AEC186D7EDF003CFF16 /* KATGForumCell.m in Sources */,
 				227270FB1648C288006E4FB7 /* KATGTabBarItem.m in Sources */,
 				227271011648C9F4006E4FB7 /* KATGTabBarButtonItem.m in Sources */,
 				227271041648CDFA006E4FB7 /* KATGTabBarTabItem.m in Sources */,

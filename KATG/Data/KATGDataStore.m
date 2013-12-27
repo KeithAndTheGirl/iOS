@@ -174,7 +174,7 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 - (NSURL *)storeURL
 {
 	NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-	return [directoryURL URLByAppendingPathComponent:@"katg4.sqlite"];
+	return [directoryURL URLByAppendingPathComponent:@"katg5.sqlite"];
 }
 
 - (NSManagedObjectContext *)childContext
@@ -637,6 +637,7 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 				[noteLines deleteCharactersInRange:NSMakeRange([noteLines length] - 1, 1)];
 				show.desc = [noteLines copy];
 			}
+            show.forum_url = episodeDetails[@"forum_url"];
 			[self saveChildContext:context completion:nil];
 		}
 	}];

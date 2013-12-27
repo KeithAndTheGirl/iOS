@@ -28,6 +28,7 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @dynamic title;
 @dynamic episode_id;
 @dynamic desc;
+@dynamic forum_url;
 @dynamic number;
 @dynamic timestamp;
 @dynamic access;

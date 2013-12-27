@@ -31,6 +31,7 @@
 #import "KATGShowImagesTableViewCell.h"
 #import "KATGShowSectionTitleCell.h"
 #import "KATGDownloadEpisodeCell.h"
+#import "KATGForumCell.h"
 #import "KATGPlaybackManager.h"
 #import "KATGDataStore.h"
 #import "KATGImagesViewController.h"
@@ -44,6 +45,7 @@ static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContex
 #define kKATGShowDetailsSectionCellIdentifierDescription @"kKATGShowDetailsSectionCellIdentifierDescription"
 #define kKATGShowDetailsSectionTitleCellIdentifier @"kKATGShowDetailsSectionTitleCellIdentifier"
 #define kKATGShowDetailsSectionDownloadCellIdentifier @"kKATGShowDetailsSectionDownloadCellIdentifier"
+#define kKATGShowDetailsSectionForumCellIdentifier @"kKATGShowDetailsSectionForumCellIdentifier"
 
 typedef enum {
 	KATGShowDetailsSectionGuests,
@@ -54,7 +56,7 @@ typedef enum {
 
 #define KATGShowDetailsSectionMaxCount KATGShowDetailsSectionDownload+1
 
-@interface KATGShowViewController () <UITableViewDelegate, UITableViewDataSource, KATGShowImagesCellDelegate, KATGImagesViewControllerDelegate, KATGDownloadEpisodeCellDelegate, UIActionSheetDelegate>
+@interface KATGShowViewController () <UITableViewDelegate, UITableViewDataSource, KATGShowImagesCellDelegate, KATGImagesViewControllerDelegate, KATGDownloadEpisodeCellDelegate, UIActionSheetDelegate, KATGForumCellDelegate>
 {
 	BOOL positionSliderIsDragging;
 }
@@ -108,7 +110,7 @@ typedef enum {
 	[self.tableView registerClass:[KATGShowDescriptionCell class] forCellReuseIdentifier:kKATGShowDetailsSectionCellIdentifierDescription];
 	[self.tableView registerClass:[KATGShowSectionTitleCell class] forCellReuseIdentifier:kKATGShowDetailsSectionTitleCellIdentifier];
 	[self.tableView registerClass:[KATGDownloadEpisodeCell class] forCellReuseIdentifier:kKATGShowDetailsSectionDownloadCellIdentifier];
-	
+	[self.tableView registerClass:[KATGForumCell class] forCellReuseIdentifier:kKATGShowDetailsSectionForumCellIdentifier];
 
 	[self.controlsView.skipBackButton addTarget:self action:@selector(backButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	[self.controlsView.playButton addTarget:self action:@selector(playButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
@@ -209,7 +211,7 @@ typedef enum {
 		case KATGShowDetailsSectionImages:
 			return [self.show.images count]?2:0;
 		case KATGShowDetailsSectionDownload:
-			return 1;
+			return 2;
 	}
 	return 0;
 }
@@ -306,30 +308,40 @@ typedef enum {
 			break;
 		case KATGShowDetailsSectionDownload:
 		{
-			KATGDownloadEpisodeCell *downloadCell = [tableView dequeueReusableCellWithIdentifier:kKATGShowDetailsSectionDownloadCellIdentifier forIndexPath:indexPath];
-			downloadCell.delegate = self;
-			if ([[self.show downloaded] boolValue])
-			{
-				downloadCell.state = KATGDownloadEpisodeCellStateDownloaded;
-			}
-			else if (self.downloadToken)
-			{
-				[self downloadButtonPressed:downloadCell];
-			}
-			else if (![[KATGDataStore sharedStore] isReachable])
-			{
-				downloadCell.state = KATGDownloadEpisodeCellStateDisabled;
-			}
-            
-            if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
-                [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading) {
-                downloadCell.downloadButton.enabled = NO;
+            if(indexPath.row == 0) {
+                KATGForumCell *forumCell = [tableView dequeueReusableCellWithIdentifier:kKATGShowDetailsSectionForumCellIdentifier forIndexPath:indexPath];
+                forumCell.delegate = self;
+                cell = forumCell;
+                cell.contentView.backgroundColor = [UIColor whiteColor];
             }
-            else {
-                downloadCell.downloadButton.enabled = YES;
+            else if(indexPath.row == 1) {
+                KATGDownloadEpisodeCell *downloadCell = [tableView dequeueReusableCellWithIdentifier:kKATGShowDetailsSectionDownloadCellIdentifier forIndexPath:indexPath];
+                downloadCell.delegate = self;
+                if ([[self.show downloaded] boolValue])
+                {
+                    downloadCell.state = KATGDownloadEpisodeCellStateDownloaded;
+                }
+                else if (self.downloadToken)
+                {
+                    [self downloadButtonPressed:downloadCell];
+                }
+                else if (![[KATGDataStore sharedStore] isReachable])
+                {
+                    downloadCell.state = KATGDownloadEpisodeCellStateDisabled;
+                }
+                
+                if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
+                    [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading) {
+                    downloadCell.downloadButton.enabled = NO;
+                }
+                else {
+                    downloadCell.downloadButton.enabled = YES;
+                }
+                if([self.show.forum_url length] == 0)
+                    downloadCell.showTopRule = YES;
+                cell = downloadCell;
+                cell.contentView.backgroundColor = [UIColor whiteColor];
             }
-			cell = downloadCell;
-            cell.contentView.backgroundColor = [UIColor whiteColor];
 			break;
 		}
 	}
@@ -363,6 +375,19 @@ typedef enum {
 			}
 			return 24.0f;
 		case KATGShowDetailsSectionDownload:
+            if (indexPath.row == 0)
+			{
+				if([self.show.forum_url length] > 0) {
+                    return 64;
+                }
+                else {
+                    return 0;
+                }
+			}
+			else if (indexPath.row == 1)
+			{
+                return 64.0f;
+			}
 			return 64.0f;
 		default:
 			return 44.0f;
@@ -549,7 +574,7 @@ typedef enum {
     [self.controlsView setNeedsLayout];
     
     //disable download/delete show button if playing
-    KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGShowDetailsSectionDownload]];
+    KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:KATGShowDetailsSectionDownload]];
     if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading) {
         downloadCell.downloadButton.enabled = NO;
@@ -751,7 +776,10 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 	
 }
 
-#pragma mark - 
+#pragma mark -
+- (void)forumButtonPressed:(KATGForumCell *)cell {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.show.forum_url]];
+}
 
 - (void)downloadButtonPressed:(KATGDownloadEpisodeCell *)cell
 {

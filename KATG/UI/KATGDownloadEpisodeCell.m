@@ -33,7 +33,7 @@
 	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
 	if (self) 
 	{
-		self.showTopRule = YES;
+		self.showTopRule = NO;
 		
 		_downloadButton = [KATGButton new];
 		_downloadButton.backgroundColor = [UIColor colorWithRed:243./255 green:245./255 blue:246./255 alpha:1];
