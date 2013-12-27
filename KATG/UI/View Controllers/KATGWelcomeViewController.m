@@ -10,6 +10,10 @@
 
 @implementation KATGWelcomeViewController
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     UIImageView *imageView1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"welcome1.png"]];
