@@ -89,12 +89,12 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    int i = [[[NSUserDefaults standardUserDefaults] valueForKey:@"run_count"] intValue];
-    if(i < 3) {
+    BOOL shown = [[[NSUserDefaults standardUserDefaults] valueForKey:@"welcome_shown"] boolValue];
+    if(!shown) {
         KATGWelcomeViewController *welcomeController = [[KATGWelcomeViewController alloc] initWithNibName:@"KATGWelcomeViewController" bundle:nil];
         welcomeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         [self.window.rootViewController presentViewController:welcomeController animated:NO completion:^{
-            [[NSUserDefaults standardUserDefaults] setValue:[NSNumber numberWithInt:i+1] forKey:@"run_count"];
+            [[NSUserDefaults standardUserDefaults] setValue:@YES forKey:@"welcome_shown"];
         }];
     }
 }
