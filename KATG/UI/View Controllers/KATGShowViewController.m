@@ -454,7 +454,7 @@ typedef enum {
 	}
 	if (![self isCurrentShow])
 	{
-/*        Float64 currentTime = [self.show.playState.lastPlaybackTime floatValue];
+        Float64 currentTime = [self.show.playState.lastPlaybackTime floatValue];
         if (isnan(currentTime))
         {
             currentTime = 0.0;
@@ -465,7 +465,7 @@ typedef enum {
             duration = 1.0;
         }
         self.controlsView.positionSlider.value = currentTime;
-        self.controlsView.positionSlider.maximumValue = duration; */
+        self.controlsView.positionSlider.maximumValue = duration;
 		return;
 	}
 	if ([keyPath isEqualToString:KATGCurrentTimeObserverKey])
@@ -473,15 +473,23 @@ typedef enum {
 		if (!positionSliderIsDragging)
 		{
 			Float64 currentTime = CMTimeGetSeconds([[KATGPlaybackManager sharedManager] currentTime]);
-			if (isnan(currentTime))
-			{
-				currentTime = 0.0;
-			}
+            if (isnan(currentTime))
+            {
+                currentTime = [self.show.playState.lastPlaybackTime floatValue];
+            }
+            if (isnan(currentTime))
+            {
+                currentTime = 0.0;
+            }
 			Float64 duration = CMTimeGetSeconds([[KATGPlaybackManager sharedManager] duration]);
 			if (isnan(duration))
 			{
-				duration = 1.0;
-			}
+				duration = [self.show.playState.duration floatValue];
+            }
+            if (isnan(duration))
+            {
+                duration = 1.0;
+            }
 			self.controlsView.positionSlider.value = currentTime;
 			self.controlsView.positionSlider.maximumValue = duration;
 		}
