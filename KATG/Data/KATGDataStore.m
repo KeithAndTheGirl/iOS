@@ -994,6 +994,7 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 
 - (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(BOOL,NSArray*))completion
 {
+    comment = [comment stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary: @{@"HiddenVoxbackId" : @"3", @"HiddenMixerCode" : @"IEOSE"}];
     [parameters setObject:comment?comment:@"" forKey:@"Comment"];
     [parameters setObject:name?name:@"" forKey:@"Name"];
