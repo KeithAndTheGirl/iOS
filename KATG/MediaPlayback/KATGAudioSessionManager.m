@@ -32,7 +32,7 @@ static void ConfigurePlaybackAudioSession(void)
 static void ConfigureAmbientAudioSession(void)
 {
 	AVAudioSession *session = [AVAudioSession sharedInstance];
-	[session setCategory:AVAudioSessionCategoryAmbient error:nil];
+	[session setCategory:AVAudioSessionCategoryPlayback error:nil];
 	[session setActive:YES error:nil];
 }
 

@@ -44,17 +44,14 @@
     }
 }
 
-- (BOOL)canBecomeFirstResponder {
-    return YES;
-}
-
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    self.npInfoRemember = [[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo];
     NSMutableDictionary *episodeInfo = [NSMutableDictionary dictionary];
 	episodeInfo[MPMediaItemPropertyArtist] = @"Keith and The Girl";
 	episodeInfo[MPMediaItemPropertyPodcastTitle] = @"Keith and The Girl";
-	episodeInfo[MPMediaItemPropertyMediaType] = @(MPMediaTypePodcast);
+	episodeInfo[MPMediaItemPropertyMediaType] = @(MPMediaTypeAnyVideo);
 		episodeInfo[MPMediaItemPropertyTitle] = self.dataDictionary[@"title"];
 		episodeInfo[MPMediaItemPropertyPlaybackDuration] = self.dataDictionary[@"duration"];
 	UIImage *image = [UIImage imageNamed:@"iTunesArtwork"];
@@ -67,10 +64,6 @@
 		}
 	}
 	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:episodeInfo];
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-    [self becomeFirstResponder];
-    
     
     webView.allowsInlineMediaPlayback=YES;
     webView.mediaPlaybackRequiresUserAction=NO;
@@ -93,8 +86,6 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-    [[UIApplication sharedApplication] endReceivingRemoteControlEvents];
-    [self resignFirstResponder];
     [super viewWillDisappear:animated];
 }
 
@@ -104,6 +95,9 @@
 }
 
 -(IBAction)closeAction:(id)sender {
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:self.npInfoRemember];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic, strong) NSDictionary *dataDictionary;
+@property (nonatomic, strong) NSDictionary *npInfoRemember;
 
 -(IBAction)closeAction:(id)sender;
 

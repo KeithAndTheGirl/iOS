@@ -182,6 +182,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 - (void)seekToTime:(CMTime)currentTime
 {
 	[self.audioPlaybackController seekToTime:currentTime];
+    [self saveCurrentTime];
 }
 
 - (void)play
@@ -325,6 +326,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 			show.playState.lastPlaybackTime = @(time);
 			show.playState.duration = @(duration);
 			[store saveChildContext:context completion:nil];
+            [self setPlaybackInfo:show];
 		}
 	}];
 }
@@ -343,6 +345,10 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	{
 		episodeInfo[MPMediaItemPropertyPlaybackDuration] = @([self durationInSeconds]);
 	}
+    if([self currentTimeInSeconds]) {
+		episodeInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = @([self currentTimeInSeconds]);
+		episodeInfo[MPNowPlayingInfoPropertyPlaybackRate] = @1;
+    }
 	if (currentShow.number)
 	{
 		episodeInfo[MPMediaItemPropertyAlbumTrackNumber] = currentShow.number;

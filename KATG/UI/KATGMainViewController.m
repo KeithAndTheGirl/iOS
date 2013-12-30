@@ -21,7 +21,9 @@
 #import "KATGMainViewController.h"
 
 #import <EventKit/EventKit.h>
+#import <MediaPlayer/MediaPlayer.h>
 
+#import "KATGApplication.h"
 #import "KATGSettingsViewController.h"
 #import "KATGLiveShowFeedbackViewController.h"
 #import "KATGShowViewController.h"
@@ -583,6 +585,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectivityRestored) name:KATGDataStoreConnectivityRestoredNotification object:nil];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(serverIsOffline:) name:KATGLiveShowStreamingServerOfflineNotification object:nil];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveGlobalControlEvent:) name:remoteControlButtonTapped object:nil];
 }
 
 - (void)unregisterNotifications
@@ -597,6 +601,13 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:KATGDataStoreConnectivityRestoredNotification object:nil];
 	
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:KATGLiveShowStreamingServerOfflineNotification object:nil];
+    
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:remoteControlButtonTapped object:nil];
+}
+
+- (void)receiveGlobalControlEvent:(NSNotification *)note
+{
+	[self remoteControlReceivedWithEvent:note.object];
 }
 
 - (void)serverIsOffline:(NSNotification *)note
@@ -656,6 +667,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		RemoteEventsLog(@"beginReceivingRemoteControlEvents");
 		[[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+        
 		self.receivingRemoteEvents = true;
 	}
 }
@@ -674,23 +686,23 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)remoteControlReceivedWithEvent:(UIEvent *)receivedEvent
 {
-	if (receivedEvent.type == UIEventTypeRemoteControl)
+    
+	NSDictionary *npInfo = [[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo];
+	if (receivedEvent.type == UIEventTypeRemoteControl &&
+        [npInfo[MPMediaItemPropertyMediaType] intValue] == MPMediaTypePodcast)
 	{
 		switch (receivedEvent.subtype) {
-			case UIEventSubtypeRemoteControlTogglePlayPause:
-				if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
-				{
+			case UIEventSubtypeRemoteControlPause:
+	
 					if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive)
 					{
 						[self startBackgroundTaskForAudio];
 					}
 					[[KATGPlaybackManager sharedManager] pause];
-				}
-				else
-				{
+				break;
+			case UIEventSubtypeRemoteControlPlay:
 					[[KATGPlaybackManager sharedManager] play];
 					[self endBackgroundTaskForAudio];
-				}
 				break;
 			case UIEventSubtypeRemoteControlPreviousTrack:
 				[[KATGPlaybackManager sharedManager] jumpBackward];

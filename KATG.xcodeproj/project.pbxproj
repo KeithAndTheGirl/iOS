@@ -55,6 +55,7 @@
 		017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920C185561B400E33003 /* TabBarBackground@2x.png */; };
 		017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92101855EA9700E33003 /* KATGYoutubeCell.m */; };
 		017C92141855F48000E33003 /* KATGAboutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92131855F48000E33003 /* KATGAboutCell.m */; };
+		0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192D1D218721C38008B1B56 /* KATGApplication.m */; };
 		01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952342185CA71300B744E1 /* PlayLiveButton.png */; };
 		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
 		01952348185CA71300B744E1 /* StopLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952344185CA71300B744E1 /* StopLiveButton.png */; };
@@ -324,6 +325,8 @@
 		017C92101855EA9700E33003 /* KATGYoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeCell.m; path = "View Controllers/KATGYoutubeCell.m"; sourceTree = "<group>"; };
 		017C92121855F48000E33003 /* KATGAboutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAboutCell.h; path = "View Controllers/KATGAboutCell.h"; sourceTree = "<group>"; };
 		017C92131855F48000E33003 /* KATGAboutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAboutCell.m; path = "View Controllers/KATGAboutCell.m"; sourceTree = "<group>"; };
+		0192D1D118721C38008B1B56 /* KATGApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGApplication.h; sourceTree = "<group>"; };
+		0192D1D218721C38008B1B56 /* KATGApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGApplication.m; sourceTree = "<group>"; };
 		01952342185CA71300B744E1 /* PlayLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayLiveButton.png; path = "Supporting Files/Images/Live/PlayLiveButton.png"; sourceTree = "<group>"; };
 		01952343185CA71300B744E1 /* PlayLiveButton@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "PlayLiveButton@2x.png"; path = "Supporting Files/Images/Live/PlayLiveButton@2x.png"; sourceTree = "<group>"; };
 		01952344185CA71300B744E1 /* StopLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = StopLiveButton.png; path = "Supporting Files/Images/Live/StopLiveButton.png"; sourceTree = "<group>"; };
@@ -1041,7 +1044,6 @@
 			isa = PBXGroup;
 			children = (
 				9108996A15EAE15500FB57C3 /* KATG */,
-				9108996115EAE15500FB57C3 /* Frameworks */,
 				9108995F15EAE15500FB57C3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -1074,11 +1076,14 @@
 				9108997F15EAE15500FB57C3 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		9108996A15EAE15500FB57C3 /* KATG */ = {
 			isa = PBXGroup;
 			children = (
+				0192D1D118721C38008B1B56 /* KATGApplication.h */,
+				0192D1D218721C38008B1B56 /* KATGApplication.m */,
 				9108997315EAE15500FB57C3 /* KATGAppDelegate.h */,
 				9108997415EAE15500FB57C3 /* KATGAppDelegate.m */,
 				9108999B15EAE19B00FB57C3 /* KATGAppDelegate_iPhone.h */,
@@ -1091,6 +1096,7 @@
 				910899C115EAE58600FB57C3 /* ThirdParty */,
 				01BCE80B186C208600F096EF /* Images.xcassets */,
 				9108996B15EAE15500FB57C3 /* Supporting Files */,
+				9108996115EAE15500FB57C3 /* Frameworks */,
 			);
 			path = KATG;
 			sourceTree = "<group>";
@@ -1609,6 +1615,7 @@
 				012B4F2B1857A2ED00B59FC5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				012B4F271857A2ED00B59FC5 /* AFURLConnectionOperation.m in Sources */,
 				91089D1A15EAE58800FB57C3 /* ESEpochDatePropertyMap.m in Sources */,
+				0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */,
 				91089D1B15EAE58800FB57C3 /* ESFloatPropertyMap.m in Sources */,
 				91089D1C15EAE58800FB57C3 /* ESIntPropertyMap.m in Sources */,
 				91089D1D15EAE58800FB57C3 /* ESObjectPropertyMap.m in Sources */,

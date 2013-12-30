@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "KATGAppDelegate_iPhone.h"
 #import "KATGAppDelegate_iPad.h"
+#import "KATGApplication.h"
 
 int main(int argc, char *argv[])
 {
@@ -18,6 +19,6 @@ int main(int argc, char *argv[])
 			appDelegateClass = [KATGAppDelegate_iPad class];
 		else
 			appDelegateClass = [KATGAppDelegate_iPhone class];
-	    return UIApplicationMain(argc, argv, nil, NSStringFromClass(appDelegateClass));
+	    return UIApplicationMain(argc, argv, NSStringFromClass([KATGApplication class]), NSStringFromClass(appDelegateClass));
 	}
 }
