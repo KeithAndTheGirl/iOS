@@ -337,8 +337,7 @@ typedef enum {
                 else {
                     downloadCell.downloadButton.enabled = YES;
                 }
-                if([self.show.forum_url length] == 0)
-                    downloadCell.showTopRule = YES;
+                downloadCell.showTopRule = [self.show.forum_url length] == 0;
                 cell = downloadCell;
                 cell.contentView.backgroundColor = [UIColor whiteColor];
             }
@@ -799,7 +798,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)
 			{
-				KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:KATGShowDetailsSectionDownload]];
+				KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionDownload]];
 				if (downloadCell.state == KATGDownloadEpisodeCellStateDownloading)
 				{
 					downloadCell.progress = progress;
@@ -812,7 +811,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 			if (strongSelf)
 			{
 				strongSelf.downloadToken = nil;
-				KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:KATGShowDetailsSectionDownload]];
+				KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionDownload]];
 				if (downloadCell)
 				{
 					cell.state = KATGDownloadEpisodeCellStateDownloaded;
