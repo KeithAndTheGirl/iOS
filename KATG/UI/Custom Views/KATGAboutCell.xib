@@ -133,7 +133,7 @@ In addition to </string>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <attributedString key="attributedText">
                                 <fragment>
-                                    <string key="content">Keith and The Girl wrote the book on podcasting. Literally. T-bonehey took all the information that they accumulated over years of podcasting ― added tips, interviews, and video tutorials from leading experts ― and released </string>
+                                    <string key="content">Keith and The Girl wrote the book on podcasting. Literally. They took all the information that they accumulated over years of podcasting ― added tips, interviews, and video tutorials from leading experts ― and released </string>
                                     <attributes>
                                         <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
