@@ -12,7 +12,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view clipsSubviews="YES" contentMode="scaleToFill" id="1">
-                    <rect key="frame" x="0.0" y="-744" width="320" height="2056"/>
+                    <rect key="frame" x="0.0" y="-1444" width="320" height="2056"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="about_background.png" id="z5g-Be-whS">
@@ -128,23 +128,23 @@ In addition to </string>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <textView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" usesAttributedText="YES" selectable="NO" id="204-Tz-vop">
-                            <rect key="frame" x="12" y="1668" width="297" height="104"/>
+                            <rect key="frame" x="9" y="1668" width="303" height="104"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <attributedString key="attributedText">
                                 <fragment>
-                                    <string key="content">Keith and The Girl recently published a podcasting guide. They took all the information that they accumulated over years of podcasting ― added tips, interviews, and video tutorials from leading experts ― and released </string>
+                                    <string key="content">Keith and The Girl wrote the book on podcasting. Literally. T-bonehey took all the information that they accumulated over years of podcasting ― added tips, interviews, and video tutorials from leading experts ― and released </string>
                                     <attributes>
                                         <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.2"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                     </attributes>
                                 </fragment>
                                 <fragment content="The Ultimate Podcasting Guide.">
                                     <attributes>
                                         <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <font key="NSFont" size="12" name="HelveticaNeue-Bold"/>
-                                        <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.2"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
                                     </attributes>
                                 </fragment>
                             </attributedString>
