@@ -98,7 +98,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 	[super prepareForReuse];
 	[self.tableView reloadData];
     NSDate *lastUpdate = [[NSUserDefaults standardUserDefaults] valueForKey:@"ytLastUpdate"];
-    if(fabs([lastUpdate timeIntervalSinceNow]) > 5*60) {
+    if(!lastUpdate || fabs([lastUpdate timeIntervalSinceNow]) > 5*60) {
         [self reload];
     }
 }
@@ -125,8 +125,8 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"%@", [error description]);
-             if([self.channelItems count] == 0)
-                 [[[UIAlertView alloc] initWithTitle:@"Loading failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+             if([self.hostController respondsToSelector:@selector(connectivityFailed)])
+                 [self.hostController performSelector:@selector(connectivityFailed) withObject:nil];
              _spinnerView.hidden = YES;
          }];
 }

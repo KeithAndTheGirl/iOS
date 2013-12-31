@@ -748,7 +748,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 		}
 		KATGAlertPanel *panel = [KATGAlertPanel panelWithText:NSLocalizedString(@"Check your internet connection", nil)];
 		self.connectivityPanel = panel;
-		[panel showFromView:self.navigationBar completionBlock:^{
+		[panel showFromView:self.view completionBlock:^{
 			self.connectivityPanel = nil;
 		}];
 	});

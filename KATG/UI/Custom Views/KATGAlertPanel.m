@@ -54,10 +54,10 @@
 	}
 	self.completionBlock = completionBlock;
 	CGRect viewFrame = view.frame;
-	CGRect rect = CGRectMake(0.0f, viewFrame.size.height-44.0f, viewFrame.size.width, 44.0f);
+	CGRect rect = CGRectMake(0.0f, 0, viewFrame.size.width, 44.0f);
 	self.frame = rect;
-	[view.superview insertSubview:self belowSubview:view];
-	rect.origin.y = viewFrame.size.height;
+	[view addSubview:self];
+//	rect.origin.y = viewFrame.size.height;
 	void (^animation)(void) = ^{
 		self.frame = rect;
 	};
