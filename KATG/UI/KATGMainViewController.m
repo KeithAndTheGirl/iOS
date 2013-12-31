@@ -757,6 +757,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 - (void)connectivityRestored
 {
 	dispatch_async(dispatch_get_main_queue(), ^(void) {
+        KATGYoutubeCell *ytCell = (KATGYoutubeCell *)[self.mainDataSource.mainCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGSectionYoutube]];
+        [ytCell reload];
 		[self.connectivityPanel hideWithCompletionBlock:^{
 			self.connectivityPanel = nil;
 		}];

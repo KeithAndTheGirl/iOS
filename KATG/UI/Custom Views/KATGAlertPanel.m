@@ -10,7 +10,7 @@
 #import "KATGAlertPanel.h"
 #import "UIColor+KATGColors.h"
 
-#define Duration 5.0f
+#define Duration 30.0f
 
 @interface KATGAlertPanel ()
 @property (nonatomic) bool animatingIn;
@@ -24,7 +24,7 @@
 {
 	KATGAlertPanel *panel = [KATGAlertPanel new];
 	UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-	label.backgroundColor = [UIColor katg_whitishColor];
+	label.backgroundColor = [[UIColor katg_whitishColor] colorWithAlphaComponent:0.45];
 	if ([text length])
 	{
 		label.text = text;
@@ -54,7 +54,7 @@
 	}
 	self.completionBlock = completionBlock;
 	CGRect viewFrame = view.frame;
-	CGRect rect = CGRectMake(0.0f, 0, viewFrame.size.width, 44.0f);
+	CGRect rect = CGRectMake(0.0f, 0.0f, viewFrame.size.width, 44.0f);
 	self.frame = rect;
 	[view addSubview:self];
 //	rect.origin.y = viewFrame.size.height;

@@ -32,8 +32,6 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *channelItems;
 
--(void)reload;
-
 @end
 
 @implementation KATGYoutubeCell
@@ -98,7 +96,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 	[super prepareForReuse];
 	[self.tableView reloadData];
     NSDate *lastUpdate = [[NSUserDefaults standardUserDefaults] valueForKey:@"ytLastUpdate"];
-    if(!lastUpdate || fabs([lastUpdate timeIntervalSinceNow]) > 5*60) {
+    if(!lastUpdate || [self.channelItems count]==0 || fabs([lastUpdate timeIntervalSinceNow]) > 5*60) {
         [self reload];
     }
 }
@@ -110,7 +108,9 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 // gdata.youtube.com/feeds/api/users/keithandthegirl/uploads?&v=2&max-results=50&alt=jsonc
 -(void)reload {
-    _spinnerView.hidden = [self.channelItems count] > 0;
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        _spinnerView.hidden = [self.channelItems count] > 0;
+	});
     NSDictionary *parameters = @{@"v": @"2",
                                  @"max-results": @"50",
                                  @"alt": @"jsonc"};

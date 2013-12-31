@@ -28,4 +28,6 @@ extern NSString *const kKATGYoutubeTableViewCellIdentifier;
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, readonly) UIView *spinnerView;
 
+-(void)reload;
+
 @end

@@ -21,6 +21,7 @@
 #import "KATGCollectionViewController.h"
 #import "KATGScheduleItemTableViewCell.h"
 #import "KATGLiveCell.h"
+#import "KATGYoutubeCell.h"
 
 @class KATGShow;
 @class KATGArchiveCell;
