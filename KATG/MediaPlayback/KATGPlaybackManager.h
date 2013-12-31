@@ -55,4 +55,6 @@ extern NSString *const KATGLiveShowStreamingServerOfflineNotification;
 // Clears all state
 - (void)stop;
 
+-(NSError*)getCurrentError;
+
 @end

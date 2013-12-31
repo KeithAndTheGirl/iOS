@@ -268,6 +268,10 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	[self seekToTime:currentTime];
 }
 
+-(NSError*)getCurrentError {
+    return self.audioPlaybackController.error;
+}
+
 #pragma mark - KATGAudioPlayerControllerDelegate
 
 - (void)player:(KATGAudioPlayerController *)player didChangeState:(KATGAudioPlayerState)state

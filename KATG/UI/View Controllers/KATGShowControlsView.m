@@ -59,7 +59,6 @@
 		[self addSubview:_positionSlider];
 		
 		_loadingIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
-		_loadingIndicator.color = [UIColor katg_titleTextColor];
 		[self addSubview:_loadingIndicator];
 		
 		self.accessibilityElements = @[_skipBackButton, _playButton, _skipForwardButton, _positionSlider];
@@ -107,10 +106,12 @@
 	_currentState = currentState;
 	if (currentState == KATGAudioPlayerStateLoading)
 	{
+        self.loadingIndicator.hidden = NO;
 		[self.loadingIndicator startAnimating];
 	}
 	else
 	{
+        self.loadingIndicator.hidden = YES;
 		[self.loadingIndicator stopAnimating];
 	}
 	switch (currentState)

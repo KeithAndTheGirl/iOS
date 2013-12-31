@@ -589,6 +589,10 @@ typedef enum {
     else {
         downloadCell.downloadButton.enabled = YES;
     }
+    if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateFailed) {
+       
+        [[[UIAlertView alloc] initWithTitle:@"Playback failed" message:[[[KATGPlaybackManager sharedManager] getCurrentError] localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+    }
 }
 
 #pragma mark - Data updates

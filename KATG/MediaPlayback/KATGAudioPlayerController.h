@@ -43,6 +43,7 @@ extern NSString * const KATGStateObserverKey;
 @property (copy, nonatomic) NSURL *url;
 @property (weak, nonatomic) id<KATGAudioPlayerControllerDelegate> delegate;
 @property (nonatomic) KATGAudioPlayerState state;
+@property (nonatomic, strong) NSError *error;
 
 @property (nonatomic, readonly) CMTime currentTime;
 @property (nonatomic, readonly) CMTime duration;
