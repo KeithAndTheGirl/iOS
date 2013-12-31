@@ -207,10 +207,9 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	CGFloat rate = self.avPlayer.rate;
 	AVPlayerItemStatus status = self.avPlayerItem.status;
 	self.duration = self.avPlayerItem.duration;
-    self.error = nil;
+    self.error = self.avPlayerItem.error?self.avPlayerItem.error:self.avPlayer.error;
 	if (status == AVPlayerItemStatusFailed)
 	{
-        self.error = self.avPlayerItem.error?self.avPlayerItem.error:self.avPlayer.error;
 		self.state = KATGAudioPlayerStateFailed;
 		self.avPlayerItem = nil;
 		self.avPlayer = nil;

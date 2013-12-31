@@ -317,6 +317,8 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	NSManagedObjectID *objectID = [self.currentShow objectID];
 	Float64 time = [self currentTimeInSeconds];
 	Float64 duration = [self durationInSeconds];
+    if(duration == 0)
+        return;
 	[context performBlock:^{
 		NSError *fetchError;
 		KATGShow *show = (KATGShow *)[context existingObjectWithID:objectID error:&fetchError];
