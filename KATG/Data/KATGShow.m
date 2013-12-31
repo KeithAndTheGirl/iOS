@@ -37,7 +37,30 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @dynamic media_url;
 @dynamic downloaded;
 @dynamic file_url;
-@dynamic playState;
+@dynamic lastPlaybackTime;
+@dynamic duration;
+
+-(NSNumber*)lastPlaybackTime {
+    NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
+    return value;
+}
+
+-(void)setLastPlaybackTime:(NSNumber *)lastPlaybackTime {
+    NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
+    return [[NSUserDefaults standardUserDefaults] setObject:lastPlaybackTime forKey:key];
+}
+
+-(NSNumber*)duration {
+    NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
+    return value;
+}
+
+-(void)setDuration:(NSNumber *)duration {
+    NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
+    return [[NSUserDefaults standardUserDefaults] setObject:duration forKey:key];
+}
 
 + (NSNumber *)episodeIDForShowDictionary:(NSDictionary *)showDictionary
 {

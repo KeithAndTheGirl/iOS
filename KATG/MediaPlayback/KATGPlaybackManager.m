@@ -215,7 +215,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	[self.audioPlaybackController play];
 	if (!self.liveShow)
 	{
-		double lastPlaybackTime = [currentShow.playState.lastPlaybackTime doubleValue];
+		double lastPlaybackTime = [currentShow.lastPlaybackTime doubleValue];
 		if (lastPlaybackTime > [self currentTimeInSeconds])
 		{
 			[self.audioPlaybackController seekToTime:CMTimeMake(lastPlaybackTime, 1)];
@@ -322,13 +322,8 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 		KATGShow *show = (KATGShow *)[context existingObjectWithID:objectID error:&fetchError];
 		if (show)
 		{
-			if (show.playState == nil)
-			{
-				show.playState = [NSEntityDescription insertNewObjectForEntityForName:[KATGShowPlayState katg_entityName] inManagedObjectContext:context];
-				show.playState.show = show;
-			}
-			show.playState.lastPlaybackTime = @(time);
-			show.playState.duration = @(duration);
+			show.lastPlaybackTime = @(time);
+			show.duration = @(duration);
 			[store saveChildContext:context completion:nil];
             [self setPlaybackInfo:show];
 		}

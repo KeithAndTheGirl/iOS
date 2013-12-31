@@ -239,7 +239,6 @@
 		91BE199517235BAD006CD2B1 /* KATGDownloadToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BE199417235BAC006CD2B1 /* KATGDownloadToken.m */; };
 		91C00D3616EBC2C40064A458 /* KATGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C00D3516EBC2C40064A458 /* KATGImageCache.m */; };
 		91EC31B4177FCF0C00151999 /* Default-Portrait@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 91EC31B3177FCF0C00151999 /* Default-Portrait@2x~ipad.png */; };
-		91F18D76173EAB4200E07C3B /* KATGShowPlayState.m in Sources */ = {isa = PBXBuildFile; fileRef = 91F18D75173EAB4200E07C3B /* KATGShowPlayState.m */; };
 		91F45A17177F881D0091AFDA /* icon72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91F45A0C177F881D0091AFDA /* icon72@2x.png */; };
 		91F45A18177F881D0091AFDA /* icon72.png in Resources */ = {isa = PBXBuildFile; fileRef = 91F45A0D177F881D0091AFDA /* icon72.png */; };
 		91F45A19177F881D0091AFDA /* icon60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 91F45A0E177F881D0091AFDA /* icon60@2x.png */; };
@@ -611,8 +610,6 @@
 		91C00D3516EBC2C40064A458 /* KATGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGImageCache.m; sourceTree = "<group>"; };
 		91C00D3716EBC3D80064A458 /* KATGDataStore_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KATGDataStore_Internal.h; sourceTree = "<group>"; };
 		91EC31B3177FCF0C00151999 /* Default-Portrait@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait@2x~ipad.png"; sourceTree = "<group>"; };
-		91F18D74173EAB4100E07C3B /* KATGShowPlayState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGShowPlayState.h; sourceTree = "<group>"; };
-		91F18D75173EAB4200E07C3B /* KATGShowPlayState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGShowPlayState.m; sourceTree = "<group>"; };
 		91F45A0C177F881D0091AFDA /* icon72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon72@2x.png"; sourceTree = "<group>"; };
 		91F45A0D177F881D0091AFDA /* icon72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon72.png; sourceTree = "<group>"; };
 		91F45A0E177F881D0091AFDA /* icon60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon60@2x.png"; sourceTree = "<group>"; };
@@ -1386,8 +1383,6 @@
 				910899BE15EAE44C00FB57C3 /* KATG.xcdatamodeld */,
 				229EC8D3167060DC00FB899A /* KATGShow.h */,
 				229EC8D4167060DC00FB899A /* KATGShow.m */,
-				91F18D74173EAB4100E07C3B /* KATGShowPlayState.h */,
-				91F18D75173EAB4200E07C3B /* KATGShowPlayState.m */,
 				229EC8D91670639B00FB899A /* KATGGuest.h */,
 				229EC8DA1670639B00FB899A /* KATGGuest.m */,
 				229EC8D61670639300FB899A /* KATGImage.h */,
@@ -1699,7 +1694,6 @@
 				228D440017320E2F00FA94FE /* KATGBeerBubblesView.m in Sources */,
 				228D44071732B9D000FA94FE /* KATGLiveShowFeedbackViewController.m in Sources */,
 				012B4F2F1857A2ED00B59FC5 /* UIImageView+AFNetworking.m in Sources */,
-				91F18D76173EAB4200E07C3B /* KATGShowPlayState.m in Sources */,
 				9177592617715A72004D366D /* UIColor+KATGColors.m in Sources */,
 				91FCB68C1771774700EE9001 /* KATGPushRegistration.m in Sources */,
 			);

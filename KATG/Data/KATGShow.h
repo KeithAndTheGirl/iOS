@@ -41,7 +41,6 @@ typedef NS_ENUM(NSUInteger, KATGShowObjectStatus) {
 
 #import "KATGGuest.h"
 #import "KATGImage.h"
-#import "KATGShowPlayState.h"
 
 extern NSString *const KATGShowEpisodeIDAttributeName;
 
@@ -61,7 +60,10 @@ extern NSString *const KATGShowEpisodeIDAttributeName;
 @property (nonatomic, retain) NSString * file_url;
 @property (nonatomic, retain) NSSet * guests;
 @property (nonatomic, retain) NSSet * images;
-@property (nonatomic, retain) KATGShowPlayState *playState;
+
+// local values
+@property (nonatomic, retain) NSNumber *lastPlaybackTime;
+@property (nonatomic, retain) NSNumber *duration;
 
 + (NSString *)katg_entityName;
 + (NSNumber *)episodeIDForShowDictionary:(NSDictionary *)showDictionary;

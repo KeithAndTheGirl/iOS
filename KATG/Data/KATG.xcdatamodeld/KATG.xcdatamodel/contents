@@ -40,18 +40,11 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="guests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Guest" inverseName="shows" inverseEntity="Guest" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="show" inverseEntity="Image" syncable="YES"/>
-        <relationship name="playState" optional="YES" minCount="1" maxCount="1" deletionRule="Cascade" destinationEntity="ShowPlayState" inverseName="show" inverseEntity="ShowPlayState" syncable="YES"/>
-    </entity>
-    <entity name="ShowPlayState" representedClassName="KATGShowPlayState" syncable="YES">
-        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="lastPlaybackTime" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <relationship name="show" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="playState" inverseEntity="Show" syncable="YES"/>
     </entity>
     <elements>
         <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Guest" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Image" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Show" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="ShowPlayState" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
