@@ -60,6 +60,7 @@ static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
 		_collectionView.isAccessibilityElement = YES;
 		_collectionView.accessibilityLabel = NSLocalizedString(@"Image gallery", nil);
 		_collectionView.accessibilityHint = NSLocalizedString(@"Double tap for full screen image gallery", nil);
+        _collectionView.scrollsToTop = NO;
 	}
 	return self;
 }
