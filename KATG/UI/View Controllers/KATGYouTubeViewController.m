@@ -18,6 +18,9 @@
     [closeButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
     [closeButton.layer setBorderWidth:0.5];
     [closeButton.layer setCornerRadius:4];
+    spinnerView.hidden = YES;
+    nameLabel.text = @"";
+    dateLabel.text = @"";
     
     if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
         [self setNeedsStatusBarAppearanceUpdate];
@@ -114,13 +117,14 @@
     return YES;
 }
 - (void)webViewDidStartLoad:(UIWebView *)webView {
-    
+    spinnerView.hidden = NO;
 }
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
-
+    spinnerView.hidden = YES;
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    
+    spinnerView.hidden = YES;
+    [[[UIAlertView alloc] initWithTitle:@"Loading failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
 @end

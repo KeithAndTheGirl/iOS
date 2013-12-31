@@ -68,6 +68,20 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
         }
 		[self.contentView addSubview:_tableView];
         
+        _spinnerView = [[UIView alloc] initWithFrame:self.contentView.bounds];
+        _spinnerView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.45];
+        UIActivityIndicatorView *actView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        actView.center = CGPointMake(self.contentView.frame.size.width/3, self.contentView.frame.size.height/2);
+        [actView startAnimating];
+        [_spinnerView addSubview:actView];
+        
+        UILabel *actLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.contentView.frame.size.width/2.5, self.contentView.frame.size.height/2-12, 120, 24)];
+        actLabel.text = @"Loading...";
+        actLabel.textColor = [UIColor whiteColor];
+        [_spinnerView addSubview:actLabel];
+        [self.contentView addSubview:_spinnerView];
+        _spinnerView.hidden = YES;
+        
         [self reload];
 	}
 	return self;
@@ -83,6 +97,10 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 {
 	[super prepareForReuse];
 	[self.tableView reloadData];
+    NSDate *lastUpdate = [[NSUserDefaults standardUserDefaults] valueForKey:@"ytLastUpdate"];
+    if(fabs([lastUpdate timeIntervalSinceNow]) > 5*60) {
+        [self reload];
+    }
 }
 
 - (void)layoutSubviews
@@ -92,6 +110,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 // gdata.youtube.com/feeds/api/users/keithandthegirl/uploads?&v=2&max-results=50&alt=jsonc
 -(void)reload {
+    _spinnerView.hidden = [self.channelItems count] > 0;
     NSDictionary *parameters = @{@"v": @"2",
                                  @"max-results": @"50",
                                  @"alt": @"jsonc"};
@@ -101,9 +120,14 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              self.channelItems = responseObject[@"data"][@"items"];
              [self.tableView reloadData];
+             _spinnerView.hidden = YES;
+             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ytLastUpdate"];
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"%@", [error description]);
+             if([self.channelItems count] == 0)
+                 [[[UIAlertView alloc] initWithTitle:@"Loading failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+             _spinnerView.hidden = YES;
          }];
 }
 

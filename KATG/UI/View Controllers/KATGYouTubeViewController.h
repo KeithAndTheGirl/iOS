@@ -13,6 +13,7 @@
     IBOutlet UILabel *dateLabel;
     IBOutlet UILabel *nameLabel;
     IBOutlet UIButton *closeButton;
+    IBOutlet UIView *spinnerView;
 }
 
 @property (nonatomic, strong) NSDictionary *dataDictionary;

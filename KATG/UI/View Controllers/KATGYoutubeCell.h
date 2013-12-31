@@ -26,5 +26,6 @@ extern NSString *const kKATGYoutubeTableViewCellIdentifier;
 
 @property (nonatomic, weak) UIViewController *hostController;
 @property (nonatomic, readonly) UITableView *tableView;
+@property (nonatomic, readonly) UIView *spinnerView;
 
 @end
