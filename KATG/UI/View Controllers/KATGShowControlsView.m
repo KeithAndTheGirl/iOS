@@ -106,13 +106,17 @@
 	_currentState = currentState;
 	if (currentState == KATGAudioPlayerStateLoading)
 	{
-        self.loadingIndicator.hidden = NO;
-		[self.loadingIndicator startAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            self.loadingIndicator.hidden = NO;
+            [self.loadingIndicator startAnimating];
+        });
 	}
 	else
 	{
-        self.loadingIndicator.hidden = YES;
-		[self.loadingIndicator stopAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            self.loadingIndicator.hidden = YES;
+            [self.loadingIndicator stopAnimating];
+        });
 	}
 	switch (currentState)
 	{
