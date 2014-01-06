@@ -20,7 +20,7 @@
 
 #import "KATGShowControlsScrubber.h"
 
-#define kKATGControlsTrackInset 50.0f
+#define kKATGControlsTrackInset 68.0f
 #define kKATGControlsLabelInset 5.0f
 
 @interface KATGShowControlsScrubber ()
@@ -41,7 +41,7 @@
 		_currentTimeLabel.textColor = [UIColor darkGrayColor];
 		_currentTimeLabel.shadowColor = [UIColor whiteColor];
 		_currentTimeLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-		_currentTimeLabel.font = [UIFont systemFontOfSize:9.0f];
+		_currentTimeLabel.font = [UIFont systemFontOfSize:15.0f];
 		[self addSubview:_currentTimeLabel];
 		
 		_remainingTimeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -50,7 +50,7 @@
 		_remainingTimeLabel.textColor = [UIColor darkGrayColor];
 		_remainingTimeLabel.shadowColor = [UIColor whiteColor];
 		_remainingTimeLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-		_remainingTimeLabel.font = [UIFont systemFontOfSize:9.0f];
+		_remainingTimeLabel.font = [UIFont systemFontOfSize:15.0f];
 		[self addSubview:_remainingTimeLabel];
 		
 		[self setMinimumTrackImage:[UIImage new] forState:UIControlStateNormal];
