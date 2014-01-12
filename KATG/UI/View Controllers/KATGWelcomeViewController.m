@@ -29,6 +29,12 @@
     
     getStartedButton.frame = CGRectMake(imageView3.frame.origin.x+20, getStartedButton.frame.origin.y, getStartedButton.frame.size.width, getStartedButton.frame.size.height);
     [scroll bringSubviewToFront:getStartedButton];
+    
+    
+    if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
+        [self setNeedsStatusBarAppearanceUpdate];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,7 +43,12 @@
 }
 
 -(IBAction)startAction:(id)sender {
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(BOOL)prefersStatusBarHidden {
+        return YES;
 }
 
 #pragma mark UIScrollViewDelegate
