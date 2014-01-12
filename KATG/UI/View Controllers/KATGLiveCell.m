@@ -125,6 +125,8 @@
     self.titleLabel.alpha = liveMode ? 0:1;
     
 	self.loadingIndicator.center = self.playButton.center;
+    
+    self.descriptionLabel.text = liveMode ? @"Hosts Keith and Chemda respond to real-time feedback live on the show" : @"You will be able to listen to the show live and send feedback directly to hosts Keith and Chemda. They respond to listener feedback live on the show.";
 }
 
 #pragma mark - Counter State

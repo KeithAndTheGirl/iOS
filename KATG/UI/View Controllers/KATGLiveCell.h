@@ -42,6 +42,7 @@
 @property (nonatomic) IBOutlet UILabel *countLabelMinutes;
 @property (nonatomic) IBOutlet UILabel *countLabelSeconds;
 @property (nonatomic) IBOutlet UILabel *onAirLabel;
+@property (nonatomic) IBOutlet UILabel *descriptionLabel;
 
 @property (nonatomic) IBOutlet UIButton *feedbackButton;
 @property (nonatomic) KATGTimerTarget *target;
