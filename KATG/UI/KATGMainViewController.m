@@ -710,6 +710,14 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 			case UIEventSubtypeRemoteControlNextTrack:
 				[[KATGPlaybackManager sharedManager] jumpForward];
 				break;
+            case UIEventSubtypeRemoteControlTogglePlayPause:
+                if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+					[[KATGPlaybackManager sharedManager] pause];
+                }
+                else {
+                    [[KATGPlaybackManager sharedManager] play];
+                }
+                break;
 			default:
 				break;
 		}

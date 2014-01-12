@@ -20,6 +20,7 @@
         case UIEventSubtypeRemoteControlStop:
         case UIEventSubtypeRemoteControlNextTrack:
         case UIEventSubtypeRemoteControlPreviousTrack:
+        case UIEventSubtypeRemoteControlTogglePlayPause:
             [[NSNotificationCenter defaultCenter] postNotificationName:remoteControlButtonTapped
                                                                 object:event];
         default:
