@@ -136,6 +136,10 @@
 		return;
 	}
 	NSDateComponents *components = [self currentComponents];
+    if([[NSDate date] timeIntervalSinceDate:self.timestamp] > 0) {
+        [[KATGDataStore sharedStore] pollForData];
+        return;
+    }
 	self.countLabelHours.text = [NSString stringWithFormat:@"%d", components.hour];
 	self.countLabelMinutes.text = [NSString stringWithFormat:@"%02d", components.minute];
 	self.countLabelSeconds.text = [NSString stringWithFormat:@"%02d", components.second];
