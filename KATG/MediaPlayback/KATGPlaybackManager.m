@@ -320,7 +320,18 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
     if(duration == 0)
         return;
 	[context performBlock:^{
-		KATGShow *show = (KATGShow *)[context objectWithID:objectID];
+        KATGShow *show = nil;
+        @try {
+            show = (KATGShow *)[context objectWithID:objectID];
+        }
+        @catch (NSException *exception) {
+            NSLog(@"%@", [exception description]);
+        }
+        @finally {
+            if(!show)
+                show = (KATGShow *)[context existingObjectWithID:objectID error:nil];
+        }
+		
 		if (show)
 		{
 			show.lastPlaybackTime = @(time);
