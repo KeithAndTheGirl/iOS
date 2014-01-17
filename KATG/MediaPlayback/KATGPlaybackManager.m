@@ -297,7 +297,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	{
 		return;
 	}
-	self.saveTimer = [NSTimer scheduledTimerWithTimeInterval:10.0f target:self selector:@selector(saveCurrentTime) userInfo:nil repeats:YES];
+	self.saveTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(saveCurrentTime) userInfo:nil repeats:YES];
 }
 
 - (void)stopSaveTimer
