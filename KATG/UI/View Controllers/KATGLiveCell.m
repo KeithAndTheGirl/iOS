@@ -74,6 +74,7 @@
     [_feedbackButton.layer setBorderWidth:0.5];
     [_feedbackButton.layer setCornerRadius:4];
     
+	_liveToggleButton.hidden = YES;
 #if DEBUG
     _liveToggleButton.hidden = NO;
 #endif
