@@ -26,8 +26,10 @@
 NSString *const KATGCurrentTimeObserverKey = @"currentTime";
 NSString *const KATGDurationObserverKey = @"duration";
 NSString *const KATGStateObserverKey = @"state";
+NSString *const KATGStateAvailableTime = @"availableTime";
 
 static NSString *const KATGAudioPlayerStatusKeyPath = @"status";
+static NSString *const KATGAudioPlayerLoadedTime = @"loadedTimeRanges";
 static NSString *const KATGAudioPlayerRateKeyPath = @"rate";
 
 static void *KATGAudioPlayerStatusObserverContext = @"StatusObserverContext";
@@ -82,6 +84,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 	if (_avPlayerItem != nil)
 	{
 		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath context:KATGAudioPlayerStatusObserverContext];
+		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
 		[[NSNotificationCenter defaultCenter] removeObserver:self.didEndObserver];
 	}
 	if (_avPlayer != nil)
@@ -144,6 +147,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		if (_avPlayerItem != nil)
 		{
 			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath context:KATGAudioPlayerStatusObserverContext];
+			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
 
 			[[NSNotificationCenter defaultCenter] removeObserver:self.didEndObserver];
 			self.didEndObserver = nil;
@@ -152,7 +156,8 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		if (_avPlayerItem != nil)
 		{
 			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath options:0 context:KATGAudioPlayerStatusObserverContext];
-
+			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerLoadedTime options:0 context:KATGAudioPlayerStatusObserverContext];
+            
 			__weak KATGAudioPlayerController *weakSelf = self;
 			self.didEndObserver = [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:_avPlayerItem queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
 				weakSelf.state = KATGAudioPlayerStateDone;
@@ -209,6 +214,10 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	CGFloat rate = self.avPlayer.rate;
 	AVPlayerItemStatus status = self.avPlayerItem.status;
 	self.duration = self.avPlayerItem.duration;
+    self.availableTime = self.avPlayerItem.loadedTimeRanges;
+    CMTimeRange tr = [[self.availableTime lastObject] CMTimeRangeValue];
+    TFLog(@"episode: %@, status: %i : %.1f - %.1f", self.url, status, CMTimeGetSeconds(tr.start), CMTimeGetSeconds(tr.duration));
+    TFLog(@"playbackLikelyToKeepUp : %@", self.avPlayerItem.playbackLikelyToKeepUp?@"YES":@"NO");
     self.error = self.avPlayerItem.error?self.avPlayerItem.error:self.avPlayer.error;
 	if (status == AVPlayerItemStatusFailed)
 	{

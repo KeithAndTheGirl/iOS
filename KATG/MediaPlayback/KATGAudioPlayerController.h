@@ -35,6 +35,7 @@ typedef NS_ENUM(NSUInteger, KATGAudioPlayerState) {
 extern NSString * const KATGCurrentTimeObserverKey;
 extern NSString * const KATGDurationObserverKey;
 extern NSString * const KATGStateObserverKey;
+extern NSString * const KATGStateAvailableTime;
 
 @interface KATGAudioPlayerController : NSObject
 

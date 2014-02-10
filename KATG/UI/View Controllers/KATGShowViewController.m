@@ -425,12 +425,14 @@ typedef enum {
 {
 	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGCurrentTimeObserverKey options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGStateObserverKey options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
+	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGStateAvailableTime options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)removePlaybackManagerKVO
 {
 	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:KATGCurrentTimeObserverKey];
 	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:KATGStateObserverKey];
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:KATGStateAvailableTime];
 }
 
 #pragma mark - Reachability
@@ -471,7 +473,7 @@ typedef enum {
         self.controlsView.positionSlider.value = currentTime;
 		return;
 	}
-	if ([keyPath isEqualToString:KATGCurrentTimeObserverKey])
+	if ([keyPath isEqualToString:KATGCurrentTimeObserverKey] || [keyPath isEqualToString:KATGStateAvailableTime])
 	{
 		if (!positionSliderIsDragging)
 		{

@@ -43,12 +43,12 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 -(NSNumber*)lastPlaybackTime {
     NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
     NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
-    NSLog(@"Return lastPlaybackTime %@ for episode %@", value, self.episode_id);
+//    NSLog(@"Return lastPlaybackTime %@ for episode %@", value, self.episode_id);
     return value;
 }
 
 -(void)setLastPlaybackTime:(NSNumber *)lastPlaybackTime {
-    NSLog(@"Set lastPlaybackTime %@ for episode %@", lastPlaybackTime, self.episode_id);
+//    NSLog(@"Set lastPlaybackTime %@ for episode %@", lastPlaybackTime, self.episode_id);
     NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
     [[NSUserDefaults standardUserDefaults] setObject:lastPlaybackTime forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -57,12 +57,12 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 -(NSNumber*)duration {
     NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
     NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
-    NSLog(@"Return Duration %@ for episode %@", value, self.episode_id);
+//    NSLog(@"Return Duration %@ for episode %@", value, self.episode_id);
     return value;
 }
 
 -(void)setDuration:(NSNumber *)duration {
-    NSLog(@"Set Duration %@ for episode %@", duration, self.episode_id);
+//    NSLog(@"Set Duration %@ for episode %@", duration, self.episode_id);
     NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
     [[NSUserDefaults standardUserDefaults] setObject:duration forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
