@@ -39,6 +39,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"c36f3090-c5d1-4df9-b6a5-ed4b311c9c1d"];
+
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

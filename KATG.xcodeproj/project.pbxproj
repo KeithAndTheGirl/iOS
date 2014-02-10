@@ -101,6 +101,10 @@
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
 		01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AD1859B230002AF906 /* SliderThumb.png */; };
 		01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */; };
+		01EC330418A9988500156A3E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC32FE18A9988500156A3E /* libTestFlight.a */; };
+		01EC330518A9988500156A3E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01EC32FF18A9988500156A3E /* README.md */; };
+		01EC330618A9988500156A3E /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 01EC330018A9988500156A3E /* release_notes.md */; };
+		01EC330818A9990500156A3E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC330718A9990500156A3E /* libz.dylib */; };
 		01F7832518680B1900A85EA4 /* KATGYouTubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */; };
 		01F7832618680B1900A85EA4 /* KATGYouTubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
@@ -373,6 +377,13 @@
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
 		01EAC4AD1859B230002AF906 /* SliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderThumb.png; sourceTree = "<group>"; };
 		01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SliderThumb@2x.png"; sourceTree = "<group>"; };
+		01EC32FE18A9988500156A3E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		01EC32FF18A9988500156A3E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		01EC330018A9988500156A3E /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		01EC330118A9988500156A3E /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		01EC330218A9988500156A3E /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		01EC330318A9988500156A3E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		01EC330718A9990500156A3E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		01F7832218680B1900A85EA4 /* KATGYouTubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYouTubeViewController.h; path = "View Controllers/KATGYouTubeViewController.h"; sourceTree = "<group>"; };
 		01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeViewController.m; path = "View Controllers/KATGYouTubeViewController.m"; sourceTree = "<group>"; };
 		01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeViewController.xib; path = "View Controllers/KATGYouTubeViewController.xib"; sourceTree = "<group>"; };
@@ -632,6 +643,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01EC330818A9990500156A3E /* libz.dylib in Frameworks */,
+				01EC330418A9988500156A3E /* libTestFlight.a in Frameworks */,
 				012B4F331857A38400B59FC5 /* Security.framework in Frameworks */,
 				9115C14D172E2C48002942B6 /* AssetsLibrary.framework in Frameworks */,
 				9123757E172DBFB700A194F2 /* EventKitUI.framework in Frameworks */,
@@ -699,6 +712,19 @@
 				012B4F211857A2ED00B59FC5 /* UIWebView+AFNetworking.m */,
 			);
 			path = "UIKit+AFNetworking";
+			sourceTree = "<group>";
+		};
+		01EC32FD18A9988500156A3E /* TestFlightSDK2 */ = {
+			isa = PBXGroup;
+			children = (
+				01EC32FE18A9988500156A3E /* libTestFlight.a */,
+				01EC32FF18A9988500156A3E /* README.md */,
+				01EC330018A9988500156A3E /* release_notes.md */,
+				01EC330118A9988500156A3E /* TestFlight+AsyncLogging.h */,
+				01EC330218A9988500156A3E /* TestFlight+ManualSessions.h */,
+				01EC330318A9988500156A3E /* TestFlight.h */,
+			);
+			path = TestFlightSDK2;
 			sourceTree = "<group>";
 		};
 		22192EC71674419E00D2B1C1 /* UICollectionView+TDAdditions */ = {
@@ -1169,6 +1195,7 @@
 		910899C115EAE58600FB57C3 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				01EC32FD18A9988500156A3E /* TestFlightSDK2 */,
 				012B4EFE1857A2ED00B59FC5 /* AFNetworking */,
 				22D07DC91676558D004EBEBB /* TDRoundedShadowView */,
 				22192ED016745FD300D2B1C1 /* TDCollectionView */,
@@ -1484,6 +1511,7 @@
 				0111A7791856A08600A3F8D5 /* Youtube@2x.png in Resources */,
 				0111A7741856A08600A3F8D5 /* About.png in Resources */,
 				9115C11E172E13E5002942B6 /* play.png in Resources */,
+				01EC330618A9988500156A3E /* release_notes.md in Resources */,
 				01199AF0186D814F003CFF16 /* comments@2x.png in Resources */,
 				9115C11F172E13E5002942B6 /* play@2x.png in Resources */,
 				012FED781857A9920073AEAA /* ArrowNext.png in Resources */,
@@ -1505,6 +1533,7 @@
 				01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */,
 				9115C124172E13E5002942B6 /* archive-tab-icon.png in Resources */,
 				9115C125172E13E5002942B6 /* archive-tab-icon@2x.png in Resources */,
+				01EC330518A9988500156A3E /* README.md in Resources */,
 				01BCE842186D1D6F00F096EF /* indicators2.png in Resources */,
 				9115C126172E13E5002942B6 /* gear.png in Resources */,
 				0111A7761856A08600A3F8D5 /* Schedule.png in Resources */,
