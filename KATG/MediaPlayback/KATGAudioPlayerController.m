@@ -177,8 +177,10 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 			[_avPlayer addObserver:self forKeyPath:KATGAudioPlayerRateKeyPath options:0 context:KATGAudioPlayerRateObserverContext];
 
 			__weak KATGAudioPlayerController *weakSelf = self;
+			__weak AVPlayerItem *weakPlayerItem = self.avPlayerItem;
 			self.timeObserver = [_avPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 10) queue:nil usingBlock:^(CMTime time) {
 				weakSelf.currentTime = time;
+                weakSelf.availableTime = weakPlayerItem.loadedTimeRanges;
 			}];
 		}
 		self.currentTime = CMTimeMake(0, 0);

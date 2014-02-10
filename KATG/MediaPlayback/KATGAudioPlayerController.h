@@ -47,6 +47,7 @@ extern NSString * const KATGStateObserverKey;
 
 @property (nonatomic, readonly) CMTime currentTime;
 @property (nonatomic, readonly) CMTime duration;
+@property (nonatomic) NSArray *availableTime;
 
 - (void)seekToTime:(CMTime)currentTime;
 - (void)play;

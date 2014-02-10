@@ -495,6 +495,11 @@ typedef enum {
             }
 			self.controlsView.positionSlider.maximumValue = duration;
 			self.controlsView.positionSlider.value = currentTime;
+            
+            for(NSValue *tRange in [[KATGPlaybackManager sharedManager] availableTime]) {
+                CMTimeRange tr = [tRange CMTimeRangeValue];
+                self.controlsView.positionSlider.loadedValue = CMTimeGetSeconds(tr.start) + CMTimeGetSeconds(tr.duration);
+            }
 		}
 	}
 	else if ([keyPath isEqualToString:KATGStateObserverKey])

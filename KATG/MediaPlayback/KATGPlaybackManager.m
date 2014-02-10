@@ -95,6 +95,10 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	return self.audioPlaybackController.duration;
 }
 
+-(NSArray*)availableTime {
+    return self.audioPlaybackController.availableTime;
+}
+
 - (KATGAudioPlayerState)state
 {
 	return self.audioPlaybackController.state;

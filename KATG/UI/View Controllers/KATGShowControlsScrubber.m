@@ -193,6 +193,14 @@
 	[[UIColor colorWithWhite:0.0f alpha:0.1f] setFill];
 	[[UIBezierPath bezierPathWithRect:rect] fill];
 	
+	// Loaded progress
+	[[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5] setFill];
+	CGRect loadedRect = CGRectMake(0.0f,
+                                     0.0f,
+                                     trackRect.origin.x + trackRect.size.width*self.loadedValue/self.maximumValue,
+                                     rect.size.height);
+	[[UIBezierPath bezierPathWithRect:loadedRect] fill];
+    
 	// Progress
 	[[UIColor colorWithRed:0.404 green:0.678 blue:0.333 alpha:1] setFill];
 	CGRect progressRect = CGRectMake(0.0f,
@@ -200,7 +208,7 @@
 																	 trackRect.origin.x + trackRect.size.width*self.value/self.maximumValue,
 																	 rect.size.height);
 	[[UIBezierPath bezierPathWithRect:progressRect] fill];
-	
+    
 	// Shadow
 	UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:CGRectInset(rect, -40.0f, -40.0f)];
 	[shadowPath appendPath:trackPath];

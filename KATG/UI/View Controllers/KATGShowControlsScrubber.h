@@ -22,4 +22,6 @@
 
 @interface KATGShowControlsScrubber : UISlider
 
+@property (nonatomic) float loadedValue;
+
 @end

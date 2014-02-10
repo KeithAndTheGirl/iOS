@@ -38,6 +38,7 @@ extern NSString *const KATGLiveShowStreamingServerOfflineNotification;
 
 @property (nonatomic, readonly) CMTime duration;
 @property (nonatomic, readonly) CMTime currentTime;
+@property (nonatomic, readonly) NSArray *availableTime;
 @property (nonatomic, readonly) KATGAudioPlayerState state;
 
 - (void)seekToTime:(CMTime)currentTime;
