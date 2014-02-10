@@ -26,4 +26,7 @@ extern NSString *const kKATGScheduleItemTableViewCellIdentifier;
 
 @property (nonatomic, readonly) UITableView *tableView;
 
+-(void)willShow;
+-(void)willHide;
+
 @end

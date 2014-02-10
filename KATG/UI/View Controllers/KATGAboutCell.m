@@ -33,6 +33,11 @@
     scrollView.contentSize = content.frame.size;
     scrollView.autoresizingMask = 15;
     self.autoresizingMask = 15;
+    scrollView.scrollsToTop = NO;
+    for(UIScrollView *v in content.subviews) {
+        if([v isKindOfClass:[UITextView class]])
+            v.scrollsToTop = NO;
+    }
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
         scrollView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
@@ -54,6 +59,13 @@
 - (void)prepareForReuse {
 	[super prepareForReuse];
     NSLog(@"%@", NSStringFromCGRect(scrollView.frame));
+}
+
+-(void)willShow {
+    scrollView.scrollsToTop = YES;
+}
+-(void)willHide {
+    scrollView.scrollsToTop = NO;
 }
 
 #pragma mark Actions

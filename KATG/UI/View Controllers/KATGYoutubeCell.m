@@ -51,6 +51,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 		_tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         _tableView.dataSource = self;
         _tableView.delegate = self;
+        _tableView.scrollsToTop = NO;
         
         if([_tableView canPerformAction:@selector(setSeparatorInset:) withSender:self]) {
             _tableView.separatorInset = UIEdgeInsetsZero;
@@ -156,5 +157,12 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
         youtubeController.dataDictionary = item;
 }
 
+-(void)willShow {
+    _tableView.scrollsToTop = YES;
+}
+
+-(void)willHide {
+    _tableView.scrollsToTop = NO;
+}
 
 @end

@@ -30,4 +30,7 @@ extern NSString *const kKATGYoutubeTableViewCellIdentifier;
 
 -(void)reload;
 
+-(void)willShow;
+-(void)willHide;
+
 @end

@@ -33,5 +33,7 @@ extern NSString *const kKATGAboutTableViewCellIdentifier;
 -(IBAction)chemdaAction:(id)sender;
 -(IBAction)guideAction:(id)sender;
 
+-(void)willShow;
+-(void)willHide;
 
 @end

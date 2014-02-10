@@ -47,7 +47,7 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
         _tableView.dataSource = self;
         _tableView.delegate = self;
         _tableView.scrollIndicatorInsets = _tableView.contentInset;
-        _tableView.scrollsToTop = YES;
+        _tableView.scrollsToTop = NO;
         
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.) {
             _tableView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
@@ -109,6 +109,14 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self.controller presentShow:self.shows[indexPath.row] fromArchiveCell:self];
+}
+
+-(void)willShow {
+    _tableView.scrollsToTop = YES;
+}
+
+-(void)willHide {
+    _tableView.scrollsToTop = NO;
 }
 
 @end

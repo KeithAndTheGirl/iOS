@@ -29,4 +29,7 @@
 @property (strong, nonatomic) NSArray *shows;
 @property (nonatomic, assign) KATGMainViewController *controller;
 
+-(void)willShow;
+-(void)willHide;
+
 @end

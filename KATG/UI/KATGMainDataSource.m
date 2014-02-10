@@ -155,12 +155,15 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [(KATGScheduleCell*)self.lastScrollablaCell willHide];
 	UICollectionViewCell *cell = nil;
 	switch ((KATGSection)indexPath.section)
 	{
 		case KATGSectionSchedule:
 			cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGScheduleCellIdentifier forIndexPath:indexPath];
 			self.eventsTableView = ((KATGScheduleCell *)cell).tableView;
+            [(KATGScheduleCell*)cell willShow];
+            self.lastScrollablaCell = cell;
 			break;
 		case KATGSectionLive:
 			cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGLiveCellIdentifier forIndexPath:indexPath];
@@ -174,14 +177,20 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
             archiveCell.controller = self.mainViewController;
 //			archiveCell.showView.footerHeight = 120.0f - archiveCell.showView.headerHeight;
 			cell = archiveCell;
+            [archiveCell willShow];
+            self.lastScrollablaCell = cell;
 			break;
 		}
         case KATGSectionYoutube:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGYoutubeCellIdentifier forIndexPath:indexPath];
             ((KATGYoutubeCell*)cell).hostController = self.mainViewController;
+            [(KATGYoutubeCell*)cell willShow];
+            self.lastScrollablaCell = cell;
 			break;
         case KATGSectionAbout:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGAboutCellIdentifier forIndexPath:indexPath];
+            [(KATGAboutCell*)cell willShow];
+            self.lastScrollablaCell = cell;
 			break;
 	}
 	return cell;
@@ -233,22 +242,9 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 	}
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-	if (indexPath.section != KATGSectionArchive)
-	{
-		return;
-	}
-	
-	KATGShow *show = self.resultsController.shows[indexPath.item];
-	KATGArchiveCell *archiveCell = (KATGArchiveCell *)[collectionView cellForItemAtIndexPath:indexPath];
-	
-	[self.mainViewController presentShow:show fromArchiveCell:archiveCell];
-}
-
 - (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	switch ((KATGSection)indexPath.section)
+    switch ((KATGSection)indexPath.section)
 	{
 		case KATGSectionSchedule:
 			self.eventsTableView = nil;

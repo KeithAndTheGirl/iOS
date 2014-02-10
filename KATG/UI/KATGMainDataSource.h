@@ -35,6 +35,7 @@ typedef NS_ENUM(NSUInteger, KATGSection) {
 
 @property (weak, nonatomic) KATGMainViewController *mainViewController;
 @property (nonatomic) TDCollectionView *mainCollectionView;
+@property (nonatomic) UICollectionViewCell *lastScrollablaCell;
 @property (nonatomic) UITableView *eventsTableView;
 @property (nonatomic, readonly) NSArray *shows;
 @property (nonatomic, readonly) NSArray *events;

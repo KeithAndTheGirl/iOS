@@ -142,7 +142,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 	
 	[self configureTabBar];
-	
+	self.collectionView.scrollsToTop = NO;
 	self.mainDataSource.mainCollectionView = self.collectionView;
 	self.mainDataSource.mainViewController = self;
 	NSError *error;
