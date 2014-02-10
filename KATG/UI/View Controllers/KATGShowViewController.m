@@ -840,6 +840,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 					strongSelf.shouldReloadDownload = true;
 					[strongSelf queueReload];
 				}
+                [[KATGPlaybackManager sharedManager] stop];
 			}
 		}];
 	}
@@ -863,6 +864,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
     else if(cell.state == KATGDownloadEpisodeCellStateDownloaded) {
 		cell.state = KATGDownloadEpisodeCellStateActive;
         [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:self.show];
+        [[KATGPlaybackManager sharedManager] stop];
     }
 }
 
