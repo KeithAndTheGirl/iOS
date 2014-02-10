@@ -60,6 +60,9 @@
 - (void)setLiveMode:(bool)liveMode animated:(BOOL)animated;
 - (void)endRefreshing;
 
+-(void)willShow;
+-(void)willHide;
+
 @end
 
 @protocol KATGLiveCellDelegate <NSObject>

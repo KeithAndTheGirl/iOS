@@ -523,7 +523,7 @@ typedef enum {
 	}
 	if (![self isCurrentShow])
 	{
-		[[KATGPlaybackManager sharedManager] pause];
+		[[KATGPlaybackManager sharedManager] stop];
 		[[KATGPlaybackManager sharedManager] configureWithShow:self.show];
 		[[KATGPlaybackManager sharedManager] play];
         [self updateControlStates];

@@ -202,6 +202,13 @@
     [[KATGDataStore sharedStore] setTestLiveMode:!_liveMode];
 }
 
+-(void)willShow {
+
+}
+-(void)willHide {
+
+}
+
 #pragma mark - Playback controls
 
 - (IBAction)playButtonTapped:(id)sender
@@ -219,6 +226,7 @@
 	}
 	else
 	{
+        [[KATGPlaybackManager sharedManager] stop];
 		[[KATGPlaybackManager sharedManager] configureForLiveShow];
 		[[KATGPlaybackManager sharedManager] play];
 	}

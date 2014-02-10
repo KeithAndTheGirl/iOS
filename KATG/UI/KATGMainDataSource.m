@@ -168,6 +168,8 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		case KATGSectionLive:
 			cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGLiveCellIdentifier forIndexPath:indexPath];
 			[self configureLiveCell:(KATGLiveCell *)cell animated:NO];
+            [(KATGLiveCell*)cell willShow];
+            self.lastScrollablaCell = cell;
 			break;
 		case KATGSectionArchive:
 		{
@@ -179,6 +181,8 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 			cell = archiveCell;
             [archiveCell willShow];
             self.lastScrollablaCell = cell;
+            
+            [self.mainViewController performSelector:@selector(configureNavBar) withObject:nil afterDelay:0.5];
 			break;
 		}
         case KATGSectionYoutube:
