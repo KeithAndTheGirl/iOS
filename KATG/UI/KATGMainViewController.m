@@ -142,6 +142,8 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 	
 	[self configureTabBar];
+    self.view.autoresizingMask = 63;
+    self.collectionView.autoresizingMask = 63;
 	self.collectionView.scrollsToTop = NO;
 	self.mainDataSource.mainCollectionView = self.collectionView;
 	self.mainDataSource.mainViewController = self;
@@ -281,9 +283,9 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 #pragma mark - Rotation
 
 - (BOOL)shouldAutorotate {
-    return NO;
+    return UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad;
 }
-
+/*
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
 	[super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
@@ -292,19 +294,19 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:self.tabBar.selectedIndex];
+    [self scrollCollectionViewToIndexPath:indexPath animated:NO];
 	[super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
-	if (self.currentlyPresentedShowViewController)
-	{
-		KATGShow *show = self.currentlyPresentedShowViewController.show;
-		NSParameterAssert(show);
-		NSIndexPath *showIndexPath = [NSIndexPath indexPathForItem:[self.mainDataSource.shows indexOfObject:show] inSection:KATGSectionArchive];
-		[self scrollCollectionViewToIndexPath:showIndexPath animated:NO];
-	}
-	else
-	{
-		NSIndexPath *indexPath = [self.collectionView nearestIndexPathForContentOffset:self.collectionView.contentOffset];
-		[self scrollCollectionViewToIndexPath:indexPath animated:YES];
-	}
+    NSLog(@"%@", NSStringFromCGRect(self.view.frame));
+    [self.collectionView.collectionViewLayout invalidateLayout];
+}
+*/
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:self.tabBar.selectedIndex];
+    [self scrollCollectionViewToIndexPath:indexPath animated:NO];
+    NSLog(@"%@", NSStringFromCGRect(self.view.frame));
+    [self.collectionView.collectionViewLayout invalidateLayout];
 }
 
 - (void)scrollCollectionViewToIndexPath:(NSIndexPath *)indexPath animated:(BOOL)animated

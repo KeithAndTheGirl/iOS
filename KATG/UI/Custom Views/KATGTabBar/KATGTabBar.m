@@ -142,6 +142,7 @@
 	[super layoutSubviews];
 	
 	self.backgroundView.frame = self.bounds;
+    [self.backgroundView setNeedsDisplay];
 	self.itemContainerView.frame = self.bounds;
 	self.drawerContainerView.frame = self.bounds;
 	

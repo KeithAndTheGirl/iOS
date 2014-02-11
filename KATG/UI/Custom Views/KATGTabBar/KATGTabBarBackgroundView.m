@@ -35,10 +35,16 @@
     return self;
 }
 
+-(void)layoutSubviews {
+
+}
+
 - (void)drawRect:(CGRect)rect
 {
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	CGContextDrawImage(context, self.bounds, [[UIImage imageNamed:@"TabBarBackground.png"] CGImage]);
+    UIImage *linesImage = [UIImage imageNamed:@"TabBarLines.png"];
+	CGContextDrawImage(context, CGRectMake((self.bounds.size.width - linesImage.size.width)/2, (self.bounds.size.height - linesImage.size.height)/2, linesImage.size.width, linesImage.size.height), [linesImage CGImage]);
     /*
 	UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:rect byRoundingCorners:self.corners cornerRadii:CGSizeMake(self.cornerRadius, self.cornerRadius)];
 	[maskPath addClip];

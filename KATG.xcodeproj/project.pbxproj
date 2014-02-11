@@ -105,6 +105,8 @@
 		01EC330518A9988500156A3E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 01EC32FF18A9988500156A3E /* README.md */; };
 		01EC330618A9988500156A3E /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 01EC330018A9988500156A3E /* release_notes.md */; };
 		01EC330818A9990500156A3E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC330718A9990500156A3E /* libz.dylib */; };
+		01EC330A18A9A95900156A3E /* TabBarLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EC330918A9A95900156A3E /* TabBarLines.png */; };
+		01EC330C18A9A96000156A3E /* TabBarLines@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EC330B18A9A96000156A3E /* TabBarLines@2x.png */; };
 		01F7832518680B1900A85EA4 /* KATGYouTubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */; };
 		01F7832618680B1900A85EA4 /* KATGYouTubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
@@ -384,6 +386,8 @@
 		01EC330218A9988500156A3E /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		01EC330318A9988500156A3E /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		01EC330718A9990500156A3E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		01EC330918A9A95900156A3E /* TabBarLines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarLines.png; sourceTree = "<group>"; };
+		01EC330B18A9A96000156A3E /* TabBarLines@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarLines@2x.png"; sourceTree = "<group>"; };
 		01F7832218680B1900A85EA4 /* KATGYouTubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYouTubeViewController.h; path = "View Controllers/KATGYouTubeViewController.h"; sourceTree = "<group>"; };
 		01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeViewController.m; path = "View Controllers/KATGYouTubeViewController.m"; sourceTree = "<group>"; };
 		01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeViewController.xib; path = "View Controllers/KATGYouTubeViewController.xib"; sourceTree = "<group>"; };
@@ -940,6 +944,9 @@
 				01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */,
 				228F940E1651FDD0006A1A05 /* KATGArchiveCell.h */,
 				228F940F1651FDD0006A1A05 /* KATGArchiveCell.m */,
+				229EC8F6167175F200FB899A /* KATGShowView.h */,
+				22D07DC71676287C004EBEBB /* KATGShowView.m */,
+				012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */,
 				229A79D1167437B000792258 /* KATGScheduleCell.h */,
 				229A79D2167437B000792258 /* KATGScheduleCell.m */,
 				2280C524167917F000C76D6D /* KATGScheduleItemTableViewCell.h */,
@@ -959,9 +966,6 @@
 		229EC8F5167175D200FB899A /* KATGShowView */ = {
 			isa = PBXGroup;
 			children = (
-				229EC8F6167175F200FB899A /* KATGShowView.h */,
-				22D07DC71676287C004EBEBB /* KATGShowView.m */,
-				012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */,
 			);
 			name = KATGShowView;
 			sourceTree = "<group>";
@@ -1082,6 +1086,7 @@
 		9108996115EAE15500FB57C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01EC330718A9990500156A3E /* libz.dylib */,
 				012B4F321857A38400B59FC5 /* Security.framework */,
 				9115C14C172E2C48002942B6 /* AssetsLibrary.framework */,
 				9123757D172DBFB700A194F2 /* EventKitUI.framework */,
@@ -1375,6 +1380,8 @@
 		9115C10C172E13E5002942B6 /* TabBar */ = {
 			isa = PBXGroup;
 			children = (
+				01EC330B18A9A96000156A3E /* TabBarLines@2x.png */,
+				01EC330918A9A95900156A3E /* TabBarLines.png */,
 				0111A76E1856A08600A3F8D5 /* About.png */,
 				0111A76F1856A08600A3F8D5 /* About@2x.png */,
 				0111A7701856A08600A3F8D5 /* Schedule.png */,
@@ -1491,6 +1498,7 @@
 				01BCE82A186D13A800F096EF /* more_of_keith@2x.png in Resources */,
 				01BCE84A186D1D6F00F096EF /* welcome3.png in Resources */,
 				229A79CB16742D8C00792258 /* KATGMainViewController.xib in Resources */,
+				01EC330C18A9A96000156A3E /* TabBarLines@2x.png in Resources */,
 				017C920D185561B400E33003 /* TabBarBackground.png in Resources */,
 				012FED7A1857AA010073AEAA /* ArrowNext@2x.png in Resources */,
 				0111A7751856A08600A3F8D5 /* About@2x.png in Resources */,
@@ -1573,6 +1581,7 @@
 				01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */,
 				228D44041732177C00FA94FE /* light-bubble.png in Resources */,
 				012FED8C1857DC850073AEAA /* DownloadIcon@2x.png in Resources */,
+				01EC330A18A9A95900156A3E /* TabBarLines.png in Resources */,
 				01BCE848186D1D6F00F096EF /* welcome2.png in Resources */,
 				01BCE826186D13A800F096EF /* get_the_guide@2x.png in Resources */,
 				0111A76718569D6200A3F8D5 /* Episodes.png in Resources */,
