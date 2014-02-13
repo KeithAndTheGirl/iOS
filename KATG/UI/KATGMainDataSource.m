@@ -208,7 +208,6 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 	liveCell.scheduledEvent = event;
 	liveCell.liveShowDelegate = self.mainViewController;
 	[liveCell setLiveMode:[[KATGDataStore sharedStore] isShowLive] animated:animated];
-	[liveCell endRefreshing];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -279,6 +278,15 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 		if (cell)
 		{
 			[self configureLiveCell:cell animated:YES];
+		}
+	}
+    NSIndexPath *indexPathSh = [NSIndexPath indexPathForItem:0 inSection:KATGSectionSchedule];
+	if ([[self.mainCollectionView indexPathsForVisibleItems] containsObject:indexPathSh])
+	{
+		KATGScheduleCell *shCell = (KATGScheduleCell *)[self.mainCollectionView.visibleCells lastObject];
+		if (shCell)
+		{
+			[shCell willShow];
 		}
 	}
 }

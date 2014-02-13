@@ -21,6 +21,7 @@
 #import "KATGScheduleCell.h"
 #import "KATGContentContainerView.h"
 #import "KATGScheduleItemTableViewCell.h"
+#import "KATGDataStore.h"
 
 NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTableViewCellIdentifier";
 
@@ -57,8 +58,16 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
             _tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 56, 0);
         }
 		[self.contentView addSubview:_tableView];
+        
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+        [_tableView addSubview:self.refreshControl];
 	}
 	return self;
+}
+
+-(void)refreshTable {
+    [[KATGDataStore sharedStore] downloadEvents];
 }
 
 - (void)dealloc
@@ -80,6 +89,7 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 }
 
 -(void)willShow {
+    [self.refreshControl endRefreshing];
     _tableView.scrollsToTop = YES;
 }
 

@@ -25,8 +25,10 @@ extern NSString *const kKATGScheduleItemTableViewCellIdentifier;
 @interface KATGScheduleCell : UICollectionViewCell
 
 @property (nonatomic, readonly) UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 -(void)willShow;
 -(void)willHide;
+-(void)refreshTable;
 
 @end

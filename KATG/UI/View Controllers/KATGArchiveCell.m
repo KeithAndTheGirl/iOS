@@ -24,6 +24,7 @@
 #import "KATGShowView.h"
 #import "TDRoundedShadowView.h"
 #import "KATGButton.h"
+#import "KATGDataStore.h"
 
 NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 
@@ -64,6 +65,10 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 
         }
 		[self.contentView addSubview:_tableView];
+        
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        [self.refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+        [_tableView addSubview:self.refreshControl];
 	}
 	return self;
 }
@@ -85,6 +90,9 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 	[self.tableView reloadData];
 }
 
+-(void)refreshTable {
+    [[KATGDataStore sharedStore] downloadAllEpisodes];
+}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -112,6 +120,7 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 }
 
 -(void)willShow {
+    [self.refreshControl endRefreshing];
     _tableView.scrollsToTop = YES;
 }
 

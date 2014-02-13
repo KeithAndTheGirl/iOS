@@ -28,8 +28,10 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSArray *shows;
 @property (nonatomic, assign) KATGMainViewController *controller;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 -(void)willShow;
 -(void)willHide;
+-(void)refreshTable;
 
 @end

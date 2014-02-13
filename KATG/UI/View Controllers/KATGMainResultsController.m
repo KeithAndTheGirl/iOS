@@ -160,8 +160,8 @@
 {
 	NSParameterAssert([NSThread isMainThread]);
 	NSParameterAssert([note object] == self.readerContext);
-	NSDictionary *userInfo = [note userInfo];
-	if (userInfo[NSInvalidatedAllObjectsKey])
+//	NSDictionary *userInfo = [note userInfo];
+//	if (userInfo[NSInvalidatedAllObjectsKey])
 	{
 		[NSFetchedResultsController deleteCacheWithName:@"Events"];
 		[NSFetchedResultsController deleteCacheWithName:@"Shows"];

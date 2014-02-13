@@ -340,9 +340,4 @@
 	[self.liveShowDelegate liveShowRefreshButtonTapped:self];
 }
 
-- (void)endRefreshing
-{
-//	[self.refreshControl endRefreshing];
-}
-
 @end

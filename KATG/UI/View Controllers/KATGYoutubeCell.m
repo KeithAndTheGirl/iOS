@@ -82,6 +82,11 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
         _spinnerView.hidden = YES;
         
         [self reload];
+        
+        
+        self.refreshControl = [[UIRefreshControl alloc] init];
+        [self.refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
+        [_tableView addSubview:self.refreshControl];
 	}
 	return self;
 }
@@ -122,6 +127,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
              self.channelItems = responseObject[@"data"][@"items"];
              [self.tableView reloadData];
              _spinnerView.hidden = YES;
+             [self.refreshControl endRefreshing];
              [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ytLastUpdate"];
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -129,6 +135,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
              if([self.hostController respondsToSelector:@selector(connectivityFailed)])
                  [self.hostController performSelector:@selector(connectivityFailed) withObject:nil];
              _spinnerView.hidden = YES;
+             [self.refreshControl endRefreshing];
          }];
 }
 
