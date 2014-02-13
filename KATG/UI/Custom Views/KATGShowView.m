@@ -48,7 +48,7 @@
     NSArray *images = [[show valueForKeyPath:@"Guests.picture_url"] allObjects];
     for(int i=0; i<[images count]; i++) {
         UIImageView *imgView = [[UIImageView alloc] initWithFrame:
-                                CGRectMake(16+i*56, 60, 50, 50)];
+                                CGRectMake(16+i*56, 64, 50, 50)];
         [self.contentView addSubview:imgView];
         imgView.tag = 111;
         imgView.contentMode = UIViewContentModeScaleAspectFit;
