@@ -1,7 +1,7 @@
 #ifdef PUSHDEVSERVER
-#define kApplicationKey @"OLxCTU5vQpOBySys_rWQug"
-#define kApplicationSecret @"V5IBIl5CRl6l8gWbXTM1GQ"
+#define kApplicationKey @"y5TnGbuJTzmnHZnI1yiK6g"
+#define kApplicationSecret @"xBS6iEY3TSGiZTMeUQ8Hig"
 #else
-#define kApplicationKey @"zDQdzDMQRa2tvkWoIsiUqQ"
-#define kApplicationSecret @"14bJBSSYTMWwX0Ly3SpeYw"
+#define kApplicationKey @"rdb7LYlwQ2WbuTZZ4rPYMw"
+#define kApplicationSecret @"b6TI-VidTYehsLVwA0aWqA"
 #endif
