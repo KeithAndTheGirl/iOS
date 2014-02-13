@@ -69,6 +69,8 @@ typedef enum {
 
 @property (nonatomic) id<KATGDownloadToken> downloadToken;
 
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+
 @property (nonatomic) bool imagesRequested;
 
 // Handy things to check sometimes
@@ -125,6 +127,11 @@ typedef enum {
 	[[KATGDataStore sharedStore] downloadEpisodeDetails:self.show.episode_id];
 	
 	self.downloadToken = [[KATGDataStore sharedStore] activeEpisodeAudioDownload:self.show];
+    
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(reachabilityReturned:) forControlEvents:UIControlEventValueChanged];
+    [_tableView addSubview:self.refreshControl];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -158,17 +165,18 @@ typedef enum {
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReturned:) name:kKATGReachabilityIsReachableNotification object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:KATGDataStoreShowDidChangeNotification object:nil];
+    
     [self addPlaybackManagerKVO];
     [self addReachabilityKVO];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:kKATGReachabilityIsReachableNotification object:nil];
-    
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:KATGDataStoreShowDidChangeNotification object:nil];
+    
     	[self removePlaybackManagerKVO];
     	[self removeReachabilityKVO];
 }
@@ -221,6 +229,7 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [self.refreshControl endRefreshing];
 	// The first row in each section is a header
 	if (indexPath.row == 0 && indexPath.section != KATGShowDetailsSectionDownload)
 	{

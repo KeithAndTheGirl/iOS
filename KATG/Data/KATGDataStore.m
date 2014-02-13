@@ -72,6 +72,7 @@ NSString *const KATGDataStoreIsShowLiveDidChangeNotification = @"KATGDataStoreIs
 NSString *const kKATGDataStoreIsShowLiveKey = @"isShowLive";
 
 NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEventsDidChangeNotification";
+NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidChangeNotification";
 
 @interface KATGDataStore ()
 
@@ -638,6 +639,9 @@ NSString *const KATGDataStoreEventsDidChangeNotification = @"KATGDataStoreEvents
 				show.desc = [noteLines copy];
 			}
             show.forum_url = episodeDetails[@"forum_url"];
+            CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:KATGDataStoreShowDidChangeNotification object:nil];
+            });
 			[self saveChildContext:context completion:nil];
 		}
 	}];

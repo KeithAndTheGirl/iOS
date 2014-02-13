@@ -160,15 +160,15 @@
 {
 	NSParameterAssert([NSThread isMainThread]);
 	NSParameterAssert([note object] == self.readerContext);
-//	NSDictionary *userInfo = [note userInfo];
-//	if (userInfo[NSInvalidatedAllObjectsKey])
+	NSDictionary *userInfo = [note userInfo];
+	if (userInfo[NSInvalidatedAllObjectsKey])
 	{
 		[NSFetchedResultsController deleteCacheWithName:@"Events"];
 		[NSFetchedResultsController deleteCacheWithName:@"Shows"];
 		[self performFetch:nil];
-		[self.delegate reloadAllData];
-		return;
 	}
+    
+    [self.delegate reloadAllData];
 }
 
 //- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {}

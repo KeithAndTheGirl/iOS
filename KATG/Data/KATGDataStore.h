@@ -61,6 +61,7 @@ extern NSString *const KATGDataStoreIsShowLiveDidChangeNotification;
 // Events updated
 // This shouldn't be needed, but working around an occasional failure on first load for now
 extern NSString *const KATGDataStoreEventsDidChangeNotification;
+extern NSString *const KATGDataStoreShowDidChangeNotification;
 
 // Main thread only reader context
 @property (strong, nonatomic, readonly) NSManagedObjectContext *readerContext;
