@@ -20,11 +20,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class KATGMainViewController;
+
 extern NSString *const kKATGYoutubeTableViewCellIdentifier;
 
 @interface KATGYoutubeCell : UICollectionViewCell
 
-@property (nonatomic, weak) UIViewController *hostController;
+@property (nonatomic, weak) KATGMainViewController *controller;
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, readonly) UIView *spinnerView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;

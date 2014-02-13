@@ -21,6 +21,7 @@
 #import "KATGAboutCell.h"
 #import "KATGContentContainerView.h"
 #import "KATGScheduleItemTableViewCell.h"
+#import "KATGPlaybackManager.h"
 
 @implementation KATGAboutCell
 
@@ -63,9 +64,49 @@
 
 -(void)willShow {
     scrollView.scrollsToTop = YES;
+    [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+    [self configureNavBar];
 }
 -(void)willHide {
     scrollView.scrollsToTop = NO;
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self configureNavBar];
+}
+
+- (void)configureNavBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+	{
+		UIView *v = [scrollView viewWithTag:1313];
+        if(!v) {
+            UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+            nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
+            [nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+            nowPlayingButton.tag = 1313;
+            
+            [scrollView addSubview:nowPlayingButton];
+            UIEdgeInsets contentInsets = scrollView.contentInset;
+            contentInsets.top += 48;
+            scrollView.contentInset = contentInsets;
+            [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y-48) animated:NO];
+        }
+	}
+	else
+	{
+        UIView *v = [scrollView viewWithTag:1313];
+        if(v) {
+            [v removeFromSuperview];
+            UIEdgeInsets contentInsets = scrollView.contentInset;
+            contentInsets.top -= 48;
+            scrollView.contentInset = contentInsets;
+        }
+	}
 }
 
 #pragma mark Actions

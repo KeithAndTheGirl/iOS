@@ -33,6 +33,5 @@
 
 - (void)presentShow:(KATGShow *)show fromArchiveCell:(KATGArchiveCell *)cell;
 - (void)closeActiveShowToArchiveCell:(KATGArchiveCell *)cell;
-- (void)configureNavBar;
 
 @end

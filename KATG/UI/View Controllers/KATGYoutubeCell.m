@@ -24,6 +24,8 @@
 #import "AFNetworking.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "KATGYouTubeViewController.h"
+#import "KATGPlaybackManager.h"
+#import "KATGMainViewController.h"
 
 NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
@@ -132,8 +134,8 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
          }
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"%@", [error description]);
-             if([self.hostController respondsToSelector:@selector(connectivityFailed)])
-                 [self.hostController performSelector:@selector(connectivityFailed) withObject:nil];
+             if([self.controller respondsToSelector:@selector(connectivityFailed)])
+                 [self.controller performSelector:@selector(connectivityFailed) withObject:nil];
              _spinnerView.hidden = YES;
              [self.refreshControl endRefreshing];
          }];
@@ -157,7 +159,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
     NSDictionary *item = self.channelItems[indexPath.row];
     KATGYouTubeViewController *youtubeController = [[KATGYouTubeViewController alloc] init];
     youtubeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-     [self.hostController presentViewController:youtubeController animated:YES completion:^{
+     [self.controller presentViewController:youtubeController animated:YES completion:^{
          
      }];
     
@@ -166,10 +168,37 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 -(void)willShow {
     _tableView.scrollsToTop = YES;
+    [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+    [self configureNavBar];
 }
 
 -(void)willHide {
     _tableView.scrollsToTop = NO;
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self configureNavBar];
+}
+
+- (void)configureNavBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+	{
+		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+		nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
+		[nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+        nowPlayingButton.tag = 1313;
+        
+        _tableView.tableHeaderView = nowPlayingButton;
+	}
+	else
+	{
+        _tableView.tableHeaderView = nil;
+	}
 }
 
 @end

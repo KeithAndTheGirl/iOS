@@ -164,6 +164,7 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 			self.eventsTableView = ((KATGScheduleCell *)cell).tableView;
             [(KATGScheduleCell*)cell willShow];
             self.lastScrollablaCell = cell;
+            ((KATGScheduleCell*)cell).controller = self.mainViewController;
 			break;
 		case KATGSectionLive:
 			cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGLiveCellIdentifier forIndexPath:indexPath];
@@ -181,19 +182,18 @@ static NSString *const kKATGAboutCellIdentifier = @"kKATGAboutCellIdentifier";
 			cell = archiveCell;
             [archiveCell willShow];
             self.lastScrollablaCell = cell;
-            
-            [self.mainViewController performSelector:@selector(configureNavBar) withObject:nil afterDelay:0.5];
 			break;
 		}
         case KATGSectionYoutube:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGYoutubeCellIdentifier forIndexPath:indexPath];
-            ((KATGYoutubeCell*)cell).hostController = self.mainViewController;
+            ((KATGYoutubeCell*)cell).controller = self.mainViewController;
             [(KATGYoutubeCell*)cell willShow];
             self.lastScrollablaCell = cell;
 			break;
         case KATGSectionAbout:
             cell = [collectionView dequeueReusableCellWithReuseIdentifier:kKATGAboutCellIdentifier forIndexPath:indexPath];
             [(KATGAboutCell*)cell willShow];
+            ((KATGAboutCell*)cell).controller = self.mainViewController;
             self.lastScrollablaCell = cell;
 			break;
 	}

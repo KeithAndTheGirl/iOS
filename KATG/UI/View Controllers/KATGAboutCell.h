@@ -19,6 +19,8 @@
 //  
 
 #import <UIKit/UIKit.h>
+#import "KATGMainViewController.h"
+
 
 extern NSString *const kKATGAboutTableViewCellIdentifier;
 
@@ -26,6 +28,7 @@ extern NSString *const kKATGAboutTableViewCellIdentifier;
     IBOutlet UIView *content;
     UIScrollView *scrollView;
 }
+@property (nonatomic, assign) KATGMainViewController *controller;
 
 -(IBAction)facebookAction:(id)sender;
 -(IBAction)twitterAction:(id)sender;

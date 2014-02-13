@@ -25,6 +25,7 @@
 #import "TDRoundedShadowView.h"
 #import "KATGButton.h"
 #import "KATGDataStore.h"
+#import "KATGPlaybackManager.h"
 
 NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 
@@ -122,10 +123,37 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 -(void)willShow {
     [self.refreshControl endRefreshing];
     _tableView.scrollsToTop = YES;
+    [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+    [self configureNavBar];
 }
 
 -(void)willHide {
     _tableView.scrollsToTop = NO;
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self configureNavBar];
+}
+
+- (void)configureNavBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+	{
+		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+		nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
+		[nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+        nowPlayingButton.tag = 1313;
+        
+        _tableView.tableHeaderView = nowPlayingButton;
+	}
+	else
+	{
+        _tableView.tableHeaderView = nil;
+	}
 }
 
 @end

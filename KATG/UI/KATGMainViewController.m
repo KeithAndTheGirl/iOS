@@ -44,6 +44,8 @@
 #import "KATGScheduleCell.h"
 #import "KATGLiveCell.h"
 #import "KATGArchiveCell.h"
+#import "KATGLiveCell.h"
+#import "KATGYoutubeCell.h"
 
 #import "KATGDataStore.h"
 #import "KATGShow.h"
@@ -156,7 +158,6 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self configureNavBar];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -205,30 +206,6 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 #endif
 }
 
-- (void)configureNavBar
-{
-	if (![self isViewLoaded])
-	{
-		return;
-	}
-    
-    KATGArchiveCell *cell = (KATGArchiveCell *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:KATGSectionArchive]];
-    
-	if ([[KATGPlaybackManager sharedManager] currentShow] &&
-        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
-	{
-		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
-		nowPlayingButton.frame = CGRectMake(0.0f, 0.0f, 320.0f, 48.0f);
-		[nowPlayingButton addTarget:self action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
-        
-        cell.tableView.tableHeaderView = nowPlayingButton;
-	}
-	else
-	{
-		cell.tableView.tableHeaderView = nil;
-	}
-}
 
 #pragma mark - Keyboard
 
@@ -545,7 +522,6 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [self configureNavBar];
 	if (context == KATGCurrentShowObserverContext)
 	{
 	}

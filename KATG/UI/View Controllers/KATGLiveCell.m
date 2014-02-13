@@ -28,6 +28,7 @@
 #import "KATGPlaybackManager.h"
 #import "UIColor+KATGColors.h"
 #import "KATGDataStore.h"
+#import "KATGMainViewController.h"
 
 @interface KATGTimerTarget : NSProxy
 @property (weak, nonatomic) id target;
@@ -202,13 +203,6 @@
     [[KATGDataStore sharedStore] setTestLiveMode:!_liveMode];
 }
 
--(void)willShow {
-
-}
--(void)willHide {
-
-}
-
 #pragma mark - Playback controls
 
 - (IBAction)playButtonTapped:(id)sender
@@ -312,6 +306,9 @@
 				self.currentAudioPlayerState = [[KATGPlaybackManager sharedManager] state];
 			});
 		}
+        else {
+            [self configureNavBar];
+        }
 	}
 	else
 	{
@@ -338,6 +335,41 @@
 - (void)refresh:(id)sender
 {
 	[self.liveShowDelegate liveShowRefreshButtonTapped:self];
+}
+
+
+-(void)willShow {
+    [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+    [self configureNavBar];
+}
+
+-(void)willHide {
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+}
+
+- (void)configureNavBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+	{
+		UIView *v = [self viewWithTag:1313];
+        if(!v) {
+            UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+            nowPlayingButton.frame = CGRectMake(0.0f, 20.0f, 320.0f, 48.0f);
+            [nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+            nowPlayingButton.tag = 1313;
+            
+            [self addSubview:nowPlayingButton];
+        }
+	}
+	else
+	{
+        UIView *v = [self viewWithTag:1313];
+        if(v) {
+            [v removeFromSuperview];
+        }
+	}
 }
 
 @end

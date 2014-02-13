@@ -22,7 +22,7 @@
 #import "KATGAudioPlayerController.h"
 #import "KATGScheduledEvent.h"
 
-@class KATGButton, KATGTimerTarget, KATGControlButton;
+@class KATGButton, KATGTimerTarget, KATGControlButton, KATGMainViewController;
 
 @protocol KATGLiveCellDelegate;
 
@@ -52,6 +52,8 @@
 @property (nonatomic) IBOutlet UIActivityIndicatorView *loadingIndicator;
 
 @property (nonatomic) IBOutlet UIButton *liveToggleButton;
+
+@property (nonatomic, assign) KATGMainViewController *controller;
 
 - (IBAction)playButtonTapped:(id)sender;
 - (IBAction)toggleLive:(id)sender;

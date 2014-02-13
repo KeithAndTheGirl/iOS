@@ -19,6 +19,7 @@
 //  
 
 #import <UIKit/UIKit.h>
+#import "KATGMainViewController.h"
 
 extern NSString *const kKATGScheduleItemTableViewCellIdentifier;
 
@@ -26,6 +27,7 @@ extern NSString *const kKATGScheduleItemTableViewCellIdentifier;
 
 @property (nonatomic, readonly) UITableView *tableView;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, assign) KATGMainViewController *controller;
 
 -(void)willShow;
 -(void)willHide;
