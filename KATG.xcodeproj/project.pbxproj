@@ -148,7 +148,7 @@
 		229EC8DB1670639B00FB899A /* KATGGuest.m in Sources */ = {isa = PBXBuildFile; fileRef = 229EC8DA1670639B00FB899A /* KATGGuest.m */; };
 		22A3199616EBF4DD007C7776 /* KATGImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A3199516EBF4DD007C7776 /* KATGImagesViewController.m */; };
 		22A3199A16EBF6CE007C7776 /* KATGShowImageThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 22A3199916EBF6CE007C7776 /* KATGShowImageThumbnailCell.m */; };
-		22AF5B9A161018F1007EA381 /* KATGChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AF5B99161018F1007EA381 /* KATGChatViewController.m */; };
+		22AF5B9A161018F1007EA381 /* KATGWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AF5B99161018F1007EA381 /* KATGWebViewController.m */; };
 		22AFD3E0164965F6007A88F4 /* KATGTabBarBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AFD3DF164965F6007A88F4 /* KATGTabBarBackgroundView.m */; };
 		22AFD3E9164971BD007A88F4 /* KATGTabBarStyledImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AFD3E8164971BD007A88F4 /* KATGTabBarStyledImageView.m */; };
 		22AFD3F8164980A6007A88F4 /* KATGSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 22AFD3F7164980A6007A88F4 /* KATGSettingsViewController.m */; };
@@ -463,8 +463,8 @@
 		22A3199516EBF4DD007C7776 /* KATGImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGImagesViewController.m; path = "View Controllers/KATGImagesViewController.m"; sourceTree = "<group>"; };
 		22A3199816EBF6CE007C7776 /* KATGShowImageThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGShowImageThumbnailCell.h; path = "Custom Views/KATGShowImageThumbnailCell.h"; sourceTree = "<group>"; };
 		22A3199916EBF6CE007C7776 /* KATGShowImageThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGShowImageThumbnailCell.m; path = "Custom Views/KATGShowImageThumbnailCell.m"; sourceTree = "<group>"; };
-		22AF5B98161018F1007EA381 /* KATGChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGChatViewController.h; path = "View Controllers/KATGChatViewController.h"; sourceTree = "<group>"; };
-		22AF5B99161018F1007EA381 /* KATGChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGChatViewController.m; path = "View Controllers/KATGChatViewController.m"; sourceTree = "<group>"; };
+		22AF5B98161018F1007EA381 /* KATGWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGWebViewController.h; path = "View Controllers/KATGWebViewController.h"; sourceTree = "<group>"; };
+		22AF5B99161018F1007EA381 /* KATGWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGWebViewController.m; path = "View Controllers/KATGWebViewController.m"; sourceTree = "<group>"; };
 		22AF5B9B161019D4007EA381 /* constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 		22AFD3DE164965F6007A88F4 /* KATGTabBarBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGTabBarBackgroundView.h; path = "Custom Views/KATGTabBar/KATGTabBarBackgroundView.h"; sourceTree = "<group>"; };
 		22AFD3DF164965F6007A88F4 /* KATGTabBarBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGTabBarBackgroundView.m; path = "Custom Views/KATGTabBar/KATGTabBarBackgroundView.m"; sourceTree = "<group>"; };
@@ -902,8 +902,8 @@
 		228F940A1651FD7C006A1A05 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				22AF5B98161018F1007EA381 /* KATGChatViewController.h */,
-				22AF5B99161018F1007EA381 /* KATGChatViewController.m */,
+				22AF5B98161018F1007EA381 /* KATGWebViewController.h */,
+				22AF5B99161018F1007EA381 /* KATGWebViewController.m */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1668,7 +1668,7 @@
 				91089D8315EAEAD700FB57C3 /* KATGAudioSessionManager.m in Sources */,
 				2281C309160DE9CD000ACAAB /* KATGCollectionViewController.m in Sources */,
 				012B4F2C1857A2ED00B59FC5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
-				22AF5B9A161018F1007EA381 /* KATGChatViewController.m in Sources */,
+				22AF5B9A161018F1007EA381 /* KATGWebViewController.m in Sources */,
 				227270F51648BFB7006E4FB7 /* KATGTabBar.m in Sources */,
 				012B4F311857A2ED00B59FC5 /* UIWebView+AFNetworking.m in Sources */,
 				01199AEC186D7EDF003CFF16 /* KATGForumCell.m in Sources */,

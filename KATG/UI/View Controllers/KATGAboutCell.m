@@ -22,6 +22,7 @@
 #import "KATGContentContainerView.h"
 #import "KATGScheduleItemTableViewCell.h"
 #import "KATGPlaybackManager.h"
+#import "KATGWebViewController.h"
 
 @implementation KATGAboutCell
 
@@ -111,23 +112,32 @@
 
 #pragma mark Actions
 -(IBAction)facebookAction:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://facebook.com/keithandthegirl"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/16492114957"]];
 }
 
 -(IBAction)twitterAction:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/keithandthegirl"]];
+    if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"twitter://user?id=14438295"]])
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"twitter://user?id=14438295"]];
+    else if([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"http://twitter.com/keithandthegirl"]])
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/keithandthegirl"]];
 }
 
 -(IBAction)keithAction:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.keithandthegirl.com/hosts.aspx#keith"]];
+    KATGWebViewController *webCtl = [[KATGWebViewController alloc] init];
+    webCtl.urlString = @"http://www.keithandthegirl.com/hosts.aspx#keith";
+    [self.controller presentViewController:webCtl animated:YES completion:nil];
 }
 
 -(IBAction)chemdaAction:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.keithandthegirl.com/hosts.aspx#chemda"]];
+    KATGWebViewController *webCtl = [[KATGWebViewController alloc] init];
+    webCtl.urlString = @"http://www.keithandthegirl.com/hosts.aspx#chemda";
+    [self.controller presentViewController:webCtl animated:YES completion:nil];
 }
 
 -(IBAction)guideAction:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://ultimatepodcastingguide.com/"]];
+    KATGWebViewController *webCtl = [[KATGWebViewController alloc] init];
+    webCtl.urlString = @"http://ultimatepodcastingguide.com/";
+    [self.controller presentViewController:webCtl animated:YES completion:nil];
 }
 
 @end

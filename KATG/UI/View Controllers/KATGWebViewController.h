@@ -1,5 +1,5 @@
 //
-//  KATGChatViewController.h
+//  KATGWebViewController.h
 //  KATG
 //
 //  Created by Timothy Donnelly on 9/24/12.
@@ -20,6 +20,8 @@
 
 #import "KATGViewController.h"
 
-@interface KATGChatViewController : KATGViewController
+@interface KATGWebViewController : KATGViewController
+
+@property (nonatomic, retain) NSString *urlString;
 
 @end

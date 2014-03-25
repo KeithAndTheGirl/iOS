@@ -39,7 +39,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"c36f3090-c5d1-4df9-b6a5-ed4b311c9c1d"];
+    [TestFlight takeOff:@"1793cbe2-d3b6-47a5-8122-d7ee9309d4eb"];
 
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
