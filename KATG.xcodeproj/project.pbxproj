@@ -1818,7 +1818,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/nick/Projects/Hillside\\ Holdings/KATG/KATGiOS/KATG/ThirdParty/TestFlightSDK2",
+					KATG/ThirdParty/TestFlightSDK2,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "D12D5842-D7EA-4570-A330-78CD736B9DC2";
@@ -1838,7 +1838,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/nick/Projects/Hillside\\ Holdings/KATG/KATGiOS/KATG/ThirdParty/TestFlightSDK2",
+					KATG/ThirdParty/TestFlightSDK2,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1880,7 +1880,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/nick/Projects/Hillside\\ Holdings/KATG/KATGiOS/KATG/ThirdParty/TestFlightSDK2",
+					KATG/ThirdParty/TestFlightSDK2,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "F3F5B1ED-B316-410F-8C99-94F2A00787B3";
