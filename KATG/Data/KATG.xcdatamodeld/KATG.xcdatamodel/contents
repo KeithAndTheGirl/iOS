@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="3" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event" representedClassName="KATGScheduledEvent" syncable="YES">
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventid" optional="YES" attributeType="String" syncable="YES"/>
@@ -27,6 +27,19 @@
         <relationship name="guest" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Guest" inverseName="image" inverseEntity="Guest" syncable="YES"/>
         <relationship name="show" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="images" inverseEntity="Show" syncable="YES"/>
     </entity>
+    <entity name="Series" representedClassName="KATGSeries" syncable="YES">
+        <attribute name="cover_image_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="episode_count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="episode_number_max" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="forum_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="prefix" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="preview_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="series_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="sort_order" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vip_status" optional="YES" attributeType="Boolean" syncable="YES"/>
+    </entity>
     <entity name="Show" representedClassName="KATGShow" syncable="YES">
         <attribute name="access" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,9 +55,10 @@
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="show" inverseEntity="Image" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Guest" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Image" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Show" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Event" positionX="0" positionY="-366" width="128" height="150"/>
+        <element name="Guest" positionX="457" positionY="-450" width="128" height="165"/>
+        <element name="Image" positionX="475" positionY="-198" width="128" height="135"/>
+        <element name="Series" positionX="234" positionY="-270" width="128" height="210"/>
+        <element name="Show" positionX="198" positionY="-387" width="128" height="225"/>
     </elements>
 </model>

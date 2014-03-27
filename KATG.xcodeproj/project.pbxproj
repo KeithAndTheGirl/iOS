@@ -99,6 +99,7 @@
 		01D0CE13185C16DA00EB88B3 /* KATGLiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */; };
 		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
+		01DE295B18E283CB00F87022 /* KATGSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE295A18E283CB00F87022 /* KATGSeries.m */; };
 		01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AD1859B230002AF906 /* SliderThumb.png */; };
 		01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */; };
 		01EC330418A9988500156A3E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC32FE18A9988500156A3E /* libTestFlight.a */; };
@@ -377,6 +378,8 @@
 		01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveCell.xib; path = "Custom Views/KATGLiveCell.xib"; sourceTree = "<group>"; };
 		01D0CE14185C17C600EB88B3 /* LiveBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = LiveBackground.png; path = "Supporting Files/Images/Live/LiveBackground.png"; sourceTree = "<group>"; };
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
+		01DE295918E283CB00F87022 /* KATGSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGSeries.h; sourceTree = "<group>"; };
+		01DE295A18E283CB00F87022 /* KATGSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGSeries.m; sourceTree = "<group>"; };
 		01EAC4AD1859B230002AF906 /* SliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderThumb.png; sourceTree = "<group>"; };
 		01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SliderThumb@2x.png"; sourceTree = "<group>"; };
 		01EC32FE18A9988500156A3E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -1417,6 +1420,8 @@
 				910899BE15EAE44C00FB57C3 /* KATG.xcdatamodeld */,
 				229EC8D3167060DC00FB899A /* KATGShow.h */,
 				229EC8D4167060DC00FB899A /* KATGShow.m */,
+				01DE295918E283CB00F87022 /* KATGSeries.h */,
+				01DE295A18E283CB00F87022 /* KATGSeries.m */,
 				229EC8D91670639B00FB899A /* KATGGuest.h */,
 				229EC8DA1670639B00FB899A /* KATGGuest.m */,
 				229EC8D61670639300FB899A /* KATGImage.h */,
@@ -1705,6 +1710,7 @@
 				22C508521676F4D900D44217 /* KATGShowImagesTableViewCell.m in Sources */,
 				012B4F281857A2ED00B59FC5 /* AFURLRequestSerialization.m in Sources */,
 				2280C51A1679009D00C76D6D /* KATGShowControlsView.m in Sources */,
+				01DE295B18E283CB00F87022 /* KATGSeries.m in Sources */,
 				2280C51E1679089000C76D6D /* KATGControlButton.m in Sources */,
 				2280C5221679100C00C76D6D /* KATGContentContainerView.m in Sources */,
 				012B4F301857A2ED00B59FC5 /* UIProgressView+AFNetworking.m in Sources */,

@@ -25,6 +25,7 @@
 #import "KATGGuest.h"
 #import "KATGImage.h"
 #import "KATGScheduledEvent.h"
+#import "KATGSeries.h"
 
 #import "ESHTTPOperation.h"
 #import "ESJSONOperation.h"
@@ -296,9 +297,37 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 
 - (void)pollForData
 {
+    [self downloadAllSeries];
 	[self downloadAllEpisodes];
 	[self downloadEvents];
 	[self checkLive];
+}
+
+- (void)downloadAllSeries
+{
+	//	Retrieve list of shows
+	NSURL *url = [NSURL URLWithString:kSeriesListURIAddress relativeToURL:self.baseURL];
+	NSParameterAssert(url);
+	if (![self networkOperationPreflight:url])
+	{
+		return;
+	}
+	ShowsLog(@"Download List of Series");
+	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
+	ESJSONOperation *op = [ESJSONOperation newJSONOperationWithRequest:request
+															   success:^(ESJSONOperation *op, NSArray *JSON) {
+																   NSParameterAssert([JSON isKindOfClass:[NSArray class]]);
+																   NSParameterAssert(([JSON count] > 0));
+																   if ([JSON count] > 0)
+																   {
+																	   [self processSeriesList:JSON];
+																   }
+															   } failure:^(ESJSONOperation *op) {
+																   ShowsLog(@"Series List Download Failed %@", op.error);
+																   [self handleError:op.error];
+															   }];
+	[self.networkQueue addOperation:op];
 }
 
 - (void)downloadAllEpisodes
@@ -545,6 +574,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 {
 	dispatch_async(dispatch_get_main_queue(), ^(void) {
 		[self startPolling];
+        [self downloadAllSeries];
 		[self downloadAllEpisodes];
 		[self downloadEvents];
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:kKATGReachabilityIsReachableNotification object:nil];
@@ -568,6 +598,31 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 }
 
 #pragma mark - Parse incoming data
+- (void)processSeriesList:(NSArray *)series
+{
+	NSManagedObjectContext *context = [self childContext];
+	[context performBlock:^{
+		@autoreleasepool {
+			for (NSDictionary *seriesDictionary in series) {
+                if (!seriesDictionary) {
+                    NSParameterAssert(seriesDictionary);
+                    continue;
+                }
+                NSNumber *series_id = [KATGSeries seriesIDForShowDictionary:seriesDictionary];
+                KATGSeries *series = [self fetchSeriesWithID:series_id context:context];
+                if (!series) {
+                    series = [NSEntityDescription insertNewObjectForEntityForName:[KATGSeries katg_entityName] inManagedObjectContext:context];
+                    series.series_id = series_id;
+                }
+                NSParameterAssert(series);
+                if (series) {
+                    [series configureWithDictionary:seriesDictionary];
+                }
+			}
+			[self saveChildContext:context completion:nil];
+		}
+	}];
+}
 
 - (void)processEpisodeList:(NSArray *)shows
 {
@@ -690,6 +745,30 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 			}];
 		}
 	}];
+}
+
+#pragma mark - Series
+- (KATGSeries *)fetchSeriesWithID:(NSNumber *)seriesID context:(NSManagedObjectContext *)context
+{
+	NSParameterAssert(context);
+	if (!seriesID)
+	{
+		NSParameterAssert(seriesID);
+		return nil;
+	}
+	NSFetchRequest *request = [NSFetchRequest new];
+	request.fetchLimit = 1;
+	NSEntityDescription *entity = [NSEntityDescription entityForName:[KATGSeries katg_entityName] inManagedObjectContext:context];
+	request.entity = entity;
+	request.predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", KATGSeriesIDAttributeName, seriesID];
+	NSError *error;
+	NSArray *result = [context executeFetchRequest:request error:&error];
+	if (!result)
+	{
+		[NSException raise:@"Fetch failed" format:@"%@", [error localizedDescription]];
+	}
+	NSParameterAssert([result count] < 2);
+	return [result lastObject];
 }
 
 #pragma mark - Shows
