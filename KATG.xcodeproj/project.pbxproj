@@ -100,6 +100,14 @@
 		01D0CE16185C17C600EB88B3 /* LiveBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE14185C17C600EB88B3 /* LiveBackground.png */; };
 		01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */; };
 		01DE295B18E283CB00F87022 /* KATGSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE295A18E283CB00F87022 /* KATGSeries.m */; };
+		01DE296318E298ED00F87022 /* KATGSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE296118E298ED00F87022 /* KATGSeriesViewController.m */; };
+		01DE296418E298ED00F87022 /* KATGSeriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DE296218E298ED00F87022 /* KATGSeriesViewController.xib */; };
+		01DE296618E2998200F87022 /* SeriesBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01DE296518E2998200F87022 /* SeriesBackground.png */; };
+		01DE29B218E3BFDE00F87022 /* TitleBackground.png in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29B118E3BFDE00F87022 /* TitleBackground.png */; };
+		01DE29B418E3C14400F87022 /* TitleBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29B318E3C14400F87022 /* TitleBackground@2x.png */; };
+		01DE29B718E3C21400F87022 /* TitleBackgroundVip.png in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29B518E3C21400F87022 /* TitleBackgroundVip.png */; };
+		01DE29B818E3C21400F87022 /* TitleBackgroundVip@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29B618E3C21400F87022 /* TitleBackgroundVip@2x.png */; };
+		01DE29BB18E3C55900F87022 /* KATGSeriesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE29BA18E3C55900F87022 /* KATGSeriesCell.m */; };
 		01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AD1859B230002AF906 /* SliderThumb.png */; };
 		01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */; };
 		01EC330418A9988500156A3E /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC32FE18A9988500156A3E /* libTestFlight.a */; };
@@ -380,6 +388,16 @@
 		01D0CE15185C17C600EB88B3 /* LiveBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "LiveBackground@2x.png"; path = "Supporting Files/Images/Live/LiveBackground@2x.png"; sourceTree = "<group>"; };
 		01DE295918E283CB00F87022 /* KATGSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGSeries.h; sourceTree = "<group>"; };
 		01DE295A18E283CB00F87022 /* KATGSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGSeries.m; sourceTree = "<group>"; };
+		01DE296018E298ED00F87022 /* KATGSeriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGSeriesViewController.h; path = "View Controllers/KATGSeriesViewController.h"; sourceTree = "<group>"; };
+		01DE296118E298ED00F87022 /* KATGSeriesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGSeriesViewController.m; path = "View Controllers/KATGSeriesViewController.m"; sourceTree = "<group>"; };
+		01DE296218E298ED00F87022 /* KATGSeriesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGSeriesViewController.xib; path = "View Controllers/KATGSeriesViewController.xib"; sourceTree = "<group>"; };
+		01DE296518E2998200F87022 /* SeriesBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = SeriesBackground.png; path = "Supporting Files/Images/SeriesBackground.png"; sourceTree = "<group>"; };
+		01DE29B118E3BFDE00F87022 /* TitleBackground.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TitleBackground.png; path = "Supporting Files/Images/TitleBackground.png"; sourceTree = "<group>"; };
+		01DE29B318E3C14400F87022 /* TitleBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TitleBackground@2x.png"; path = "Supporting Files/Images/TitleBackground@2x.png"; sourceTree = "<group>"; };
+		01DE29B518E3C21400F87022 /* TitleBackgroundVip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = TitleBackgroundVip.png; path = "Supporting Files/Images/TitleBackgroundVip.png"; sourceTree = "<group>"; };
+		01DE29B618E3C21400F87022 /* TitleBackgroundVip@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "TitleBackgroundVip@2x.png"; path = "Supporting Files/Images/TitleBackgroundVip@2x.png"; sourceTree = "<group>"; };
+		01DE29B918E3C55900F87022 /* KATGSeriesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGSeriesCell.h; path = "View Controllers/KATGSeriesCell.h"; sourceTree = "<group>"; };
+		01DE29BA18E3C55900F87022 /* KATGSeriesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGSeriesCell.m; path = "View Controllers/KATGSeriesCell.m"; sourceTree = "<group>"; };
 		01EAC4AD1859B230002AF906 /* SliderThumb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SliderThumb.png; sourceTree = "<group>"; };
 		01EAC4AE1859B230002AF906 /* SliderThumb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SliderThumb@2x.png"; sourceTree = "<group>"; };
 		01EC32FE18A9988500156A3E /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
@@ -721,6 +739,18 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		01DE295F18E298BD00F87022 /* Series */ = {
+			isa = PBXGroup;
+			children = (
+				01DE296018E298ED00F87022 /* KATGSeriesViewController.h */,
+				01DE296118E298ED00F87022 /* KATGSeriesViewController.m */,
+				01DE296218E298ED00F87022 /* KATGSeriesViewController.xib */,
+				01DE29B918E3C55900F87022 /* KATGSeriesCell.h */,
+				01DE29BA18E3C55900F87022 /* KATGSeriesCell.m */,
+			);
+			name = Series;
+			sourceTree = "<group>";
+		};
 		01EC32FD18A9988500156A3E /* TestFlightSDK2 */ = {
 			isa = PBXGroup;
 			children = (
@@ -875,6 +905,7 @@
 		2281C302160DE865000ACAAB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01DE295F18E298BD00F87022 /* Series */,
 				2280C52A16799A8A00C76D6D /* Main */,
 				228F9411165207D1006A1A05 /* Show Details */,
 				9115C0F7172E0AD4002942B6 /* Live Show */,
@@ -998,6 +1029,11 @@
 		22AFD3E2164970B4007A88F4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				01DE29B518E3C21400F87022 /* TitleBackgroundVip.png */,
+				01DE29B618E3C21400F87022 /* TitleBackgroundVip@2x.png */,
+				01DE29B318E3C14400F87022 /* TitleBackground@2x.png */,
+				01DE29B118E3BFDE00F87022 /* TitleBackground.png */,
+				01DE296518E2998200F87022 /* SeriesBackground.png */,
 				01199AED186D814F003CFF16 /* comments.png */,
 				01199AEE186D814F003CFF16 /* comments@2x.png */,
 				01BCE830186D1D6F00F096EF /* get_started.png */,
@@ -1538,6 +1574,7 @@
 				9115C122172E13E5002942B6 /* skip-forward.png in Resources */,
 				01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */,
 				01BCE84B186D1D6F00F096EF /* welcome3@2x.png in Resources */,
+				01DE29B818E3C21400F87022 /* TitleBackgroundVip@2x.png in Resources */,
 				012FEE161857E6A40073AEAA /* ControlsBackground.png in Resources */,
 				9115C123172E13E5002942B6 /* skip-forward@2x.png in Resources */,
 				012FED7C1857C0000073AEAA /* KATGShowViewController.xib in Resources */,
@@ -1576,6 +1613,7 @@
 				0111A7781856A08600A3F8D5 /* Youtube.png in Resources */,
 				228D43FD1731DB3600FA94FE /* cigarette-smoke.png in Resources */,
 				01BCE82F186D1BC800F096EF /* KATGWelcomeViewController.xib in Resources */,
+				01DE29B218E3BFDE00F87022 /* TitleBackground.png in Resources */,
 				228D44021732113B00FA94FE /* bubble.png in Resources */,
 				017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */,
 				01952349185CA71300B744E1 /* StopLiveButton@2x.png in Resources */,
@@ -1591,6 +1629,7 @@
 				01BCE826186D13A800F096EF /* get_the_guide@2x.png in Resources */,
 				0111A76718569D6200A3F8D5 /* Episodes.png in Resources */,
 				9131561217717CE000475CAE /* Entitlements.plist in Resources */,
+				01DE29B418E3C14400F87022 /* TitleBackground@2x.png in Resources */,
 				91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */,
 				01BCE83E186D1D6F00F096EF /* get_started.png in Resources */,
 				91F45A17177F881D0091AFDA /* icon72@2x.png in Resources */,
@@ -1604,7 +1643,9 @@
 				91F45A1B177F881D0091AFDA /* icon57@2x.png in Resources */,
 				01BCE83F186D1D6F00F096EF /* get_started@2x.png in Resources */,
 				012FED831857C5870073AEAA /* CloseButton.png in Resources */,
+				01DE29B718E3C21400F87022 /* TitleBackgroundVip.png in Resources */,
 				01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */,
+				01DE296618E2998200F87022 /* SeriesBackground.png in Resources */,
 				01BCE825186D13A800F096EF /* get_the_guide.png in Resources */,
 				01BCE814186D038800F096EF /* about_background@2x.png in Resources */,
 				91F45A1C177F881D0091AFDA /* icon57.png in Resources */,
@@ -1614,6 +1655,7 @@
 				0111A7771856A08600A3F8D5 /* Schedule@2x.png in Resources */,
 				91F45A1F177F881D0091AFDA /* icon29.png in Resources */,
 				0111A76C18569F2400A3F8D5 /* Live.png in Resources */,
+				01DE296418E298ED00F87022 /* KATGSeriesViewController.xib in Resources */,
 				01BCE81C186D117200F096EF /* fb@2x.png in Resources */,
 				0111A76918569D9D00A3F8D5 /* Episodes@2x.png in Resources */,
 				91F45A20177F881D0091AFDA /* icon29@2x.png in Resources */,
@@ -1648,6 +1690,7 @@
 				91089D1015EAE58800FB57C3 /* NSMutableURLRequest+ESNetworking.m in Sources */,
 				91089D1315EAE58800FB57C3 /* ESBaseModelObject.m in Sources */,
 				91089D1415EAE58800FB57C3 /* ESObjectMap.m in Sources */,
+				01DE29BB18E3C55900F87022 /* KATGSeriesCell.m in Sources */,
 				91089D1515EAE58800FB57C3 /* ESObjectMapFunctions.m in Sources */,
 				91089D1615EAE58800FB57C3 /* NSManagedObject+ESObject.m in Sources */,
 				012B4F231857A2ED00B59FC5 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -1743,6 +1786,7 @@
 				228D440017320E2F00FA94FE /* KATGBeerBubblesView.m in Sources */,
 				228D44071732B9D000FA94FE /* KATGLiveShowFeedbackViewController.m in Sources */,
 				012B4F2F1857A2ED00B59FC5 /* UIImageView+AFNetworking.m in Sources */,
+				01DE296318E298ED00F87022 /* KATGSeriesViewController.m in Sources */,
 				9177592617715A72004D366D /* UIColor+KATGColors.m in Sources */,
 				91FCB68C1771774700EE9001 /* KATGPushRegistration.m in Sources */,
 			);
