@@ -46,13 +46,13 @@
 #define EventsLog(fmt, ...) 
 #endif //DEBUG
 
-#if DEBUG && 0
+#if DEBUG
 #define ShowsLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define ShowsLog(fmt, ...) 
 #endif //DEBUG
 
-#if DEBUG && 0
+#if DEBUG
 #define CoreDataLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define CoreDataLog(fmt, ...) 
@@ -99,6 +99,9 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 
 //
 @property (nonatomic) BOOL live;
+
+@property (nonatomic, strong) NSNumber *lastSeriesID;
+@property (nonatomic, strong) NSNumber *lastEpisodeStartNumber;
 
 @end
 
@@ -298,7 +301,6 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 - (void)pollForData
 {
     [self downloadAllSeries];
-	[self downloadAllEpisodes];
 	[self downloadEvents];
 	[self checkLive];
 }
@@ -330,10 +332,13 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	[self.networkQueue addOperation:op];
 }
 
-- (void)downloadAllEpisodes
+- (void)downloadEpisodesForSeriesID:(NSNumber*)seriesID fromEpisodeNumber:(NSNumber*)startNumber
 {
+    self.lastSeriesID = seriesID;
+    self.lastEpisodeStartNumber = startNumber;
 	//	Retrieve list of shows
-	NSURL *url = [NSURL URLWithString:kShowListURIAddress relativeToURL:self.baseURL];
+    NSString *urlString = [NSString stringWithFormat:@"%@?shownameid=%@&number=%@", kShowListURIAddress, seriesID, startNumber];
+	NSURL *url = [NSURL URLWithString:urlString relativeToURL:self.baseURL];
 	NSParameterAssert(url);
 	if (![self networkOperationPreflight:url])
 	{
@@ -575,7 +580,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	dispatch_async(dispatch_get_main_queue(), ^(void) {
 		[self startPolling];
         [self downloadAllSeries];
-		[self downloadAllEpisodes];
+		[self downloadEpisodesForSeriesID:self.lastSeriesID fromEpisodeNumber:self.lastEpisodeStartNumber];
 		[self downloadEvents];
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:kKATGReachabilityIsReachableNotification object:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:KATGDataStoreConnectivityRestoredNotification object:nil];
@@ -612,7 +617,6 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
                 KATGSeries *series = [self fetchSeriesWithID:series_id context:context];
                 if (!series) {
                     series = [NSEntityDescription insertNewObjectForEntityForName:[KATGSeries katg_entityName] inManagedObjectContext:context];
-                    series.series_id = series_id;
                 }
                 NSParameterAssert(series);
                 if (series) {
@@ -629,17 +633,24 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	NSManagedObjectContext *context = [self childContext];
 	[context performBlock:^{
 		@autoreleasepool {
-			NSMutableSet *showObjectIDs = [NSMutableSet new];
-			for (NSDictionary *showDictionary in shows)
-			{
-				NSManagedObjectID *showObjectID = [self insertOrUpdateShow:showDictionary context:context];
-				if (showObjectID)
-				{
-					[showObjectIDs addObject:showObjectID];
-				}
+			for (NSDictionary *episodeDictionary in shows) {
+                if (!episodeDictionary) {
+                    NSParameterAssert(episodeDictionary);
+                    continue;
+                }
+                NSNumber *episode_id = [KATGShow episodeIDForShowDictionary:episodeDictionary];
+                KATGShow *show = [self fetchShowWithID:episode_id context:context];
+                if (!show) {
+                    show = [NSEntityDescription insertNewObjectForEntityForName:[KATGShow katg_entityName]
+                                                         inManagedObjectContext:context];
+                    [self insertOrUpdateGuests:show showDictionary:episodeDictionary context:context];
+                }
+                NSParameterAssert(show);
+                if (show) {
+                    [show configureWithDictionary:episodeDictionary];
+                }
 			}
-			ShowsLog(@"Processed %ld show", (long)[showObjectIDs count]);
-			[self deleteOldEpisodes:showObjectIDs context:context];
+			ShowsLog(@"Processed %ld show", (long)[shows count]);
 			[self saveChildContext:context completion:nil];
 		}
 	}];

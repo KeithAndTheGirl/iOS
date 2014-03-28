@@ -137,7 +137,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
     if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
         [self setNeedsStatusBarAppearanceUpdate];
     
-	[[KATGDataStore sharedStore] downloadAllEpisodes];
+//	[[KATGDataStore sharedStore] downloadAllEpisodes];
 	[[KATGDataStore sharedStore] downloadEvents];
 	
 	UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;

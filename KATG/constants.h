@@ -15,7 +15,7 @@ static NSString * const kReachabilityURL = @"app.keithandthegirl.com";
 //static NSString * const kTestServerBaseURL = @"http://protected-savannah-5921.herokuapp.com";
 static NSString * const kServerBaseURL = @"http://app.keithandthegirl.com/api/v2/";
 static NSString * const kSeriesListURIAddress		=	@"shows/series-overview/";
-static NSString * const kShowListURIAddress		=	@"shows/recent/";
+static NSString * const kShowListURIAddress		=	@"shows/list/";
 static NSString * const kShowDetailsURIAddress	=	@"shows/details/?showid=%@";
 
 static NSString * const kUpcomingURIAddress		=	@"events?sanitize=true";

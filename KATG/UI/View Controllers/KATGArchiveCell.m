@@ -92,7 +92,7 @@ NSString *const kKATGShowCellIdentifier = @"kKATGShowCellIdentifier";
 }
 
 -(void)refreshTable {
-    [[KATGDataStore sharedStore] downloadAllEpisodes];
+//    [[KATGDataStore sharedStore] downloadAllEpisodes];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

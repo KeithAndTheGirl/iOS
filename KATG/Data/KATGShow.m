@@ -27,6 +27,7 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @implementation KATGShow
 @dynamic title;
 @dynamic episode_id;
+@dynamic series_id;
 @dynamic desc;
 @dynamic forum_url;
 @dynamic number;
@@ -88,6 +89,9 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 	if (self == [KATGShow class])
 	{
 		ESObjectMap *map = [KATGShow objectMap];
+        [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"ShowNameId" outputKey:@"series_id" transformBlock:^id(id<ESObject> object, id inputValue) {
+			return @([inputValue intValue]);
+		}]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Title" outputKey:@"title"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Description" outputKey:@"desc"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Number" outputKey:@"number" transformBlock:^id(id<ESObject> object, id inputValue) {
