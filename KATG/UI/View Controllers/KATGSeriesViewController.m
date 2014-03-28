@@ -10,6 +10,7 @@
 #import "KATGDataStore.h"
 #import "KATGSeries.h"
 #import "KATGSeriesCell.h"
+#import "KATGEpisodesViewController.h"
 
 @implementation KATGSeriesViewController
 
@@ -17,6 +18,10 @@
     [super viewDidLoad];
     collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"SeriesBackground.png"]];
     [collectionView registerClass:[KATGSeriesCell class] forCellWithReuseIdentifier:@"series_cell"];
+}
+
+-(UIStatusBarStyle)preferredStatusBarStyle {
+    return UIStatusBarStyleLightContent;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -69,6 +74,13 @@
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
 	return [KATGSeriesCell lineSpacing];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    KATGEpisodesViewController *episodesController = [[KATGEpisodesViewController alloc] init];
+    KATGSeries *series = [self.fetchedResultsController fetchedObjects][indexPath.row];
+    episodesController.series = series;
+    [self presentViewController:episodesController animated:YES completion:^{}];
 }
 
 #pragma mark NSFetchedResultsController
