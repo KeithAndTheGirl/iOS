@@ -18,6 +18,9 @@
     [super viewDidLoad];
     collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"SeriesBackground.png"]];
     [collectionView registerClass:[KATGSeriesCell class] forCellWithReuseIdentifier:@"series_cell"];
+    
+    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]
+                                             forState:UIControlStateHighlighted];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -80,7 +83,7 @@
     KATGEpisodesViewController *episodesController = [[KATGEpisodesViewController alloc] init];
     KATGSeries *series = [self.fetchedResultsController fetchedObjects][indexPath.row];
     episodesController.series = series;
-    [self presentViewController:episodesController animated:YES completion:^{}];
+    [self.navigationController pushViewController:episodesController animated:YES];
 }
 
 #pragma mark NSFetchedResultsController

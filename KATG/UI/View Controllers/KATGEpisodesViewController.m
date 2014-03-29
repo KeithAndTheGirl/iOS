@@ -23,6 +23,7 @@
     [detailsButton.layer setCornerRadius:4];
     
     [tableView registerNib:[UINib nibWithNibName:@"KATGShowCell" bundle:nil] forCellReuseIdentifier:@"kKATGShowCellIdentifier"];
+    [tableView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -53,7 +54,7 @@
 }
 
 -(IBAction)backAction:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 -(IBAction)detailsAction:(id)sender {

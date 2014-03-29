@@ -25,6 +25,9 @@
 #import "KATGPushRegistration.h"
 #import "KATGWelcomeViewController.h"
 
+
+#import "KATGSeriesViewController.h"
+
 @protocol KATGNavBar7 <NSObject>
 
 - (void)setTintColor:(UIColor *)color;
@@ -41,14 +44,10 @@
 {
     [TestFlight takeOff:@"1793cbe2-d3b6-47a5-8122-d7ee9309d4eb"];
 
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 	KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-	self.window.backgroundColor = [UIColor blackColor];
-	[self setupAppearance];
-	self.window.rootViewController = [[KATGMainViewController alloc] init];
-	[self.window makeKeyAndVisible];
-	
+    
+    [self setupAppearance];
+    
 	CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
 		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 	});
@@ -75,19 +74,35 @@
 
 - (void)setupAppearance
 {
-	[[UINavigationBar appearance] setBackgroundColor:[UIColor katg_whitishColor]];
-	if ([[UINavigationBar class] instancesRespondToSelector:@selector(setTintColor:)])
-	{
-		[(id<KATGNavBar7>)[UINavigationBar appearance] setTintColor:[UIColor katg_whitishColor]];
-	}
-	[[UINavigationBar appearance] setBackgroundColor:[UIColor katg_whitishColor]];
-	[[UINavigationBar appearance] setTitleTextAttributes:@{
-								UITextAttributeTextColor:[UIColor katg_titleTextColor],
-						  UITextAttributeTextShadowColor:[UIColor whiteColor],
-						 UITextAttributeTextShadowOffset:[NSValue valueWithUIOffset:UIOffsetMake(0, 1)],
-									 UITextAttributeFont:[UIFont boldSystemFontOfSize:0.0f]
-	 }];
-	
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    self.tabBar.frame = CGRectMake(0, self.tabBar.frame.origin.y-7, self.tabBar.frame.size.width, 56);
+    [(UIView*)self.tabBar.subviews[0] setFrame:CGRectMake(0, 0, self.tabBar.frame.size.width, 56)];
+    
+    UITabBarItem *item0 = [self.tabBar.items objectAtIndex:0];
+    item0.image = [[UIImage imageNamed:@"Episodes"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item0.selectedImage = [[UIImage imageNamed:@"EpisodesOn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [item0 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
+    
+    UITabBarItem *item1 = [self.tabBar.items objectAtIndex:1];
+    item1.image = [[UIImage imageNamed:@"Live"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item1.selectedImage = [[UIImage imageNamed:@"LiveOn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [item1 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
+    
+    UITabBarItem *item2 = [self.tabBar.items objectAtIndex:2];
+    item2.image = [[UIImage imageNamed:@"Schedule"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item2.selectedImage = [[UIImage imageNamed:@"ScheduleOn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [item2 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
+    
+    UITabBarItem *item3 = [self.tabBar.items objectAtIndex:3];
+    item3.image = [[UIImage imageNamed:@"Youtube"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item3.selectedImage = [[UIImage imageNamed:@"YoutubeOn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [item3 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
+    
+    UITabBarItem *item4 = [self.tabBar.items objectAtIndex:4];
+    item4.image = [[UIImage imageNamed:@"About"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item4.selectedImage = [[UIImage imageNamed:@"AboutOn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    [item4 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
