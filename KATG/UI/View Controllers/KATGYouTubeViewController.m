@@ -1,130 +1,131 @@
 //
-//  KATGYouTubeViewController.m
+//  KATGYoutubeViewController.m
 //  KATG
 //
-//  Created by Nicolas Rostov on 23.12.13.
-//  Copyright (c) 2013 Doug Russell. All rights reserved.
+//  Created by Nicolas Rostov on 30.03.14.
+//  Copyright (c) 2014 Doug Russell. All rights reserved.
 //
 
-#import "KATGYouTubeViewController.h"
+#import "KATGYoutubeViewController.h"
+#import "KATGYoutubeDetails.h"
+#import "KATGYouTubeTableCell.h"
+#import "AFNetworking.h"
 #import "KATGPlaybackManager.h"
-#import <MediaPlayer/MediaPlayer.h>
 
-@implementation KATGYouTubeViewController
+NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
-- (void)viewDidLoad {
+@implementation KATGYoutubeViewController
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    closeButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
-    [closeButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
-    [closeButton.layer setBorderWidth:0.5];
-    [closeButton.layer setCornerRadius:4];
-    spinnerView.hidden = YES;
-    nameLabel.text = @"";
-    dateLabel.text = @"";
     
-    if([self canPerformAction:@selector(setNeedsStatusBarAppearanceUpdate) withSender:self])
-        [self setNeedsStatusBarAppearanceUpdate];
+    [tableView registerNib:[UINib nibWithNibName:@"KATGYouTubeTableCell" bundle:nil]
+     forCellReuseIdentifier:kKATGYoutubeTableViewCellIdentifier];
     
-    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+//    tableView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
+//    tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
     
-    if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
-		[[KATGPlaybackManager sharedManager] pause];
-	}
+     refreshControl = [[UIRefreshControl alloc] init];
+     [refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
+     [tableView addSubview:refreshControl];
+    
+    [self reload];
+    [self registerStateObserver];
 }
 
-- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
-    if (receivedEvent.type == UIEventTypeRemoteControl) {
-        switch (receivedEvent.subtype) {
-            case UIEventSubtypeRemoteControlTogglePlayPause:
-                break;
-            case UIEventSubtypeRemoteControlPreviousTrack:
-                break;
-            case UIEventSubtypeRemoteControlNextTrack:
-                break;
-            default:
-                break;
-        }
-    }
-}
-
--(void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    self.npInfoRemember = [[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo];
-    NSMutableDictionary *episodeInfo = [NSMutableDictionary dictionary];
-	episodeInfo[MPMediaItemPropertyArtist] = @"Keith and The Girl";
-	episodeInfo[MPMediaItemPropertyPodcastTitle] = @"Keith and The Girl";
-	episodeInfo[MPMediaItemPropertyMediaType] = @(MPMediaTypeAnyVideo);
-		episodeInfo[MPMediaItemPropertyTitle] = self.dataDictionary[@"title"];
-		episodeInfo[MPMediaItemPropertyPlaybackDuration] = self.dataDictionary[@"duration"];
-	UIImage *image = [UIImage imageNamed:@"iTunesArtwork"];
-	if (image)
-	{
-		MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
-		if (artwork)
-		{
-			episodeInfo[MPMediaItemPropertyArtwork] = artwork;
-		}
-	}
-	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:episodeInfo];
-    
-    webView.allowsInlineMediaPlayback=YES;
-    webView.mediaPlaybackRequiresUserAction=NO;
-    webView.mediaPlaybackAllowsAirPlay=YES;
-    webView.scrollView.bounces=NO;
-    
-    NSString *linkObj= [NSString stringWithFormat:@"http://www.youtube.com/v/%@", self.dataDictionary[@"id"]];
-    NSLog(@"linkObj1_________________%@",linkObj);
-    NSString *embedHTML = @"\
-    <html><head>\
-    <style type=\"text/css\">\
-    body {\
-    background-color: black;color: black;}\\</style>\\</head><body style=\"margin:0\">\\<embed webkit-playsinline id=\"yt\" src=\"%@\" type=\"application/x-shockwave-flash\" \\width=\"320\" height=\"320\"></embed>\\</body></html>";
-    
-    NSString *html = [NSString stringWithFormat:embedHTML, linkObj];
-    [webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://youtube.com"]];
-
-    nameLabel.text = self.dataDictionary[@"title"];
-    dateLabel.text = self.dataDictionary[@"recorded"];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-}
-
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)closeAction:(id)sender {
-    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
-	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:self.npInfoRemember];
+#pragma mak logic
+// gdata.youtube.com/feeds/api/users/keithandthegirl/uploads?&v=2&max-results=50&alt=jsonc
+-(void)reload {
+    dispatch_async(dispatch_get_main_queue(), ^(void) {
+        spinnerView.hidden = [channelItems count] > 0;
+	});
+    NSDictionary *parameters = @{@"v": @"2",
+                                 @"max-results": @"50",
+                                 @"alt": @"jsonc"};
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://gdata.youtube.com"]];
+    [manager GET:@"feeds/api/users/keithandthegirl/uploads"
+      parameters:parameters
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             channelItems = responseObject[@"data"][@"items"];
+             [tableView reloadData];
+             spinnerView.hidden = YES;
+             [refreshControl endRefreshing];
+             [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ytLastUpdate"];
+         }
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"%@", [error description]);
+//             if([controller respondsToSelector:@selector(connectivityFailed)])
+//                 [self.controller performSelector:@selector(connectivityFailed) withObject:nil];
+             spinnerView.hidden = YES;
+             [refreshControl endRefreshing];
+         }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return [channelItems count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	KATGYouTubeTableCell *cell = [_tableView dequeueReusableCellWithIdentifier:kKATGYoutubeTableViewCellIdentifier forIndexPath:indexPath];
+	[cell configureWithDictionary:channelItems[indexPath.row]];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 66;
+}
+
+-(void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSDictionary *item = channelItems[indexPath.row];
+    KATGYoutubeDetails *youtubeDetails = [[KATGYoutubeDetails alloc] init];
+    [self.navigationController pushViewController:youtubeDetails animated:YES];
+    youtubeDetails.dataDictionary = item;
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle {
-    return UIStatusBarStyleLightContent;
+#pragma mark GlobalPlayState
+-(void)registerStateObserver {
+    [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+    [self configureNavBar];
 }
 
-- (BOOL)shouldAutorotate {
-    return NO;
+-(void)unregisterStateObserver {
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
 }
 
-#pragma mark UIWebViewDelegate
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
-    return YES;
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self configureNavBar];
 }
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    spinnerView.hidden = NO;
-}
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    spinnerView.hidden = YES;
-}
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    spinnerView.hidden = YES;
-    [[[UIAlertView alloc] initWithTitle:@"Loading failed" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+
+- (void)configureNavBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+	{
+		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+		nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
+//		[nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+        nowPlayingButton.tag = 1313;
+        
+        tableView.tableHeaderView = nowPlayingButton;
+	}
+	else
+	{
+        tableView.tableHeaderView = nil;
+	}
 }
 
 @end

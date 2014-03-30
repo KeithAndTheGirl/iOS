@@ -69,6 +69,10 @@
 		017C92141855F48000E33003 /* KATGAboutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92131855F48000E33003 /* KATGAboutCell.m */; };
 		018C35B418E7E9FA00E218D8 /* KATGScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */; };
 		018C35B518E7E9FA00E218D8 /* KATGScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */; };
+		018C35BA18E7EEF600E218D8 /* KATGYoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35B818E7EEF600E218D8 /* KATGYoutubeViewController.m */; };
+		018C35BB18E7EEF600E218D8 /* KATGYoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35B918E7EEF600E218D8 /* KATGYoutubeViewController.xib */; };
+		018C35BF18E7EF0700E218D8 /* KATGYoutubeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35BD18E7EF0700E218D8 /* KATGYoutubeDetails.m */; };
+		018C35C018E7EF0700E218D8 /* KATGYoutubeDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35BE18E7EF0700E218D8 /* KATGYoutubeDetails.xib */; };
 		0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192D1D218721C38008B1B56 /* KATGApplication.m */; };
 		01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952342185CA71300B744E1 /* PlayLiveButton.png */; };
 		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
@@ -133,8 +137,6 @@
 		01EC330818A9990500156A3E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC330718A9990500156A3E /* libz.dylib */; };
 		01EC330A18A9A95900156A3E /* TabBarLines.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EC330918A9A95900156A3E /* TabBarLines.png */; };
 		01EC330C18A9A96000156A3E /* TabBarLines@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01EC330B18A9A96000156A3E /* TabBarLines@2x.png */; };
-		01F7832518680B1900A85EA4 /* KATGYouTubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */; };
-		01F7832618680B1900A85EA4 /* KATGYouTubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
 		227017CA16521B5C004E4B0B /* KATGSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 227017C916521B5C004E4B0B /* KATGSearchBar.m */; };
@@ -372,6 +374,12 @@
 		018C35B118E7E9FA00E218D8 /* KATGScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGScheduleViewController.h; path = "View Controllers/KATGScheduleViewController.h"; sourceTree = "<group>"; };
 		018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGScheduleViewController.m; path = "View Controllers/KATGScheduleViewController.m"; sourceTree = "<group>"; };
 		018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGScheduleViewController.xib; path = "View Controllers/KATGScheduleViewController.xib"; sourceTree = "<group>"; };
+		018C35B718E7EEF600E218D8 /* KATGYoutubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYoutubeViewController.h; path = "View Controllers/KATGYoutubeViewController.h"; sourceTree = "<group>"; };
+		018C35B818E7EEF600E218D8 /* KATGYoutubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeViewController.m; path = "View Controllers/KATGYoutubeViewController.m"; sourceTree = "<group>"; };
+		018C35B918E7EEF600E218D8 /* KATGYoutubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYoutubeViewController.xib; path = "View Controllers/KATGYoutubeViewController.xib"; sourceTree = "<group>"; };
+		018C35BC18E7EF0600E218D8 /* KATGYoutubeDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYoutubeDetails.h; path = "View Controllers/KATGYoutubeDetails.h"; sourceTree = "<group>"; };
+		018C35BD18E7EF0700E218D8 /* KATGYoutubeDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeDetails.m; path = "View Controllers/KATGYoutubeDetails.m"; sourceTree = "<group>"; };
+		018C35BE18E7EF0700E218D8 /* KATGYoutubeDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYoutubeDetails.xib; path = "View Controllers/KATGYoutubeDetails.xib"; sourceTree = "<group>"; };
 		0192D1D118721C38008B1B56 /* KATGApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGApplication.h; sourceTree = "<group>"; };
 		0192D1D218721C38008B1B56 /* KATGApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGApplication.m; sourceTree = "<group>"; };
 		01952342185CA71300B744E1 /* PlayLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayLiveButton.png; path = "Supporting Files/Images/Live/PlayLiveButton.png"; sourceTree = "<group>"; };
@@ -446,9 +454,6 @@
 		01EC330718A9990500156A3E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		01EC330918A9A95900156A3E /* TabBarLines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBarLines.png; sourceTree = "<group>"; };
 		01EC330B18A9A96000156A3E /* TabBarLines@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "TabBarLines@2x.png"; sourceTree = "<group>"; };
-		01F7832218680B1900A85EA4 /* KATGYouTubeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYouTubeViewController.h; path = "View Controllers/KATGYouTubeViewController.h"; sourceTree = "<group>"; };
-		01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeViewController.m; path = "View Controllers/KATGYouTubeViewController.m"; sourceTree = "<group>"; };
-		01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeViewController.xib; path = "View Controllers/KATGYouTubeViewController.xib"; sourceTree = "<group>"; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
 		22192ED116745FF000D2B1C1 /* TDCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCollectionView.h; path = TDCollectionView/TDCollectionView.h; sourceTree = "<group>"; };
@@ -796,6 +801,22 @@
 			name = Schedule;
 			sourceTree = "<group>";
 		};
+		018C35B618E7EE7200E218D8 /* Youtube */ = {
+			isa = PBXGroup;
+			children = (
+				018C35B718E7EEF600E218D8 /* KATGYoutubeViewController.h */,
+				018C35B818E7EEF600E218D8 /* KATGYoutubeViewController.m */,
+				018C35B918E7EEF600E218D8 /* KATGYoutubeViewController.xib */,
+				018C35BC18E7EF0600E218D8 /* KATGYoutubeDetails.h */,
+				018C35BD18E7EF0700E218D8 /* KATGYoutubeDetails.m */,
+				018C35BE18E7EF0700E218D8 /* KATGYoutubeDetails.xib */,
+				0198AB92186077320063947C /* KATGYouTubeTableCell.h */,
+				0198AB93186077320063947C /* KATGYouTubeTableCell.m */,
+				0198AB95186077850063947C /* KATGYouTubeTableCell.xib */,
+			);
+			name = Youtube;
+			sourceTree = "<group>";
+		};
 		01DE295F18E298BD00F87022 /* Series */ = {
 			isa = PBXGroup;
 			children = (
@@ -972,6 +993,7 @@
 		2281C302160DE865000ACAAB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				018C35B618E7EE7200E218D8 /* Youtube */,
 				018C35B018E7E9D100E218D8 /* Schedule */,
 				0104451318E6E6C00025F278 /* Live */,
 				01DE295F18E298BD00F87022 /* Series */,
@@ -1040,12 +1062,6 @@
 				01BCE815186D03B700F096EF /* KATGAboutCell.xib */,
 				017C920F1855EA9700E33003 /* KATGYoutubeCell.h */,
 				017C92101855EA9700E33003 /* KATGYoutubeCell.m */,
-				0198AB92186077320063947C /* KATGYouTubeTableCell.h */,
-				0198AB93186077320063947C /* KATGYouTubeTableCell.m */,
-				0198AB95186077850063947C /* KATGYouTubeTableCell.xib */,
-				01F7832218680B1900A85EA4 /* KATGYouTubeViewController.h */,
-				01F7832318680B1900A85EA4 /* KATGYouTubeViewController.m */,
-				01F7832418680B1900A85EA4 /* KATGYouTubeViewController.xib */,
 				228F940E1651FDD0006A1A05 /* KATGArchiveCell.h */,
 				228F940F1651FDD0006A1A05 /* KATGArchiveCell.m */,
 				229EC8F6167175F200FB899A /* KATGShowView.h */,
@@ -1665,6 +1681,7 @@
 				9115C123172E13E5002942B6 /* skip-forward@2x.png in Resources */,
 				012FED7C1857C0000073AEAA /* KATGShowViewController.xib in Resources */,
 				012FED881857DA7F0073AEAA /* DownloadShowButton@2x.png in Resources */,
+				018C35C018E7EF0700E218D8 /* KATGYoutubeDetails.xib in Resources */,
 				012FEE171857E6A40073AEAA /* ControlsBackground@2x.png in Resources */,
 				01D0CE17185C17C600EB88B3 /* LiveBackground@2x.png in Resources */,
 				9115C124172E13E5002942B6 /* archive-tab-icon.png in Resources */,
@@ -1699,7 +1716,6 @@
 				018C35B518E7E9FA00E218D8 /* KATGScheduleViewController.xib in Resources */,
 				01DE29C118E3D5F200F87022 /* KATGEpisodesViewController.xib in Resources */,
 				228D43F21731830B00FA94FE /* live-mic.png in Resources */,
-				01F7832618680B1900A85EA4 /* KATGYouTubeViewController.xib in Resources */,
 				228D43F31731830B00FA94FE /* live-mic@2x.png in Resources */,
 				01BCE827186D13A800F096EF /* more_of_chemda.png in Resources */,
 				0111A7781856A08600A3F8D5 /* Youtube.png in Resources */,
@@ -1746,6 +1762,7 @@
 				91F45A1D177F881D0091AFDA /* icon50@2x.png in Resources */,
 				01BCE816186D03B700F096EF /* KATGAboutCell.xib in Resources */,
 				91F45A1E177F881D0091AFDA /* icon50.png in Resources */,
+				018C35BB18E7EEF600E218D8 /* KATGYoutubeViewController.xib in Resources */,
 				0111A7771856A08600A3F8D5 /* Schedule@2x.png in Resources */,
 				91F45A1F177F881D0091AFDA /* icon29.png in Resources */,
 				0111A76C18569F2400A3F8D5 /* Live.png in Resources */,
@@ -1817,6 +1834,7 @@
 				22AF5B9A161018F1007EA381 /* KATGWebViewController.m in Sources */,
 				227270F51648BFB7006E4FB7 /* KATGTabBar.m in Sources */,
 				012B4F311857A2ED00B59FC5 /* UIWebView+AFNetworking.m in Sources */,
+				018C35BA18E7EEF600E218D8 /* KATGYoutubeViewController.m in Sources */,
 				01199AEC186D7EDF003CFF16 /* KATGForumCell.m in Sources */,
 				227270FB1648C288006E4FB7 /* KATGTabBarItem.m in Sources */,
 				227271011648C9F4006E4FB7 /* KATGTabBarButtonItem.m in Sources */,
@@ -1842,11 +1860,11 @@
 				22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */,
 				22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */,
 				22D07DC81676287C004EBEBB /* KATGShowView.m in Sources */,
-				01F7832518680B1900A85EA4 /* KATGYouTubeViewController.m in Sources */,
 				012B4F221857A2ED00B59FC5 /* AFHTTPRequestOperation.m in Sources */,
 				22C508411676ED2800D44217 /* KATGShowDescriptionCell.m in Sources */,
 				22C5084E1676EE4800D44217 /* KATGShowGuestCell.m in Sources */,
 				22C508511676F3D500D44217 /* KATGShowSectionTitleCell.m in Sources */,
+				018C35BF18E7EF0700E218D8 /* KATGYoutubeDetails.m in Sources */,
 				22C508521676F4D900D44217 /* KATGShowImagesTableViewCell.m in Sources */,
 				012B4F281857A2ED00B59FC5 /* AFURLRequestSerialization.m in Sources */,
 				2280C51A1679009D00C76D6D /* KATGShowControlsView.m in Sources */,

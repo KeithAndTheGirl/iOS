@@ -27,7 +27,7 @@
 #import "KATGPlaybackManager.h"
 #import "KATGMainViewController.h"
 
-NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
+NSString *const kkKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 @interface KATGYoutubeCell () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) UILabel *titleLabel;
@@ -156,14 +156,14 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary *item = self.channelItems[indexPath.row];
-    KATGYouTubeViewController *youtubeController = [[KATGYouTubeViewController alloc] init];
-    youtubeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-     [self.controller presentViewController:youtubeController animated:YES completion:^{
-         
-     }];
-    
-        youtubeController.dataDictionary = item;
+//    NSDictionary *item = self.channelItems[indexPath.row];
+//    KATGYouTubeViewController *youtubeController = [[KATGYouTubeViewController alloc] init];
+//    youtubeController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//     [self.controller presentViewController:youtubeController animated:YES completion:^{
+//         
+//     }];
+//    
+//        youtubeController.dataDictionary = item;
 }
 
 -(void)willShow {

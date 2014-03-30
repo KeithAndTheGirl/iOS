@@ -1,24 +1,23 @@
 //
-//  KATGYouTubeViewController.h
+//  KATGYoutubeViewController.h
 //  KATG
 //
-//  Created by Nicolas Rostov on 23.12.13.
-//  Copyright (c) 2013 Doug Russell. All rights reserved.
+//  Created by Nicolas Rostov on 30.03.14.
+//  Copyright (c) 2014 Doug Russell. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface KATGYouTubeViewController : UIViewController {
-    IBOutlet UIWebView *webView;
-    IBOutlet UILabel *dateLabel;
-    IBOutlet UILabel *nameLabel;
-    IBOutlet UIButton *closeButton;
+@interface KATGYoutubeViewController : UIViewController {
+    IBOutlet UITableView *tableView;
     IBOutlet UIView *spinnerView;
+    UIRefreshControl *refreshControl;
+    NSArray *channelItems;
 }
 
-@property (nonatomic, strong) NSDictionary *dataDictionary;
-@property (nonatomic, strong) NSDictionary *npInfoRemember;
+-(void)reload;
 
--(IBAction)closeAction:(id)sender;
+-(void)registerStateObserver;
+-(void)unregisterStateObserver;
 
 @end

@@ -79,14 +79,28 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <nil key="simulatedDestinationMetrics"/>
                 </viewController>
-                <viewController id="Kxv-by-Oav">
-                    <tabBarItem key="tabBarItem" title="YOUTUBE" id="dDJ-fc-jR2"/>
+                <navigationController definesPresentationContext="YES" navigationBarHidden="YES" id="jIr-2t-GFn">
+                    <tabBarItem key="tabBarItem" title="YOUTUBE" id="XKj-Q7-zSW"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <nil key="simulatedDestinationMetrics"/>
-                </viewController>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZgD-9E-9v6">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <viewControllers>
+                        <viewController nibName="KATGYoutubeViewController" id="Kxv-by-Oav" customClass="KATGYoutubeViewController">
+                            <tabBarItem key="tabBarItem" title="YOUTUBE" id="dDJ-fc-jR2"/>
+                            <navigationItem key="navigationItem" title="Item" id="BpG-A8-zxb"/>
+                            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                            <nil key="simulatedTopBarMetrics"/>
+                            <nil key="simulatedBottomBarMetrics"/>
+                            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                            <nil key="simulatedDestinationMetrics"/>
+                        </viewController>
+                    </viewControllers>
+                </navigationController>
                 <viewController id="Ufc-jY-1wA">
                     <tabBarItem key="tabBarItem" title="ABOUT" id="WC7-dr-DRM"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
