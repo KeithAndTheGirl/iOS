@@ -63,7 +63,7 @@
                         </viewController>
                     </viewControllers>
                 </navigationController>
-                <viewController id="tNb-kw-A30">
+                <viewController nibName="KATGLiveViewController" id="tNb-kw-A30" customClass="KATGLiveViewController">
                     <tabBarItem key="tabBarItem" title="LIVE" id="hXM-Xf-dbB"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>

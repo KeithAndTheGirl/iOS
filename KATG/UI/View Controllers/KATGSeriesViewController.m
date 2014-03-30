@@ -18,9 +18,6 @@
     [super viewDidLoad];
     collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"SeriesBackground.png"]];
     [collectionView registerClass:[KATGSeriesCell class] forCellWithReuseIdentifier:@"series_cell"];
-    
-    [[UITabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil]
-                                             forState:UIControlStateHighlighted];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
