@@ -8,6 +8,9 @@
 
 #import "KATGEpisodesViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "KATGShowViewController.h"
+#import "KATGShow.h"
+#import "KATGPlaybackManager.h"
 
 @implementation KATGEpisodesViewController
 
@@ -22,8 +25,11 @@
     [detailsButton.layer setBorderWidth:0.5];
     [detailsButton.layer setCornerRadius:4];
     
+    tableView.backgroundView.backgroundColor = [UIColor blackColor];
+    tableView.backgroundColor = [UIColor blackColor];
     [tableView registerNib:[UINib nibWithNibName:@"KATGShowCell" bundle:nil] forCellReuseIdentifier:@"kKATGShowCellIdentifier"];
     [tableView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
+    [self registerStateObserver];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -139,5 +145,56 @@
                      completion:^{}];
 }
 
+#pragma mark GlobalPlayState
+-(void)registerStateObserver {
+    [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+    [self configureTopBar];
+}
+
+-(void)unregisterStateObserver {
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self configureTopBar];
+}
+
+- (void)configureTopBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+	{
+		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+		nowPlayingButton.frame = CGRectMake(0.0f, -28.0f, 320.0f, 48.0f);
+		[nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
+        nowPlayingButton.tag = 1313;
+        
+        [tableView addSubview:nowPlayingButton];
+        UIEdgeInsets contentInsets = tableView.contentInset;
+        contentInsets.top += 48;
+        tableView.contentInset = contentInsets;
+        [tableView setContentOffset:CGPointMake(0, tableView.contentOffset.y-48) animated:NO];
+	}
+	else
+	{
+        UIView *v = [tableView viewWithTag:1313];
+        if(v) {
+            [v removeFromSuperview];
+            UIEdgeInsets contentInsets = tableView.contentInset;
+            contentInsets.top -= 48;
+            tableView.contentInset = contentInsets;
+        }
+	}
+}
+
+-(void)showNowPlayingEpisode {
+    KATGShow *show = [[KATGPlaybackManager sharedManager] currentShow];
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+	showViewController.showObjectID = [show objectID];
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:showViewController animated:YES completion:nil];
+}
 
 @end

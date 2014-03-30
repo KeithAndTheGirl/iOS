@@ -11,6 +11,8 @@
 #import "KATGDataStore.h"
 #import "KATGScheduledEvent.h"
 #import "KATGPlaybackManager.h"
+#import "KATGShowViewController.h"
+#import "KATGShow.h"
 
 NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTableViewCellIdentifier";
 
@@ -21,7 +23,7 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
     [super viewDidLoad];
     [tableView registerNib:[UINib nibWithNibName:@"KATGScheduleItemTableViewCell" bundle:nil] forCellReuseIdentifier:kKATGScheduleItemTableViewCellIdentifier];
     tableView.contentInset = tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
-    [self registerObserver];
+    [self registerStateObserver];
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,13 +82,13 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 }
 
 #pragma mark GlobalPlayState
--(void)registerObserver {
+-(void)registerStateObserver {
     tableView.scrollsToTop = YES;
     [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
     [self configureTopBar];
 }
 
--(void)unregisterObserver {
+-(void)unregisterStateObserver {
     tableView.scrollsToTop = NO;
 	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
 }
@@ -104,7 +106,7 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
 		nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
-//		[nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+		[nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
         nowPlayingButton.tag = 1313;
         
         tableView.tableHeaderView = nowPlayingButton;
@@ -113,6 +115,14 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
 	{
         tableView.tableHeaderView = nil;
 	}
+}
+
+-(void)showNowPlayingEpisode {
+    KATGShow *show = [[KATGPlaybackManager sharedManager] currentShow];
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+	showViewController.showObjectID = [show objectID];
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:showViewController animated:YES completion:nil];
 }
 
 @end

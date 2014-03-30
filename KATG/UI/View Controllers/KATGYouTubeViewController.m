@@ -11,6 +11,8 @@
 #import "KATGYouTubeTableCell.h"
 #import "AFNetworking.h"
 #import "KATGPlaybackManager.h"
+#import "KATGShowViewController.h"
+#import "KATGShow.h"
 
 NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
@@ -22,9 +24,6 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
     
     [tableView registerNib:[UINib nibWithNibName:@"KATGYouTubeTableCell" bundle:nil]
      forCellReuseIdentifier:kKATGYoutubeTableViewCellIdentifier];
-    
-//    tableView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
-//    tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
     
      refreshControl = [[UIRefreshControl alloc] init];
      [refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
@@ -97,7 +96,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 #pragma mark GlobalPlayState
 -(void)registerStateObserver {
     [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
-    [self configureNavBar];
+    [self configureTopBar];
 }
 
 -(void)unregisterStateObserver {
@@ -106,10 +105,10 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [self configureNavBar];
+    [self configureTopBar];
 }
 
-- (void)configureNavBar
+- (void)configureTopBar
 {
 	if ([[KATGPlaybackManager sharedManager] currentShow] &&
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
@@ -117,7 +116,7 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
 		nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
-//		[nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+		[nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
         nowPlayingButton.tag = 1313;
         
         tableView.tableHeaderView = nowPlayingButton;
@@ -126,6 +125,14 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 	{
         tableView.tableHeaderView = nil;
 	}
+}
+
+-(void)showNowPlayingEpisode {
+    KATGShow *show = [[KATGPlaybackManager sharedManager] currentShow];
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+	showViewController.showObjectID = [show objectID];
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:showViewController animated:YES completion:nil];
 }
 
 @end

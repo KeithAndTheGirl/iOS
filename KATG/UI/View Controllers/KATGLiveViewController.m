@@ -11,6 +11,8 @@
 #import "KATGDataStore.h"
 #import "KATGScheduledEvent.h"
 #import "KATGLiveShowFeedbackViewController.h"
+#import "KATGShowViewController.h"
+#import "KATGShow.h"
 
 @interface KATG_TimerTarget : NSProxy
 @property (weak, nonatomic) id target;
@@ -144,7 +146,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 			});
 		}
         else {
-            [self configureNavBar];
+            [self configureTopBar];
         }
 	}
 	else
@@ -227,7 +229,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 }
 
 #pragma mark - state
-- (void)configureNavBar
+- (void)configureTopBar
 {
 	if ([[KATGPlaybackManager sharedManager] currentShow] &&
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
@@ -237,7 +239,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
             UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
             nowPlayingButton.frame = CGRectMake(0.0f, 20.0f, 320.0f, 48.0f);
-//            [nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+            [nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
             nowPlayingButton.tag = 1313;
             
             [self.view addSubview:nowPlayingButton];
@@ -250,6 +252,14 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
             [v removeFromSuperview];
         }
 	}
+}
+
+-(void)showNowPlayingEpisode {
+    KATGShow *show = [[KATGPlaybackManager sharedManager] currentShow];
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+	showViewController.showObjectID = [show objectID];
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:showViewController animated:YES completion:nil];
 }
 
 - (void)layoutLiveMode

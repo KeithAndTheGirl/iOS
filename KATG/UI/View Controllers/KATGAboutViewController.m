@@ -9,18 +9,15 @@
 #import "KATGAboutViewController.h"
 #import "KATGPlaybackManager.h"
 #import "KATGWebViewController.h"
+#import "KATGShowViewController.h"
+#import "KATGShow.h"
 
 @implementation KATGAboutViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-}
-
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
+    [self registerStateObserver];
     scrollView.contentSize = scrollView.frame.size;
     scrollView.frame = self.view.bounds;
     scrollView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
@@ -50,7 +47,7 @@
 #pragma mark GlobalPlayState
 -(void)registerStateObserver {
     [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
-    [self configureNavBar];
+    [self configureTopBar];
 }
 
 -(void)unregisterStateObserver {
@@ -59,10 +56,10 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    [self configureNavBar];
+    [self configureTopBar];
 }
 
-- (void)configureNavBar
+- (void)configureTopBar
 {
 	if ([[KATGPlaybackManager sharedManager] currentShow] &&
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
@@ -72,7 +69,7 @@
             UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
             nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
-//            [nowPlayingButton addTarget:self.controller action:@selector(nowPlaying:) forControlEvents:UIControlEventTouchUpInside];
+            [nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
             nowPlayingButton.tag = 1313;
             
             [scrollView addSubview:nowPlayingButton];
@@ -82,8 +79,7 @@
             [scrollView setContentOffset:CGPointMake(0, scrollView.contentOffset.y-48) animated:NO];
         }
 	}
-	else
-	{
+	else {
         UIView *v = [scrollView viewWithTag:1313];
         if(v) {
             [v removeFromSuperview];
@@ -92,6 +88,14 @@
             scrollView.contentInset = contentInsets;
         }
 	}
+}
+
+-(void)showNowPlayingEpisode {
+    KATGShow *show = [[KATGPlaybackManager sharedManager] currentShow];
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+	showViewController.showObjectID = [show objectID];
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:showViewController animated:YES completion:nil];
 }
 
 #pragma mark Actions

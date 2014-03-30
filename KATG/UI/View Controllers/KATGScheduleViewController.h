@@ -14,4 +14,7 @@
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+-(void)registerStateObserver;
+-(void)unregisterStateObserver;
+
 @end
