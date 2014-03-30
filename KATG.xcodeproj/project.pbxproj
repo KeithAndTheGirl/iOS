@@ -67,6 +67,8 @@
 		017C920E185561B400E33003 /* TabBarBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 017C920C185561B400E33003 /* TabBarBackground@2x.png */; };
 		017C92111855EA9700E33003 /* KATGYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92101855EA9700E33003 /* KATGYoutubeCell.m */; };
 		017C92141855F48000E33003 /* KATGAboutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 017C92131855F48000E33003 /* KATGAboutCell.m */; };
+		018C35B418E7E9FA00E218D8 /* KATGScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */; };
+		018C35B518E7E9FA00E218D8 /* KATGScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */; };
 		0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192D1D218721C38008B1B56 /* KATGApplication.m */; };
 		01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952342185CA71300B744E1 /* PlayLiveButton.png */; };
 		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
@@ -367,6 +369,9 @@
 		017C92101855EA9700E33003 /* KATGYoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeCell.m; path = "View Controllers/KATGYoutubeCell.m"; sourceTree = "<group>"; };
 		017C92121855F48000E33003 /* KATGAboutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAboutCell.h; path = "View Controllers/KATGAboutCell.h"; sourceTree = "<group>"; };
 		017C92131855F48000E33003 /* KATGAboutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAboutCell.m; path = "View Controllers/KATGAboutCell.m"; sourceTree = "<group>"; };
+		018C35B118E7E9FA00E218D8 /* KATGScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGScheduleViewController.h; path = "View Controllers/KATGScheduleViewController.h"; sourceTree = "<group>"; };
+		018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGScheduleViewController.m; path = "View Controllers/KATGScheduleViewController.m"; sourceTree = "<group>"; };
+		018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGScheduleViewController.xib; path = "View Controllers/KATGScheduleViewController.xib"; sourceTree = "<group>"; };
 		0192D1D118721C38008B1B56 /* KATGApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGApplication.h; sourceTree = "<group>"; };
 		0192D1D218721C38008B1B56 /* KATGApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGApplication.m; sourceTree = "<group>"; };
 		01952342185CA71300B744E1 /* PlayLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayLiveButton.png; path = "Supporting Files/Images/Live/PlayLiveButton.png"; sourceTree = "<group>"; };
@@ -781,6 +786,16 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		018C35B018E7E9D100E218D8 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				018C35B118E7E9FA00E218D8 /* KATGScheduleViewController.h */,
+				018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */,
+				018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
 		01DE295F18E298BD00F87022 /* Series */ = {
 			isa = PBXGroup;
 			children = (
@@ -957,6 +972,7 @@
 		2281C302160DE865000ACAAB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				018C35B018E7E9D100E218D8 /* Schedule */,
 				0104451318E6E6C00025F278 /* Live */,
 				01DE295F18E298BD00F87022 /* Series */,
 				01DE29BC18E3D5D400F87022 /* Episodes */,
@@ -1680,6 +1696,7 @@
 				9115C12F172E13E5002942B6 /* x@2x.png in Resources */,
 				9115C137172E1439002942B6 /* Default@2x~iphone.png in Resources */,
 				9115C14A172E1752002942B6 /* Default-Portrait~ipad.png in Resources */,
+				018C35B518E7E9FA00E218D8 /* KATGScheduleViewController.xib in Resources */,
 				01DE29C118E3D5F200F87022 /* KATGEpisodesViewController.xib in Resources */,
 				228D43F21731830B00FA94FE /* live-mic.png in Resources */,
 				01F7832618680B1900A85EA4 /* KATGYouTubeViewController.xib in Resources */,
@@ -1853,6 +1870,7 @@
 				22D6BBDE171629A100A48B35 /* KATGDownloadEpisodeCell.m in Sources */,
 				910CF31C171DD5A7001B28FF /* KATGMainResultsController.m in Sources */,
 				910CF31F171DD9F1001B28FF /* KATGMainDataSource.m in Sources */,
+				018C35B418E7E9FA00E218D8 /* KATGScheduleViewController.m in Sources */,
 				012B4F251857A2ED00B59FC5 /* AFNetworkReachabilityManager.m in Sources */,
 				91BE199517235BAD006CD2B1 /* KATGDownloadToken.m in Sources */,
 				910FCD6617237ECC003491A1 /* KATGReachabilityOperation.m in Sources */,

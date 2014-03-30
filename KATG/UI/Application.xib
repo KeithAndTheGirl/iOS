@@ -71,7 +71,7 @@
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
-                <viewController id="tKp-HI-Nq5">
+                <viewController nibName="KATGScheduleViewController" id="tKp-HI-Nq5" customClass="KATGScheduleViewController">
                     <tabBarItem key="tabBarItem" title="SCHEDULE" id="vVL-ct-urj"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>

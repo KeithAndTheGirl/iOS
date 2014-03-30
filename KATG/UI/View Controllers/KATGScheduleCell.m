@@ -24,7 +24,7 @@
 #import "KATGDataStore.h"
 #import "KATGPlaybackManager.h"
 
-NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTableViewCellIdentifier";
+NSString *const kkKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTableViewCellIdentifier";
 
 @interface KATGScheduleCell () <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) KATGContentContainerView *containerView;
