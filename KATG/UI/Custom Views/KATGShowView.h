@@ -39,6 +39,11 @@
 @property (strong, nonatomic) IBOutlet UILabel *guestLabel;
 @property (strong, nonatomic) IBOutlet UILabel *showTimeLabel;
 
+@property (strong, nonatomic) IBOutlet UIImageView *listenedProgressView;
+@property (strong, nonatomic) IBOutlet UILabel *listenedProgressLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *downloadIndicatorView;
+@property (strong, nonatomic) IBOutlet UILabel *downloadLabel;
+
 // This determines if the close button's width is taken into account when laying
 // out the items in the header.
 @property (nonatomic, getter=isCloseButtonVisible) BOOL closeButtonVisible;

@@ -54,6 +54,19 @@
         imgView.contentMode = UIViewContentModeScaleAspectFit;
         [imgView setImageWithURL:[NSURL URLWithString:images[i]]];
     }
+
+    _downloadIndicatorView.hidden = ![[show downloaded] boolValue];
+    _downloadLabel.hidden = ![[show downloaded] boolValue];
+
+    float playedPercentage = 0;
+    if(show.duration && show.lastPlaybackTime && [show.duration floatValue] > 0) {
+        playedPercentage = [show.lastPlaybackTime floatValue]/[show.duration floatValue];
+    }
+    CGRect progressFrame = _listenedProgressView.frame;
+    progressFrame.size.width = 40*playedPercentage;
+    _listenedProgressView.frame = progressFrame;
+    _listenedProgressLabel.text = [NSString stringWithFormat:@"%.0f%% listened", playedPercentage*100];
+    
 	[self setNeedsLayout];
 }
 

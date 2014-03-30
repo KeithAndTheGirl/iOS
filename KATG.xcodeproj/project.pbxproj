@@ -75,6 +75,9 @@
 		018C35C018E7EF0700E218D8 /* KATGYoutubeDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35BE18E7EF0700E218D8 /* KATGYoutubeDetails.xib */; };
 		018C35C518E892ED00E218D8 /* KATGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35C318E892ED00E218D8 /* KATGAboutViewController.m */; };
 		018C35C618E892ED00E218D8 /* KATGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35C418E892ED00E218D8 /* KATGAboutViewController.xib */; };
+		018C35CB18E8A49000E218D8 /* Progress.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35C718E8A49000E218D8 /* Progress.png */; };
+		018C35CD18E8A49000E218D8 /* ProgressFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35C918E8A49000E218D8 /* ProgressFill.png */; };
+		018C35D018E8A75100E218D8 /* CheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35CF18E8A75100E218D8 /* CheckMark.png */; };
 		0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192D1D218721C38008B1B56 /* KATGApplication.m */; };
 		01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952342185CA71300B744E1 /* PlayLiveButton.png */; };
 		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
@@ -385,6 +388,9 @@
 		018C35C218E892ED00E218D8 /* KATGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAboutViewController.h; path = "View Controllers/KATGAboutViewController.h"; sourceTree = "<group>"; };
 		018C35C318E892ED00E218D8 /* KATGAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAboutViewController.m; path = "View Controllers/KATGAboutViewController.m"; sourceTree = "<group>"; };
 		018C35C418E892ED00E218D8 /* KATGAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGAboutViewController.xib; path = "View Controllers/KATGAboutViewController.xib"; sourceTree = "<group>"; };
+		018C35C718E8A49000E218D8 /* Progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Progress.png; path = "Supporting Files/Images/Progress.png"; sourceTree = "<group>"; };
+		018C35C918E8A49000E218D8 /* ProgressFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ProgressFill.png; path = "Supporting Files/Images/ProgressFill.png"; sourceTree = "<group>"; };
+		018C35CF18E8A75100E218D8 /* CheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckMark.png; path = "Supporting Files/Images/CheckMark.png"; sourceTree = "<group>"; };
 		0192D1D118721C38008B1B56 /* KATGApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGApplication.h; sourceTree = "<group>"; };
 		0192D1D218721C38008B1B56 /* KATGApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGApplication.m; sourceTree = "<group>"; };
 		01952342185CA71300B744E1 /* PlayLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayLiveButton.png; path = "Supporting Files/Images/Live/PlayLiveButton.png"; sourceTree = "<group>"; };
@@ -743,6 +749,9 @@
 				0104451418E6E6E80025F278 /* KATGLiveViewController.h */,
 				0104451518E6E6E80025F278 /* KATGLiveViewController.m */,
 				0104451618E6E6E80025F278 /* KATGLiveViewController.xib */,
+				228D44051732B9D000FA94FE /* KATGLiveShowFeedbackViewController.h */,
+				228D44061732B9D000FA94FE /* KATGLiveShowFeedbackViewController.m */,
+				019568B7185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib */,
 			);
 			name = Live;
 			sourceTree = "<group>";
@@ -802,6 +811,9 @@
 				018C35B118E7E9FA00E218D8 /* KATGScheduleViewController.h */,
 				018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */,
 				018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */,
+				2280C524167917F000C76D6D /* KATGScheduleItemTableViewCell.h */,
+				2280C525167917F100C76D6D /* KATGScheduleItemTableViewCell.m */,
+				0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -852,6 +864,9 @@
 				01DE29BD18E3D5F200F87022 /* KATGEpisodesViewController.h */,
 				01DE29BE18E3D5F200F87022 /* KATGEpisodesViewController.m */,
 				01DE29BF18E3D5F200F87022 /* KATGEpisodesViewController.xib */,
+				229EC8F6167175F200FB899A /* KATGShowView.h */,
+				22D07DC71676287C004EBEBB /* KATGShowView.m */,
+				012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */,
 			);
 			name = Episodes;
 			sourceTree = "<group>";
@@ -1012,13 +1027,12 @@
 			children = (
 				01DE295F18E298BD00F87022 /* Series */,
 				01DE29BC18E3D5D400F87022 /* Episodes */,
+				228F9411165207D1006A1A05 /* Show Details */,
 				0104451318E6E6C00025F278 /* Live */,
 				018C35B018E7E9D100E218D8 /* Schedule */,
 				018C35B618E7EE7200E218D8 /* Youtube */,
 				018C35C118E892D400E218D8 /* About */,
 				2280C52A16799A8A00C76D6D /* Main */,
-				228F9411165207D1006A1A05 /* Show Details */,
-				9115C0F7172E0AD4002942B6 /* Live Show */,
 				228F940D1651FDA2006A1A05 /* Settings */,
 			);
 			name = "View Controllers";
@@ -1072,14 +1086,8 @@
 				017C92101855EA9700E33003 /* KATGYoutubeCell.m */,
 				228F940E1651FDD0006A1A05 /* KATGArchiveCell.h */,
 				228F940F1651FDD0006A1A05 /* KATGArchiveCell.m */,
-				229EC8F6167175F200FB899A /* KATGShowView.h */,
-				22D07DC71676287C004EBEBB /* KATGShowView.m */,
-				012B4EFC18577F8400B59FC5 /* KATGShowCell.xib */,
 				229A79D1167437B000792258 /* KATGScheduleCell.h */,
 				229A79D2167437B000792258 /* KATGScheduleCell.m */,
-				2280C524167917F000C76D6D /* KATGScheduleItemTableViewCell.h */,
-				2280C525167917F100C76D6D /* KATGScheduleItemTableViewCell.m */,
-				0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */,
 				229A79D4167437BC00792258 /* KATGLiveCell.h */,
 				229A79D5167437BC00792258 /* KATGLiveCell.m */,
 				01D0CE12185C16DA00EB88B3 /* KATGLiveCell.xib */,
@@ -1123,6 +1131,9 @@
 		22AFD3E2164970B4007A88F4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				018C35CF18E8A75100E218D8 /* CheckMark.png */,
+				018C35C718E8A49000E218D8 /* Progress.png */,
+				018C35C918E8A49000E218D8 /* ProgressFill.png */,
 				01DE29B518E3C21400F87022 /* TitleBackgroundVip.png */,
 				01DE29B618E3C21400F87022 /* TitleBackgroundVip@2x.png */,
 				01DE29B318E3C14400F87022 /* TitleBackground@2x.png */,
@@ -1451,16 +1462,6 @@
 			path = MediaPlayback;
 			sourceTree = "<group>";
 		};
-		9115C0F7172E0AD4002942B6 /* Live Show */ = {
-			isa = PBXGroup;
-			children = (
-				228D44051732B9D000FA94FE /* KATGLiveShowFeedbackViewController.h */,
-				228D44061732B9D000FA94FE /* KATGLiveShowFeedbackViewController.m */,
-				019568B7185CC40B002E81F2 /* KATGLiveShowFeedbackViewController.xib */,
-			);
-			name = "Live Show";
-			sourceTree = "<group>";
-		};
 		9115C0FE172E13E5002942B6 /* Default */ = {
 			isa = PBXGroup;
 			children = (
@@ -1645,6 +1646,7 @@
 				01BCE82A186D13A800F096EF /* more_of_keith@2x.png in Resources */,
 				01BCE84A186D1D6F00F096EF /* welcome3.png in Resources */,
 				229A79CB16742D8C00792258 /* KATGMainViewController.xib in Resources */,
+				018C35D018E8A75100E218D8 /* CheckMark.png in Resources */,
 				0104451818E6E6E80025F278 /* KATGLiveViewController.xib in Resources */,
 				01EC330C18A9A96000156A3E /* TabBarLines@2x.png in Resources */,
 				017C920D185561B400E33003 /* TabBarBackground.png in Resources */,
@@ -1712,6 +1714,7 @@
 				9115C12A172E13E5002942B6 /* schedule-tab-icon.png in Resources */,
 				9115C12B172E13E5002942B6 /* schedule-tab-icon@2x.png in Resources */,
 				9115C12C172E13E5002942B6 /* search.png in Resources */,
+				018C35CD18E8A49000E218D8 /* ProgressFill.png in Resources */,
 				0104450C18E6D5E20025F278 /* EpisodesOn@2x.png in Resources */,
 				01BCE849186D1D6F00F096EF /* welcome2@2x.png in Resources */,
 				9115C12D172E13E5002942B6 /* search@2x.png in Resources */,
@@ -1774,6 +1777,7 @@
 				018C35BB18E7EEF600E218D8 /* KATGYoutubeViewController.xib in Resources */,
 				0111A7771856A08600A3F8D5 /* Schedule@2x.png in Resources */,
 				91F45A1F177F881D0091AFDA /* icon29.png in Resources */,
+				018C35CB18E8A49000E218D8 /* Progress.png in Resources */,
 				0111A76C18569F2400A3F8D5 /* Live.png in Resources */,
 				01DE296418E298ED00F87022 /* KATGSeriesViewController.xib in Resources */,
 				01BCE81C186D117200F096EF /* fb@2x.png in Resources */,

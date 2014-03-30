@@ -129,8 +129,8 @@
     KATGShow *show = [self.fetchedResultsController fetchedObjects][indexPath.row];
     NSArray *images = [[show valueForKeyPath:@"Guests.picture_url"] allObjects];
     if([images count] > 0)
-        return 126;
-    return 76;
+        return 158;
+    return 108;
 }
 
 -(void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
