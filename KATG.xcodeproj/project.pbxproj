@@ -73,6 +73,8 @@
 		018C35BB18E7EEF600E218D8 /* KATGYoutubeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35B918E7EEF600E218D8 /* KATGYoutubeViewController.xib */; };
 		018C35BF18E7EF0700E218D8 /* KATGYoutubeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35BD18E7EF0700E218D8 /* KATGYoutubeDetails.m */; };
 		018C35C018E7EF0700E218D8 /* KATGYoutubeDetails.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35BE18E7EF0700E218D8 /* KATGYoutubeDetails.xib */; };
+		018C35C518E892ED00E218D8 /* KATGAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35C318E892ED00E218D8 /* KATGAboutViewController.m */; };
+		018C35C618E892ED00E218D8 /* KATGAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35C418E892ED00E218D8 /* KATGAboutViewController.xib */; };
 		0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192D1D218721C38008B1B56 /* KATGApplication.m */; };
 		01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952342185CA71300B744E1 /* PlayLiveButton.png */; };
 		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
@@ -380,6 +382,9 @@
 		018C35BC18E7EF0600E218D8 /* KATGYoutubeDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYoutubeDetails.h; path = "View Controllers/KATGYoutubeDetails.h"; sourceTree = "<group>"; };
 		018C35BD18E7EF0700E218D8 /* KATGYoutubeDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYoutubeDetails.m; path = "View Controllers/KATGYoutubeDetails.m"; sourceTree = "<group>"; };
 		018C35BE18E7EF0700E218D8 /* KATGYoutubeDetails.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYoutubeDetails.xib; path = "View Controllers/KATGYoutubeDetails.xib"; sourceTree = "<group>"; };
+		018C35C218E892ED00E218D8 /* KATGAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAboutViewController.h; path = "View Controllers/KATGAboutViewController.h"; sourceTree = "<group>"; };
+		018C35C318E892ED00E218D8 /* KATGAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAboutViewController.m; path = "View Controllers/KATGAboutViewController.m"; sourceTree = "<group>"; };
+		018C35C418E892ED00E218D8 /* KATGAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGAboutViewController.xib; path = "View Controllers/KATGAboutViewController.xib"; sourceTree = "<group>"; };
 		0192D1D118721C38008B1B56 /* KATGApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGApplication.h; sourceTree = "<group>"; };
 		0192D1D218721C38008B1B56 /* KATGApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGApplication.m; sourceTree = "<group>"; };
 		01952342185CA71300B744E1 /* PlayLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayLiveButton.png; path = "Supporting Files/Images/Live/PlayLiveButton.png"; sourceTree = "<group>"; };
@@ -817,6 +822,18 @@
 			name = Youtube;
 			sourceTree = "<group>";
 		};
+		018C35C118E892D400E218D8 /* About */ = {
+			isa = PBXGroup;
+			children = (
+				018C35C218E892ED00E218D8 /* KATGAboutViewController.h */,
+				018C35C318E892ED00E218D8 /* KATGAboutViewController.m */,
+				018C35C418E892ED00E218D8 /* KATGAboutViewController.xib */,
+				22AF5B98161018F1007EA381 /* KATGWebViewController.h */,
+				22AF5B99161018F1007EA381 /* KATGWebViewController.m */,
+			);
+			name = About;
+			sourceTree = "<group>";
+		};
 		01DE295F18E298BD00F87022 /* Series */ = {
 			isa = PBXGroup;
 			children = (
@@ -993,16 +1010,16 @@
 		2281C302160DE865000ACAAB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				018C35B618E7EE7200E218D8 /* Youtube */,
-				018C35B018E7E9D100E218D8 /* Schedule */,
-				0104451318E6E6C00025F278 /* Live */,
 				01DE295F18E298BD00F87022 /* Series */,
 				01DE29BC18E3D5D400F87022 /* Episodes */,
+				0104451318E6E6C00025F278 /* Live */,
+				018C35B018E7E9D100E218D8 /* Schedule */,
+				018C35B618E7EE7200E218D8 /* Youtube */,
+				018C35C118E892D400E218D8 /* About */,
 				2280C52A16799A8A00C76D6D /* Main */,
 				228F9411165207D1006A1A05 /* Show Details */,
 				9115C0F7172E0AD4002942B6 /* Live Show */,
 				228F940D1651FDA2006A1A05 /* Settings */,
-				228F940A1651FD7C006A1A05 /* Chat */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -1023,15 +1040,6 @@
 				228D43F11731830B00FA94FE /* live-mic@2x.png */,
 			);
 			name = Live;
-			sourceTree = "<group>";
-		};
-		228F940A1651FD7C006A1A05 /* Chat */ = {
-			isa = PBXGroup;
-			children = (
-				22AF5B98161018F1007EA381 /* KATGWebViewController.h */,
-				22AF5B99161018F1007EA381 /* KATGWebViewController.m */,
-			);
-			name = Chat;
 			sourceTree = "<group>";
 		};
 		228F940D1651FDA2006A1A05 /* Settings */ = {
@@ -1677,6 +1685,7 @@
 				01EAC4B01859B230002AF906 /* SliderThumb@2x.png in Resources */,
 				01BCE84B186D1D6F00F096EF /* welcome3@2x.png in Resources */,
 				01DE29B818E3C21400F87022 /* TitleBackgroundVip@2x.png in Resources */,
+				018C35C618E892ED00E218D8 /* KATGAboutViewController.xib in Resources */,
 				012FEE161857E6A40073AEAA /* ControlsBackground.png in Resources */,
 				9115C123172E13E5002942B6 /* skip-forward@2x.png in Resources */,
 				012FED7C1857C0000073AEAA /* KATGShowViewController.xib in Resources */,
@@ -1829,6 +1838,7 @@
 				91089D7915EAE5F600FB57C3 /* NSObject+PropertyDictionary.m in Sources */,
 				91089D8215EAEAD700FB57C3 /* KATGAudioPlayerController.m in Sources */,
 				91089D8315EAEAD700FB57C3 /* KATGAudioSessionManager.m in Sources */,
+				018C35C518E892ED00E218D8 /* KATGAboutViewController.m in Sources */,
 				2281C309160DE9CD000ACAAB /* KATGCollectionViewController.m in Sources */,
 				012B4F2C1857A2ED00B59FC5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				22AF5B9A161018F1007EA381 /* KATGWebViewController.m in Sources */,

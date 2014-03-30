@@ -101,7 +101,7 @@
                         </viewController>
                     </viewControllers>
                 </navigationController>
-                <viewController id="Ufc-jY-1wA">
+                <viewController nibName="KATGAboutViewController" id="Ufc-jY-1wA" customClass="KATGAboutViewController">
                     <tabBarItem key="tabBarItem" title="ABOUT" id="WC7-dr-DRM"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
