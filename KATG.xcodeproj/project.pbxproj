@@ -78,6 +78,9 @@
 		018C35CB18E8A49000E218D8 /* Progress.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35C718E8A49000E218D8 /* Progress.png */; };
 		018C35CD18E8A49000E218D8 /* ProgressFill.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35C918E8A49000E218D8 /* ProgressFill.png */; };
 		018C35D018E8A75100E218D8 /* CheckMark.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35CF18E8A75100E218D8 /* CheckMark.png */; };
+		018C35D418E93A4400E218D8 /* CheckMark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35D118E93A4400E218D8 /* CheckMark@2x.png */; };
+		018C35D518E93A4400E218D8 /* Progress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35D218E93A4400E218D8 /* Progress@2x.png */; };
+		018C35D618E93A4400E218D8 /* ProgressFill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C35D318E93A4400E218D8 /* ProgressFill@2x.png */; };
 		0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192D1D218721C38008B1B56 /* KATGApplication.m */; };
 		01952346185CA71300B744E1 /* PlayLiveButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952342185CA71300B744E1 /* PlayLiveButton.png */; };
 		01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01952343185CA71300B744E1 /* PlayLiveButton@2x.png */; };
@@ -391,6 +394,9 @@
 		018C35C718E8A49000E218D8 /* Progress.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Progress.png; path = "Supporting Files/Images/Progress.png"; sourceTree = "<group>"; };
 		018C35C918E8A49000E218D8 /* ProgressFill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ProgressFill.png; path = "Supporting Files/Images/ProgressFill.png"; sourceTree = "<group>"; };
 		018C35CF18E8A75100E218D8 /* CheckMark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = CheckMark.png; path = "Supporting Files/Images/CheckMark.png"; sourceTree = "<group>"; };
+		018C35D118E93A4400E218D8 /* CheckMark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "CheckMark@2x.png"; path = "Supporting Files/Images/CheckMark@2x.png"; sourceTree = "<group>"; };
+		018C35D218E93A4400E218D8 /* Progress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Progress@2x.png"; path = "Supporting Files/Images/Progress@2x.png"; sourceTree = "<group>"; };
+		018C35D318E93A4400E218D8 /* ProgressFill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ProgressFill@2x.png"; path = "Supporting Files/Images/ProgressFill@2x.png"; sourceTree = "<group>"; };
 		0192D1D118721C38008B1B56 /* KATGApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGApplication.h; sourceTree = "<group>"; };
 		0192D1D218721C38008B1B56 /* KATGApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGApplication.m; sourceTree = "<group>"; };
 		01952342185CA71300B744E1 /* PlayLiveButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = PlayLiveButton.png; path = "Supporting Files/Images/Live/PlayLiveButton.png"; sourceTree = "<group>"; };
@@ -1131,6 +1137,9 @@
 		22AFD3E2164970B4007A88F4 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				018C35D118E93A4400E218D8 /* CheckMark@2x.png */,
+				018C35D218E93A4400E218D8 /* Progress@2x.png */,
+				018C35D318E93A4400E218D8 /* ProgressFill@2x.png */,
 				018C35CF18E8A75100E218D8 /* CheckMark.png */,
 				018C35C718E8A49000E218D8 /* Progress.png */,
 				018C35C918E8A49000E218D8 /* ProgressFill.png */,
@@ -1739,11 +1748,13 @@
 				01BCE843186D1D6F00F096EF /* indicators2@2x.png in Resources */,
 				01BCE847186D1D6F00F096EF /* welcome1@2x.png in Resources */,
 				0198AB96186077850063947C /* KATGYouTubeTableCell.xib in Resources */,
+				018C35D418E93A4400E218D8 /* CheckMark@2x.png in Resources */,
 				01952347185CA71300B744E1 /* PlayLiveButton@2x.png in Resources */,
 				01DE29CD18E567C500F87022 /* KATGWelcomeViewController.xib in Resources */,
 				01EAC4AF1859B230002AF906 /* SliderThumb.png in Resources */,
 				228D44041732177C00FA94FE /* light-bubble.png in Resources */,
 				012FED8C1857DC850073AEAA /* DownloadIcon@2x.png in Resources */,
+				018C35D618E93A4400E218D8 /* ProgressFill@2x.png in Resources */,
 				01EC330A18A9A95900156A3E /* TabBarLines.png in Resources */,
 				01BCE848186D1D6F00F096EF /* welcome2.png in Resources */,
 				01BCE826186D13A800F096EF /* get_the_guide@2x.png in Resources */,
@@ -1787,6 +1798,7 @@
 				01BCE828186D13A800F096EF /* more_of_chemda@2x.png in Resources */,
 				91F45A21177F881D0091AFDA /* iTunesArtwork in Resources */,
 				01BCE810186CFEA000F096EF /* NowPlaying@2x.png in Resources */,
+				018C35D518E93A4400E218D8 /* Progress@2x.png in Resources */,
 				91EC31B4177FCF0C00151999 /* Default-Portrait@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
