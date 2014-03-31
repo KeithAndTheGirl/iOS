@@ -119,14 +119,12 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Loading cell for row %@", indexPath);
 	KATGShowView *cell = [_tableView dequeueReusableCellWithIdentifier:@"kKATGShowCellIdentifier" forIndexPath:indexPath];
 	[cell configureWithShow:[self.fetchedResultsController fetchedObjects][indexPath.row]];
 	return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSLog(@"Evaluating cell height for row %@", indexPath);
     KATGShow *show = [self.fetchedResultsController fetchedObjects][indexPath.row];
     NSArray *images = [[show valueForKeyPath:@"Guests.picture_url"] allObjects];
     if([images count] > 0)
