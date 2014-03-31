@@ -207,6 +207,7 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    [self.refreshControl endRefreshing];
 	return 5;
 }
 
@@ -229,7 +230,6 @@ typedef enum {
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.refreshControl endRefreshing];
 	// The first row in each section is a header
 	if (indexPath.row == 0 && indexPath.section != KATGShowDetailsSectionDownload)
 	{
