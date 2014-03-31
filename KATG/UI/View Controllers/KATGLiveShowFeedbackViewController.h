@@ -6,11 +6,9 @@
 //  Copyright (c) 2013 Doug Russell. All rights reserved.
 //
 
-#import "KATGViewController.h"
-
 @protocol KATGLiveShowFeedbackViewControllerDelegate;
 
-@interface KATGLiveShowFeedbackViewController : KATGViewController
+@interface KATGLiveShowFeedbackViewController : UIViewController
 @property (weak, nonatomic) id<KATGLiveShowFeedbackViewControllerDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIButton *doneButton;

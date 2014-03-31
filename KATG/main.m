@@ -7,18 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "KATGAppDelegate_iPhone.h"
-#import "KATGAppDelegate_iPad.h"
 #import "KATGApplication.h"
+#import "KATGAppDelegate.h"
 
 int main(int argc, char *argv[])
 {
 	@autoreleasepool {
-		Class appDelegateClass;
-		if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-			appDelegateClass = [KATGAppDelegate_iPad class];
-		else
-			appDelegateClass = [KATGAppDelegate_iPhone class];
+		Class appDelegateClass = [KATGAppDelegate class];
 	    return UIApplicationMain(argc, argv, NSStringFromClass([KATGApplication class]), NSStringFromClass(appDelegateClass));
 	}
 }

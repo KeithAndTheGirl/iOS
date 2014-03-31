@@ -13,7 +13,6 @@
 	#import <Foundation/Foundation.h>
 	#import <CoreData/CoreData.h>
 	#import <QuartzCore/QuartzCore.h>
-	#import "UINavigationController+KATGAdditions.h"
 	#import "constants.h"
 #import "TestFlight.h"
 #endif

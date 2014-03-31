@@ -18,7 +18,6 @@
 //  limitations under the License.
 //  
 
-#import "KATGViewController.h"
 #import "KATGShowControlsView.h"
 
 @class KATGShow, KATGShowViewController, KATGShowView;

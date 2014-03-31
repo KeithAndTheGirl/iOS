@@ -16,9 +16,7 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-//  
-
-#import "KATGViewController.h"
+//
 
 @class KATGImage, KATGImagesViewController;
 
@@ -28,7 +26,7 @@
 - (void)performAnimationsWhileImagesViewControllerIsClosing:(KATGImagesViewController *)viewController; // Called within animation block
 @end
 
-@interface KATGImagesViewController : KATGViewController
+@interface KATGImagesViewController : UIViewController
 
 @property (nonatomic) NSArray *images;
 @property (weak, nonatomic) id <KATGImagesViewControllerDelegate> delegate;

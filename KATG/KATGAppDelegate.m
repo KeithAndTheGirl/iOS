@@ -20,8 +20,6 @@
 
 #import "KATGAppDelegate.h"
 #import "KATGAudioSessionManager.h"
-#import "KATGMainViewController.h"
-#import "UIColor+KATGColors.h"
 #import "KATGPushRegistration.h"
 #import "KATGWelcomeViewController.h"
 

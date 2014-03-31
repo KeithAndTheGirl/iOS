@@ -21,9 +21,7 @@
 // Adds some show specific UI elements to KATGContentContainerView
 
 #import <UIKit/UIKit.h>
-#import "KATGContentContainerView.h"
 #import "KATGShow.h"
-#import "KATGTabBarStyledImageView.h"
 
 @class KATGButton;
 

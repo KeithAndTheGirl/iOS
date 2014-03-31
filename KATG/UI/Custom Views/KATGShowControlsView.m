@@ -20,7 +20,6 @@
 
 #import "KATGShowControlsView.h"
 #import "KATGControlButton.h"
-#import "UIColor+KATGColors.h"
 
 #define kKATGPlayButtonRatio 0.5f
 #define kKATGControlsSideMargin 0.0f

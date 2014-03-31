@@ -19,7 +19,6 @@
 //  
 
 #import "KATGShowView.h"
-#import "KATGContentContainerView_Internal.h"
 #import "TDRoundedShadowView.h"
 #import "KATGButton.h"
 #import "UIImageView+AFNetworking.h"

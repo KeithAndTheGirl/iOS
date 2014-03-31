@@ -9,7 +9,6 @@
 #import "KATGLiveShowFeedbackViewController.h"
 #import "KATGButton.h"
 #import "KATGDataStore.h"
-#import "KATGContentContainerView.h"
 #import <QuartzCore/QuartzCore.h>
 
 #define TEXTVIEW_PLACEHOLDER @"Comment"
