@@ -73,6 +73,7 @@
     [titleLabel sizeToFit];
     descLabel.text = _series.desc;
     int startNumber = [self.series.episode_number_max intValue] - 9;
+    [tableView reloadData];
     [[KATGDataStore sharedStore] downloadEpisodesForSeriesID:self.series.series_id
                                            fromEpisodeNumber:@(startNumber)];
 }
