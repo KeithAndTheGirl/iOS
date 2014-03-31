@@ -179,7 +179,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 - (NSURL *)storeURL
 {
 	NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-	return [directoryURL URLByAppendingPathComponent:@"katg21.sqlite"];
+	return [directoryURL URLByAppendingPathComponent:@"katg30.sqlite"];
 }
 
 - (NSManagedObjectContext *)childContext
