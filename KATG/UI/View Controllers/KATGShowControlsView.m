@@ -108,6 +108,7 @@
 	{
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             self.loadingIndicator.hidden = NO;
+            self.playButton.hidden = YES;
             [self.loadingIndicator startAnimating];
         });
 	}
@@ -115,6 +116,7 @@
 	{
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             self.loadingIndicator.hidden = YES;
+            self.playButton.hidden = NO;
             [self.loadingIndicator stopAnimating];
         });
 	}
