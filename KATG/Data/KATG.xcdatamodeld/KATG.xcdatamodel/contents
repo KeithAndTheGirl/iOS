@@ -23,6 +23,7 @@
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="media_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pictureid" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="guest" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Guest" inverseName="image" inverseEntity="Guest" syncable="YES"/>
         <relationship name="show" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Show" inverseName="images" inverseEntity="Show" syncable="YES"/>
@@ -58,7 +59,7 @@
     <elements>
         <element name="Event" positionX="0" positionY="-366" width="128" height="150"/>
         <element name="Guest" positionX="457" positionY="-450" width="128" height="165"/>
-        <element name="Image" positionX="475" positionY="-198" width="128" height="135"/>
+        <element name="Image" positionX="475" positionY="-198" width="128" height="150"/>
         <element name="Series" positionX="234" positionY="-270" width="128" height="210"/>
         <element name="Show" positionX="198" positionY="-387" width="128" height="238"/>
     </elements>

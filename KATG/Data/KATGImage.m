@@ -24,9 +24,11 @@
 #import "NSManagedObject+ESObject.h"
 
 NSString *const KATGImageMediaURLAttributeName = @"media_url";
+NSString *const KATGImageMediaIDAttributeName = @"pictureid";
 NSString *const KATGImageShowAttributeName = @"show";
 
 @implementation KATGImage
+@dynamic pictureid;
 @dynamic title;
 @dynamic desc;
 @dynamic media_url;

@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+extern NSString *const KATGImageMediaIDAttributeName;
 extern NSString *const KATGImageMediaURLAttributeName;
 extern NSString *const KATGImageShowAttributeName;
 
@@ -28,6 +29,7 @@ extern NSString *const KATGImageShowAttributeName;
 
 @interface KATGImage : NSManagedObject
 
+@property (nonatomic, retain) NSString *pictureid;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *desc;
 @property (nonatomic, retain) NSString *media_url;

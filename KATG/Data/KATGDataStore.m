@@ -680,7 +680,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 			NSUInteger index = 0;
 			for (NSDictionary *imageDictionary in images)
 			{
-				KATGImage *image = [self fetchOrInsertImageWithShow:show url:imageDictionary[@"media_url"] context:context];
+				KATGImage *image = [self fetchOrInsertImageWithID:imageDictionary[@"pictureid"] show:show url:imageDictionary[@"media_url"] context:context];
 				if (image)
 				{
 					image.index = @(index);
@@ -895,7 +895,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
                                               @"title": guestDict[@"RealName"]};
             
             // This block creates Guest's Image and adds to show images
-//            KATGImage *image = [self fetchOrInsertImageWithShow:show url:imageDictionary[@"media_url"] context:context];
+//            KATGImage *image = [self fetchOrInsertImageWithID: show:show url:imageDictionary[@"media_url"] context:context];
    
             // This block creates Guest's Image, but doesn't add to show images
             NSFetchRequest *request = [NSFetchRequest new];
@@ -949,7 +949,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 
 #pragma mark - Images
 
-- (KATGImage *)fetchOrInsertImageWithShow:(KATGShow *)show url:(NSString *)url context:(NSManagedObjectContext *)context
+- (KATGImage *)fetchOrInsertImageWithID:(NSString*)pictureID show:(KATGShow *)show url:(NSString *)url context:(NSManagedObjectContext *)context
 {
 	NSParameterAssert(context);
 	if (!show)
@@ -966,7 +966,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	request.fetchLimit = 1;
 	NSEntityDescription *entity = [NSEntityDescription entityForName:[KATGImage katg_entityName] inManagedObjectContext:context];
 	request.entity = entity;	
-	request.predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", KATGImageMediaURLAttributeName, url];
+	request.predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", KATGImageMediaIDAttributeName, pictureID];
 	NSError *error = nil;
 	NSArray *result = [context executeFetchRequest:request error:&error];
 	if (!result)
@@ -981,6 +981,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	KATGImage *image = [NSEntityDescription insertNewObjectForEntityForName:[KATGImage katg_entityName] inManagedObjectContext:context];
 	NSParameterAssert(image);
 	image.show = show;
+    image.pictureid = pictureID;
 	[show addImagesObject:image];
 	return image;
 }
