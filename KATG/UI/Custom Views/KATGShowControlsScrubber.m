@@ -38,19 +38,15 @@
 		_currentTimeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 		_currentTimeLabel.textAlignment = NSTextAlignmentCenter;
 		_currentTimeLabel.backgroundColor = [UIColor clearColor];
-		_currentTimeLabel.textColor = [UIColor darkGrayColor];
-		_currentTimeLabel.shadowColor = [UIColor whiteColor];
-		_currentTimeLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-		_currentTimeLabel.font = [UIFont systemFontOfSize:15.0f];
+		_currentTimeLabel.textColor = [UIColor whiteColor];
+		_currentTimeLabel.font = [UIFont fontWithName:@"OpenSans-Semibold" size:12];
 		[self addSubview:_currentTimeLabel];
 		
 		_remainingTimeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
 		_remainingTimeLabel.textAlignment = NSTextAlignmentCenter;
 		_remainingTimeLabel.backgroundColor = [UIColor clearColor];
-		_remainingTimeLabel.textColor = [UIColor darkGrayColor];
-		_remainingTimeLabel.shadowColor = [UIColor whiteColor];
-		_remainingTimeLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-		_remainingTimeLabel.font = [UIFont systemFontOfSize:15.0f];
+		_remainingTimeLabel.textColor = [UIColor whiteColor];
+		_remainingTimeLabel.font = [UIFont fontWithName:@"OpenSans-Semibold" size:12];
 		[self addSubview:_remainingTimeLabel];
 		
 		[self setMinimumTrackImage:[UIImage new] forState:UIControlStateNormal];

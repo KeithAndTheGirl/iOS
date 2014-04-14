@@ -157,6 +157,7 @@
 		01DE29C118E3D5F200F87022 /* KATGEpisodesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29BF18E3D5F200F87022 /* KATGEpisodesViewController.xib */; };
 		01DE29CC18E567C500F87022 /* KATGWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE29CA18E567C500F87022 /* KATGWelcomeViewController.m */; };
 		01DE29CD18E567C500F87022 /* KATGWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29CB18E567C500F87022 /* KATGWelcomeViewController.xib */; };
+		01E8966018FBDE150036CAA8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */; };
 		01EC330818A9990500156A3E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC330718A9990500156A3E /* libz.dylib */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
@@ -423,6 +424,7 @@
 		01DE29C918E567C500F87022 /* KATGWelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGWelcomeViewController.h; path = "View Controllers/KATGWelcomeViewController.h"; sourceTree = "<group>"; };
 		01DE29CA18E567C500F87022 /* KATGWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGWelcomeViewController.m; path = "View Controllers/KATGWelcomeViewController.m"; sourceTree = "<group>"; };
 		01DE29CB18E567C500F87022 /* KATGWelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGWelcomeViewController.xib; path = "View Controllers/KATGWelcomeViewController.xib"; sourceTree = "<group>"; };
+		01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		01EC330718A9990500156A3E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
@@ -973,6 +975,7 @@
 		9108996B15EAE15500FB57C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */,
 				018C35FB18E94F3300E218D8 /* Images */,
 				9108996C15EAE15500FB57C3 /* KATG-Info.plist */,
 				91FD856A177185FA0061C632 /* DebugEntitlements.plist */,
@@ -1283,6 +1286,7 @@
 				018C36C718E94F3400E218D8 /* ScheduleOn.png in Resources */,
 				018C36AB18E94F3400E218D8 /* SliderThumb@2x.png in Resources */,
 				018C36D918E94F3400E218D8 /* welcome3.png in Resources */,
+				01E8966018FBDE150036CAA8 /* OpenSans-Semibold.ttf in Resources */,
 				018C36C518E94F3400E218D8 /* Schedule.png in Resources */,
 				018C36CB18E94F3400E218D8 /* Youtube.png in Resources */,
 				018C368518E94F3400E218D8 /* get_started.png in Resources */,
