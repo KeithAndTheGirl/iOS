@@ -325,6 +325,8 @@ typedef enum {
                 forumCell.delegate = self;
                 cell = forumCell;
                 cell.contentView.backgroundColor = [UIColor whiteColor];
+				if([self.show.forum_url length] == 0)
+                    cell.hidden = YES;
             }
             else if(indexPath.row == 1) {
                 KATGDownloadEpisodeCell *downloadCell = [tableView dequeueReusableCellWithIdentifier:kKATGShowDetailsSectionDownloadCellIdentifier forIndexPath:indexPath];
