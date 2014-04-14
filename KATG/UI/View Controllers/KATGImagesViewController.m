@@ -95,6 +95,12 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
     self.titleLabel.backgroundColor = [UIColor clearColor];
     self.titleLabel.textColor = [UIColor whiteColor];
+    
+    self.titleLabel.layer.shadowColor = [[UIColor blackColor] CGColor];
+    self.titleLabel.layer.shadowOffset = CGSizeMake(0.0, 0.0);
+    self.titleLabel.layer.shadowRadius = 2.0;
+    self.titleLabel.layer.shadowOpacity = 1;
+    
     [self.view addSubview:self.titleLabel];
 }
 
