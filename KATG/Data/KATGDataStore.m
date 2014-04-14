@@ -678,6 +678,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 			}
 			NSArray *images = episodeDetails[@"images"];
 			NSUInteger index = 0;
+            [self removeImagesForShow:show context:context];
 			for (NSDictionary *imageDictionary in images)
 			{
 				KATGImage *image = [self fetchOrInsertImageWithID:imageDictionary[@"pictureid"] show:show url:imageDictionary[@"media_url"] context:context];
@@ -948,6 +949,11 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 }
 
 #pragma mark - Images
+
+- (void)removeImagesForShow:(KATGShow*)show context:(NSManagedObjectContext *)context {
+    for(KATGImage *image in show.images.allObjects)
+        [context deleteObject:image];
+}
 
 - (KATGImage *)fetchOrInsertImageWithID:(NSString*)pictureID show:(KATGShow *)show url:(NSString *)url context:(NSManagedObjectContext *)context
 {
