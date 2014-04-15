@@ -40,6 +40,7 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @dynamic file_url;
 @dynamic lastPlaybackTime;
 @dynamic duration;
+@dynamic lastListenedTime;
 
 -(NSNumber*)lastPlaybackTime {
     NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
@@ -66,6 +67,20 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 //    NSLog(@"Set Duration %@ for episode %@", duration, self.episode_id);
     NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
     [[NSUserDefaults standardUserDefaults] setObject:duration forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSDate*)lastListenedTime {
+    NSString *key = [NSString stringWithFormat:@"lastListenedTime-%@", self.episode_id];
+    NSDate *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
+    if(!value)
+        value = [NSDate dateWithTimeIntervalSinceReferenceDate:0];
+    return value;
+}
+
+-(void)setLastListenedTime:(NSDate *)time {
+    NSString *key = [NSString stringWithFormat:@"lastListenedTime-%@", self.episode_id];
+    [[NSUserDefaults standardUserDefaults] setObject:time forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

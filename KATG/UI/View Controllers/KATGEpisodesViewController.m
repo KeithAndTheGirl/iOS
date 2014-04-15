@@ -78,9 +78,26 @@
     [titleLabel sizeToFit];
     descLabel.text = _series.desc;
     int startNumber = [self.series.episode_number_max intValue] - 9;
+    [self sortEpisodes];
     [tableView reloadData];
     [[KATGDataStore sharedStore] downloadEpisodesForSeriesID:self.series.series_id
                                            fromEpisodeNumber:@(startNumber)];
+}
+
+-(void)sortEpisodes {
+    BOOL sortByRecentlyListened = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_SORT_RECENTLY_LISTENED];
+    self.sortedEpisodes = [[self.fetchedResultsController fetchedObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSComparisonResult result;
+        if(sortByRecentlyListened) {
+            result = [[(KATGShow*)obj2 lastListenedTime] compare:[(KATGShow*)obj1 lastListenedTime]];
+            if(result == NSOrderedSame)
+                result = [[(KATGShow*)obj2 timestamp] compare:[(KATGShow*)obj1 timestamp]];
+        }
+        else {
+            result = [[(KATGShow*)obj2 timestamp] compare:[(KATGShow*)obj1 timestamp]];
+        }
+        return result;
+    }];
 }
 
 #pragma mark NSFetchedResultsController
@@ -113,24 +130,25 @@
 	NSParameterAssert([NSThread isMainThread]);
 	NSParameterAssert([note object] == [[KATGDataStore sharedStore] readerContext]);
     _fetchedResultsController = nil;
+    [self sortEpisodes];
     [tableView reloadData];
 }
 
 #pragma mark UITableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return [[self.fetchedResultsController fetchedObjects] count];
+	return [self.sortedEpisodes count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	KATGShowView *cell = [_tableView dequeueReusableCellWithIdentifier:@"kKATGShowCellIdentifier" forIndexPath:indexPath];
-	[cell configureWithShow:[self.fetchedResultsController fetchedObjects][indexPath.row]];
+	[cell configureWithShow:self.sortedEpisodes[indexPath.row]];
 	return cell;
 }
 
 -(CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    KATGShow *show = [self.fetchedResultsController fetchedObjects][indexPath.row];
+    KATGShow *show = self.sortedEpisodes[indexPath.row];
     NSArray *images = [[show valueForKeyPath:@"Guests.picture_url"] allObjects];
     if([images count] > 0)
         return 158;
@@ -140,7 +158,7 @@
 -(void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    KATGShow *show = [self.fetchedResultsController fetchedObjects][indexPath.row];
+    KATGShow *show = self.sortedEpisodes[indexPath.row];
     KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
 	showViewController.showObjectID = [show objectID];
 	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;

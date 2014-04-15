@@ -25,6 +25,7 @@
 
 @property (nonatomic, strong) KATGSeries *series;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSArray *sortedEpisodes;
 
 -(IBAction)backAction:(id)sender;
 -(IBAction)detailsAction:(id)sender;

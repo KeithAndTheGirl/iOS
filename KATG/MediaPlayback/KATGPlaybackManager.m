@@ -340,6 +340,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 		{
 			show.lastPlaybackTime = @(time);
 			show.duration = @(duration);
+            show.lastListenedTime = [NSDate date];
 			[store saveChildContext:context completion:nil];
             [self setPlaybackInfo:show];
 		}
