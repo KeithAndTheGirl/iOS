@@ -105,7 +105,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:KATGScheduledEventTimestampAttributeName ascending:YES];
 	seriesFetchRequest.sortDescriptors = [NSArray arrayWithObject:sort];
     
-	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:seriesFetchRequest managedObjectContext:[[KATGDataStore sharedStore] readerContext] sectionNameKeyPath:nil cacheName:@"Events"];
+	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:seriesFetchRequest managedObjectContext:[[KATGDataStore sharedStore] readerContext] sectionNameKeyPath:nil cacheName:nil];
 	aFetchedResultsController.delegate = self;
     self.fetchedResultsController = aFetchedResultsController;
     
