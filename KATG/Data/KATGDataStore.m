@@ -514,6 +514,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
     if (show.file_url) {
         [[NSFileManager defaultManager] removeItemAtPath:show.file_url error:nil];
         show.downloaded = @NO;
+        show.file_url = nil;
         [self saveChildContext:self.childContext completion:^(NSError *saveError) {
             CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
                 if (saveError)

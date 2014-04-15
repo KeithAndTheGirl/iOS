@@ -37,7 +37,7 @@
 
 #pragma mark UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -45,16 +45,34 @@
     if (section == 0) {
         return 2;
     }
-    else {
+    else if (section == 1) {
         return 1;
+    }
+    else {
+        downloadedShows = 0;
+        for(KATGShow *show in self.episodes) {
+            if(show.file_url) downloadedShows++;
+        }
+        if(downloadedShows > 0)
+            return 1;
+        else
+            return 0;
     }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if(section == 0)
+    if(section == 0) {
         return @"Sort By:";
-    else if(section == 1)
+    }
+    else if(section == 1) {
         return @"Filter Episodes";
+    }
+    else if(section == 2) {
+        if(downloadedShows > 0)
+            return @"Remove Downloaded";
+        else
+            return @"";
+    }
     return @"";
 }
 
@@ -76,11 +94,15 @@
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
-    else {
+    else if (indexPath.section == 1) {
         BOOL filterDownloaded = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_FILTER_DOWNLOADED];
         cell.textLabel.text = @"Downloaded only";
         if(filterDownloaded)
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else {
+        cell.textLabel.text = [NSString stringWithFormat:@"Remove all downloaded files (%i)", downloadedShows];
+        cell.textLabel.textColor = [UIColor redColor];
     }
 	return cell;
 }
@@ -95,9 +117,15 @@
     if(indexPath.section == 0) {
         [[NSUserDefaults standardUserDefaults] setBool:(indexPath.row == 0) forKey:EPISODES_SORT_RECENTLY_LISTENED];
     }
-    else {
+    else if(indexPath.section == 1) {
         BOOL filterDownloaded = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_FILTER_DOWNLOADED];
         [[NSUserDefaults standardUserDefaults] setBool:!filterDownloaded forKey:EPISODES_FILTER_DOWNLOADED];
+    }
+    else {
+        for(KATGShow *show in self.episodes) {
+            if(show.file_url)
+                [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
+        }
     }
     [_tableView reloadData];
 }

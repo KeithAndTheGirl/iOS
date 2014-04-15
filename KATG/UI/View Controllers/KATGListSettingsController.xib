@@ -8,6 +8,7 @@
             <connections>
                 <outlet property="cancelButton" destination="Zrb-p8-GBt" id="QNt-xV-kay"/>
                 <outlet property="doneButton" destination="3Ym-mB-YIV" id="MSr-oH-T18"/>
+                <outlet property="tableView" destination="6F3-pP-qPS" id="5H8-sT-oI8"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

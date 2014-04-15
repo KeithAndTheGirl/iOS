@@ -69,6 +69,7 @@
 
 -(IBAction)settingsAction:(id)sender {
     KATGListSettingsController *settingsCtl = [[KATGListSettingsController alloc] init];
+    settingsCtl.episodes = [self.fetchedResultsController fetchedObjects];
     [self presentViewController:settingsCtl animated:YES completion:nil];
 }
 

@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KATGDataStore.h"
+#import "KATGShow.h"
 
 #define EPISODES_SORT_RECENTLY_LISTENED @"EPISODES_SORT_RECENTLY_LISTENED"
 #define EPISODES_FILTER_DOWNLOADED @"EPISODES_FILTER_DOWNLOADED"
@@ -14,7 +16,12 @@
 @interface KATGListSettingsController : UIViewController {
     IBOutlet UIButton       *doneButton;
     IBOutlet UIButton       *cancelButton;
+    IBOutlet UITableView    *tableView;
+    
+    int downloadedShows;
 }
+
+@property (nonatomic, strong) NSArray *episodes;
 
 -(IBAction)doneAction:(id)sender;
 -(IBAction)cancelAction:(id)sender;
