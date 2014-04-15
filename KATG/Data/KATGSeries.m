@@ -21,6 +21,7 @@
 #import "KATGSeries.h"
 
 NSString *const KATGSeriesIDAttributeName = @"series_id";
+NSString *const KATGSeriesSortAttributeName = @"sort_order";
 
 @implementation KATGSeries
 

@@ -47,7 +47,7 @@
     NSFetchRequest *seriesFetchRequest = [NSFetchRequest new];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:[KATGSeries katg_entityName] inManagedObjectContext:[[KATGDataStore sharedStore] readerContext]];
 	seriesFetchRequest.entity = entity;
-	NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:KATGSeriesIDAttributeName ascending:YES];
+	NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:KATGSeriesSortAttributeName ascending:YES];
 	seriesFetchRequest.sortDescriptors = [NSArray arrayWithObject:sort];
     
 	NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:seriesFetchRequest managedObjectContext:[[KATGDataStore sharedStore] readerContext] sectionNameKeyPath:nil cacheName:@"Series"];

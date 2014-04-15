@@ -23,6 +23,7 @@
 #import "NSManagedObject+ESObject.h"
 
 extern NSString *const KATGSeriesIDAttributeName;
+extern NSString *const KATGSeriesSortAttributeName;
 
 @interface KATGSeries : NSManagedObject
 
