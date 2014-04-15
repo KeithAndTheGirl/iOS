@@ -29,33 +29,49 @@
 
 #pragma mark UITableView
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return 2;
+    if (section == 0) {
+        return 2;
+    }
+    else {
+        return 1;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if(section == 0)
         return @"Sort By:";
+    else if(section == 1)
+        return @"Filter Episodes";
     return @"";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];
-    BOOL sortByRecentlyListened = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_SORT_RECENTLY_LISTENED];
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    if(indexPath.row == 0) {
-        cell.textLabel.text = @"Recently Listened";
-        if(sortByRecentlyListened)
-            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
+    if (indexPath.section == 0) {
+        BOOL sortByRecentlyListened = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_SORT_RECENTLY_LISTENED];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        if(indexPath.row == 0) {
+            cell.textLabel.text = @"Recently Listened";
+            if(sortByRecentlyListened)
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
+        else {
+            cell.textLabel.text = @"Posted Date";
+            if(!sortByRecentlyListened)
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        }
     }
     else {
-        cell.textLabel.text = @"Posted Date";
-        if(!sortByRecentlyListened)
+        BOOL filterDownloaded = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_FILTER_DOWNLOADED];
+        cell.textLabel.text = @"Downloaded only";
+        if(filterDownloaded)
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
 	return cell;
@@ -70,8 +86,12 @@
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     if(indexPath.section == 0) {
         [[NSUserDefaults standardUserDefaults] setBool:(indexPath.row == 0) forKey:EPISODES_SORT_RECENTLY_LISTENED];
-        [_tableView reloadData];
     }
+    else {
+        BOOL filterDownloaded = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_FILTER_DOWNLOADED];
+        [[NSUserDefaults standardUserDefaults] setBool:!filterDownloaded forKey:EPISODES_FILTER_DOWNLOADED];
+    }
+    [_tableView reloadData];
 }
 
 

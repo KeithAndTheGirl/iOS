@@ -86,7 +86,18 @@
 
 -(void)sortEpisodes {
     BOOL sortByRecentlyListened = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_SORT_RECENTLY_LISTENED];
-    self.sortedEpisodes = [[self.fetchedResultsController fetchedObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    BOOL filterDownloaded = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_FILTER_DOWNLOADED];
+    NSMutableArray *sourceArray = [NSMutableArray array];
+    if(filterDownloaded) {
+        for(KATGShow *show in [self.fetchedResultsController fetchedObjects])
+            if(show.file_url)
+                [sourceArray addObject:show];
+    }
+    else {
+        [sourceArray addObjectsFromArray:[self.fetchedResultsController fetchedObjects]];
+    }
+    
+    self.sortedEpisodes = [sourceArray sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         NSComparisonResult result;
         if(sortByRecentlyListened) {
             result = [[(KATGShow*)obj2 lastListenedTime] compare:[(KATGShow*)obj1 lastListenedTime]];
