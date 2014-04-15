@@ -15,13 +15,12 @@
 
 @interface KATGListSettingsController : UIViewController {
     IBOutlet UIButton       *doneButton;
-    IBOutlet UIButton       *cancelButton;
     IBOutlet UITableView    *tableView;
-    
-    int downloadedShows;
 }
 
 @property (nonatomic, strong) NSArray *episodes;
+@property (nonatomic, strong) NSMutableArray *downloadedEpisodes;
+@property (nonatomic, strong) NSMutableArray *selectedEpisodes;
 
 -(IBAction)doneAction:(id)sender;
 -(IBAction)cancelAction:(id)sender;

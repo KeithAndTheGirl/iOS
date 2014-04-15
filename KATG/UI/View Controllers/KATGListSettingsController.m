@@ -12,18 +12,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.selectedEpisodes = [NSMutableArray array];
+    self.downloadedEpisodes = [NSMutableArray array];
+    
     doneButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
     [doneButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
     [doneButton.layer setBorderWidth:0.5];
     [doneButton.layer setCornerRadius:4];
-    cancelButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
-    [cancelButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
-    [cancelButton.layer setBorderWidth:0.5];
-    [cancelButton.layer setCornerRadius:4];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    for(KATGShow *show in self.episodes) {
+        if(show.file_url)
+            [self.downloadedEpisodes addObject:show];
+    }
 }
 
 #pragma mark Actions
@@ -49,12 +57,8 @@
         return 1;
     }
     else {
-        downloadedShows = 0;
-        for(KATGShow *show in self.episodes) {
-            if(show.file_url) downloadedShows++;
-        }
-        if(downloadedShows > 0)
-            return 1;
+        if([self.downloadedEpisodes count] > 0)
+            return [self.downloadedEpisodes count]+2;
         else
             return 0;
     }
@@ -68,12 +72,12 @@
         return @"Filter Episodes";
     }
     else if(section == 2) {
-        if(downloadedShows > 0)
+        if([self.downloadedEpisodes count] > 0)
             return @"Remove Downloaded";
         else
-            return @"";
+            return @" ";
     }
-    return @"";
+    return @" ";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -101,8 +105,23 @@
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     else {
-        cell.textLabel.text = [NSString stringWithFormat:@"Remove all downloaded files (%i)", downloadedShows];
-        cell.textLabel.textColor = [UIColor redColor];
+        if(indexPath.row == 0) {
+            cell.textLabel.text = [NSString stringWithFormat:@"Remove all downloaded files (%i)", (int)[self.downloadedEpisodes count]];
+            cell.textLabel.textColor = [UIColor redColor];
+        }
+        else if(indexPath.row == 1) {
+            cell.textLabel.text = [NSString stringWithFormat:@"Remove selected files (%i)", (int)[self.selectedEpisodes count]];
+        }
+        else {
+            KATGShow *show = self.downloadedEpisodes[indexPath.row-2];
+            cell.indentationLevel = 2;
+            cell.textLabel.font = [UIFont systemFontOfSize:12];
+            cell.textLabel.text = show.title;
+            if([self.selectedEpisodes containsObject:show])
+                cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            else
+                cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
 	return cell;
 }
@@ -122,10 +141,32 @@
         [[NSUserDefaults standardUserDefaults] setBool:!filterDownloaded forKey:EPISODES_FILTER_DOWNLOADED];
     }
     else {
-        for(KATGShow *show in self.episodes) {
-            if(show.file_url)
-                [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
+        if(indexPath.row == 0) {
+            for(KATGShow *show in self.episodes) {
+                if(show.file_url)
+                    [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
+            }
         }
+        else if(indexPath.row == 1) {
+            for(KATGShow *show in self.selectedEpisodes) {
+                if(show.file_url)
+                    [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
+            }
+            [self.selectedEpisodes removeAllObjects];
+        }
+        else {
+            KATGShow *show = self.downloadedEpisodes[indexPath.row-2];
+            if([self.selectedEpisodes containsObject:show])
+                [self.selectedEpisodes removeObject:show];
+            else
+                [self.selectedEpisodes addObject:show];
+        }
+    }
+    
+    [self.downloadedEpisodes removeAllObjects];
+    for(KATGShow *show in self.episodes) {
+        if(show.file_url)
+            [self.downloadedEpisodes addObject:show];
     }
     [_tableView reloadData];
 }
