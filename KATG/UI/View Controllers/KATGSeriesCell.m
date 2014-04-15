@@ -21,7 +21,7 @@
         
         titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 110, 108, 34)];
         titleLabel.numberOfLines = 3;
-        titleLabel.font = [UIFont boldSystemFontOfSize:13];
+        titleLabel.font = [UIFont boldSystemFontOfSize:12.5];
         titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:titleLabel];
     }
