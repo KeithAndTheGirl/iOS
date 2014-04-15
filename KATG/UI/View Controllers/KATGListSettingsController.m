@@ -12,6 +12,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    doneButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    [doneButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
+    [doneButton.layer setBorderWidth:0.5];
+    [doneButton.layer setCornerRadius:4];
+    cancelButton.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+    [cancelButton.layer setBorderColor:[[UIColor colorWithWhite:1 alpha:0.75] CGColor]];
+    [cancelButton.layer setBorderWidth:0.5];
+    [cancelButton.layer setCornerRadius:4];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
