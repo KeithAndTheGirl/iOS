@@ -67,6 +67,11 @@
     
 }
 
+-(IBAction)settingsAction:(id)sender {
+    KATGListSettingsController *settingsCtl = [[KATGListSettingsController alloc] init];
+    [self presentViewController:settingsCtl animated:YES completion:nil];
+}
+
 -(void)updateView {
     [coverImage setImageWithURL:[NSURL URLWithString:_series.cover_image_url]];
     titleLabel.text = _series.title;

@@ -63,7 +63,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7A-HD-R0E">
-                                <rect key="frame" x="240" y="170" width="64" height="34"/>
+                                <rect key="frame" x="198" y="170" width="64" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Details">
@@ -72,6 +72,16 @@
                                 </state>
                                 <connections>
                                     <action selector="detailsAction:" destination="-1" eventType="touchUpInside" id="JxY-eg-tUl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7a1-Hk-aeQ">
+                                <rect key="frame" x="270" y="170" width="34" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="gear.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="settingsAction:" destination="-1" eventType="touchUpInside" id="PNh-IQ-qtd"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -90,5 +100,6 @@
     </objects>
     <resources>
         <image name="SeriesBackground.png" width="640" height="1136"/>
+        <image name="gear.png" width="34" height="34"/>
     </resources>
 </document>

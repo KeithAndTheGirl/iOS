@@ -12,6 +12,7 @@
 #import "KATGDataStore.h"
 #import "KATGShowView.h"
 #import "KATGShowViewController.h"
+#import "KATGListSettingsController.h"
 
 @interface KATGEpisodesViewController : UIViewController <NSFetchedResultsControllerDelegate> {
     IBOutlet UITableView    *tableView;
@@ -27,5 +28,6 @@
 
 -(IBAction)backAction:(id)sender;
 -(IBAction)detailsAction:(id)sender;
+-(IBAction)settingsAction:(id)sender;
 
 @end

@@ -26,6 +26,10 @@
 		012B4F301857A2ED00B59FC5 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4F1F1857A2ED00B59FC5 /* UIProgressView+AFNetworking.m */; };
 		012B4F311857A2ED00B59FC5 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4F211857A2ED00B59FC5 /* UIWebView+AFNetworking.m */; };
 		012B4F331857A38400B59FC5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012B4F321857A38400B59FC5 /* Security.framework */; };
+		014D05AF18FDA82400C1CBE2 /* gear.png in Resources */ = {isa = PBXBuildFile; fileRef = 014D05AD18FDA82400C1CBE2 /* gear.png */; };
+		014D05B018FDA82400C1CBE2 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014D05AE18FDA82400C1CBE2 /* gear@2x.png */; };
+		014D05B418FDA98200C1CBE2 /* KATGListSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D05B218FDA98200C1CBE2 /* KATGListSettingsController.m */; };
+		014D05B518FDA98200C1CBE2 /* KATGListSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014D05B318FDA98200C1CBE2 /* KATGListSettingsController.xib */; };
 		018C35B418E7E9FA00E218D8 /* KATGScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */; };
 		018C35B518E7E9FA00E218D8 /* KATGScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */; };
 		018C35BA18E7EEF600E218D8 /* KATGYoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35B818E7EEF600E218D8 /* KATGYoutubeViewController.m */; };
@@ -269,6 +273,11 @@
 		012B4F201857A2ED00B59FC5 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		012B4F211857A2ED00B59FC5 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		012B4F321857A38400B59FC5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		014D05AD18FDA82400C1CBE2 /* gear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gear.png; sourceTree = "<group>"; };
+		014D05AE18FDA82400C1CBE2 /* gear@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gear@2x.png"; sourceTree = "<group>"; };
+		014D05B118FDA98200C1CBE2 /* KATGListSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGListSettingsController.h; path = "View Controllers/KATGListSettingsController.h"; sourceTree = "<group>"; };
+		014D05B218FDA98200C1CBE2 /* KATGListSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGListSettingsController.m; path = "View Controllers/KATGListSettingsController.m"; sourceTree = "<group>"; };
+		014D05B318FDA98200C1CBE2 /* KATGListSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGListSettingsController.xib; path = "View Controllers/KATGListSettingsController.xib"; sourceTree = "<group>"; };
 		018C35B118E7E9FA00E218D8 /* KATGScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGScheduleViewController.h; path = "View Controllers/KATGScheduleViewController.h"; sourceTree = "<group>"; };
 		018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGScheduleViewController.m; path = "View Controllers/KATGScheduleViewController.m"; sourceTree = "<group>"; };
 		018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGScheduleViewController.xib; path = "View Controllers/KATGScheduleViewController.xib"; sourceTree = "<group>"; };
@@ -691,6 +700,8 @@
 		018C35FB18E94F3300E218D8 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				014D05AD18FDA82400C1CBE2 /* gear.png */,
+				014D05AE18FDA82400C1CBE2 /* gear@2x.png */,
 				018C35FC18E94F3300E218D8 /* about_background.png */,
 				018C35FD18E94F3300E218D8 /* about_background@2x.png */,
 				018C35FE18E94F3300E218D8 /* ArrowNext.png */,
@@ -846,6 +857,9 @@
 				229EC8F6167175F200FB899A /* KATGShowView.h */,
 				22D07DC71676287C004EBEBB /* KATGShowView.m */,
 				018C36DB18E94FCF00E218D8 /* KATGShowCell.xib */,
+				014D05B118FDA98200C1CBE2 /* KATGListSettingsController.h */,
+				014D05B218FDA98200C1CBE2 /* KATGListSettingsController.m */,
+				014D05B318FDA98200C1CBE2 /* KATGListSettingsController.xib */,
 			);
 			name = Episodes;
 			sourceTree = "<group>";
@@ -1279,6 +1293,7 @@
 				018C367518E94F3400E218D8 /* CloseButton@2x.png in Resources */,
 				018C36BA18E94F3400E218D8 /* About@2x.png in Resources */,
 				0198AA35185F3C240063947C /* KATGScheduleItemTableViewCell.xib in Resources */,
+				014D05B018FDA82400C1CBE2 /* gear@2x.png in Resources */,
 				018C36AF18E94F3400E218D8 /* more_of_keith@2x.png in Resources */,
 				018C35D818E94E2D00E218D8 /* KATGLiveShowFeedbackViewController.xib in Resources */,
 				018C368418E94F3400E218D8 /* fb@2x.png in Resources */,
@@ -1307,7 +1322,9 @@
 				018C367218E94F3400E218D8 /* CheckMark.png in Resources */,
 				018C368818E94F3400E218D8 /* get_the_guide@2x.png in Resources */,
 				018C369F18E94F3400E218D8 /* StopLiveButton@2x.png in Resources */,
+				014D05AF18FDA82400C1CBE2 /* gear.png in Resources */,
 				018C35B518E7E9FA00E218D8 /* KATGScheduleViewController.xib in Resources */,
+				014D05B518FDA98200C1CBE2 /* KATGListSettingsController.xib in Resources */,
 				018C36D018E94F3400E218D8 /* TitleBackground@2x.png in Resources */,
 				018C36B018E94F3400E218D8 /* NowPlaying.png in Resources */,
 				018C369418E94F3400E218D8 /* indicators1.png in Resources */,
@@ -1415,6 +1432,7 @@
 				91089D1E15EAE58800FB57C3 /* ESPropertyMap.m in Sources */,
 				91089D1F15EAE58800FB57C3 /* ESURLPropertyMap.m in Sources */,
 				91089D2115EAE58800FB57C3 /* Reachability.m in Sources */,
+				014D05B418FDA98200C1CBE2 /* KATGListSettingsController.m in Sources */,
 				91089D7015EAE5E600FB57C3 /* ESMutableDictionary.m in Sources */,
 				91089D7715EAE5F600FB57C3 /* ESDeclaredPropertyAttributes.m in Sources */,
 				91089D7815EAE5F600FB57C3 /* ESDeclaredPropertyFunctions.m in Sources */,
