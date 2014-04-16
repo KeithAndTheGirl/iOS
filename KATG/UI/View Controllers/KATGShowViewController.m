@@ -48,6 +48,7 @@ static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContex
 #define kKATGShowDetailsSectionForumCellIdentifier @"kKATGShowDetailsSectionForumCellIdentifier"
 
 typedef enum {
+	KATGShowDetailsSectionPreview,
 	KATGShowDetailsSectionGuests,
 	KATGShowDetailsSectionDescription,
 	KATGShowDetailsSectionImages,
@@ -208,7 +209,7 @@ typedef enum {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     [self.refreshControl endRefreshing];
-	return 5;
+	return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -216,6 +217,8 @@ typedef enum {
     NSArray *guests = [[self.show valueForKeyPath:@"Guests.name"] allObjects];
     
 	switch ((KATGShowDetailsSection)section) {
+        case KATGShowDetailsSectionPreview:
+            return [self.show.preview_url length]?2:0;
 		case KATGShowDetailsSectionGuests:
             return [guests count]?2:0;
 		case KATGShowDetailsSectionDescription:
@@ -238,6 +241,11 @@ typedef enum {
         NSArray *guests = [[self.show valueForKeyPath:@"Guests.name"] allObjects];
 		switch ((KATGShowDetailsSection)indexPath.section)
 		{
+			case KATGShowDetailsSectionPreview:
+				titleCell.showTopRule = NO;
+				titleCell.sectionTitleLabel.text = NSLocalizedString(@"Preview", nil);
+                titleCell.contentView.backgroundColor = [UIColor whiteColor];
+                break;
 			case KATGShowDetailsSectionGuests:
 				titleCell.showTopRule = YES;
 				titleCell.sectionTitleLabel.text = [NSString stringWithFormat:@"%@: %@",
@@ -267,6 +275,32 @@ typedef enum {
 	UITableViewCell *cell;
 	switch ((KATGShowDetailsSection)indexPath.section) 
 	{
+		case KATGShowDetailsSectionPreview:
+        {
+            cell = [[UITableViewCell alloc] init];
+            UIWebView *webView = [[UIWebView alloc] initWithFrame:cell.frame];
+            webView.autoresizingMask = 63;
+            webView.allowsInlineMediaPlayback = YES;
+            webView.mediaPlaybackRequiresUserAction = YES;
+            webView.backgroundColor = [UIColor blackColor];
+            [cell addSubview:webView];
+            webView.scrollView.scrollEnabled = NO;
+            NSLog(@"%@", self.show.preview_url);
+            
+            if([self.show.preview_url rangeOfString:@"youtube"].location != NSNotFound) {
+                NSString *embedHTML = @"<style type=\"text/css\">body {background-color: black;color: black;}</style><body><iframe width=\"306\" height=\"210\" src=\"http://www.youtube.com/embed/%@\" frameborder=\"0\" allowfullscreen></iframe></body>";
+                NSRange yt_id = [self.show.preview_url rangeOfString:@"watch?v="];
+                if(yt_id.location == NSNotFound)
+                    yt_id = [self.show.preview_url rangeOfString:@"/" options:NSBackwardsSearch];
+                NSString *video_id = [self.show.preview_url substringFromIndex:yt_id.location+yt_id.length];
+                NSString *html = [NSString stringWithFormat:embedHTML, video_id];
+                [webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://youtube.com"]];
+            }
+            else {
+                [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.show.preview_url]]];
+            }
+            break;
+        }
 		case KATGShowDetailsSectionGuests:
 		{
             NSArray *guests = self.show.sortedGuests;
@@ -364,6 +398,12 @@ typedef enum {
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	switch ((KATGShowDetailsSection)indexPath.section) {
+		case KATGShowDetailsSectionPreview:
+            if (indexPath.row == 0)
+			{
+				return 44.0f;
+			}
+			return 220.0f;
 		case KATGShowDetailsSectionGuests:
 			if (indexPath.row == 0)
 			{

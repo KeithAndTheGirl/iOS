@@ -61,6 +61,7 @@ extern NSString *const KATGShowEpisodeIDAttributeName;
 @property (nonatomic, retain) NSString * file_url;
 @property (nonatomic, retain) NSSet * guests;
 @property (nonatomic, retain) NSSet * images;
+@property (nonatomic, retain) NSString *preview_url;
 
 // local values
 @property (nonatomic, retain) NSNumber *lastPlaybackTime;

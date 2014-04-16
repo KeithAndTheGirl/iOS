@@ -179,7 +179,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 - (NSURL *)storeURL
 {
 	NSURL *directoryURL = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-	return [directoryURL URLByAppendingPathComponent:@"katg30.sqlite"];
+	return [directoryURL URLByAppendingPathComponent:@"katg31.sqlite"];
 }
 
 - (NSManagedObjectContext *)childContext
@@ -707,6 +707,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 				show.desc = [noteLines copy];
 			}
             show.forum_url = episodeDetails[@"forum_url"];
+            show.preview_url = episodeDetails[@"preview_url"];
             CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:KATGDataStoreShowDidChangeNotification object:nil];
             });
