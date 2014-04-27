@@ -39,6 +39,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateView];
+    [self reload];
     
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
 }
@@ -56,7 +57,6 @@
 
 -(void)setSeries:(KATGSeries *)value {
     _series = value;
-    [self updateView];
 }
 
 -(IBAction)backAction:(id)sender {
@@ -74,15 +74,39 @@
 }
 
 -(void)updateView {
+    tableView.tableFooterView = nil;
+    spinner.hidden = YES;
+    
     [coverImage setImageWithURL:[NSURL URLWithString:_series.cover_image_url]];
     titleLabel.text = _series.title;
     [titleLabel sizeToFit];
     descLabel.text = _series.desc;
-    int startNumber = [self.series.episode_number_max intValue] - 9;
     [self sortEpisodes];
     [tableView reloadData];
+}
+
+-(void)reload {
+    if([self.sortedEpisodes count] == 0) {
+        spinner.hidden = NO;
+    }
+    int startNumber = [self.series.episode_number_max intValue] - 9;
     [[KATGDataStore sharedStore] downloadEpisodesForSeriesID:self.series.series_id
                                            fromEpisodeNumber:@(startNumber)];
+}
+
+-(void)loadMore {
+    if([self.series.episode_count intValue] > [self.sortedEpisodes count]) {
+        UIActivityIndicatorView *moreSpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+        [tableView.tableFooterView addSubview:moreSpinner];
+        moreSpinner.center = CGPointMake(160, 22);
+        [moreSpinner startAnimating];
+        
+        KATGShow *lastShow = [self.sortedEpisodes lastObject];
+        int startNumber = [lastShow.number intValue]-10;
+        [[KATGDataStore sharedStore] downloadEpisodesForSeriesID:self.series.series_id
+                                               fromEpisodeNumber:@(startNumber)];
+    }
 }
 
 -(void)sortEpisodes {
@@ -141,9 +165,9 @@
 {
 	NSParameterAssert([NSThread isMainThread]);
 	NSParameterAssert([note object] == [[KATGDataStore sharedStore] readerContext]);
+    
     _fetchedResultsController = nil;
-    [self sortEpisodes];
-    [tableView reloadData];
+    [self updateView];
 }
 
 #pragma mark UITableView
@@ -156,6 +180,10 @@
 {
 	KATGShowView *cell = [_tableView dequeueReusableCellWithIdentifier:@"kKATGShowCellIdentifier" forIndexPath:indexPath];
 	[cell configureWithShow:self.sortedEpisodes[indexPath.row]];
+    
+    if(indexPath.row == [self.sortedEpisodes count]-1) {
+        [self loadMore];
+    }
 	return cell;
 }
 

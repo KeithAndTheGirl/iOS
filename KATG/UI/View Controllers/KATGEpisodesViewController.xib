@@ -10,6 +10,7 @@
                 <outlet property="coverImage" destination="bfI-S4-vuS" id="nfr-sF-hlc"/>
                 <outlet property="descLabel" destination="pwL-E5-CEL" id="zvJ-E7-uOf"/>
                 <outlet property="detailsButton" destination="u7A-HD-R0E" id="kgS-r5-FhT"/>
+                <outlet property="spinner" destination="B0l-8s-yGV" id="Wrc-Mi-djL"/>
                 <outlet property="tableView" destination="qV4-xv-DP9" id="AsI-2C-Dwg"/>
                 <outlet property="titleLabel" destination="X6F-r0-DJD" id="DTZ-1q-vZa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -92,6 +93,10 @@
                         <outlet property="delegate" destination="-1" id="W9U-xh-1cZ"/>
                     </connections>
                 </tableView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" id="B0l-8s-yGV">
+                    <rect key="frame" x="151" y="273" width="20" height="20"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
