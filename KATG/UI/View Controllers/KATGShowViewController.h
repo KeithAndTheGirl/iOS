@@ -29,6 +29,7 @@
 @interface KATGShowViewController : UIViewController
 
 @property (nonatomic, readonly) KATGShow *show;
+@property (assign, nonatomic) BOOL needAuth;
 @property (nonatomic) NSManagedObjectID	*showObjectID;
 @property (weak, nonatomic) id<KATGShowViewControllerDelegate> delegate;
 

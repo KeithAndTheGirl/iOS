@@ -212,7 +212,22 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 		}
 		else
 		{
-			url = [NSURL URLWithString:currentShow.media_url];
+            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+            NSString *userName = [def valueForKey:KATG_PLAYBACK_USERNAME_KEY];
+            NSString *password = [def valueForKey:KATG_PLAYBACK_PASSWORD_KEY];
+            if([userName length] && [password length]) {
+                NSString *media_url = currentShow.media_url;
+                if([media_url hasPrefix:@"http://"])
+                    media_url = [media_url substringFromIndex:7];
+                else if([media_url hasPrefix:@"https://"])
+                    media_url = [media_url substringFromIndex:8];
+                NSString *urlString = [NSString stringWithFormat:@"http://%@:%@@%@", userName, password, media_url];
+                url = [NSURL URLWithString:urlString];
+            }
+            else {
+                url = [NSURL URLWithString:currentShow.media_url];
+            }
+            NSLog(@"Will play from URL: %@", url);
 		}
 		self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];
 	}

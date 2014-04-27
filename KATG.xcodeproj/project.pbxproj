@@ -153,6 +153,8 @@
 		0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198AB93186077320063947C /* KATGYouTubeTableCell.m */; };
 		0198AB96186077850063947C /* KATGYouTubeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AB95186077850063947C /* KATGYouTubeTableCell.xib */; };
 		01BCE80C186C208600F096EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BCE80B186C208600F096EF /* Images.xcassets */; };
+		01CCD312190D86F600CE3956 /* KATGVipLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CCD310190D86F600CE3956 /* KATGVipLoginViewController.m */; };
+		01CCD313190D86F600CE3956 /* KATGVipLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CCD311190D86F600CE3956 /* KATGVipLoginViewController.xib */; };
 		01DE295B18E283CB00F87022 /* KATGSeries.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE295A18E283CB00F87022 /* KATGSeries.m */; };
 		01DE296318E298ED00F87022 /* KATGSeriesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE296118E298ED00F87022 /* KATGSeriesViewController.m */; };
 		01DE296418E298ED00F87022 /* KATGSeriesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DE296218E298ED00F87022 /* KATGSeriesViewController.xib */; };
@@ -420,6 +422,9 @@
 		0198AB93186077320063947C /* KATGYouTubeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeTableCell.m; path = "View Controllers/KATGYouTubeTableCell.m"; sourceTree = "<group>"; };
 		0198AB95186077850063947C /* KATGYouTubeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeTableCell.xib; path = "View Controllers/KATGYouTubeTableCell.xib"; sourceTree = "<group>"; };
 		01BCE80B186C208600F096EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		01CCD30F190D86F600CE3956 /* KATGVipLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGVipLoginViewController.h; path = "View Controllers/KATGVipLoginViewController.h"; sourceTree = "<group>"; };
+		01CCD310190D86F600CE3956 /* KATGVipLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGVipLoginViewController.m; path = "View Controllers/KATGVipLoginViewController.m"; sourceTree = "<group>"; };
+		01CCD311190D86F600CE3956 /* KATGVipLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGVipLoginViewController.xib; path = "View Controllers/KATGVipLoginViewController.xib"; sourceTree = "<group>"; };
 		01DE295918E283CB00F87022 /* KATGSeries.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGSeries.h; sourceTree = "<group>"; };
 		01DE295A18E283CB00F87022 /* KATGSeries.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGSeries.m; sourceTree = "<group>"; };
 		01DE296018E298ED00F87022 /* KATGSeriesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGSeriesViewController.h; path = "View Controllers/KATGSeriesViewController.h"; sourceTree = "<group>"; };
@@ -836,6 +841,16 @@
 			path = TestFlightSDK3;
 			sourceTree = "<group>";
 		};
+		01CCD30E190D86CA00CE3956 /* VIP */ = {
+			isa = PBXGroup;
+			children = (
+				01CCD30F190D86F600CE3956 /* KATGVipLoginViewController.h */,
+				01CCD310190D86F600CE3956 /* KATGVipLoginViewController.m */,
+				01CCD311190D86F600CE3956 /* KATGVipLoginViewController.xib */,
+			);
+			name = VIP;
+			sourceTree = "<group>";
+		};
 		01DE295F18E298BD00F87022 /* Series */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,6 +900,7 @@
 		2281C302160DE865000ACAAB /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01CCD30E190D86CA00CE3956 /* VIP */,
 				01DE295F18E298BD00F87022 /* Series */,
 				01DE29BC18E3D5D400F87022 /* Episodes */,
 				228F9411165207D1006A1A05 /* Show Details */,
@@ -1319,6 +1335,7 @@
 				018C36DA18E94F3400E218D8 /* welcome3@2x.png in Resources */,
 				018C36BD18E94F3400E218D8 /* Episodes.png in Resources */,
 				018C36A218E94F3400E218D8 /* pause.png in Resources */,
+				01CCD313190D86F600CE3956 /* KATGVipLoginViewController.xib in Resources */,
 				018C367218E94F3400E218D8 /* CheckMark.png in Resources */,
 				018C368818E94F3400E218D8 /* get_the_guide@2x.png in Resources */,
 				018C369F18E94F3400E218D8 /* StopLiveButton@2x.png in Resources */,
@@ -1489,6 +1506,7 @@
 				012B4F2F1857A2ED00B59FC5 /* UIImageView+AFNetworking.m in Sources */,
 				01DE296318E298ED00F87022 /* KATGSeriesViewController.m in Sources */,
 				91FCB68C1771774700EE9001 /* KATGPushRegistration.m in Sources */,
+				01CCD312190D86F600CE3956 /* KATGVipLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

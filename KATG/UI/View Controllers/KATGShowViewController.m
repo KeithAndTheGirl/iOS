@@ -37,6 +37,7 @@
 #import "KATGImagesViewController.h"
 #import "KATGReachabilityOperation.h"
 #import "KATGImageCache.h"
+#import "KATGVipLoginViewController.h"
 
 static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContext";
 
@@ -569,6 +570,20 @@ typedef enum {
 
 - (void)playButtonPressed:(id)sender
 {
+    if(self.needAuth) {
+        NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+        NSString *userName = [def valueForKey:KATG_PLAYBACK_USERNAME_KEY];
+        NSString *password = [def valueForKey:KATG_PLAYBACK_PASSWORD_KEY];
+        if([userName length] == 0 || [password length] == 0) {
+            KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
+            loginController.completion = (^() {
+                [self playButtonPressed:nil];
+            });
+            [self presentViewController:loginController animated:YES completion:nil];
+            return;
+        }
+    }
+    
     if (self.downloadToken)
     {
         [[[UIAlertView alloc] initWithTitle:@"Playback Unavailable" message:@"Playback is not available while downloading." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
