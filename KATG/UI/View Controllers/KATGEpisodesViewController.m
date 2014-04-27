@@ -29,7 +29,6 @@
     tableView.backgroundColor = [UIColor blackColor];
     [tableView registerNib:[UINib nibWithNibName:@"KATGShowCell" bundle:nil] forCellReuseIdentifier:@"kKATGShowCellIdentifier"];
     self.edgesForExtendedLayout = UIRectEdgeBottom;
-    [self registerStateObserver];
     
     refreshControl = [[UIRefreshControl alloc] init];
     refreshControl.tintColor = [UIColor whiteColor];
@@ -46,12 +45,14 @@
     [self updateView];
     [self reload];
     
+    [self registerStateObserver];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    [self unregisterStateObserver];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
 }
 
