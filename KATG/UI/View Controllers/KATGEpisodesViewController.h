@@ -17,6 +17,7 @@
 @interface KATGEpisodesViewController : UIViewController <NSFetchedResultsControllerDelegate> {
     IBOutlet UITableView    *tableView;
     IBOutlet UIActivityIndicatorView       *spinner;
+    UIRefreshControl *refreshControl;
     IBOutlet UIImageView    *coverImage;
     IBOutlet UILabel        *titleLabel;
     IBOutlet UILabel        *descLabel;

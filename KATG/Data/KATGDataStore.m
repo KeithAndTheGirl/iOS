@@ -102,6 +102,8 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 
 @property (nonatomic, strong) NSNumber *lastSeriesID;
 @property (nonatomic, strong) NSNumber *lastEpisodeStartNumber;
+@property (nonatomic, copy) void (^lastSuccess)();
+@property (nonatomic, copy) void (^lastFailure)();
 
 @end
 
@@ -332,16 +334,19 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	[self.networkQueue addOperation:op];
 }
 
-- (void)downloadEpisodesForSeriesID:(NSNumber*)seriesID fromEpisodeNumber:(NSNumber*)startNumber
+- (void)downloadEpisodesForSeriesID:(NSNumber*)seriesID fromEpisodeNumber:(NSNumber*)startNumber success:(void(^)())success failure:(void(^)())failure
 {
     self.lastSeriesID = seriesID;
     self.lastEpisodeStartNumber = startNumber;
+    self.lastSuccess = success;
+    self.lastFailure = failure;
 	//	Retrieve list of shows
     NSString *urlString = [NSString stringWithFormat:@"%@?shownameid=%@&number=%@", kShowListURIAddress, seriesID, startNumber];
 	NSURL *url = [NSURL URLWithString:urlString relativeToURL:self.baseURL];
 	NSParameterAssert(url);
 	if (![self networkOperationPreflight:url])
 	{
+        failure();
 		return;
 	}
 	ShowsLog(@"Download Shows");
@@ -354,10 +359,12 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 																   if ([JSON count] > 0)
 																   {
 																	   [self processEpisodeList:JSON];
+                                                                       success();
 																   }
 															   } failure:^(ESJSONOperation *op) {
 																   ShowsLog(@"Shows Download Failed %@", op.error);
 																   [self handleError:op.error];
+                                                                   failure();
 															   }];
 	[self.networkQueue addOperation:op];
 }
@@ -581,7 +588,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	dispatch_async(dispatch_get_main_queue(), ^(void) {
 		[self startPolling];
         [self downloadAllSeries];
-		[self downloadEpisodesForSeriesID:self.lastSeriesID fromEpisodeNumber:self.lastEpisodeStartNumber];
+		[self downloadEpisodesForSeriesID:self.lastSeriesID fromEpisodeNumber:self.lastEpisodeStartNumber success:self.lastSuccess failure:self.lastFailure];
 		[self downloadEvents];
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:kKATGReachabilityIsReachableNotification object:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:KATGDataStoreConnectivityRestoredNotification object:nil];

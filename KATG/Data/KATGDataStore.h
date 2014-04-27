@@ -76,8 +76,7 @@ extern NSString *const KATGDataStoreShowDidChangeNotification;
 - (void)saveChildContext:(NSManagedObjectContext *)context completion:(void (^)(NSError *error))completion;
 
 // Fetch episodes
-- (void)downloadEpisodesForSeriesID:(NSNumber*)seriesID fromEpisodeNumber:(NSNumber*)startNumber;
-
+- (void)downloadEpisodesForSeriesID:(NSNumber*)seriesID fromEpisodeNumber:(NSNumber*)startNumber success:(void(^)())success failure:(void(^)())failure;
 // 
 - (void)downloadEpisodeDetails:(NSNumber *)episodeID;
 

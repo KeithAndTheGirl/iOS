@@ -30,6 +30,11 @@
     [tableView registerNib:[UINib nibWithNibName:@"KATGShowCell" bundle:nil] forCellReuseIdentifier:@"kKATGShowCellIdentifier"];
     self.edgesForExtendedLayout = UIRectEdgeBottom;
     [self registerStateObserver];
+    
+    refreshControl = [[UIRefreshControl alloc] init];
+    refreshControl.tintColor = [UIColor whiteColor];
+    [refreshControl addTarget:self action:@selector(reload) forControlEvents:UIControlEventValueChanged];
+    [tableView addSubview:refreshControl];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -74,7 +79,6 @@
 }
 
 -(void)updateView {
-    tableView.tableFooterView = nil;
     spinner.hidden = YES;
     
     [coverImage setImageWithURL:[NSURL URLWithString:_series.cover_image_url]];
@@ -91,7 +95,12 @@
     }
     int startNumber = [self.series.episode_number_max intValue] - 9;
     [[KATGDataStore sharedStore] downloadEpisodesForSeriesID:self.series.series_id
-                                           fromEpisodeNumber:@(startNumber)];
+                                           fromEpisodeNumber:@(startNumber)
+                                                     success:^{
+                                                         [refreshControl endRefreshing];
+                                                     } failure:^{
+                                                         [refreshControl endRefreshing];
+                                                     }];
 }
 
 -(void)loadMore {
@@ -105,7 +114,13 @@
         KATGShow *lastShow = [self.sortedEpisodes lastObject];
         int startNumber = [lastShow.number intValue]-10;
         [[KATGDataStore sharedStore] downloadEpisodesForSeriesID:self.series.series_id
-                                               fromEpisodeNumber:@(startNumber)];
+                                               fromEpisodeNumber:@(startNumber)
+                                                         success:^{
+                                                             tableView.tableFooterView = nil;
+             
+                                                         } failure:^{
+                                                             tableView.tableFooterView = nil;
+                                                         }];
     }
 }
 
