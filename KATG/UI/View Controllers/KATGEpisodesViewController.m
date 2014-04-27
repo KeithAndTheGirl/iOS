@@ -28,7 +28,7 @@
     tableView.backgroundView.backgroundColor = [UIColor blackColor];
     tableView.backgroundColor = [UIColor blackColor];
     [tableView registerNib:[UINib nibWithNibName:@"KATGShowCell" bundle:nil] forCellReuseIdentifier:@"kKATGShowCellIdentifier"];
-    [tableView setContentInset:UIEdgeInsetsMake(-20, 0, 0, 0)];
+    self.edgesForExtendedLayout = UIRectEdgeBottom;
     [self registerStateObserver];
 }
 
