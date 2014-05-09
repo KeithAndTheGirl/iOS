@@ -91,6 +91,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 
 // Download tracking
 @property (nonatomic) NSMutableDictionary *urlToTokenMap;
+@property (nonatomic) UIBackgroundTaskIdentifier bgTask;
 
 // Reachability
 @property (nonatomic) Reachability *reachabilityForConnectionType;
@@ -137,6 +138,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 		_baseURL = [NSURL URLWithString:kServerBaseURL];
 		
 		_urlToTokenMap = [NSMutableDictionary new];
+        self.bgTask = UIBackgroundTaskInvalid;
 		
 		_reachabilityForConnectionType = [Reachability reachabilityWithHostName:kReachabilityURL];
 		NSParameterAssert(_reachabilityForConnectionType);
@@ -459,6 +461,12 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 		EpisodeAudioLog(@"Already downloading %@", show.media_url);
 		return token;
 	}
+    
+    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+        self.bgTask = UIBackgroundTaskInvalid;
+    }];
+    
 	EpisodeAudioLog(@"Download %@", show.media_url);
 	NSNumber *episodeID = show.episode_id;
 	NSParameterAssert(episodeID);
@@ -470,6 +478,10 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 		}
 		[token callCompletionBlockWithError:error];
 		[self.urlToTokenMap removeObjectForKey:url];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+            self.bgTask = UIBackgroundTaskInvalid;
+        });
 	};
 	KATGDownloadOperation *op = [KATGDownloadOperation newDownloadOperationWithRemoteURL:url fileURL:fileURL completion:^(ESHTTPOperation *op) {
 		if (op.error)
