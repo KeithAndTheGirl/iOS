@@ -142,10 +142,11 @@
     }
     else {
         if(indexPath.row == 0) {
-            for(KATGShow *show in self.episodes) {
-                if(show.file_url)
-                    [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
-            }
+            [[[UIAlertView alloc] initWithTitle:@"Confirmation"
+                                        message:@"Are you sure you want to delete all files?"
+                                       delegate:self
+                              cancelButtonTitle:@"No"
+                              otherButtonTitles:@"Yes", nil] show];
         }
         else if(indexPath.row == 1) {
             for(KATGShow *show in self.selectedEpisodes) {
@@ -171,5 +172,14 @@
     [_tableView reloadData];
 }
 
+// remove all downloaded episodes
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex == 1) {
+        for(KATGShow *show in self.episodes) {
+            if(show.file_url)
+                [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
+        }
+    }
+}
 
 @end
