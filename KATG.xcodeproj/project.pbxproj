@@ -30,6 +30,7 @@
 		014D05B018FDA82400C1CBE2 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014D05AE18FDA82400C1CBE2 /* gear@2x.png */; };
 		014D05B418FDA98200C1CBE2 /* KATGListSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D05B218FDA98200C1CBE2 /* KATGListSettingsController.m */; };
 		014D05B518FDA98200C1CBE2 /* KATGListSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014D05B318FDA98200C1CBE2 /* KATGListSettingsController.xib */; };
+		0171221619206CE9006D29D3 /* KATGURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0171221519206CE9006D29D3 /* KATGURLProtocol.m */; };
 		018C35B418E7E9FA00E218D8 /* KATGScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */; };
 		018C35B518E7E9FA00E218D8 /* KATGScheduleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */; };
 		018C35BA18E7EEF600E218D8 /* KATGYoutubeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 018C35B818E7EEF600E218D8 /* KATGYoutubeViewController.m */; };
@@ -280,6 +281,8 @@
 		014D05B118FDA98200C1CBE2 /* KATGListSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGListSettingsController.h; path = "View Controllers/KATGListSettingsController.h"; sourceTree = "<group>"; };
 		014D05B218FDA98200C1CBE2 /* KATGListSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGListSettingsController.m; path = "View Controllers/KATGListSettingsController.m"; sourceTree = "<group>"; };
 		014D05B318FDA98200C1CBE2 /* KATGListSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGListSettingsController.xib; path = "View Controllers/KATGListSettingsController.xib"; sourceTree = "<group>"; };
+		0171221419206CE9006D29D3 /* KATGURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGURLProtocol.h; sourceTree = "<group>"; };
+		0171221519206CE9006D29D3 /* KATGURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGURLProtocol.m; sourceTree = "<group>"; };
 		018C35B118E7E9FA00E218D8 /* KATGScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGScheduleViewController.h; path = "View Controllers/KATGScheduleViewController.h"; sourceTree = "<group>"; };
 		018C35B218E7E9FA00E218D8 /* KATGScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGScheduleViewController.m; path = "View Controllers/KATGScheduleViewController.m"; sourceTree = "<group>"; };
 		018C35B318E7E9FA00E218D8 /* KATGScheduleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGScheduleViewController.xib; path = "View Controllers/KATGScheduleViewController.xib"; sourceTree = "<group>"; };
@@ -1169,6 +1172,8 @@
 				91089D8115EAEAD700FB57C3 /* KATGAudioSessionManager.m */,
 				2280C52B1679A45500C76D6D /* KATGPlaybackManager.h */,
 				2280C52C1679A45500C76D6D /* KATGPlaybackManager.m */,
+				0171221419206CE9006D29D3 /* KATGURLProtocol.h */,
+				0171221519206CE9006D29D3 /* KATGURLProtocol.m */,
 			);
 			path = MediaPlayback;
 			sourceTree = "<group>";
@@ -1470,6 +1475,7 @@
 				229EC8D81670639300FB899A /* KATGImage.m in Sources */,
 				229EC8DB1670639B00FB899A /* KATGGuest.m in Sources */,
 				22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */,
+				0171221619206CE9006D29D3 /* KATGURLProtocol.m in Sources */,
 				22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */,
 				22D07DC81676287C004EBEBB /* KATGShowView.m in Sources */,
 				012B4F221857A2ED00B59FC5 /* AFHTTPRequestOperation.m in Sources */,

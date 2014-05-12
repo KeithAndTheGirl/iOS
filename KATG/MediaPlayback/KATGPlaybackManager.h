@@ -22,8 +22,8 @@
 #import <CoreMedia/CoreMedia.h>
 #import "KATGAudioPlayerController.h"
 
-#define KATG_PLAYBACK_USERNAME_KEY @"katg_username"
-#define KATG_PLAYBACK_PASSWORD_KEY @"katg_pass"
+#define KATG_PLAYBACK_KEY @"KatgVip_key"
+#define KATG_PLAYBACK_UID @"KatgVip_uid"
 
 extern NSString *const KATGLiveShowStreamingServerOfflineNotification;
 

@@ -17,5 +17,6 @@
 
 -(IBAction)loginAction:(id)sender;
 -(IBAction)cancelAction:(id)sender;
++(void)logout;
 
 @end

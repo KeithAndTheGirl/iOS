@@ -38,6 +38,7 @@
 #import "KATGReachabilityOperation.h"
 #import "KATGImageCache.h"
 #import "KATGVipLoginViewController.h"
+#import "KATGURLProtocol.h"
 
 static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContext";
 
@@ -572,9 +573,9 @@ typedef enum {
 {
     if(self.needAuth) {
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-        NSString *userName = [def valueForKey:KATG_PLAYBACK_USERNAME_KEY];
-        NSString *password = [def valueForKey:KATG_PLAYBACK_PASSWORD_KEY];
-        if([userName length] == 0 || [password length] == 0) {
+        NSString *key = [def valueForKey:KATG_PLAYBACK_KEY];
+        NSString *uid = [def valueForKey:KATG_PLAYBACK_UID];
+        if(!key || !uid) {
             KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
             loginController.completion = (^() {
                 [self playButtonPressed:nil];
@@ -667,10 +668,31 @@ typedef enum {
         downloadCell.downloadButton.enabled = YES;
     }
     if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateFailed) {
-       
-        [[[UIAlertView alloc] initWithTitle:@"Playback failed" message:[[[KATGPlaybackManager sharedManager] getCurrentError] localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        NSError *error = [[KATGPlaybackManager sharedManager] getCurrentError];
+        NSString *urlString = [[error.userInfo valueForKey:NSURLErrorKey] absoluteString];
+        BOOL authError = [KATGURLProtocol errorForUrlString:urlString];
+        if(authError) {
+            [[[UIAlertView alloc] initWithTitle:@"Playback failed"
+                                        message:@"Please enter your VIP account email and password to access this feed."
+                                       delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        }
+        else {
+            [[[UIAlertView alloc] initWithTitle:@"Playback failed"
+                                        message:[[[KATGPlaybackManager sharedManager] getCurrentError] localizedDescription]
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        }
         [[KATGPlaybackManager sharedManager] stop];
     }
+}
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    [KATGVipLoginViewController logout];
+    [self playButtonPressed:nil];
 }
 
 #pragma mark - Data updates
