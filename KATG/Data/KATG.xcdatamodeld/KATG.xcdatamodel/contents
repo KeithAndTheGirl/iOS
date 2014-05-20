@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="3.1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="13C64" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="3.1" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="13C1021" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Event" representedClassName="KATGScheduledEvent" syncable="YES">
         <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="eventid" optional="YES" attributeType="String" syncable="YES"/>
@@ -54,6 +54,8 @@
         <attribute name="series_id" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="video_file_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="video_thumbnail_url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="guests" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Guest" inverseName="shows" inverseEntity="Guest" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Image" inverseName="show" inverseEntity="Image" syncable="YES"/>
     </entity>
@@ -62,6 +64,6 @@
         <element name="Guest" positionX="457" positionY="-450" width="128" height="165"/>
         <element name="Image" positionX="475" positionY="-198" width="128" height="150"/>
         <element name="Series" positionX="234" positionY="-270" width="128" height="210"/>
-        <element name="Show" positionX="198" positionY="-387" width="128" height="255"/>
+        <element name="Show" positionX="198" positionY="-387" width="128" height="285"/>
     </elements>
 </model>

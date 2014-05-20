@@ -39,6 +39,9 @@
 #import "KATGImageCache.h"
 #import "KATGVipLoginViewController.h"
 #import "KATGURLProtocol.h"
+#import "UIKit+AFNetworking.h"
+
+#import <MediaPlayer/MediaPlayer.h>
 
 static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContext";
 
@@ -51,6 +54,7 @@ static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContex
 
 typedef enum {
 	KATGShowDetailsSectionPreview,
+	KATGShowDetailsSectionVideo,
 	KATGShowDetailsSectionGuests,
 	KATGShowDetailsSectionDescription,
 	KATGShowDetailsSectionImages,
@@ -182,6 +186,7 @@ typedef enum {
     
     	[self removePlaybackManagerKVO];
     	[self removeReachabilityKVO];
+    NSLog(@"%@", self.show.video_file_url);
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -211,7 +216,7 @@ typedef enum {
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     [self.refreshControl endRefreshing];
-	return 6;
+	return 7;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -221,6 +226,8 @@ typedef enum {
 	switch ((KATGShowDetailsSection)section) {
         case KATGShowDetailsSectionPreview:
             return [self.show.preview_url length]?2:0;
+        case KATGShowDetailsSectionVideo:
+            return [self.show.video_file_url length]?2:0;
 		case KATGShowDetailsSectionGuests:
             return [guests count]?2:0;
 		case KATGShowDetailsSectionDescription:
@@ -246,6 +253,11 @@ typedef enum {
 			case KATGShowDetailsSectionPreview:
 				titleCell.showTopRule = NO;
 				titleCell.sectionTitleLabel.text = NSLocalizedString(@"Preview", nil);
+                titleCell.contentView.backgroundColor = [UIColor whiteColor];
+                break;
+            case KATGShowDetailsSectionVideo:
+				titleCell.showTopRule = NO;
+				titleCell.sectionTitleLabel.text = NSLocalizedString(@"Full episode", nil);
                 titleCell.contentView.backgroundColor = [UIColor whiteColor];
                 break;
 			case KATGShowDetailsSectionGuests:
@@ -287,7 +299,6 @@ typedef enum {
             webView.backgroundColor = [UIColor blackColor];
             [cell addSubview:webView];
             webView.scrollView.scrollEnabled = NO;
-            NSLog(@"%@", self.show.preview_url);
             
             if([self.show.preview_url rangeOfString:@"youtube"].location != NSNotFound) {
                 NSString *embedHTML = @"<style type=\"text/css\">body {background-color: black;color: black;}</style><body><iframe width=\"306\" height=\"210\" src=\"http://www.youtube.com/embed/%@\" frameborder=\"0\" allowfullscreen></iframe></body>";
@@ -301,6 +312,24 @@ typedef enum {
             else {
                 [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.show.preview_url]]];
             }
+            break;
+        }
+        case KATGShowDetailsSectionVideo:
+        {
+            cell = [[UITableViewCell alloc] init];
+            UIButton *videoButton = [[UIButton alloc] initWithFrame:cell.frame];
+            videoButton.adjustsImageWhenHighlighted = NO;
+            videoButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+            videoButton.autoresizingMask = 63;
+            videoButton.backgroundColor = [UIColor blackColor];
+            [videoButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:self.show.video_thumbnail_url]];
+            [videoButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
+            [cell addSubview:videoButton];
+            
+            UIImageView *playImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play"]];
+            playImage.center = videoButton.center;
+            playImage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            [cell addSubview:playImage];
             break;
         }
 		case KATGShowDetailsSectionGuests:
@@ -401,6 +430,12 @@ typedef enum {
 {
 	switch ((KATGShowDetailsSection)indexPath.section) {
 		case KATGShowDetailsSectionPreview:
+            if (indexPath.row == 0)
+			{
+				return 44.0f;
+			}
+			return 220.0f;
+        case KATGShowDetailsSectionVideo:
             if (indexPath.row == 0)
 			{
 				return 44.0f;
@@ -568,6 +603,45 @@ typedef enum {
 }
 
 #pragma mark - UI Actions
+
+-(void)playVideo {
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSString *key = [def valueForKey:KATG_PLAYBACK_KEY];
+    NSString *uid = [def valueForKey:KATG_PLAYBACK_UID];
+    if(self.needAuth) {
+        if(!key || !uid) {
+            KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
+            loginController.completion = (^() {
+                [self playVideo];
+            });
+            [self presentViewController:loginController animated:YES completion:nil];
+            return;
+        }
+    }
+    NSURL *videoUrl = [NSURL URLWithString:self.show.video_file_url];
+    NSString *cookie = [NSString stringWithFormat:@"%@=%@;%@=%@",
+                        KATG_PLAYBACK_UID, uid,
+                        KATG_PLAYBACK_KEY, key];
+    [KATGURLProtocol register];
+    [KATGURLProtocol injectURL:[videoUrl absoluteString] cookie:cookie];
+    
+    MPMoviePlayerViewController *mpvc = [[MPMoviePlayerViewController alloc] initWithContentURL:videoUrl];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(moviePlayBackDidFinish:)
+                                                 name:MPMoviePlayerPlaybackDidFinishNotification
+                                               object:nil];
+    
+    [self presentMoviePlayerViewControllerAnimated:mpvc];
+}
+
+- (void) moviePlayBackDidFinish:(NSNotification*)notification {
+    NSError *error = [[notification userInfo] objectForKey:@"error"];
+    if (error) {
+//        NSLog(@"Did finish with error: %@", error);
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
+}
 
 - (void)playButtonPressed:(id)sender
 {

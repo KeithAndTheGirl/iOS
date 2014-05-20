@@ -42,6 +42,8 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @dynamic duration;
 @dynamic lastListenedTime;
 @dynamic preview_url;
+@dynamic video_file_url;
+@dynamic video_thumbnail_url;
 
 -(NSNumber*)lastPlaybackTime {
     NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
@@ -118,7 +120,9 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 		}]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"FileUrl" outputKey:@"media_url"]];
 		[map addPropertyMap:[ESEpochDatePropertyMap newPropertyMapWithInputKey:@"Timestamp" outputKey:@"timestamp"]];
-        [map addPropertyMap:[ESEpochDatePropertyMap newPropertyMapWithInputKey:@"preview_url" outputKey:@"preview_url"]];
+        [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"preview_url" outputKey:@"preview_url"]];
+        [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"VideoFileUrl" outputKey:@"video_file_url"]];
+        [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"VideoThumbnailUrl" outputKey:@"video_thumbnail_url"]];
 	}
 }
 
