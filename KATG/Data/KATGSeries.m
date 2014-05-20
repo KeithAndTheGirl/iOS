@@ -59,7 +59,7 @@ NSString *const KATGSeriesSortAttributeName = @"sort_order";
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Description" outputKey:@"desc"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"ForumUrl" outputKey:@"forum_url"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"PreviewUrl" outputKey:@"preview_url"]];
-		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"CoverImageUrl" outputKey:@"cover_image_url"]];
+		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"CoverImageUrl-200" outputKey:@"cover_image_url"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Prefix" outputKey:@"prefix"]];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"VIP" outputKey:@"vip_status" transformBlock:^id(id<ESObject> object, id inputValue) {
 			return @([inputValue boolValue]);
