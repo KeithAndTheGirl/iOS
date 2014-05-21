@@ -12,6 +12,6 @@
 
 + (void) register;
 + (void) injectURL:(NSString*) urlString cookie:(NSString*)cookie;
-+ (BOOL) errorForUrlString:(NSString*)urlString;
++ (NSString*) errorForUrlString:(NSString*)urlString;
 
 @end

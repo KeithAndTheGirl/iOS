@@ -16,7 +16,7 @@
 
 static NSString* injectedURL = nil;
 static NSString* myCookie = nil;
-static NSMutableArray *urlsWith401Code;
+static NSMutableDictionary *urlsWithError;
 
 @implementation KATGURLProtocol
 // register the class to intercept all HTTP calls
@@ -28,13 +28,13 @@ static NSMutableArray *urlsWith401Code;
 + (void) injectURL:(NSString*) urlString cookie:(NSString*)cookie {
     injectedURL = urlString;
     myCookie = cookie;
-    urlsWith401Code = [NSMutableArray array];
+    urlsWithError = [NSMutableDictionary dictionary];
 }
 
-+ (BOOL) errorForUrlString:(NSString*)urlString {
-    BOOL result = [urlsWith401Code containsObject:urlString];
++ (NSString*) errorForUrlString:(NSString*)urlString {
+    NSString *result = [urlsWithError valueForKey:urlString];
     if(result)
-        [urlsWith401Code removeObject:urlString];
+        [urlsWithError removeObjectForKey:urlString];
     return result;
 }
 
@@ -69,14 +69,18 @@ static NSMutableArray *urlsWith401Code;
 }
 
 // overload didReceive data
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+- (void)connection:(NSURLConnection *)_connection didReceiveData:(NSData *)data {
+    NSString *result = [urlsWithError valueForKey:[_connection.currentRequest.URL absoluteString]];
+    if(result && [result length] == 0)
+        [urlsWithError setObject:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]
+                          forKey:[_connection.currentRequest.URL absoluteString]];
     [[self client] URLProtocol:self didLoadData:data];
 }
 
 // overload didReceiveResponse
 - (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse *)response {
-    if([response isKindOfClass:[NSHTTPURLResponse class]] && [(NSHTTPURLResponse*)response statusCode] == 401) {
-        [urlsWith401Code addObject:[response.URL absoluteString]];
+    if([response isKindOfClass:[NSHTTPURLResponse class]] && [(NSHTTPURLResponse*)response statusCode] > 400) {
+        [urlsWithError setObject:@"" forKey:[response.URL absoluteString]];
     }
     
     [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:[myRequest cachePolicy]];

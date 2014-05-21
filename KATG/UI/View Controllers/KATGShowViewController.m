@@ -637,8 +637,8 @@ typedef enum {
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
     NSError *error = [[notification userInfo] objectForKey:@"error"];
     if (error) {
-//        NSLog(@"Did finish with error: %@", error);
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        NSString *authError = [KATGURLProtocol errorForUrlString:self.show.video_file_url];
+        [[[UIAlertView alloc] initWithTitle:@"Error" message:authError?:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 }
@@ -744,7 +744,7 @@ typedef enum {
     if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateFailed) {
         NSError *error = [[KATGPlaybackManager sharedManager] getCurrentError];
         NSString *urlString = [[error.userInfo valueForKey:NSURLErrorKey] absoluteString];
-        BOOL authError = [KATGURLProtocol errorForUrlString:urlString];
+        NSString *authError = [KATGURLProtocol errorForUrlString:urlString];
         if(authError) {
             [[[UIAlertView alloc] initWithTitle:@"Playback failed"
                                         message:@"Please enter your VIP account email and password to access this feed."
