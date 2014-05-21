@@ -266,6 +266,7 @@ typedef enum {
                                                     NSLocalizedString(@"Guests", nil),
                                                     [guests componentsJoinedByString:@", "]];
                 titleCell.contentView.backgroundColor = [UIColor whiteColor];
+                titleCell.sectionTitleLabel.numberOfLines = 10;
 				break;
 			case KATGShowDetailsSectionDescription:
 				titleCell.showTopRule = NO;
@@ -444,9 +445,14 @@ typedef enum {
 		case KATGShowDetailsSectionGuests:
 			if (indexPath.row == 0)
 			{
-				return 44.0f;
+                NSArray *guests = [[self.show valueForKeyPath:@"Guests.name"] allObjects];
+                NSString *text = [NSString stringWithFormat:@"%@: %@", NSLocalizedString(@"Guests", nil), [guests componentsJoinedByString:@", "]];
+                CGFloat cellHeight = [text sizeWithFont:[UIFont boldSystemFontOfSize:12]
+                                               constrainedToSize:CGSizeMake(320, 440)].height * 1.1;
+				return cellHeight + 30;
 			}
-			return 110.0f;
+            int rows = ceil([self.show.guests count]/3.);
+            return 104*rows;
 		case KATGShowDetailsSectionDescription:
 			if (indexPath.row == 0)
 			{
