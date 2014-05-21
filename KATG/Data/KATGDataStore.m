@@ -663,8 +663,8 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
                 if (!show) {
                     show = [NSEntityDescription insertNewObjectForEntityForName:[KATGShow katg_entityName]
                                                          inManagedObjectContext:context];
-                    [self insertOrUpdateGuests:show showDictionary:episodeDictionary context:context];
                 }
+                [self insertOrUpdateGuests:show showDictionary:episodeDictionary context:context];
                 NSParameterAssert(show);
                 if (show) {
                     [show configureWithDictionary:episodeDictionary];
