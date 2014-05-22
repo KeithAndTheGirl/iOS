@@ -225,7 +225,10 @@ typedef enum {
     
 	switch ((KATGShowDetailsSection)section) {
         case KATGShowDetailsSectionPreview:
-            return [self.show.preview_url length]?2:0;
+            if([self.show.preview_url length] && ([self.show.preview_url rangeOfString:@"youtube"].location != NSNotFound || [self.show.preview_url rangeOfString:@"mp3"].location != NSNotFound))
+                return 2;
+            else
+                return 0;
         case KATGShowDetailsSectionVideo:
             return [self.show.video_file_url length]?2:0;
 		case KATGShowDetailsSectionGuests:
@@ -293,15 +296,14 @@ typedef enum {
 		case KATGShowDetailsSectionPreview:
         {
             cell = [[UITableViewCell alloc] init];
-            UIWebView *webView = [[UIWebView alloc] initWithFrame:cell.frame];
-            webView.autoresizingMask = 63;
-            webView.allowsInlineMediaPlayback = YES;
-            webView.mediaPlaybackRequiresUserAction = YES;
-            webView.backgroundColor = [UIColor blackColor];
-            [cell addSubview:webView];
-            webView.scrollView.scrollEnabled = NO;
             
             if([self.show.preview_url rangeOfString:@"youtube"].location != NSNotFound) {
+                UIWebView *webView = [[UIWebView alloc] initWithFrame:cell.frame];
+                webView.autoresizingMask = 63;
+                webView.backgroundColor = [UIColor blackColor];
+                webView.scrollView.scrollEnabled = NO;
+                webView.allowsInlineMediaPlayback = YES;
+                webView.mediaPlaybackRequiresUserAction = YES;
                 NSString *embedHTML = @"<style type=\"text/css\">body {background-color: black;color: black;}</style><body><iframe width=\"306\" height=\"210\" src=\"http://www.youtube.com/embed/%@\" frameborder=\"0\" allowfullscreen></iframe></body>";
                 NSRange yt_id = [self.show.preview_url rangeOfString:@"watch?v="];
                 if(yt_id.location == NSNotFound)
@@ -309,9 +311,17 @@ typedef enum {
                 NSString *video_id = [self.show.preview_url substringFromIndex:yt_id.location+yt_id.length];
                 NSString *html = [NSString stringWithFormat:embedHTML, video_id];
                 [webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://youtube.com"]];
+                [cell addSubview:webView];
             }
-            else {
-                [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.show.preview_url]]];
+            else if([self.show.preview_url rangeOfString:@"mp3"].location != NSNotFound) {
+                UIButton *playButton = [[UIButton alloc] initWithFrame:cell.frame];
+                playButton.autoresizingMask = 63;
+                [playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+                [playButton setTitle:@"Play Audio Preview" forState:UIControlStateNormal];
+                [playButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+                playButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 40);
+                [playButton addTarget:self action:@selector(audioPreviewAction:) forControlEvents:UIControlEventTouchUpInside];
+                [cell addSubview:playButton];
             }
             break;
         }
@@ -435,6 +445,8 @@ typedef enum {
 			{
 				return 44.0f;
 			}
+            if([self.show.preview_url rangeOfString:@"mp3"].location != NSNotFound)
+                return 44;
 			return 220.0f;
         case KATGShowDetailsSectionVideo:
             if (indexPath.row == 0)
@@ -609,6 +621,11 @@ typedef enum {
 }
 
 #pragma mark - UI Actions
+
+-(void)audioPreviewAction:(UIButton*)sender {
+    MPMoviePlayerViewController *mpvc = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:self.show.preview_url]];
+    [self presentMoviePlayerViewControllerAnimated:mpvc];
+}
 
 -(void)playVideo {
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
