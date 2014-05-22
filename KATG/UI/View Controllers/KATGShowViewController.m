@@ -998,6 +998,12 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 			}
 		};
 		self.downloadToken = [[KATGDataStore sharedStore] downloadEpisodeAudio:self.show progress:progress completion:^(NSError *error) {
+            if(!error) {
+                UILocalNotification *ntfy = [[UILocalNotification alloc] init];
+                ntfy.userInfo = @{@"show": self.show.episode_id};
+                ntfy.alertBody = [NSString stringWithFormat:@"Show \"%@\" was downloaded", self.show.title];
+                [[UIApplication sharedApplication] presentLocalNotificationNow:ntfy];
+            }
 			NSParameterAssert([NSThread isMainThread]);
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)

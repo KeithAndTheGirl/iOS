@@ -94,4 +94,6 @@ extern NSString *const KATGDataStoreShowDidChangeNotification;
 //
 - (void)submitFeedback:(NSString *)name location:(NSString *)location comment:(NSString *)comment completion:(void (^)(BOOL, NSArray *))completion;
 
+- (KATGShow *)fetchShowWithID:(NSNumber *)episodeID context:(NSManagedObjectContext *)context;
+
 @end

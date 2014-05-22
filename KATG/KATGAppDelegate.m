@@ -22,7 +22,9 @@
 #import "KATGAudioSessionManager.h"
 #import "KATGPushRegistration.h"
 #import "KATGWelcomeViewController.h"
-
+#import "KATGShowViewController.h"
+#import "KATGDataStore.h"
+#import "KATGShow.h"
 
 #import "KATGSeriesViewController.h"
 
@@ -68,6 +70,51 @@
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
 	// TODO: Show alert
+}
+
+- (BOOL)canPresentShowControllerWithShowID:(NSNumber*)show_id {
+    UITabBarController *mainTabBarCtl = (UITabBarController*)self.window.rootViewController;
+    UINavigationController *showsNavigation = [mainTabBarCtl viewControllers][0];
+    UIViewController *topController = [showsNavigation topViewController];
+    if(mainTabBarCtl.selectedIndex == 0 && [topController isKindOfClass:[KATGShowViewController class]] && [[[(KATGShowViewController*)topController show] episode_id] isEqual:show_id]) {
+            return NO;
+    }
+    return YES;
+}
+
+- (void)presentShowControllerWithShowID:(NSNumber*)show_id {
+    KATGDataStore *dataStore = [KATGDataStore sharedStore];
+    KATGShow *show = [dataStore fetchShowWithID:show_id context:dataStore.readerContext];
+    if(!show)
+        return;
+    UITabBarController *mainTabBarCtl = (UITabBarController*)self.window.rootViewController;
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+    showViewController.showObjectID = show.objectID;
+    showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [mainTabBarCtl presentViewController:showViewController animated:YES completion:nil];
+}
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+    NSNumber *show_id = notification.userInfo[@"show"];
+    NSLog(@"App state: %i, objID: %@", (int)application.applicationState, show_id);
+    if(application.applicationState == UIApplicationStateActive) {
+        if([self canPresentShowControllerWithShowID:show_id]) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"KATG" message:notification.alertBody delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"View", nil];
+            alert.tag = [show_id integerValue];
+            [alert show];
+        }
+    }
+    else {
+        [self presentShowControllerWithShowID:show_id];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if(buttonIndex == 1) {
+        NSNumber *show_id = @(alertView.tag);
+        if([self canPresentShowControllerWithShowID:show_id])
+            [self presentShowControllerWithShowID:show_id];
+    }
 }
 
 - (void)setupAppearance
