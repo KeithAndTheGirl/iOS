@@ -198,7 +198,9 @@
 	[cell configureWithShow:self.sortedEpisodes[indexPath.row]];
     
     if(indexPath.row == [self.sortedEpisodes count]-1) {
-        [self loadMore];
+        BOOL filterDownloaded = [[NSUserDefaults standardUserDefaults] boolForKey:EPISODES_FILTER_DOWNLOADED];
+        if(!filterDownloaded)
+            [self loadMore];
     }
 	return cell;
 }
