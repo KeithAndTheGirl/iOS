@@ -10,10 +10,10 @@
 
 #pragma mark - API
 
-static NSString * const kReachabilityURL = @"app.keithandthegirl.com";
+static NSString * const kReachabilityURL = @"www.keithandthegirl.com";
 
 //static NSString * const kTestServerBaseURL = @"http://protected-savannah-5921.herokuapp.com";
-static NSString * const kServerBaseURL = @"http://app.keithandthegirl.com/api/v2/";
+static NSString * const kServerBaseURL = @"https://www.keithandthegirl.com/api/v2/";
 static NSString * const kSeriesListURIAddress		=	@"shows/series-overview/";
 static NSString * const kShowListURIAddress		=	@"shows/list/";
 static NSString * const kShowDetailsURIAddress	=	@"shows/details/?showid=%@";
