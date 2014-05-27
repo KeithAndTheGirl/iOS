@@ -19,7 +19,7 @@
         imageView.backgroundColor = [UIColor grayColor];
         [self addSubview:imageView];
         
-        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 110, 108, 34)];
+        titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16, 110, 108, 50)];
         titleLabel.numberOfLines = 3;
         titleLabel.font = [UIFont boldSystemFontOfSize:12.5];
         titleLabel.textColor = [UIColor whiteColor];
@@ -30,7 +30,10 @@
 
 -(void)setObject:(KATGSeries *)value {
     _object = value;
-    
+    [self setNeedsLayout];
+}
+
+-(void)layoutSubviews {
     [imageView setImageWithURL:[NSURL URLWithString:_object.cover_image_url]];
     
     BOOL vip = [_object.vip_status boolValue];
@@ -41,7 +44,25 @@
     if(vip)
         [asTitle addAttribute:NSBackgroundColorAttributeName value:[UIColor colorWithPatternImage:[UIImage imageNamed:@"TitleBackgroundVip.png"]] range:NSMakeRange(0, 5)];
     titleLabel.attributedText = asTitle;
-    [titleLabel sizeToFit];
+    
+    [titleLabel setLineBreakMode:NSLineBreakByWordWrapping];
+    
+
+    CGRect expectedLabelRect = [title boundingRectWithSize:CGSizeMake(titleLabel.frame.size.width, MAXFLOAT)
+                                                   options:NSStringDrawingUsesLineFragmentOrigin
+                                                attributes:@{NSFontAttributeName: titleLabel.font}
+                                                   context:nil];
+    CGFloat lineHeight = 15.3;
+    int maxLinesNumber = 3;
+    CGFloat height = round(expectedLabelRect.size.height/lineHeight)*lineHeight;
+    if(height > lineHeight*maxLinesNumber) height = lineHeight*maxLinesNumber;
+    CGRect newFrame = titleLabel.frame;
+    newFrame.size.height = height;
+    titleLabel.frame = newFrame;
+}
+
+-(void)willMoveToSuperview:(UIView *)newSuperview {
+    [self setNeedsLayout];
 }
 
 +(CGSize)cellSize {
