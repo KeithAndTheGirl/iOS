@@ -91,4 +91,14 @@
     [def removeObjectForKey:KATG_PLAYBACK_UID];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if(textField == loginField) {
+        [passwordField becomeFirstResponder];
+    }
+    else if(textField == passwordField) {
+        [self loginAction:nil];
+    }
+    return YES;
+}
+
 @end
