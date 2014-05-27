@@ -301,6 +301,9 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 - (void)setLiveMode:(bool)liveMode animated:(BOOL)animated
 {
 	_liveMode = liveMode;
+    if(!liveMode && [[KATGPlaybackManager sharedManager] isLiveShow] && [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+               [[KATGPlaybackManager sharedManager] stop];
+    }
 	[UIView animateWithDuration:animated ? 0.3f : 0.0f
 					 animations:^{
 						 [self layoutLiveMode];
