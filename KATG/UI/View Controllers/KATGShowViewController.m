@@ -532,6 +532,7 @@ typedef enum {
 	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGCurrentTimeObserverKey options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGStateObserverKey options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGStateAvailableTime options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
+    [self configureTopBar];
 }
 
 - (void)removePlaybackManagerKVO
@@ -557,6 +558,10 @@ typedef enum {
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    if ([keyPath isEqualToString:KATGStateObserverKey])
+	{
+        [self configureTopBar];
+    }
 	if (context == KATGReachabilityObserverContext)
 	{
 		self.shouldReloadDownload = true;
@@ -1098,6 +1103,45 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 {
 	NSParameterAssert([NSThread isMainThread]);
 	[[KATGDataStore sharedStore] downloadEpisodeDetails:self.show.episode_id];
+}
+
+
+- (void)configureTopBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying &&
+        ![[[KATGPlaybackManager sharedManager] currentShow] isEqual:self.show])
+	{
+		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+		nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
+		[nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
+        nowPlayingButton.tag = 1313;
+        
+        [self.tableView addSubview:nowPlayingButton];
+        UIEdgeInsets contentInsets = self.tableView.contentInset;
+        contentInsets.top += 48;
+        self.tableView.contentInset = contentInsets;
+        [self.tableView setContentOffset:CGPointMake(0, self.tableView.contentOffset.y-48) animated:NO];
+	}
+	else
+	{
+        UIView *v = [self.tableView viewWithTag:1313];
+        if(v) {
+            [v removeFromSuperview];
+            UIEdgeInsets contentInsets = self.tableView.contentInset;
+            contentInsets.top -= 48;
+            self.tableView.contentInset = contentInsets;
+        }
+	}
+}
+
+-(void)showNowPlayingEpisode {
+    KATGShow *show = [[KATGPlaybackManager sharedManager] currentShow];
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+	showViewController.showObjectID = [show objectID];
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:showViewController animated:YES completion:nil];
 }
 
 @end
