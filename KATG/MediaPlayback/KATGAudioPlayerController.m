@@ -228,11 +228,17 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	}
 	if (KATGFloatEqual(rate, 0.0f))
 	{
-		self.state = KATGAudioPlayerStatePaused;
+        if(self.state != KATGAudioPlayerStateLoading) {
+            self.state = KATGAudioPlayerStatePaused;
+        }
+        else if(CMTimeGetSeconds(tr.duration) > 30.) {
+            [self.avPlayer play];
+			self.state = KATGAudioPlayerStatePlaying;
+        }
 	}
 	else if (KATGFloatEqual(rate, 1.0f))
 	{
-		if (status == AVPlayerItemStatusUnknown)
+        if (status == AVPlayerItemStatusUnknown)
 		{
 			self.state = KATGAudioPlayerStateLoading;
 		}
@@ -288,6 +294,8 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	self.shouldSwitchToAmbientOnActive = false;
 	KATGConfigureAudioSessionState(KATGAudioSessionStatePlayback);
 	[self.avPlayer play];
+    [self.avPlayer pause];
+    self.state = KATGAudioPlayerStateLoading;
 }
 
 - (void)pause
