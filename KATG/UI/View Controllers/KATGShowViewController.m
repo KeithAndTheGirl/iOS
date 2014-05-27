@@ -1112,6 +1112,8 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying &&
         ![[[KATGPlaybackManager sharedManager] currentShow] isEqual:self.show])
 	{
+        if([self.tableView viewWithTag:1313])
+            return;
 		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
 		nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);

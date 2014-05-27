@@ -246,6 +246,8 @@
 	if ([[KATGPlaybackManager sharedManager] currentShow] &&
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
 	{
+        if([tableView viewWithTag:1313])
+            return;
 		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
         [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
 		nowPlayingButton.frame = CGRectMake(0.0f, -28.0f, 320.0f, 48.0f);
