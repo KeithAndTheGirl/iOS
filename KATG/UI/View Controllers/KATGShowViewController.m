@@ -649,6 +649,7 @@ typedef enum {
     [KATGURLProtocol injectURL:[videoUrl absoluteString] cookie:cookie];
     
     MPMoviePlayerViewController *mpvc = [[MPMoviePlayerViewController alloc] initWithContentURL:videoUrl];
+    mpvc.moviePlayer.initialPlaybackTime = [[[NSUserDefaults standardUserDefaults] objectForKey:self.show.video_file_url] doubleValue];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(moviePlayBackDidFinish:)
                                                  name:MPMoviePlayerPlaybackDidFinishNotification
@@ -662,6 +663,12 @@ typedef enum {
     if (error) {
         NSString *authError = [KATGURLProtocol errorForUrlString:self.show.video_file_url];
         [[[UIAlertView alloc] initWithTitle:@"Error" message:authError?:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+    }
+    else {
+        MPMoviePlayerController *mpc = notification.object;
+        NSTimeInterval currentTime = mpc.currentPlaybackTime;
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:currentTime] forKey:[mpc.contentURL absoluteString]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
 }
