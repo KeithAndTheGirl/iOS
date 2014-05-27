@@ -69,7 +69,6 @@
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"%@", responseObject);
               if([responseObject[@"Error"] integerValue] > 0) {
-                  loginField.text = @"";
                   passwordField.text = @"";
                   [self showAlert:responseObject[@"Message"]];
               }
