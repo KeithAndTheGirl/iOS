@@ -24,12 +24,6 @@
     [loginField becomeFirstResponder];
 }
 
--(BOOL)isValidEmail:(NSString *)checkString {
-    NSString *emailRegex = @".+@([A-Za-z0-9]+\\.)+[A-Za-z]{2}[A-Za-z]*";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:checkString];
-}
-
 -(void)showAlert:(NSString*)alert {
     [[[UIAlertView alloc] initWithTitle:@"KATG VIP Login"
                                 message:alert
@@ -49,11 +43,6 @@
     if(![passwordField.text length]) {
         [self showAlert:@"Please enter your password"];
         [passwordField becomeFirstResponder];
-        return;
-    }
-    if(![self isValidEmail:loginField.text]) {
-        [self showAlert:@"Please enter correct email"];
-        [loginField becomeFirstResponder];
         return;
     }
     
