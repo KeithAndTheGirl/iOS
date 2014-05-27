@@ -26,10 +26,6 @@
         [self setNeedsStatusBarAppearanceUpdate];
     
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-    
-    if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
-		[[KATGPlaybackManager sharedManager] pause];
-	}
 }
 
 - (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
@@ -86,6 +82,8 @@
 
     nameLabel.text = self.dataDictionary[@"title"];
     dateLabel.text = self.dataDictionary[@"recorded"];
+    
+    [[KATGPlaybackManager sharedManager] pause];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
