@@ -21,6 +21,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CoreMedia.h>
 #import "KATGAudioPlayerController.h"
+#import "KATGUtil.h"
 
 #define KATG_PLAYBACK_KEY @"KatgVip_key"
 #define KATG_PLAYBACK_UID @"KatgVip_uid"

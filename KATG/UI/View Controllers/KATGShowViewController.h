@@ -19,6 +19,7 @@
 //  
 
 #import "KATGShowControlsView.h"
+#import "KATGUtil.h"
 
 @class KATGShow, KATGShowViewController, KATGShowView;
 

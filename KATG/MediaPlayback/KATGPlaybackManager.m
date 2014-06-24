@@ -84,6 +84,12 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	return sharedManager;
 }
 
+-(id)init {
+    self = [super init];
+    [KATGURLProtocol register];
+    return self;
+}
+
 #pragma mark - Accessors
 
 - (CMTime)currentTime
@@ -216,11 +222,9 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
             url = [NSURL URLWithString:currentShow.media_url];
             
             NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-            NSString *cookie = [NSString stringWithFormat:@"%@=%@;%@=%@",
-                                KATG_PLAYBACK_UID, [def valueForKey:KATG_PLAYBACK_UID],
-                                KATG_PLAYBACK_KEY, [def valueForKey:KATG_PLAYBACK_KEY]];
-            [KATGURLProtocol register];
-            [KATGURLProtocol injectURL:[url absoluteString] cookie:cookie];
+            
+            [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:url];
+            [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:url];
             NSLog(@"Will play from URL: %@", url);
 		}
 		self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];

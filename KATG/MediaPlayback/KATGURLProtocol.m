@@ -16,19 +16,20 @@
 
 static NSString* injectedURL = nil;
 static NSString* myCookie = nil;
-static NSMutableDictionary *urlsWithError;
+static NSMutableDictionary *urlsWithError = nil;
 
 @implementation KATGURLProtocol
 // register the class to intercept all HTTP calls
 + (void) register {
     [NSURLProtocol registerClass:[self class]];
+    if(!urlsWithError)
+        urlsWithError = [NSMutableDictionary dictionary];
 }
 
 // public static function to call when injecting a cookie
 + (void) injectURL:(NSString*) urlString cookie:(NSString*)cookie {
     injectedURL = urlString;
     myCookie = cookie;
-    urlsWithError = [NSMutableDictionary dictionary];
 }
 
 + (NSString*) errorForUrlString:(NSString*)urlString {
@@ -66,14 +67,28 @@ static NSMutableDictionary *urlsWithError;
     //  inject your cookie
     [myRequest setValue:myCookie forHTTPHeaderField:@"Cookie"];
     connection = [[NSURLConnection alloc] initWithRequest:myRequest delegate:self];
+    NSLog(@"KATGURLProtocol startLoading: %@ with cookie: %@", [myRequest.URL absoluteString], myCookie);
+}
+
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
+    [[[UIAlertView alloc] initWithTitle:@"willSendRequest"
+                                message:[[request allHTTPHeaderFields] description]
+                               delegate:nil
+                      cancelButtonTitle:@"OK"
+                      otherButtonTitles:nil] show];
+    NSLog(@"KATGURLProtocol willSendRequest: %@ with headers: %@", [request.URL absoluteString], [request allHTTPHeaderFields]);
+    return request;
 }
 
 // overload didReceive data
 - (void)connection:(NSURLConnection *)_connection didReceiveData:(NSData *)data {
     NSString *result = [urlsWithError valueForKey:[_connection.currentRequest.URL absoluteString]];
-    if(result && [result length] == 0)
+    if(result && [result length] == 0) {
         [urlsWithError setObject:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]
                           forKey:[_connection.currentRequest.URL absoluteString]];
+        
+        NSLog(@"KATGURLProtocol addError: %@ for URL: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding], [_connection.currentRequest.URL absoluteString]);
+    }
     [[self client] URLProtocol:self didLoadData:data];
 }
 
@@ -82,6 +97,8 @@ static NSMutableDictionary *urlsWithError;
     if([response isKindOfClass:[NSHTTPURLResponse class]] && [(NSHTTPURLResponse*)response statusCode] > 400) {
         [urlsWithError setObject:@"" forKey:[response.URL absoluteString]];
     }
+    
+    NSLog(@"KATGURLProtocol didReceiveResponse: %i for url: %@", (int)[(NSHTTPURLResponse*)response statusCode], [response.URL absoluteString]);
     
     [[self client] URLProtocol:self didReceiveResponse:response cacheStoragePolicy:[myRequest cachePolicy]];
 }
@@ -92,8 +109,10 @@ static NSMutableDictionary *urlsWithError;
 }
 
 // overload didFail
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+- (void)connection:(NSURLConnection *)_connection didFailWithError:(NSError *)error {
     [[self client] URLProtocol:self didFailWithError:error];
+    
+    NSLog(@"KATGURLProtocol didFailWithError: %@ for url: %@", error, [_connection.currentRequest.URL absoluteString]);
 }
 
 // handle load cancelation

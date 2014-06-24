@@ -166,6 +166,7 @@
 		01DE29CD18E567C500F87022 /* KATGWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29CB18E567C500F87022 /* KATGWelcomeViewController.xib */; };
 		01E8966018FBDE150036CAA8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */; };
 		01EC330818A9990500156A3E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC330718A9990500156A3E /* libz.dylib */; };
+		01F827B61959DC8A00BDCFBA /* KATGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F827B51959DC8A00BDCFBA /* KATGUtil.m */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
 		227B638F172F7FBF0032FB64 /* KATGDownloadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 227B638E172F7FBF0032FB64 /* KATGDownloadProgressView.m */; };
@@ -443,6 +444,8 @@
 		01DE29CB18E567C500F87022 /* KATGWelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGWelcomeViewController.xib; path = "View Controllers/KATGWelcomeViewController.xib"; sourceTree = "<group>"; };
 		01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		01EC330718A9990500156A3E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		01F827B41959DC8A00BDCFBA /* KATGUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGUtil.h; sourceTree = "<group>"; };
+		01F827B51959DC8A00BDCFBA /* KATGUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGUtil.m; sourceTree = "<group>"; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
 		22192ED116745FF000D2B1C1 /* TDCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCollectionView.h; path = TDCollectionView/TDCollectionView.h; sourceTree = "<group>"; };
@@ -997,6 +1000,8 @@
 				910899A415EAE27300FB57C3 /* UI */,
 				910899BD15EAE44C00FB57C3 /* Data */,
 				91089D7D15EAEAD600FB57C3 /* MediaPlayback */,
+				01F827B41959DC8A00BDCFBA /* KATGUtil.h */,
+				01F827B51959DC8A00BDCFBA /* KATGUtil.m */,
 				910899C115EAE58600FB57C3 /* ThirdParty */,
 				01BCE80B186C208600F096EF /* Images.xcassets */,
 				9108996B15EAE15500FB57C3 /* Supporting Files */,
@@ -1429,6 +1434,7 @@
 				91089D0D15EAE58800FB57C3 /* ESHTTPOperation.m in Sources */,
 				91089D0E15EAE58800FB57C3 /* ESJSONOperation.m in Sources */,
 				018C35F318E94E8E00E218D8 /* KATGShowControlsScrubber.m in Sources */,
+				01F827B61959DC8A00BDCFBA /* KATGUtil.m in Sources */,
 				91089D0F15EAE58800FB57C3 /* ESRunLoopOperation.m in Sources */,
 				91089D1015EAE58800FB57C3 /* NSMutableURLRequest+ESNetworking.m in Sources */,
 				91089D1315EAE58800FB57C3 /* ESBaseModelObject.m in Sources */,
