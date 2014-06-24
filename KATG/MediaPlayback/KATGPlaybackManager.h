@@ -23,9 +23,6 @@
 #import "KATGAudioPlayerController.h"
 #import "KATGUtil.h"
 
-#define KATG_PLAYBACK_KEY @"KatgVip_key"
-#define KATG_PLAYBACK_UID @"KatgVip_uid"
-
 extern NSString *const KATGLiveShowStreamingServerOfflineNotification;
 
 @class KATGShow, KATGAudioPlayerController;

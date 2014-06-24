@@ -18,11 +18,9 @@
 {
     [super viewDidLoad];
     [self registerStateObserver];
+    self.title = @"About";
     scrollView.contentSize = scrollView.frame.size;
     scrollView.frame = self.view.bounds;
-    scrollView.contentInset = UIEdgeInsetsMake(20, 0, 56, 0);
-    scrollView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
-    scrollView.contentOffset = CGPointMake(0, -20);
 }
 
 - (void)didReceiveMemoryWarning

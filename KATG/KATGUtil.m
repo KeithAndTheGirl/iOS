@@ -28,4 +28,8 @@
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
 }
 
++(void)alertWithTitle:(NSString*)title message:(NSString*)message {
+    [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+}
+
 @end

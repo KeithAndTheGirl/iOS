@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -34,7 +34,7 @@
             <nil key="simulatedBottomBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-            <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" backgroundImage="TabBarBackground.png" id="GeC-OD-RLO">
+            <tabBar key="tabBar" opaque="NO" contentMode="scaleToFill" selectedItem="j9S-vQ-AYq" backgroundImage="TabBarBackground.png" id="GeC-OD-RLO">
                 <rect key="frame" x="0.0" y="519" width="320" height="49"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -102,14 +102,36 @@
                         </viewController>
                     </viewControllers>
                 </navigationController>
-                <viewController nibName="KATGAboutViewController" id="Ufc-jY-1wA" customClass="KATGAboutViewController">
-                    <tabBarItem key="tabBarItem" title="ABOUT" id="WC7-dr-DRM"/>
+                <navigationController definesPresentationContext="YES" id="KZE-ia-yp6">
+                    <tabBarItem key="tabBarItem" title="MORE" id="j9S-vQ-AYq"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
                     <nil key="simulatedDestinationMetrics"/>
-                </viewController>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="4UN-uN-H6L">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <viewControllers>
+                        <tableViewController id="7n2-DQ-kNC" customClass="KATGMoreViewController">
+                            <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="NsH-xz-XTb">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="7n2-DQ-kNC" id="Of2-P6-QxD"/>
+                                    <outlet property="delegate" destination="7n2-DQ-kNC" id="1Ox-d9-qnv"/>
+                                </connections>
+                            </tableView>
+                            <navigationItem key="navigationItem" title="KATG" id="5Ae-JM-uVQ"/>
+                            <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                            <nil key="simulatedTopBarMetrics"/>
+                            <nil key="simulatedBottomBarMetrics"/>
+                            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+                            <nil key="simulatedDestinationMetrics"/>
+                        </tableViewController>
+                    </viewControllers>
+                </navigationController>
             </viewControllers>
         </tabBarController>
     </objects>

@@ -18,6 +18,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
+    self.view.tintColor = self.sendButton.backgroundColor;
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.)
         self.view.layer.sublayerTransform = CATransform3DMakeTranslation(0, -20, 0);
 	

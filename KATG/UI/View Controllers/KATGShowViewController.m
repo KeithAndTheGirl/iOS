@@ -639,6 +639,7 @@ typedef enum {
         if(!key || !uid) {
             KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
             loginController.completion = (^() {
+                [self dismissViewControllerAnimated:YES completion:nil];
                 [self playVideo];
             });
             [self presentViewController:loginController animated:YES completion:nil];
@@ -682,6 +683,7 @@ typedef enum {
         if(!key || !uid) {
             KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
             loginController.completion = (^() {
+                [self dismissViewControllerAnimated:YES completion:nil];
                 [self playButtonPressed:nil];
             });
             [self presentViewController:loginController animated:YES completion:nil];

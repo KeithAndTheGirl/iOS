@@ -67,9 +67,11 @@
 	
 }
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
-{
-	// TODO: Show alert
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    NSArray *notifications = [def objectForKey:@"notifications"];
+    [[NSUserDefaults standardUserDefaults] setObject:[notifications arrayByAddingObject:userInfo] forKey:@"notifications"];
+    [def synchronize];
 }
 
 - (BOOL)canPresentShowControllerWithShowID:(NSNumber*)show_id {
@@ -144,10 +146,9 @@
     [item3 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
     
     UITabBarItem *item4 = [self.tabBar.items objectAtIndex:4];
-    item4.image = [[UIImage imageNamed:@"About"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    item4.selectedImage = [[UIImage imageNamed:@"AboutOn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item4.image = [[UIImage imageNamed:@"more"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+    item4.selectedImage = [[UIImage imageNamed:@"moreOn"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     [item4 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
-    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

@@ -65,13 +65,10 @@
                   NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
                   [def setObject:responseObject[@"KatgVip_key"] forKey:KATG_PLAYBACK_KEY];
                   [def setObject:responseObject[@"KatgVip_uid"] forKey:KATG_PLAYBACK_UID];
-                  [def setObject:login forKey:@"KATG_EMAIL"];
-                  [def setObject:pass forKey:@"KATG_PASS"];
+                  [def setObject:login forKey:KATG_EMAIL];
+                  [def setObject:pass forKey:KATG_PASSWORD];
                   [def synchronize];
-                  [self dismissViewControllerAnimated:YES
-                                           completion:^{
-                                               self.completion();
-                                           }];
+                  self.completion();
               }
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"%@", error);
@@ -89,6 +86,7 @@
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def removeObjectForKey:KATG_PLAYBACK_KEY];
     [def removeObjectForKey:KATG_PLAYBACK_UID];
+    [def synchronize];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
