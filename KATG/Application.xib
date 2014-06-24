@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <customObject id="bYg-Ix-Cfg" userLabel="App Delegate" customClass="KATGAppDelegate">
             <connections>
+                <outlet property="liveController" destination="tNb-kw-A30" id="tFq-9l-UxD"/>
                 <outlet property="tabBar" destination="GeC-OD-RLO" id="BOC-O3-HKW"/>
                 <outlet property="window" destination="Na2-4i-xf1" id="CLB-ox-hnw"/>
             </connections>

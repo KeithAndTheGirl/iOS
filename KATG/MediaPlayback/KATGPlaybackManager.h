@@ -38,7 +38,7 @@ extern NSString *const KATGLiveShowStreamingServerOfflineNotification;
 - (void)configureWithShow:(KATGShow *)show;
 
 - (void)configureForLiveShow;
-- (bool)isLiveShow;
+- (BOOL)isLiveShow;
 
 @property (nonatomic, readonly) CMTime duration;
 @property (nonatomic, readonly) CMTime currentTime;

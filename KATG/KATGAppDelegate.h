@@ -19,10 +19,12 @@
 //  
 
 #import <UIKit/UIKit.h>
+#import "KATGLiveViewController.h"
 
 @interface KATGAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (strong, nonatomic) IBOutlet UITabBar *tabBar;
+@property (strong, nonatomic) IBOutlet KATGLiveViewController *liveController;
 
 @end

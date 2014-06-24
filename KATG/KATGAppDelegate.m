@@ -151,6 +151,7 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    [self.liveController view];
     BOOL shown = [[[NSUserDefaults standardUserDefaults] valueForKey:@"welcome_shown"] boolValue];
     if(!shown) {
         KATGWelcomeViewController *welcomeController = [[KATGWelcomeViewController alloc] initWithNibName:@"KATGWelcomeViewController" bundle:nil];

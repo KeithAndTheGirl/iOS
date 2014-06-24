@@ -83,8 +83,10 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 }
 
 - (void)updateViewState {
-    KATGScheduledEvent *event = [self.fetchedResultsController fetchedObjects][0];
-    [self setScheduledEvent:event];
+    if([[self.fetchedResultsController fetchedObjects] count] > 0) {
+        KATGScheduledEvent *event = [self.fetchedResultsController fetchedObjects][0];
+        [self setScheduledEvent:event];
+    }
     [self setLiveMode:[[KATGDataStore sharedStore] isShowLive]];
 }
 
@@ -141,8 +143,9 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
 	{
 		if ([[KATGPlaybackManager sharedManager] isLiveShow])
 		{
+            KATGAudioPlayerState state = [[KATGPlaybackManager sharedManager] state];
 			CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
-				self.currentAudioPlayerState = [[KATGPlaybackManager sharedManager] state];
+				self.currentAudioPlayerState = state;
 			});
 		}
         else {

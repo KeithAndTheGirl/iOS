@@ -33,7 +33,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 @property (nonatomic) KATGShow *currentShow;
 @property (nonatomic) KATGAudioPlayerState state;
 @property (nonatomic) NSTimer *saveTimer;
-@property (nonatomic, getter=isLiveShow) bool liveShow;
+@property (nonatomic) BOOL liveShow;
 @end
 
 @implementation KATGPlaybackManager
@@ -164,6 +164,10 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 {
 	[self configureWithShow:nil];
 	self.liveShow = true;
+}
+
+-(BOOL)isLiveShow {
+    return self.liveShow;
 }
 
 #pragma mark - Core Data
