@@ -1028,6 +1028,14 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
                 ntfy.alertBody = [NSString stringWithFormat:@"Show \"%@\" was downloaded", self.show.title];
                 [[UIApplication sharedApplication] presentLocalNotificationNow:ntfy];
             }
+            else {
+                NSString *msg = [NSString stringWithFormat:@"Show \"%@\" was failed to download. %@", self.show.title, [error localizedDescription]];
+                [[[UIAlertView alloc] initWithTitle:@"Download error"
+                                            message:msg
+                                           delegate:nil
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil] show];
+            }
 			NSParameterAssert([NSThread isMainThread]);
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)
