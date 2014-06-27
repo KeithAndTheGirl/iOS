@@ -323,12 +323,13 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
 	ESJSONOperation *op = [ESJSONOperation newJSONOperationWithRequest:request
 															   success:^(ESJSONOperation *op, NSArray *JSON) {
-																   NSParameterAssert([JSON isKindOfClass:[NSArray class]]);
-																   NSParameterAssert(([JSON count] > 0));
-																   if ([JSON count] > 0)
-																   {
-																	   [self processSeriesList:JSON];
-																   }
+                                                                   if(JSON) {
+                                                                       NSParameterAssert([JSON isKindOfClass:[NSArray class]]);
+                                                                       NSParameterAssert(([JSON count] > 0));
+                                                                       if ([JSON count] > 0) {
+                                                                           [self processSeriesList:JSON];
+                                                                       }
+                                                                   }
 															   } failure:^(ESJSONOperation *op) {
 																   ShowsLog(@"Series List Download Failed %@", op.error);
 																   [self handleError:op.error];
