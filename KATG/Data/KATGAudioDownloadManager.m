@@ -68,23 +68,50 @@
 	return token;
 }
 
-- (id<KATGDownloadToken>)downloadEpisodeAudio:(KATGShow *)show progress:(void (^)(CGFloat progress))progress completion:(void (^)(NSError *error))completion {
-    
-	NSString *mediaURL = show.media_url;
-	if (mediaURL == nil)
-	{
+-(id<KATGDownloadToken>)tokenForShow:(KATGShow*)show {
+    NSString *mediaURL = show.media_url;
+	if (mediaURL == nil) {
 		NSParameterAssert(NO);
 		return nil;
 	}
 	NSURL *url = [NSURL URLWithString:mediaURL];
-	if (url == nil)
-	{
+	if (url == nil) {
 		NSParameterAssert(NO);
 		return nil;
 	}
-	__block KATGDownloadToken *token = self.urlToTokenMap[url];
-	if (token)
-	{
+	return self.urlToTokenMap[url];
+}
+
+-(KATGDownloadOperation*)downloadOperationWithUrl:(NSURL*)url
+                                          fileURL:fileURL
+                                         progress:(void (^)(CGFloat progress))progress
+                                          success:(void(^)())success
+                                          failure:(void(^)(NSError*))failure {
+    
+	KATGDownloadOperation *op = [KATGDownloadOperation newDownloadOperationWithRemoteURL:url fileURL:fileURL completion:^(ESHTTPOperation *op) {
+		if (op.error) {
+			failure(op.error);
+		}
+		else {
+			success();
+		}
+	}];
+    if (progress) {
+		[op setDownloadProgressBlock:^(NSUInteger totalBytesRead, NSUInteger totalBytesExpectedToRead) {
+			CGFloat value = (CGFloat)totalBytesRead/(CGFloat)totalBytesExpectedToRead;
+			value = floorf(value * 100.0f) / 100.0f;
+			progress(value);
+		}];
+	}
+    return op;
+}
+
+- (id<KATGDownloadToken>)downloadEpisodeAudio:(KATGShow *)show
+                                     progress:(void (^)(CGFloat progress))progress
+                                   completion:(void (^)(NSError *error))completion {
+    
+	__block KATGDownloadToken *token = [self tokenForShow:show];
+	if (token) {
 		token.progressBlock = progress;
 		token.completionBlock = completion;
 		EpisodeAudioLog(@"Already downloading %@", show.media_url);
@@ -98,13 +125,10 @@
     
 	EpisodeAudioLog(@"Download %@", show.media_url);
 	NSNumber *episodeID = show.episode_id;
+	NSURL *url = [NSURL URLWithString:show.media_url];
 	NSParameterAssert(episodeID);
 	NSURL *fileURL = [[self fileURLForEpisodeID:episodeID] URLByAppendingPathExtension:[url pathExtension]];
 	void (^finishWithError)(NSError *) = ^(NSError *error) {
-		if (error)
-		{
-			[[KATGDataStore sharedStore] handleError:error];
-		}
 		[token callCompletionBlockWithError:error];
 		[self.urlToTokenMap removeObjectForKey:url];
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -112,43 +136,27 @@
             self.bgTask = UIBackgroundTaskInvalid;
         });
 	};
-	KATGDownloadOperation *op = [KATGDownloadOperation newDownloadOperationWithRemoteURL:url fileURL:fileURL completion:^(ESHTTPOperation *op) {
-		if (op.error)
-		{
-			finishWithError(op.error);
-		}
-		else
-		{
-			[[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:[fileURL path] error:nil];
-			NSManagedObjectContext *context = [[KATGDataStore sharedStore] childContext];
-			NSParameterAssert(context);
-			[context performBlock:^{
-				KATGShow *fetchedShow = [[KATGDataStore sharedStore] fetchShowWithID:episodeID context:context];
-				if (fetchedShow)
-				{
-					fetchedShow.downloaded = @YES;
-					fetchedShow.file_url = [fileURL path];
-					[[KATGDataStore sharedStore] saveChildContext:context completion:^(NSError *saveError) {
-						CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
-							if (saveError)
-							{
-								EpisodeAudioLog(@"Core Data Error %@", saveError);
-							}
-							finishWithError(saveError);
-						});
-					}];
-				}
-			}];
-		}
-	}];
-	if (progress)
-	{
-		[op setDownloadProgressBlock:^(NSUInteger totalBytesRead, NSUInteger totalBytesExpectedToRead) {
-			CGFloat progress = (CGFloat)totalBytesRead/(CGFloat)totalBytesExpectedToRead;
-			progress = floorf(progress * 100.0f) / 100.0f;
-			[token callProgressBlockWithProgress:progress];
-		}];
-	}
+    void (^success)() = ^() {
+        [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:[fileURL path] error:nil];
+        NSManagedObjectContext *context = [[KATGDataStore sharedStore] childContext];
+        NSParameterAssert(context);
+        [context performBlock:^{
+            KATGShow *fetchedShow = [[KATGDataStore sharedStore] fetchShowWithID:episodeID context:context];
+            if (fetchedShow) {
+                fetchedShow.downloaded = @YES;
+                fetchedShow.file_url = [fileURL path];
+                [[KATGDataStore sharedStore] saveChildContext:context completion:^(NSError *saveError) {
+                    CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
+                        if (saveError) {
+                            EpisodeAudioLog(@"Core Data Error %@", saveError);
+                        }
+                        finishWithError(saveError);
+                    });
+                }];
+            }
+        }];
+    };
+    KATGDownloadOperation *op = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:finishWithError];
 	token = [[KATGDownloadToken alloc] initWithOperation:op];
 	NSParameterAssert(token);
 	token.progressBlock = progress;
