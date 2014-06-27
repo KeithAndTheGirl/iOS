@@ -646,6 +646,8 @@ typedef enum {
             return;
         }
     }
+    [[KATGPlaybackManager sharedManager] stop];
+    
     NSURL *videoUrl = [NSURL URLWithString:self.show.video_file_url];
     [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:videoUrl];
     [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:videoUrl];
