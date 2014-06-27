@@ -120,8 +120,15 @@
 	{
 		return;
 	}
-	[self.downloadButton setTitle:[NSString stringWithFormat:@"Downloading (%2.0f%%)", progress * 100] forState:UIControlStateNormal];
-	self.downloadProgressView.downloadProgress = progress;
+    if(progress > 0) {
+        [self.downloadButton setTitle:[NSString stringWithFormat:@"Downloading (%2.0f%%)", progress * 100] forState:UIControlStateNormal];
+        self.downloadProgressView.downloadProgress = progress;
+        self.downloadProgressView.hidden = NO;
+    }
+    else {
+        [self.downloadButton setTitle:@"Downloading..." forState:UIControlStateNormal];
+        self.downloadProgressView.hidden = YES;
+    }
 }
 
 @end

@@ -58,6 +58,7 @@
 - (instancetype)initDownloadOperationWithRemoteURL:(NSURL *)remoteURL fileURL:(NSURL *)fileURL completion:(ESHTTPOperationCompletionBlock)completion
 {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:remoteURL];
+    request.timeoutInterval = 10;
 	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
 	NSOutputStream *outputStream;
 	int size;

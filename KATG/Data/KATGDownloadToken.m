@@ -21,10 +21,6 @@
 #import "KATGDownloadToken.h"
 #import "KATGDownloadOperation.h"
 
-@interface KATGDownloadToken ()
-@property (nonatomic) KATGDownloadOperation *op;
-@end
-
 @implementation KATGDownloadToken
 
 - (instancetype)initWithOperation:(KATGDownloadOperation *)op

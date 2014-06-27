@@ -82,6 +82,51 @@
 	return self.urlToTokenMap[url];
 }
 
+- (KATGDownloadOperation *)downloadOperationWithUrl:(NSURL*)url
+                                            fileURL:fileURL
+                                           progress:(void (^)(CGFloat progress))progress
+                                            success:(void(^)())success
+                                            failure:(void(^)(NSError*))failure
+                                        autoRetryOf:(int)timesToRetry retryInterval:(int)intervalInSeconds {
+    
+    void (^retryBlock)(NSError *) = ^(NSError *error) {
+        int retryCount = timesToRetry;
+        if (retryCount > 0) {
+            EpisodeAudioLog(@"AutoRetry: Request failed: %@, retry begining...", error.localizedDescription);
+            KATGDownloadOperation *retryOperation = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:failure autoRetryOf:retryCount-1 retryInterval:intervalInSeconds];
+            
+            void (^addRetryOperation)() = ^{
+                [self.networkQueue addOperation:retryOperation];
+                KATGDownloadToken *token = self.urlToTokenMap[url];
+                if (token) {
+                    token.op = retryOperation;
+                }
+            };
+            if (intervalInSeconds > 0) {
+                EpisodeAudioLog(@"AutoRetry: Delaying retry for %d seconds... timesToRetry: %i", intervalInSeconds, timesToRetry);
+                dispatch_time_t delay = dispatch_time(0, (int64_t)(intervalInSeconds * NSEC_PER_SEC));
+                dispatch_after(delay, dispatch_get_main_queue(), ^(void){
+                    addRetryOperation();
+                });
+            } else {
+                addRetryOperation();
+            }
+        } else {
+            EpisodeAudioLog(@"AutoRetry: Request failed: %@, no more retries allowed! executing supplied failure block...", error.localizedDescription);
+            failure(error);
+            EpisodeAudioLog(@"AutoRetry: done.");
+        }
+    };
+    
+    KATGDownloadOperation *operation = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:^{
+        EpisodeAudioLog(@"AutoRetry: success, running success block...");
+        success();
+        EpisodeAudioLog(@"AutoRetry: done.");
+    } failure:retryBlock];
+    
+    return operation;
+}
+
 -(KATGDownloadOperation*)downloadOperationWithUrl:(NSURL*)url
                                           fileURL:fileURL
                                          progress:(void (^)(CGFloat progress))progress
@@ -97,8 +142,16 @@
 		}
 	}];
     if (progress) {
+        __block int downloadedSize = 0;
+        if ([fileURL checkResourceIsReachableAndReturnError:nil]) {
+            NSNumber *sizeObject;
+            NSError *error;
+            if ([fileURL getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:&error]) {
+                downloadedSize = [sizeObject intValue];
+            }
+        }
 		[op setDownloadProgressBlock:^(NSUInteger totalBytesRead, NSUInteger totalBytesExpectedToRead) {
-			CGFloat value = (CGFloat)totalBytesRead/(CGFloat)totalBytesExpectedToRead;
+			CGFloat value = ((CGFloat)totalBytesRead + downloadedSize)/((CGFloat)totalBytesExpectedToRead + downloadedSize);
 			value = floorf(value * 100.0f) / 100.0f;
 			progress(value);
 		}];
@@ -156,7 +209,7 @@
             }
         }];
     };
-    KATGDownloadOperation *op = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:finishWithError];
+    KATGDownloadOperation *op = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:finishWithError autoRetryOf:15 retryInterval:10];
 	token = [[KATGDownloadToken alloc] initWithOperation:op];
 	NSParameterAssert(token);
 	token.progressBlock = progress;
