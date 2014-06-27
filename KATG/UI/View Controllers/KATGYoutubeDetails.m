@@ -9,6 +9,7 @@
 #import "KATGYoutubeDetails.h"
 #import "KATGPlaybackManager.h"
 #import <MediaPlayer/MediaPlayer.h>
+#import "KATGAudioSessionManager.h"
 
 @implementation KATGYoutubeDetails
 
@@ -28,23 +29,10 @@
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
 }
 
-- (void) remoteControlReceivedWithEvent: (UIEvent *) receivedEvent {
-    if (receivedEvent.type == UIEventTypeRemoteControl) {
-        switch (receivedEvent.subtype) {
-            case UIEventSubtypeRemoteControlTogglePlayPause:
-                break;
-            case UIEventSubtypeRemoteControlPreviousTrack:
-                break;
-            case UIEventSubtypeRemoteControlNextTrack:
-                break;
-            default:
-                break;
-        }
-    }
-}
-
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    [[KATGPlaybackManager sharedManager] stop];
     
     self.npInfoRemember = [[MPNowPlayingInfoCenter defaultCenter] nowPlayingInfo];
     NSMutableDictionary *episodeInfo = [NSMutableDictionary dictionary];
@@ -82,12 +70,11 @@
 
     nameLabel.text = self.dataDictionary[@"title"];
     dateLabel.text = self.dataDictionary[@"recorded"];
-    
-    [[KATGPlaybackManager sharedManager] pause];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:nil];
 }
 
 - (void)didReceiveMemoryWarning {
