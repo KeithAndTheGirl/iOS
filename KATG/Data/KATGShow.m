@@ -123,6 +123,9 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
         [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"preview_url" outputKey:@"preview_url"]];
         [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"VideoFileUrl" outputKey:@"video_file_url"]];
         [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"VideoThumbnailUrl" outputKey:@"video_thumbnail_url"]];
+        [map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"Public" outputKey:@"access" transformBlock:^id(id<ESObject> object, id inputValue) {
+			return @([inputValue boolValue]);
+		}]];
 	}
 }
 

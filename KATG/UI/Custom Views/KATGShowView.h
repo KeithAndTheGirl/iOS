@@ -41,6 +41,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *listenedProgressLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *downloadIndicatorView;
 @property (strong, nonatomic) IBOutlet UILabel *downloadLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *vipIndicatorView;
+@property (strong, nonatomic) IBOutlet UILabel *vipLabel;
 
 // This determines if the close button's width is taken into account when laying
 // out the items in the header.

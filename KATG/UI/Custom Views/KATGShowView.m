@@ -56,7 +56,10 @@
 
     _downloadIndicatorView.hidden = ![[show downloaded] boolValue];
     _downloadLabel.hidden = ![[show downloaded] boolValue];
-
+    
+    _vipIndicatorView.hidden = [[show access] boolValue];
+    _vipLabel.hidden = [[show access] boolValue];
+    
     float playedPercentage = 0;
     if(show.duration && show.lastPlaybackTime && [show.duration floatValue] > 0) {
         playedPercentage = [show.lastPlaybackTime floatValue]/[show.duration floatValue];
