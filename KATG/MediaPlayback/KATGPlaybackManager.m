@@ -25,6 +25,7 @@
 #import "KATGAudioSessionManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "KATGURLProtocol.h"
+#import "KATGApplication.h"
 
 NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowStreamingServerOfflineNotification";
 
@@ -185,6 +186,29 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	}
 }
 
+#pragma mark remote control logic 
+-(void)remoteControlAction:(NSNotification*)notification {
+    UIEvent *event = [notification object];
+    switch (event.subtype) {
+        case UIEventSubtypeRemoteControlTogglePlayPause:
+        case UIEventSubtypeRemoteControlPlay:
+            [self play];
+            break;
+        case UIEventSubtypeRemoteControlStop:
+        case UIEventSubtypeRemoteControlPause:
+            [self pause];
+            break;
+        case UIEventSubtypeRemoteControlNextTrack:
+            [self jumpForward];
+            break;
+        case UIEventSubtypeRemoteControlPreviousTrack:
+            [self jumpBackward];
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - Public API
 
 - (void)configureWithShow:(KATGShow *)show
@@ -202,11 +226,12 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 
 - (void)play
 {
-	if (self.state == KATGAudioPlayerStatePlaying)
+	if (self.state == KATGAudioPlayerStatePlaying || self.currentShow == nil)
 	{
 		return;
 	}
 	KATGShow *currentShow = self.currentShow;
+    [self setPlaybackInfo:currentShow];
 	if (!self.audioPlaybackController)
 	{
 		NSURL *url;
@@ -231,8 +256,8 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
             [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:url];
             NSLog(@"Will play from URL: %@", url);
 		}
-		self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];
-	}
+        self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];
+    }
 	[self.audioPlaybackController play];
 	if (!self.liveShow)
 	{
@@ -241,13 +266,17 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 		{
 			[self.audioPlaybackController seekToTime:CMTimeMake(lastPlaybackTime, 1)];
 		}
-		[self setPlaybackInfo:currentShow];
 		[self startSaveTimer];
 	}
 	else
 	{
 		[self checkIfStreamingServerIsOffline];
 	}
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(remoteControlAction:)
+                                                 name:remoteControlButtonTapped
+                                               object:nil];
 }
 
 - (void)pause
@@ -264,7 +293,8 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	self.currentShow = nil;
 	self.audioPlaybackController = nil;
 	self.state = KATGAudioPlayerStateUnknown;
-	KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:remoteControlButtonTapped object:nil];
 }
 
 - (void)jumpForward
@@ -335,24 +365,12 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	}
 	KATGDataStore *store = [KATGDataStore sharedStore];
 	NSManagedObjectContext *context = [store childContext];
-	NSManagedObjectID *objectID = [self.currentShow objectID];
 	Float64 time = [self currentTimeInSeconds];
 	Float64 duration = [self durationInSeconds];
     if(duration == 0)
         return;
+    __block KATGShow *show = self.currentShow;
 	[context performBlock:^{
-        KATGShow *show = nil;
-        @try {
-            show = (KATGShow *)[context objectWithID:objectID];
-        }
-        @catch (NSException *exception) {
-            NSLog(@"%@", [exception description]);
-        }
-        @finally {
-            if(!show)
-                show = (KATGShow *)[context existingObjectWithID:objectID error:nil];
-        }
-		
 		if (show)
 		{
 			show.lastPlaybackTime = @(time);
@@ -395,6 +413,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 			episodeInfo[MPMediaItemPropertyArtwork] = artwork;
 		}
 	}
+    
 	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:episodeInfo];
 }
 

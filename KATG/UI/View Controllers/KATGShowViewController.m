@@ -63,6 +63,7 @@ typedef enum {
 
 #define KATGShowDetailsSectionMaxCount KATGShowDetailsSectionDownload+1
 
+
 @interface KATGShowViewController () <UITableViewDelegate, UITableViewDataSource, KATGShowImagesCellDelegate, KATGImagesViewControllerDelegate, KATGDownloadEpisodeCellDelegate, UIActionSheetDelegate, KATGForumCellDelegate>
 {
 	BOOL positionSliderIsDragging;
@@ -554,7 +555,6 @@ typedef enum {
 }
 
 #pragma mark - KVO
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:KATGStateObserverKey])

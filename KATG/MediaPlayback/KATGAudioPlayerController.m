@@ -37,8 +37,8 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 
 @interface KATGAudioPlayerController ()
 
-@property (nonatomic) AVPlayer *avPlayer;
-@property (nonatomic) AVPlayerItem *avPlayerItem;
+@property (nonatomic, strong) AVPlayer *avPlayer;
+@property (nonatomic, strong) AVPlayerItem *avPlayerItem;
 
 @property (nonatomic) CMTime currentTime;
 @property (nonatomic) CMTime duration;
@@ -49,8 +49,6 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 @property (nonatomic) id didEndObserver;
 
 @property (nonatomic) bool isApplicationActive;
-
-@property (nonatomic) bool shouldSwitchToAmbientOnActive;
 
 - (instancetype)initWithURL:(NSURL *)url;
 
@@ -106,11 +104,6 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 - (void)didBecomeActive:(NSNotification *)notification
 {
 	self.isApplicationActive = true;
-	if (self.shouldSwitchToAmbientOnActive)
-	{
-		KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
-		self.shouldSwitchToAmbientOnActive = false;
-	}
 }
 
 #pragma mark - Accessors
@@ -297,7 +290,6 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 			return;
 		}
 	}
-	self.shouldSwitchToAmbientOnActive = false;
 	KATGConfigureAudioSessionState(KATGAudioSessionStatePlayback);
 	
     self.state = KATGAudioPlayerStateLoading;
@@ -305,14 +297,6 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 
 - (void)pause
 {
-	if (self.isApplicationActive)
-	{
-		KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
-	}
-	else
-	{
-		self.shouldSwitchToAmbientOnActive = true;
-	}
 	[self.avPlayer pause];
 }
 

@@ -25,6 +25,7 @@
 #import "KATGShowViewController.h"
 #import "KATGDataStore.h"
 #import "KATGShow.h"
+#import <MediaPlayer/MediaPlayer.h>
 
 #import "KATGSeriesViewController.h"
 
@@ -42,6 +43,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    self.task=[application beginBackgroundTaskWithExpirationHandler:^{
+        NSLog(@"Expiration handler called %f",[application backgroundTimeRemaining]);
+        [application endBackgroundTask:self.task];
+        self.task=UIBackgroundTaskInvalid;
+    }];
+    [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
+    [self.window makeKeyAndVisible];
+    
     [TestFlight takeOff:@"1793cbe2-d3b6-47a5-8122-d7ee9309d4eb"];
 
 	KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
@@ -51,7 +60,7 @@
 	CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
 		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 	});
-	
+    
 	return YES;
 }
 
@@ -161,6 +170,15 @@
             [[NSUserDefaults standardUserDefaults] setValue:@YES forKey:@"welcome_shown"];
         }];
     }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    self.task=[application beginBackgroundTaskWithExpirationHandler:^{
+        NSLog(@"Expiration handler called %f",[application backgroundTimeRemaining]);
+        [application endBackgroundTask:self.task];
+        self.task=UIBackgroundTaskInvalid;
+    }];
 }
 
 @end

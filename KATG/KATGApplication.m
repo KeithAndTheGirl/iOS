@@ -12,6 +12,10 @@
 
 @implementation KATGApplication
 
+- (BOOL)canBecomeFirstResponder {
+    return YES;
+}
+
 - (void)remoteControlReceivedWithEvent:(UIEvent *)event
 {
     switch (event.subtype) {

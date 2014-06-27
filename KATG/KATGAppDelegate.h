@@ -26,5 +26,6 @@
 @property (strong, nonatomic) IBOutlet UIWindow *window;
 @property (strong, nonatomic) IBOutlet UITabBar *tabBar;
 @property (strong, nonatomic) IBOutlet KATGLiveViewController *liveController;
+@property UIBackgroundTaskIdentifier task;
 
 @end
