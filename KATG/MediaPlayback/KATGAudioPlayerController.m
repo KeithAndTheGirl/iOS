@@ -226,6 +226,12 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 		self.avPlayer = nil;
 		return;
 	}
+    else if(status == AVPlayerItemStatusReadyToPlay && self.state == KATGAudioPlayerStateLoading) {
+        [self.avPlayer prerollAtRate:1 completionHandler:^(BOOL finished) {
+            if(finished )
+                [self.avPlayer play];
+        }];
+    }
 	if (KATGFloatEqual(rate, 0.0f))
 	{
         if(self.state != KATGAudioPlayerStateLoading) {
@@ -293,8 +299,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	}
 	self.shouldSwitchToAmbientOnActive = false;
 	KATGConfigureAudioSessionState(KATGAudioSessionStatePlayback);
-	[self.avPlayer play];
-    [self.avPlayer pause];
+	
     self.state = KATGAudioPlayerStateLoading;
 }
 
