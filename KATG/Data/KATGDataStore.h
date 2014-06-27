@@ -28,14 +28,6 @@
 extern NSString * const KATGDataStoreConnectivityRestoredNotification;
 extern NSString * const KATGDataStoreConnectivityFailureNotification;
 
-@protocol KATGDownloadToken <NSObject>
-@property (nonatomic) CGFloat progress;
-@property (copy, nonatomic) void (^progressBlock)(CGFloat progress);
-@property (copy, nonatomic) void (^completionBlock)(NSError *error);
-- (BOOL)isCancelled;
-- (void)cancel;
-@end
-
 @interface KATGDataStore : NSObject
 
 + (KATGDataStore *)sharedStore;
@@ -58,6 +50,8 @@ extern NSString *const KATGDataStoreIsShowLiveDidChangeNotification;
 - (BOOL)isShowLive;
 - (void)setTestLiveMode:(BOOL)value;
 
+
+- (void)handleError:(NSError *)error;
 // Events updated
 // This shouldn't be needed, but working around an occasional failure on first load for now
 extern NSString *const KATGDataStoreEventsDidChangeNotification;
@@ -79,14 +73,6 @@ extern NSString *const KATGDataStoreShowDidChangeNotification;
 - (void)downloadEpisodesForSeriesID:(NSNumber*)seriesID fromEpisodeNumber:(NSNumber*)startNumber success:(void(^)())success failure:(void(^)())failure;
 // 
 - (void)downloadEpisodeDetails:(NSNumber *)episodeID;
-
-//
-- (id<KATGDownloadToken>)activeEpisodeAudioDownload:(KATGShow *)show;
-
-//
-- (id<KATGDownloadToken>)downloadEpisodeAudio:(KATGShow *)show progress:(void (^)(CGFloat progress))progress completion:(void (^)(NSError *error))completion;
-
-- (void)removeDownloadedEpisodeAudio:(KATGShow *)show;
 
 //
 - (void)downloadEvents;

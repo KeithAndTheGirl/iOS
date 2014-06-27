@@ -7,6 +7,7 @@
 //
 
 #import "KATGListSettingsController.h"
+#import "KATGAudioDownloadManager.h"
 
 @implementation KATGListSettingsController
 
@@ -151,7 +152,7 @@
         else if(indexPath.row == 1) {
             for(KATGShow *show in self.selectedEpisodes) {
                 if(show.file_url)
-                    [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
+                    [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:show];
             }
             [self.selectedEpisodes removeAllObjects];
         }
@@ -177,7 +178,7 @@
     if(buttonIndex == 1) {
         for(KATGShow *show in self.episodes) {
             if(show.file_url)
-                [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:show];
+                [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:show];
         }
     }
 }

@@ -27,7 +27,7 @@
 	return [[self alloc] initDownloadOperationWithRemoteURL:remoteURL fileURL:fileURL completion:completion];
 }
 
-- (BOOL)exists:(NSURL *)fileURL size:(NSUInteger *)size
+- (BOOL)exists:(NSURL *)fileURL size:(int *)size
 {
 	NSParameterAssert(size);
 	NSParameterAssert([fileURL isFileURL]);
@@ -39,7 +39,7 @@
 		NSError *error;
 		if ([fileURL getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:&error])
 		{
-			*size = [sizeObject unsignedIntegerValue];
+			*size = [sizeObject intValue];
 		}
 		else
 		{
@@ -60,7 +60,7 @@
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:remoteURL];
 	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
 	NSOutputStream *outputStream;
-	NSUInteger size;
+	int size;
 	if ([self exists:fileURL size:&size])
 	{
 		[request setValue:[NSString stringWithFormat:@"bytes=%d-", size] forHTTPHeaderField:@"Range"];

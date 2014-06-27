@@ -30,9 +30,6 @@
 #import "ESHTTPOperation.h"
 #import "ESJSONOperation.h"
 
-#import "KATGDownloadOperation.h"
-#import "KATGDownloadToken.h"
-
 #import "Reachability.h"
 #import "KATGReachabilityOperation.h"
 
@@ -56,12 +53,6 @@
 #define CoreDataLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
 #else
 #define CoreDataLog(fmt, ...) 
-#endif //DEBUG
-
-#if DEBUG && 0
-#define EpisodeAudioLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
-#else
-#define EpisodeAudioLog(fmt, ...) 
 #endif //DEBUG
 
 NSString *const kKATGDataStoreIsReachableKey = @"isReachable";
@@ -88,10 +79,6 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 
 // Polling timer
 @property (nonatomic, strong) NSTimer *timer;
-
-// Download tracking
-@property (nonatomic) NSMutableDictionary *urlToTokenMap;
-@property (nonatomic) UIBackgroundTaskIdentifier bgTask;
 
 // Reachability
 @property (nonatomic) Reachability *reachabilityForConnectionType;
@@ -136,9 +123,6 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willTerminate:) name:UIApplicationWillTerminateNotification object:nil];
 		
 		_baseURL = [NSURL URLWithString:kServerBaseURL];
-		
-		_urlToTokenMap = [NSMutableDictionary new];
-        self.bgTask = UIBackgroundTaskInvalid;
 		
 		_reachabilityForConnectionType = [Reachability reachabilityWithHostName:kReachabilityURL];
 		NSParameterAssert(_reachabilityForConnectionType);
@@ -395,155 +379,6 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 																   [self handleError:op.error];
 															   }];
 	[self.networkQueue addOperation:op];
-}
-
-- (NSURL *)fileURLForEpisodeID:(NSNumber *)episodeID
-{
-	NSParameterAssert(episodeID);
-	NSString *fileName = [NSString stringWithFormat:@"%@", episodeID];
-	NSURL *url = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-	url = [url URLByAppendingPathComponent:@"Media"];
-	BOOL isDir;
-	if (![[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&isDir])
-	{
-		NSError *error;
-		if (![[NSFileManager defaultManager] createDirectoryAtURL:url withIntermediateDirectories:NO attributes:nil error:nil])
-		{
-			NSLog(@"%@", error);
-			return nil;
-		}
-	}
-	else
-	{
-		NSParameterAssert(isDir);
-	}
-	url = [url URLByAppendingPathComponent:fileName];
-	return url;
-}
-
-- (id<KATGDownloadToken>)activeEpisodeAudioDownload:(KATGShow *)show
-{
-	NSString *mediaURL = show.media_url;
-	EpisodeAudioLog(@"Check for download of %@", show.media_url);
-	if (mediaURL == nil)
-	{
-		NSParameterAssert(NO);
-		return nil;
-	}
-	NSURL *url = [NSURL URLWithString:mediaURL];
-	if (url == nil)
-	{
-		NSParameterAssert(NO);
-		return nil;
-	}
-	KATGDownloadToken *token = self.urlToTokenMap[url];
-	return token;
-}
-
-- (id<KATGDownloadToken>)downloadEpisodeAudio:(KATGShow *)show progress:(void (^)(CGFloat progress))progress completion:(void (^)(NSError *error))completion
-{
-	NSString *mediaURL = show.media_url;
-	if (mediaURL == nil)
-	{
-		NSParameterAssert(NO);
-		return nil;
-	}
-	NSURL *url = [NSURL URLWithString:mediaURL];
-	if (url == nil)
-	{
-		NSParameterAssert(NO);
-		return nil;
-	}
-	__block KATGDownloadToken *token = self.urlToTokenMap[url];
-	if (token)
-	{
-		token.progressBlock = progress;
-		token.completionBlock = completion;
-		EpisodeAudioLog(@"Already downloading %@", show.media_url);
-		return token;
-	}
-    
-    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
-        self.bgTask = UIBackgroundTaskInvalid;
-    }];
-    
-	EpisodeAudioLog(@"Download %@", show.media_url);
-	NSNumber *episodeID = show.episode_id;
-	NSParameterAssert(episodeID);
-	NSURL *fileURL = [[self fileURLForEpisodeID:episodeID] URLByAppendingPathExtension:[url pathExtension]];
-	void (^finishWithError)(NSError *) = ^(NSError *error) {
-		if (error)
-		{
-			[self handleError:error];
-		}
-		[token callCompletionBlockWithError:error];
-		[self.urlToTokenMap removeObjectForKey:url];
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
-            self.bgTask = UIBackgroundTaskInvalid;
-        });
-	};
-	KATGDownloadOperation *op = [KATGDownloadOperation newDownloadOperationWithRemoteURL:url fileURL:fileURL completion:^(ESHTTPOperation *op) {
-		if (op.error)
-		{
-			finishWithError(op.error);
-		}
-		else
-		{
-			[[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:[fileURL path] error:nil];
-			NSManagedObjectContext *context = [self childContext];
-			NSParameterAssert(context);
-			[context performBlock:^{
-				KATGShow *fetchedShow = [self fetchShowWithID:episodeID context:context];
-				if (fetchedShow)
-				{
-					fetchedShow.downloaded = @YES;
-					fetchedShow.file_url = [fileURL path];
-					[self saveChildContext:context completion:^(NSError *saveError) {
-						CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
-							if (saveError)
-							{
-								EpisodeAudioLog(@"Core Data Error %@", saveError);
-							}
-							finishWithError(saveError);
-						});
-					}];
-				}
-			}];
-		}
-	}];
-	if (progress)
-	{
-		[op setDownloadProgressBlock:^(NSUInteger totalBytesRead, NSUInteger totalBytesExpectedToRead) {
-			CGFloat progress = (CGFloat)totalBytesRead/(CGFloat)totalBytesExpectedToRead;
-			progress = floorf(progress * 100.0f) / 100.0f;
-			[token callProgressBlockWithProgress:progress];
-		}];
-	}
-	token = [[KATGDownloadToken alloc] initWithOperation:op];
-	NSParameterAssert(token);
-	token.progressBlock = progress;
-	token.completionBlock = completion;
-	self.urlToTokenMap[url] = token;
-	[self.networkQueue addOperation:op];
-	return token;
-}
-
-- (void)removeDownloadedEpisodeAudio:(KATGShow *)show {
-    if (show.file_url) {
-        [[NSFileManager defaultManager] removeItemAtPath:show.file_url error:nil];
-        show.downloaded = @NO;
-        show.file_url = nil;
-        [self saveChildContext:self.childContext completion:^(NSError *saveError) {
-            CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
-                if (saveError)
-                {
-                    EpisodeAudioLog(@"Core Data Error %@", saveError);
-                }
-            });
-        }];
-    }
 }
 
 - (void)downloadEvents

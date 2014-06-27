@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0104451718E6E6E80025F278 /* KATGLiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0104451518E6E6E80025F278 /* KATGLiveViewController.m */; };
 		0104451818E6E6E80025F278 /* KATGLiveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0104451618E6E6E80025F278 /* KATGLiveViewController.xib */; };
+		0106DB2D195DF29000A1AFD4 /* KATGAudioDownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0106DB2C195DF29000A1AFD4 /* KATGAudioDownloadManager.m */; };
 		012B4F221857A2ED00B59FC5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4F001857A2ED00B59FC5 /* AFHTTPRequestOperation.m */; };
 		012B4F231857A2ED00B59FC5 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4F021857A2ED00B59FC5 /* AFHTTPRequestOperationManager.m */; };
 		012B4F241857A2ED00B59FC5 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 012B4F041857A2ED00B59FC5 /* AFHTTPSessionManager.m */; };
@@ -257,6 +258,8 @@
 		0104451418E6E6E80025F278 /* KATGLiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGLiveViewController.h; path = "View Controllers/KATGLiveViewController.h"; sourceTree = "<group>"; };
 		0104451518E6E6E80025F278 /* KATGLiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGLiveViewController.m; path = "View Controllers/KATGLiveViewController.m"; sourceTree = "<group>"; };
 		0104451618E6E6E80025F278 /* KATGLiveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGLiveViewController.xib; path = "View Controllers/KATGLiveViewController.xib"; sourceTree = "<group>"; };
+		0106DB2B195DF29000A1AFD4 /* KATGAudioDownloadManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGAudioDownloadManager.h; sourceTree = "<group>"; };
+		0106DB2C195DF29000A1AFD4 /* KATGAudioDownloadManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGAudioDownloadManager.m; sourceTree = "<group>"; };
 		012B4EFF1857A2ED00B59FC5 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		012B4F001857A2ED00B59FC5 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		012B4F011857A2ED00B59FC5 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -1097,6 +1100,8 @@
 				91C00D3716EBC3D80064A458 /* KATGDataStore_Internal.h */,
 				9110F82D16E944C20014F87D /* KATGDownloadOperation.h */,
 				9110F82E16E944C20014F87D /* KATGDownloadOperation.m */,
+				0106DB2B195DF29000A1AFD4 /* KATGAudioDownloadManager.h */,
+				0106DB2C195DF29000A1AFD4 /* KATGAudioDownloadManager.m */,
 				91BE199317235BAC006CD2B1 /* KATGDownloadToken.h */,
 				91BE199417235BAC006CD2B1 /* KATGDownloadToken.m */,
 				91C00D3416EBC2C40064A458 /* KATGImageCache.h */,
@@ -1542,6 +1547,7 @@
 				228F9414165207EC006A1A05 /* KATGShowViewController.m in Sources */,
 				012B4F2A1857A2ED00B59FC5 /* AFURLSessionManager.m in Sources */,
 				229EC8CE16704F6600FB899A /* KATGDataStore.m in Sources */,
+				0106DB2D195DF29000A1AFD4 /* KATGAudioDownloadManager.m in Sources */,
 				229EC8D5167060DC00FB899A /* KATGShow.m in Sources */,
 				229EC8D81670639300FB899A /* KATGImage.m in Sources */,
 				229EC8DB1670639B00FB899A /* KATGGuest.m in Sources */,

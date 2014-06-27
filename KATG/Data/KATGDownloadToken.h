@@ -20,6 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import "KATGDataStore.h"
+#import "KATGAudioDownloadManager.h"
 
 @class KATGDownloadOperation;
 

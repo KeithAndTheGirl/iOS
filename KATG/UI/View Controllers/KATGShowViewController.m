@@ -34,6 +34,7 @@
 #import "KATGForumCell.h"
 #import "KATGPlaybackManager.h"
 #import "KATGDataStore.h"
+#import "KATGAudioDownloadManager.h"
 #import "KATGImagesViewController.h"
 #import "KATGReachabilityOperation.h"
 #import "KATGImageCache.h"
@@ -133,7 +134,7 @@ typedef enum {
 	
 	[[KATGDataStore sharedStore] downloadEpisodeDetails:self.show.episode_id];
 	
-	self.downloadToken = [[KATGDataStore sharedStore] activeEpisodeAudioDownload:self.show];
+	self.downloadToken = [[KATGAudioDownloadManager sharedManager] activeEpisodeAudioDownload:self.show];
     
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -1025,7 +1026,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 				}
 			}
 		};
-		self.downloadToken = [[KATGDataStore sharedStore] downloadEpisodeAudio:self.show progress:progress completion:^(NSError *error) {
+		self.downloadToken = [[KATGAudioDownloadManager sharedManager] downloadEpisodeAudio:self.show progress:progress completion:^(NSError *error) {
             if(!error) {
                 UILocalNotification *ntfy = [[UILocalNotification alloc] init];
                 ntfy.userInfo = @{@"show": self.show.episode_id};
@@ -1075,7 +1076,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 	}
     else if(cell.state == KATGDownloadEpisodeCellStateDownloaded) {
 		cell.state = KATGDownloadEpisodeCellStateActive;
-        [[KATGDataStore sharedStore] removeDownloadedEpisodeAudio:self.show];
+        [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:self.show];
         [[KATGPlaybackManager sharedManager] stop];
     }
 }
