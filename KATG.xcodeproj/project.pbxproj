@@ -153,6 +153,7 @@
 		0198AA35185F3C240063947C /* KATGScheduleItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */; };
 		0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198AB93186077320063947C /* KATGYouTubeTableCell.m */; };
 		0198AB96186077850063947C /* KATGYouTubeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AB95186077850063947C /* KATGYouTubeTableCell.xib */; };
+		01B1CFF7195D91EB00B2268A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B1CFF6195D91EB00B2268A /* MessageUI.framework */; };
 		01BCE80C186C208600F096EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BCE80B186C208600F096EF /* Images.xcassets */; };
 		01CCD312190D86F600CE3956 /* KATGVipLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CCD310190D86F600CE3956 /* KATGVipLoginViewController.m */; };
 		01CCD313190D86F600CE3956 /* KATGVipLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CCD311190D86F600CE3956 /* KATGVipLoginViewController.xib */; };
@@ -439,6 +440,7 @@
 		0198AB92186077320063947C /* KATGYouTubeTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGYouTubeTableCell.h; path = "View Controllers/KATGYouTubeTableCell.h"; sourceTree = "<group>"; };
 		0198AB93186077320063947C /* KATGYouTubeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeTableCell.m; path = "View Controllers/KATGYouTubeTableCell.m"; sourceTree = "<group>"; };
 		0198AB95186077850063947C /* KATGYouTubeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeTableCell.xib; path = "View Controllers/KATGYouTubeTableCell.xib"; sourceTree = "<group>"; };
+		01B1CFF6195D91EB00B2268A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		01BCE80B186C208600F096EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01CCD30F190D86F600CE3956 /* KATGVipLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGVipLoginViewController.h; path = "View Controllers/KATGVipLoginViewController.h"; sourceTree = "<group>"; };
 		01CCD310190D86F600CE3956 /* KATGVipLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGVipLoginViewController.m; path = "View Controllers/KATGVipLoginViewController.m"; sourceTree = "<group>"; };
@@ -614,6 +616,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01B1CFF7195D91EB00B2268A /* MessageUI.framework in Frameworks */,
 				01EC330818A9990500156A3E /* libz.dylib in Frameworks */,
 				012B4F331857A38400B59FC5 /* Security.framework in Frameworks */,
 				9115C14D172E2C48002942B6 /* AssetsLibrary.framework in Frameworks */,
@@ -1017,6 +1020,7 @@
 			isa = PBXGroup;
 			children = (
 				01EC330718A9990500156A3E /* libz.dylib */,
+				01B1CFF6195D91EB00B2268A /* MessageUI.framework */,
 				012B4F321857A38400B59FC5 /* Security.framework */,
 				9115C14C172E2C48002942B6 /* AssetsLibrary.framework */,
 				9123757D172DBFB700A194F2 /* EventKitUI.framework */,

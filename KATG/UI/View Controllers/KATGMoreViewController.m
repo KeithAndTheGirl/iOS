@@ -56,8 +56,16 @@
         nextView.title = @"KATG VIP";
     }
     else if(indexPath.row == 2) {
-        UIViewController *feedbackView = [[KATGLiveShowFeedbackViewController alloc] init];
-        [self presentViewController:feedbackView animated:YES completion:nil];
+        if([MFMailComposeViewController canSendMail]) {
+            MFMailComposeViewController *mailView = [[MFMailComposeViewController alloc] init];
+            [mailView setSubject:@"Feedback for the KATG app (iOS)"];
+            [mailView setToRecipients:@[@"support@keithandthegirl.com"]];
+            mailView.mailComposeDelegate = self;
+            [self presentViewController:mailView animated:YES completion:nil];
+        }
+        else {
+            [[[UIAlertView alloc] initWithTitle:@"KATG Feedback" message:@"Sorry, you can't send email now" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
+        }
         return;
     }
     else if(indexPath.row == 3) {
@@ -66,4 +74,11 @@
 
     [self.navigationController pushViewController:nextView animated:YES];
 }
+
+#pragma mark MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
 @end

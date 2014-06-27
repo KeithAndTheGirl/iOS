@@ -12,7 +12,8 @@
 #import "KATGVIPViewController.h"
 #import "KATGLiveShowFeedbackViewController.h"
 #import "KATGMessagesViewController.h"
+#import <MessageUI/MessageUI.h>
 
-@interface KATGMoreViewController : UITableViewController
+@interface KATGMoreViewController : UITableViewController <MFMailComposeViewControllerDelegate>
 
 @end
