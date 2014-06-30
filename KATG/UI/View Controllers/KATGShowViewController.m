@@ -308,19 +308,19 @@ typedef enum {
         case KATGShowDetailsSectionVideo:
         {
             cell = [[UITableViewCell alloc] init];
-            UIButton *videoButton = [[UIButton alloc] initWithFrame:cell.frame];
-            videoButton.adjustsImageWhenHighlighted = NO;
-            videoButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
-            videoButton.autoresizingMask = 63;
-            videoButton.backgroundColor = [UIColor blackColor];
-            [videoButton setImageForState:UIControlStateNormal withURL:[NSURL URLWithString:self.show.video_thumbnail_url]];
-            [videoButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
-            [cell addSubview:videoButton];
-            
-            UIImageView *playImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"play"]];
-            playImage.center = videoButton.center;
-            playImage.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
-            [cell addSubview:playImage];
+            if(!self.videoButton) {
+                self.videoButton = [[UIButton alloc] init];
+                self.videoButton.adjustsImageWhenHighlighted = NO;
+                self.videoButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+                self.videoButton.autoresizingMask = 63;
+                self.videoButton.backgroundColor = [UIColor blackColor];
+                [self.videoButton setBackgroundImageForState:UIControlStateNormal withURL:[NSURL URLWithString:self.show.video_thumbnail_url]];
+                [self.videoButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+                [self.videoButton addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
+            }
+            self.videoButton.frame = CGRectInset(cell.bounds, 0, 4);
+            cell.backgroundColor = [UIColor blackColor];
+            [cell addSubview:self.videoButton];
             break;
         }
 		case KATGShowDetailsSectionGuests:

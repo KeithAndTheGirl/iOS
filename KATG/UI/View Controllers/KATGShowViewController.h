@@ -42,6 +42,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet KATGShowControlsView *controlsView;
 @property (strong, nonatomic) KATGShowPreviewCell *previewCell;
+@property (strong, nonatomic) UIButton *videoButton;
 
 - (IBAction)close:(id)sender;
 
