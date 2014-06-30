@@ -19,8 +19,7 @@
     [super viewDidLoad];
     [self registerStateObserver];
     self.title = @"About";
-    scrollView.contentSize = scrollView.frame.size;
-    scrollView.frame = self.view.bounds;
+    scrollView.contentSize = backImageView.frame.size;
 }
 
 - (void)didReceiveMemoryWarning

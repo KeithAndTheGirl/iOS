@@ -123,7 +123,9 @@
                                     <outlet property="delegate" destination="7n2-DQ-kNC" id="1Ox-d9-qnv"/>
                                 </connections>
                             </tableView>
-                            <navigationItem key="navigationItem" title="KATG" id="5Ae-JM-uVQ"/>
+                            <navigationItem key="navigationItem" title="KATG" id="5Ae-JM-uVQ">
+                                <barButtonItem key="backBarButtonItem" title="Back" id="JUJ-GR-qRY"/>
+                            </navigationItem>
                             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                             <nil key="simulatedTopBarMetrics"/>
                             <nil key="simulatedBottomBarMetrics"/>

@@ -10,6 +10,7 @@
 
 @interface KATGAboutViewController : UIViewController {
     IBOutlet UIScrollView *scrollView;
+    IBOutlet UIImageView *backImageView;
 }
 
 -(IBAction)facebookAction:(id)sender;
