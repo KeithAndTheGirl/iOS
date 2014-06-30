@@ -30,7 +30,16 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
      [tableView addSubview:refreshControl];
     
     [self reload];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self registerStateObserver];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self unregisterStateObserver];
 }
 
 - (void)didReceiveMemoryWarning

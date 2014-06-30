@@ -23,7 +23,16 @@ NSString *const kKATGScheduleItemTableViewCellIdentifier = @"kKATGScheduleItemTa
     [super viewDidLoad];
     [tableView registerNib:[UINib nibWithNibName:@"KATGScheduleItemTableViewCell" bundle:nil] forCellReuseIdentifier:kKATGScheduleItemTableViewCellIdentifier];
     tableView.contentInset = tableView.scrollIndicatorInsets = UIEdgeInsetsMake(20, 0, 56, 0);
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self registerStateObserver];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self unregisterStateObserver];
 }
 
 - (void)didReceiveMemoryWarning

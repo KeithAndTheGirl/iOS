@@ -17,9 +17,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self registerStateObserver];
     self.title = @"About";
     scrollView.contentSize = backImageView.frame.size;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self registerStateObserver];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self unregisterStateObserver];
 }
 
 - (void)didReceiveMemoryWarning

@@ -21,7 +21,16 @@
     [super viewDidLoad];
     collectionView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"SeriesBackground.png"]];
     [collectionView registerClass:[KATGSeriesCell class] forCellWithReuseIdentifier:@"series_cell"];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     [self registerStateObserver];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self unregisterStateObserver];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {

@@ -7,6 +7,9 @@
 //
 
 #import "KATGMoreViewController.h"
+#import "KATGPlaybackManager.h"
+#import "KATGShowViewController.h"
+#import "KATGShow.h"
 
 #define ROW_TEXT @[@"About Keith and The Girl", @"KATG VIP Account", @"App Feedback", @"Messages"]
 #define ROW_IMAGES @[@"About", @"star", @"feedback", @"messages"]
@@ -16,6 +19,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.rowHeight = 54;
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self registerStateObserver];
+}
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self unregisterStateObserver];
 }
 
 #pragma mark UITableView
@@ -79,6 +92,59 @@
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error {
     [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark GlobalPlayState
+-(void)registerStateObserver {
+    [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
+    [self configureTopBar];
+}
+
+-(void)unregisterStateObserver {
+	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    [self configureTopBar];
+}
+
+- (void)configureTopBar
+{
+	if ([[KATGPlaybackManager sharedManager] currentShow] &&
+        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+	{
+		UIView *v = [self.tableView viewWithTag:1313];
+        if(!v) {
+            UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+            nowPlayingButton.frame = CGRectMake(0.0f, -48.0f, 320.0f, 48.0f);
+            [nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
+            nowPlayingButton.tag = 1313;
+            
+            [self.tableView addSubview:nowPlayingButton];
+            UIEdgeInsets contentInsets = self.tableView.contentInset;
+            contentInsets.top += 48;
+            self.tableView.contentInset = contentInsets;
+        }
+	}
+	else {
+        UIView *v = [self.tableView viewWithTag:1313];
+        if(v) {
+            [v removeFromSuperview];
+            UIEdgeInsets contentInsets = self.tableView.contentInset;
+            contentInsets.top -= 48;
+            self.tableView.contentInset = contentInsets;
+        }
+	}
+}
+
+-(void)showNowPlayingEpisode {
+    KATGShow *show = [[KATGPlaybackManager sharedManager] currentShow];
+    KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
+	showViewController.showObjectID = [show objectID];
+	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:showViewController animated:YES completion:nil];
 }
 
 @end
