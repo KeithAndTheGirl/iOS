@@ -84,8 +84,8 @@
     
     [coverImage setImageWithURL:[NSURL URLWithString:_series.cover_image_url]];
     titleLabel.text = _series.title;
-    [titleLabel sizeToFit];
     descLabel.text = _series.desc;
+    [descLabel sizeToFit];
     [self sortEpisodes];
     [tableView reloadData];
 }
