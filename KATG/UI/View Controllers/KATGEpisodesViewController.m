@@ -219,7 +219,7 @@
     KATGShow *show = self.sortedEpisodes[indexPath.row];
     KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
 	showViewController.showObjectID = [show objectID];
-    showViewController.needAuth = [self.series.vip_status boolValue];
+    showViewController.needAuth = ![show.access boolValue] || [self.series.vip_status boolValue];
 	showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self presentViewController:showViewController
                        animated:YES
