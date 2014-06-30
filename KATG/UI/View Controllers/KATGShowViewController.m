@@ -41,6 +41,7 @@
 #import "KATGVipLoginViewController.h"
 #import "KATGURLProtocol.h"
 #import "UIKit+AFNetworking.h"
+#import "XCDYouTubeKit.h"
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -296,34 +297,12 @@ typedef enum {
 	{
 		case KATGShowDetailsSectionPreview:
         {
-            cell = [[UITableViewCell alloc] init];
-            
-            if([self.show.preview_url rangeOfString:@"youtube"].location != NSNotFound) {
-                UIWebView *webView = [[UIWebView alloc] initWithFrame:cell.frame];
-                webView.autoresizingMask = 63;
-                webView.backgroundColor = [UIColor blackColor];
-                webView.scrollView.scrollEnabled = NO;
-                webView.allowsInlineMediaPlayback = YES;
-                webView.mediaPlaybackRequiresUserAction = YES;
-                NSString *embedHTML = @"<style type=\"text/css\">body {background-color: black;color: black;}</style><body><iframe width=\"306\" height=\"210\" src=\"http://www.youtube.com/embed/%@\" frameborder=\"0\" allowfullscreen></iframe></body>";
-                NSRange yt_id = [self.show.preview_url rangeOfString:@"watch?v="];
-                if(yt_id.location == NSNotFound)
-                    yt_id = [self.show.preview_url rangeOfString:@"/" options:NSBackwardsSearch];
-                NSString *video_id = [self.show.preview_url substringFromIndex:yt_id.location+yt_id.length];
-                NSString *html = [NSString stringWithFormat:embedHTML, video_id];
-                [webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://youtube.com"]];
-                [cell addSubview:webView];
+            if(!self.previewCell) {
+                self.previewCell = [[KATGShowPreviewCell alloc] init];
+                self.previewCell.previewURL = self.show.preview_url;
+                self.previewCell.delegate = self;
             }
-            else if([self.show.preview_url rangeOfString:@"mp3"].location != NSNotFound) {
-                UIButton *playButton = [[UIButton alloc] initWithFrame:cell.frame];
-                playButton.autoresizingMask = 63;
-                [playButton setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-                [playButton setTitle:@"Play Audio Preview" forState:UIControlStateNormal];
-                [playButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-                playButton.imageEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 40);
-                [playButton addTarget:self action:@selector(audioPreviewAction:) forControlEvents:UIControlEventTouchUpInside];
-                [cell addSubview:playButton];
-            }
+            cell = self.previewCell;
             break;
         }
         case KATGShowDetailsSectionVideo:
@@ -625,13 +604,21 @@ typedef enum {
 	}
 }
 
-#pragma mark - UI Actions
-
--(void)audioPreviewAction:(UIButton*)sender {
+#pragma markKATGShowPreviewCellDelegate
+-(void)audioPreviewAction {
+    [[KATGPlaybackManager sharedManager] stop];
     MPMoviePlayerViewController *mpvc = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL URLWithString:self.show.preview_url]];
+    mpvc.moviePlayer.shouldAutoplay = YES;
     [self presentMoviePlayerViewControllerAnimated:mpvc];
 }
 
+-(void)videoPreviewAction:(NSString*)videoID {
+    [[KATGPlaybackManager sharedManager] stop];
+    XCDYouTubeVideoPlayerViewController *videoController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:videoID];
+    [self presentMoviePlayerViewControllerAnimated:videoController];
+}
+
+#pragma mark - UI Actions
 -(void)playVideo {
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     NSString *key = [def valueForKey:KATG_PLAYBACK_KEY];

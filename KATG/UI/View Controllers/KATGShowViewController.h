@@ -20,6 +20,7 @@
 
 #import "KATGShowControlsView.h"
 #import "KATGUtil.h"
+#import "KATGShowPreviewCell.h"
 
 @class KATGShow, KATGShowViewController, KATGShowView;
 
@@ -27,7 +28,7 @@
 - (void)closeShowViewController:(KATGShowViewController *)showViewController;
 @end
 
-@interface KATGShowViewController : UIViewController
+@interface KATGShowViewController : UIViewController <KATGShowPreviewCellDelegate>
 
 @property (nonatomic, readonly) KATGShow *show;
 @property (assign, nonatomic) BOOL needAuth;
@@ -40,6 +41,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *showTimeLabel;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet KATGShowControlsView *controlsView;
+@property (strong, nonatomic) KATGShowPreviewCell *previewCell;
 
 - (IBAction)close:(id)sender;
 

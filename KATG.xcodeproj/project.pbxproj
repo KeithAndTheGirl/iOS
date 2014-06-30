@@ -31,6 +31,7 @@
 		014D05B018FDA82400C1CBE2 /* gear@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 014D05AE18FDA82400C1CBE2 /* gear@2x.png */; };
 		014D05B418FDA98200C1CBE2 /* KATGListSettingsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014D05B218FDA98200C1CBE2 /* KATGListSettingsController.m */; };
 		014D05B518FDA98200C1CBE2 /* KATGListSettingsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014D05B318FDA98200C1CBE2 /* KATGListSettingsController.xib */; };
+		0157F0131960E5A100A0A9D1 /* KATGShowPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F0121960E5A100A0A9D1 /* KATGShowPreviewCell.m */; };
 		0157F0281960EB3C00A0A9D1 /* XCDYouTubeClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F0191960EB3C00A0A9D1 /* XCDYouTubeClient.m */; };
 		0157F0291960EB3C00A0A9D1 /* XCDYouTubePlayerScript.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F01E1960EB3C00A0A9D1 /* XCDYouTubePlayerScript.m */; };
 		0157F02A1960EB3C00A0A9D1 /* XCDYouTubeVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0157F0211960EB3C00A0A9D1 /* XCDYouTubeVideo.m */; };
@@ -306,6 +307,8 @@
 		014D05B118FDA98200C1CBE2 /* KATGListSettingsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGListSettingsController.h; path = "View Controllers/KATGListSettingsController.h"; sourceTree = "<group>"; };
 		014D05B218FDA98200C1CBE2 /* KATGListSettingsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGListSettingsController.m; path = "View Controllers/KATGListSettingsController.m"; sourceTree = "<group>"; };
 		014D05B318FDA98200C1CBE2 /* KATGListSettingsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGListSettingsController.xib; path = "View Controllers/KATGListSettingsController.xib"; sourceTree = "<group>"; };
+		0157F0111960E5A100A0A9D1 /* KATGShowPreviewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGShowPreviewCell.h; path = "Custom Views/KATGShowPreviewCell.h"; sourceTree = "<group>"; };
+		0157F0121960E5A100A0A9D1 /* KATGShowPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGShowPreviewCell.m; path = "Custom Views/KATGShowPreviewCell.m"; sourceTree = "<group>"; };
 		0157F0151960EB3C00A0A9D1 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		0157F0161960EB3C00A0A9D1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		0157F0181960EB3C00A0A9D1 /* XCDYouTubeClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCDYouTubeClient.h; sourceTree = "<group>"; };
@@ -1035,6 +1038,8 @@
 				228F9412165207EC006A1A05 /* KATGShowViewController.h */,
 				228F9413165207EC006A1A05 /* KATGShowViewController.m */,
 				018C35D918E94E3A00E218D8 /* KATGShowViewController.xib */,
+				0157F0111960E5A100A0A9D1 /* KATGShowPreviewCell.h */,
+				0157F0121960E5A100A0A9D1 /* KATGShowPreviewCell.m */,
 			);
 			name = "Show Details";
 			sourceTree = "<group>";
@@ -1646,6 +1651,7 @@
 				012B4F241857A2ED00B59FC5 /* AFHTTPSessionManager.m in Sources */,
 				0157F02C1960EB3C00A0A9D1 /* XCDYouTubeVideoPlayerViewController.m in Sources */,
 				0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */,
+				0157F0131960E5A100A0A9D1 /* KATGShowPreviewCell.m in Sources */,
 				0157F0291960EB3C00A0A9D1 /* XCDYouTubePlayerScript.m in Sources */,
 				228D43EE173073AB00FA94FE /* KATGInsetView.m in Sources */,
 				228D44071732B9D000FA94FE /* KATGLiveShowFeedbackViewController.m in Sources */,
