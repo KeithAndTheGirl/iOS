@@ -292,7 +292,10 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	}
 	KATGConfigureAudioSessionState(KATGAudioSessionStatePlayback);
 	
-    self.state = KATGAudioPlayerStateLoading;
+    if(self.avPlayer.status == AVPlayerStatusReadyToPlay)
+        [self.avPlayer play];
+    else
+        self.state = KATGAudioPlayerStateLoading;
 }
 
 - (void)pause
