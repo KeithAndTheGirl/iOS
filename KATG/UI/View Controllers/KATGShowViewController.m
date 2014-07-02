@@ -992,6 +992,21 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 {
 	if (cell.state == KATGDownloadEpisodeCellStateActive)
 	{
+        NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+        NSString *key = [def valueForKey:KATG_PLAYBACK_KEY];
+        NSString *uid = [def valueForKey:KATG_PLAYBACK_UID];
+        if(self.needAuth) {
+            if(!key || !uid) {
+                KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
+                loginController.completion = (^() {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                    [self downloadButtonPressed:cell];
+                });
+                [self presentViewController:loginController animated:YES completion:nil];
+                return;
+            }
+        }
+        
 		cell.state = KATGDownloadEpisodeCellStateDownloading;
 		cell.progress = 0.0f;
         
