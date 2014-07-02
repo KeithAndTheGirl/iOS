@@ -43,6 +43,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [TestFlight takeOff:@"1793cbe2-d3b6-47a5-8122-d7ee9309d4eb"];
     self.task=[application beginBackgroundTaskWithExpirationHandler:^{
         NSLog(@"Expiration handler called %f",[application backgroundTimeRemaining]);
         [application endBackgroundTask:self.task];
@@ -51,7 +52,6 @@
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self.window makeKeyAndVisible];
     
-    [TestFlight takeOff:@"1793cbe2-d3b6-47a5-8122-d7ee9309d4eb"];
 
 	KATGConfigureAudioSessionState(KATGAudioSessionStateAmbient);
     
