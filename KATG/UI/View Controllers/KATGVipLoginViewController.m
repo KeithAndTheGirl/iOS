@@ -86,6 +86,8 @@
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def removeObjectForKey:KATG_PLAYBACK_KEY];
     [def removeObjectForKey:KATG_PLAYBACK_UID];
+    [def removeObjectForKey:KATG_EMAIL];
+    [def removeObjectForKey:KATG_PASSWORD];
     [def synchronize];
 }
 
