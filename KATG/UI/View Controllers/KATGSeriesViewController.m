@@ -109,7 +109,12 @@
 }
 
 -(void)unregisterStateObserver {
-	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+    @try {
+        [[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:@"state"];
+    }
+    @catch (NSException *exception) {
+        NSLog(@"%@", exception);
+    }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
