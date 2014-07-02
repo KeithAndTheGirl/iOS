@@ -42,6 +42,7 @@
 #import "KATGURLProtocol.h"
 #import "UIKit+AFNetworking.h"
 #import "XCDYouTubeKit.h"
+#import "KATGDownloadToken.h"
 
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -77,7 +78,7 @@ typedef enum {
 @property (nonatomic) bool shouldReloadGuests;
 @property (nonatomic) bool shouldReloadDownload;
 
-@property (nonatomic) id<KATGDownloadToken> downloadToken;
+@property (nonatomic) KATGDownloadToken *downloadToken;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -188,7 +189,6 @@ typedef enum {
     
     	[self removePlaybackManagerKVO];
     	[self removeReachabilityKVO];
-    NSLog(@"%@", self.show.video_file_url);
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle {
@@ -1058,6 +1058,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
                 [[KATGPlaybackManager sharedManager] stop];
 			}
 		}];
+        self.downloadToken.viewController = self;
 	}
 	else if (cell.state == KATGDownloadEpisodeCellStateDownloading)
 	{
@@ -1093,8 +1094,8 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 		{
 			KATGDownloadEpisodeCell *cell = (KATGDownloadEpisodeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:KATGShowDetailsSectionDownload]];
 			NSParameterAssert(self.downloadToken);
-			[self.downloadToken cancel];
-			self.downloadToken = nil;
+			[[KATGAudioDownloadManager sharedManager] cancelDownloadToken:self.downloadToken];
+            self.downloadToken = nil;
 			cell.state = KATGDownloadEpisodeCellStateActive;
 			self.shouldReloadDownload = true;
 			[self queueReload];

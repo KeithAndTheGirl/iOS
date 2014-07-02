@@ -91,7 +91,7 @@
     
     void (^retryBlock)(NSError *) = ^(NSError *error) {
         int retryCount = timesToRetry;
-        if (retryCount > 0) {
+        if (retryCount > 0 && self.urlToTokenMap[url] != nil) {
             EpisodeAudioLog(@"AutoRetry: Request failed: %@, retry begining...", error.localizedDescription);
             KATGDownloadOperation *retryOperation = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:failure autoRetryOf:retryCount-1 retryInterval:intervalInSeconds];
             
@@ -171,10 +171,11 @@
 		return token;
 	}
     
-    self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
-        [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
-        self.bgTask = UIBackgroundTaskInvalid;
-    }];
+    if(self.bgTask == UIBackgroundTaskInvalid)
+        self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
+            self.bgTask = UIBackgroundTaskInvalid;
+        }];
     
 	EpisodeAudioLog(@"Download %@", show.media_url);
 	NSNumber *episodeID = show.episode_id;
@@ -217,6 +218,12 @@
 	self.urlToTokenMap[url] = token;
 	[self.networkQueue addOperation:op];
 	return token;
+}
+
+-(void)cancelDownloadToken:(id<KATGDownloadToken>)token {
+    [token cancel];
+    NSArray *keys = [self.urlToTokenMap allKeysForObject:token];
+    [self.urlToTokenMap removeObjectsForKeys:keys];
 }
 
 - (void)removeDownloadedEpisodeAudio:(KATGShow *)show {

@@ -38,6 +38,9 @@
 {
 	NSParameterAssert([NSThread isMainThread]);
 	[self.op cancel];
+    self.progressBlock = nil;
+    self.completionBlock = nil;
+    self.viewController = nil;
 }
 
 - (BOOL)isCancelled
@@ -56,6 +59,7 @@
 		self.progressBlock = nil;
 		self.completionBlock = nil;
 	}
+    self.viewController = nil;
 }
 
 - (void)callProgressBlockWithProgress:(CGFloat)progress

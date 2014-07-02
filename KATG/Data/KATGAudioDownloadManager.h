@@ -26,6 +26,8 @@
 
 - (id<KATGDownloadToken>)downloadEpisodeAudio:(KATGShow *)show progress:(void (^)(CGFloat progress))progress completion:(void (^)(NSError *error))completion;
 
+-(void)cancelDownloadToken:(id<KATGDownloadToken>)token;
+
 - (void)removeDownloadedEpisodeAudio:(KATGShow *)show;
 
 @end

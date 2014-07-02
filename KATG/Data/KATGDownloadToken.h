@@ -30,6 +30,7 @@
 @property (nonatomic) CGFloat progress;
 @property (copy, nonatomic) void (^progressBlock)(CGFloat progress);
 @property (copy, nonatomic) void (^completionBlock)(NSError *error);
+@property (nonatomic, strong) id viewController;
 
 - (void)callProgressBlockWithProgress:(CGFloat)progress;
 - (void)callCompletionBlockWithError:(NSError *)error;

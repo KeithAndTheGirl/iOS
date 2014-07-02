@@ -11,6 +11,8 @@
 #import "KATGShowViewController.h"
 #import "KATGShow.h"
 #import "KATGPlaybackManager.h"
+#import "KATGAudioDownloadManager.h"
+#import "KATGDownloadToken.h"
 
 @implementation KATGEpisodesViewController
 
@@ -217,6 +219,18 @@
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     KATGShow *show = self.sortedEpisodes[indexPath.row];
+    KATGDownloadToken *token = [[KATGAudioDownloadManager sharedManager] activeEpisodeAudioDownload:show];
+    if(token) {
+        KATGShowViewController *showViewController = (KATGShowViewController*)token.viewController;
+        if([showViewController isKindOfClass:[KATGShowViewController class]]) {
+            showViewController.needAuth = ![show.access boolValue] || [self.series.vip_status boolValue];
+            showViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+            [self presentViewController:showViewController
+                               animated:YES
+                             completion:^{}];
+            return;
+        }
+    }
     KATGShowViewController *showViewController = [[KATGShowViewController alloc] initWithNibName:@"KATGShowViewController" bundle:nil];
 	showViewController.showObjectID = [show objectID];
     showViewController.needAuth = ![show.access boolValue] || [self.series.vip_status boolValue];
