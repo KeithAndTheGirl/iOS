@@ -40,5 +40,5 @@
 @end
 
 @protocol KATGScheduleItemTableViewCellDelegate <NSObject>
-- (void)longPressRecognized:(KATGScheduleItemTableViewCell *)cell;
+- (void)longPressAction:(KATGScheduleItemTableViewCell *)cell;
 @end

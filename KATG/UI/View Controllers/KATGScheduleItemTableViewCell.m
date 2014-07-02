@@ -31,7 +31,7 @@
 {
 	if ([sender state] == UIGestureRecognizerStateRecognized)
 	{
-		[self.longPressDelegate longPressRecognized:self];
+		[self.longPressDelegate longPressAction:self];
 	}
 }
 
