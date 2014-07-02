@@ -226,7 +226,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 
 - (void)play
 {
-	if (self.state == KATGAudioPlayerStatePlaying || self.currentShow == nil)
+	if ((self.state == KATGAudioPlayerStatePlaying || self.currentShow == nil) && !self.liveShow)
 	{
 		return;
 	}
