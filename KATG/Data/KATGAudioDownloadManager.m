@@ -51,7 +51,7 @@
 }
 
 - (id<KATGDownloadToken>)activeEpisodeAudioDownload:(KATGShow *)show {
-	NSString *mediaURL = show.media_url;
+	NSString *mediaURL = [show.media_url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	EpisodeAudioLog(@"Check for download of %@", show.media_url);
 	if (mediaURL == nil)
 	{
@@ -69,7 +69,7 @@
 }
 
 -(id<KATGDownloadToken>)tokenForShow:(KATGShow*)show {
-    NSString *mediaURL = show.media_url;
+	NSString *mediaURL = [show.media_url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	if (mediaURL == nil) {
 		NSParameterAssert(NO);
 		return nil;
@@ -179,7 +179,8 @@
     
 	EpisodeAudioLog(@"Download %@", show.media_url);
 	NSNumber *episodeID = show.episode_id;
-	NSURL *url = [NSURL URLWithString:show.media_url];
+	NSString *mediaURL = [show.media_url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	NSURL *url = [NSURL URLWithString:mediaURL];
 	NSParameterAssert(episodeID);
 	NSURL *fileURL = [[self fileURLForEpisodeID:episodeID] URLByAppendingPathExtension:[url pathExtension]];
 	void (^finishWithError)(NSError *) = ^(NSError *error) {
