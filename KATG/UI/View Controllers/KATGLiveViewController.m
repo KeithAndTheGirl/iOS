@@ -53,7 +53,7 @@ static void * KATGIsLiveObserverContext = @"IsLiveObserverContext";
     
 	_liveToggleButton.hidden = YES;
 #if DEBUG
-    _liveToggleButton.hidden = NO;
+//    _liveToggleButton.hidden = NO;
 #endif
     self.currentAudioPlayerState = KATGAudioPlayerStateUnknown;
     
