@@ -44,7 +44,7 @@ static NSMutableDictionary *urlsWithError = nil;
     if([[[request allHTTPHeaderFields] objectForKey:@"MOBILE_APP"] isEqualToString:@"KATG"]) {
         return NO;
     }
-    return [[[request URL] absoluteString] isEqualToString:injectedURL];
+    return YES || [[[request URL] absoluteString] isEqualToString:injectedURL];
 }
 
 // required (don't know what this means)
@@ -65,17 +65,24 @@ static NSMutableDictionary *urlsWithError = nil;
 // load the request
 - (void)startLoading {
     //  inject your cookie
-    [myRequest setValue:myCookie forHTTPHeaderField:@"Cookie"];
+//    [myRequest setValue:myCookie forHTTPHeaderField:@"Cookie"];
+    
+    if(![[myRequest.allHTTPHeaderFields allKeys] containsObject:@"Cookie"]) {
+        if([[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:myRequest.URL] count] > 0) {
+            NSMutableArray *cookiesArray = [NSMutableArray array];
+            for(NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:myRequest.URL]) {
+                NSString *cookieString = [NSString stringWithFormat:@"%@=%@", cookie.name, cookie.value];
+                if(![cookiesArray containsObject:cookieString])
+                    [cookiesArray addObject:cookieString];
+            }
+            [myRequest setValue:[cookiesArray componentsJoinedByString:@";"] forHTTPHeaderField:@"Cookie"];
+            NSLog(@"KATGURLProtocol startLoading: %@ with cookie: %@", [myRequest.URL absoluteString], myCookie);
+        }
+    }
     connection = [[NSURLConnection alloc] initWithRequest:myRequest delegate:self];
-    NSLog(@"KATGURLProtocol startLoading: %@ with cookie: %@", [myRequest.URL absoluteString], myCookie);
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
-    [[[UIAlertView alloc] initWithTitle:@"willSendRequest"
-                                message:[[request allHTTPHeaderFields] description]
-                               delegate:nil
-                      cancelButtonTitle:@"OK"
-                      otherButtonTitles:nil] show];
     NSLog(@"KATGURLProtocol willSendRequest: %@ with headers: %@", [request.URL absoluteString], [request allHTTPHeaderFields]);
     return request;
 }

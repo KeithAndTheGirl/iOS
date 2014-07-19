@@ -21,11 +21,12 @@
                                  NSHTTPCookieValue: value,
                                  NSHTTPCookieDomain: [url host],
                                  NSHTTPCookieOriginURL: [url absoluteString],
-                                 NSHTTPCookiePath: @"/",
+                                 NSHTTPCookiePath: [url path],
                                  NSHTTPCookieVersion: @"0",
                                  NSHTTPCookieExpires: [[NSDate date] dateByAddingTimeInterval:2629743]};
     NSHTTPCookie *cookie = [NSHTTPCookie cookieWithProperties:cookieData];
     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
 }
 
 +(void)alertWithTitle:(NSString*)title message:(NSString*)message {
