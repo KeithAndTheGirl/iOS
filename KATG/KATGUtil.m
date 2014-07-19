@@ -17,6 +17,8 @@
 +(void)setCookieWithName:(NSString*)name value:(NSString*)value forURL:(NSURL*)url {
     if(![KATGUtil validString:name] || ![KATGUtil validString:value] || ![KATGUtil validString:[url absoluteString]])
         return;
+    if(![url host] || ![url path] || ![url absoluteString])
+        return;
     NSDictionary *cookieData = @{NSHTTPCookieName: name,
                                  NSHTTPCookieValue: value,
                                  NSHTTPCookieDomain: [url host],
