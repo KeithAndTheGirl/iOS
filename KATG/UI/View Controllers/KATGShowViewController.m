@@ -400,8 +400,9 @@ typedef enum {
                     downloadCell.state = KATGDownloadEpisodeCellStateDisabled;
                 }
                 
-                if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
-                    [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading) {
+                if ([[[KATGPlaybackManager sharedManager] currentShow] isEqual:self.show] &&
+                    ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
+                    [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading)) {
                     downloadCell.downloadButton.enabled = NO;
                 }
                 else {
@@ -755,14 +756,8 @@ typedef enum {
     [self.controlsView setNeedsLayout];
     
     //disable download/delete show button if playing
-    KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:KATGShowDetailsSectionDownload]];
-    if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
-        [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading) {
-        downloadCell.downloadButton.enabled = NO;
-    }
-    else {
-        downloadCell.downloadButton.enabled = YES;
-    }
+    [self.tableView reloadData];
+    
     if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateFailed) {
         NSError *error = [[KATGPlaybackManager sharedManager] getCurrentError];
         NSString *urlString = [[error.userInfo valueForKey:NSURLErrorKey] absoluteString];
@@ -1011,7 +1006,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 		cell.progress = 0.0f;
         
         //  Disable playback
-        if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+        if ([[[KATGPlaybackManager sharedManager] currentShow] isEqual:self.show] && [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
             [[KATGPlaybackManager sharedManager] pause];
         }
         
