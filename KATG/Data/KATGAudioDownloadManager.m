@@ -10,6 +10,7 @@
 #import "KATGShow.h"
 #import "KATGDownloadOperation.h"
 #import "KATGDownloadToken.h"
+#import "KATGUtil.h"
 
 #if DEBUG
 #define EpisodeAudioLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
@@ -162,7 +163,6 @@
 - (id<KATGDownloadToken>)downloadEpisodeAudio:(KATGShow *)show
                                      progress:(void (^)(CGFloat progress))progress
                                    completion:(void (^)(NSError *error))completion {
-    
 	__block KATGDownloadToken *token = [self tokenForShow:show];
 	if (token) {
 		token.progressBlock = progress;
@@ -182,6 +182,12 @@
 	NSString *mediaURL = [show.media_url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	NSURL *url = [NSURL URLWithString:mediaURL];
 	NSParameterAssert(episodeID);
+    
+    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+    [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:url];
+    [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:url];
+    
+    
 	NSURL *fileURL = [[self fileURLForEpisodeID:episodeID] URLByAppendingPathExtension:[url pathExtension]];
 	void (^finishWithError)(NSError *) = ^(NSError *error) {
 		[token callCompletionBlockWithError:error];
