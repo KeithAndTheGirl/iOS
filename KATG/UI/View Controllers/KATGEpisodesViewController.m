@@ -93,10 +93,14 @@
 }
 
 -(void)reload {
+    int startNumber = 0;
     if([self.sortedEpisodes count] == 0) {
         spinner.hidden = NO;
+        startNumber = [self.series.episode_number_max intValue] - 9;
     }
-    int startNumber = [self.series.episode_number_max intValue] - 9;
+    else {
+        startNumber = [self.series.episode_number_max intValue] - ((int)[self.sortedEpisodes count]-1);
+    }
     [[KATGDataStore sharedStore] downloadEpisodesForSeriesID:self.series.series_id
                                            fromEpisodeNumber:@(startNumber)
                                                      success:^{
