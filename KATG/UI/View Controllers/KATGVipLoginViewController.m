@@ -89,6 +89,10 @@
     [def removeObjectForKey:KATG_EMAIL];
     [def removeObjectForKey:KATG_PASSWORD];
     [def synchronize];
+    
+    NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    for(NSHTTPCookie *cookie in [storage cookies])
+        [storage deleteCookie:cookie];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
