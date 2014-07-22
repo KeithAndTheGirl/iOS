@@ -254,7 +254,7 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-	[self setNavigationBarVisible:NO animated:YES];
+
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
