@@ -94,12 +94,13 @@
         int retryCount = timesToRetry;
         if (retryCount > 0 && self.urlToTokenMap[url] != nil) {
             EpisodeAudioLog(@"AutoRetry: Request failed: %@, retry begining...", error.localizedDescription);
-            KATGDownloadOperation *retryOperation = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:failure autoRetryOf:retryCount-1 retryInterval:intervalInSeconds];
             
             void (^addRetryOperation)() = ^{
+                KATGDownloadOperation *retryOperation = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:failure autoRetryOf:retryCount-1 retryInterval:intervalInSeconds];
                 [self.networkQueue addOperation:retryOperation];
                 KATGDownloadToken *token = self.urlToTokenMap[url];
                 if (token) {
+                    [token cancel];
                     token.op = retryOperation;
                 }
             };
