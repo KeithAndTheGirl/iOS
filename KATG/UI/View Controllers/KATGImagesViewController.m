@@ -90,10 +90,10 @@ static NSString *fullScreenImageCellIdentifier = @"fullScreenImageCellIdentifier
 	[_saveButton addTarget:self action:@selector(disclosureButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_saveButton];
     
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, 370.0f, 310.0f, 56.0f)];
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(5.0f, self.view.frame.size.height-56, 310.0f, 56.0f)];
     self.titleLabel.numberOfLines = 4;
     self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    self.titleLabel.backgroundColor = [UIColor clearColor];
+    self.titleLabel.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
     self.titleLabel.textColor = [UIColor whiteColor];
     
     self.titleLabel.layer.shadowColor = [[UIColor blackColor] CGColor];
