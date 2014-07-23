@@ -640,7 +640,7 @@ typedef enum {
     NSURL *videoUrl = [NSURL URLWithString:self.show.video_file_url];
     [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:videoUrl];
     [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:videoUrl];
-    MPMoviePlayerViewController *mpvc = [[MPMoviePlayerViewController alloc] initWithContentURL:videoUrl];
+    XCDYouTubeVideoPlayerViewController *mpvc = [[XCDYouTubeVideoPlayerViewController alloc] initWithContentURL:videoUrl];
     mpvc.moviePlayer.initialPlaybackTime = [[[NSUserDefaults standardUserDefaults] objectForKey:self.show.video_file_url] doubleValue];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(moviePlayBackDidFinish:)

@@ -51,10 +51,10 @@ NSString *const XCDYouTubeVideoUserInfoKey = @"Video";
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype) initWithContentURL:(NSURL *)contentURL
-{
-	@throw [NSException exceptionWithName:NSGenericException reason:@"Use the `initWithVideoIdentifier:` method instead." userInfo:nil];
-}
+//- (instancetype) initWithContentURL:(NSURL *)contentURL
+//{
+//	@throw [NSException exceptionWithName:NSGenericException reason:@"Use the `initWithVideoIdentifier:` method instead." userInfo:nil];
+//}
 
 - (instancetype) initWithVideoIdentifier:(NSString *)videoIdentifier
 {
@@ -191,6 +191,15 @@ NSString *const XCDYouTubeVideoUserInfoKey = @"Video";
 		return;
 	
 	[self.videoOperation cancel];
+}
+
+#pragma mark hande rotation
+- (BOOL)shouldAutorotate {
+    return YES;
+}
+
+- (NSUInteger)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskAll;
 }
 
 @end

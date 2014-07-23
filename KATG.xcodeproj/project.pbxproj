@@ -162,6 +162,7 @@
 		0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198AB93186077320063947C /* KATGYouTubeTableCell.m */; };
 		0198AB96186077850063947C /* KATGYouTubeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AB95186077850063947C /* KATGYouTubeTableCell.xib */; };
 		01B1CFF7195D91EB00B2268A /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01B1CFF6195D91EB00B2268A /* MessageUI.framework */; };
+		01B5A7E7197F3261001DE1FD /* KATGTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01B5A7E6197F3261001DE1FD /* KATGTabBarViewController.m */; };
 		01BCE80C186C208600F096EF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01BCE80B186C208600F096EF /* Images.xcassets */; };
 		01CCD312190D86F600CE3956 /* KATGVipLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01CCD310190D86F600CE3956 /* KATGVipLoginViewController.m */; };
 		01CCD313190D86F600CE3956 /* KATGVipLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01CCD311190D86F600CE3956 /* KATGVipLoginViewController.xib */; };
@@ -470,6 +471,8 @@
 		0198AB93186077320063947C /* KATGYouTubeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeTableCell.m; path = "View Controllers/KATGYouTubeTableCell.m"; sourceTree = "<group>"; };
 		0198AB95186077850063947C /* KATGYouTubeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeTableCell.xib; path = "View Controllers/KATGYouTubeTableCell.xib"; sourceTree = "<group>"; };
 		01B1CFF6195D91EB00B2268A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		01B5A7E5197F3261001DE1FD /* KATGTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGTabBarViewController.h; path = "View Controllers/KATGTabBarViewController.h"; sourceTree = "<group>"; };
+		01B5A7E6197F3261001DE1FD /* KATGTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGTabBarViewController.m; path = "View Controllers/KATGTabBarViewController.m"; sourceTree = "<group>"; };
 		01BCE80B186C208600F096EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01CCD30F190D86F600CE3956 /* KATGVipLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGVipLoginViewController.h; path = "View Controllers/KATGVipLoginViewController.h"; sourceTree = "<group>"; };
 		01CCD310190D86F600CE3956 /* KATGVipLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGVipLoginViewController.m; path = "View Controllers/KATGVipLoginViewController.m"; sourceTree = "<group>"; };
@@ -1145,6 +1148,8 @@
 		910899A415EAE27300FB57C3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				01B5A7E5197F3261001DE1FD /* KATGTabBarViewController.h */,
+				01B5A7E6197F3261001DE1FD /* KATGTabBarViewController.m */,
 				01DE29C918E567C500F87022 /* KATGWelcomeViewController.h */,
 				01DE29CA18E567C500F87022 /* KATGWelcomeViewController.m */,
 				01DE29CB18E567C500F87022 /* KATGWelcomeViewController.xib */,
@@ -1555,6 +1560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22D07DD11676E9C6004EBEBB /* TDRoundedShadowView.m in Sources */,
+				01B5A7E7197F3261001DE1FD /* KATGTabBarViewController.m in Sources */,
 				9108997115EAE15500FB57C3 /* main.m in Sources */,
 				9108997515EAE15500FB57C3 /* KATGAppDelegate.m in Sources */,
 				01DE29C018E3D5F200F87022 /* KATGEpisodesViewController.m in Sources */,
