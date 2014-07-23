@@ -197,6 +197,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
         case UIEventSubtypeRemoteControlStop:
         case UIEventSubtypeRemoteControlPause:
             [self pause];
+            self.audioPlaybackController = nil;
             break;
         case UIEventSubtypeRemoteControlNextTrack:
             [self jumpForward];
