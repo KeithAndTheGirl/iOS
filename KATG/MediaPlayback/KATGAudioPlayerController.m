@@ -56,6 +56,8 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 
 @implementation KATGAudioPlayerController
 
+@synthesize avPlayer = _avPlayer;
+
 #pragma mark - Init/Dealloc
 
 + (instancetype)audioPlayerWithURL:(NSURL *)url
@@ -85,10 +87,10 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
 		[[NSNotificationCenter defaultCenter] removeObserver:self.didEndObserver];
 	}
-	if (_avPlayer != nil)
+	if (self.avPlayer != nil)
 	{
-		[_avPlayer removeObserver:self forKeyPath:KATGAudioPlayerRateKeyPath context:KATGAudioPlayerRateObserverContext];
-		[_avPlayer setRate:0.0f];
+		[self.avPlayer removeObserver:self forKeyPath:KATGAudioPlayerRateKeyPath context:KATGAudioPlayerRateObserverContext];
+		[self.avPlayer setRate:0.0f];
 	}
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -290,6 +292,8 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 			return;
 		}
 	}
+    if(self.avPlayer.currentItem == nil)
+        [self.avPlayer replaceCurrentItemWithPlayerItem:self.avPlayerItem];
 	KATGConfigureAudioSessionState(KATGAudioSessionStatePlayback);
 	
     if(self.avPlayer.status == AVPlayerStatusReadyToPlay)
@@ -301,6 +305,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 - (void)pause
 {
 	[self.avPlayer pause];
+    [self.avPlayer replaceCurrentItemWithPlayerItem:nil];
     self.state = KATGAudioPlayerStatePaused;
 }
 

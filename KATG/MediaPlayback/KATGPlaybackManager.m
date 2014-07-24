@@ -197,7 +197,6 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
         case UIEventSubtypeRemoteControlStop:
         case UIEventSubtypeRemoteControlPause:
             [self pause];
-            self.audioPlaybackController = nil;
             break;
         case UIEventSubtypeRemoteControlNextTrack:
             [self jumpForward];
@@ -258,6 +257,11 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
             NSLog(@"Will play from URL: %@", url);
 		}
         self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(remoteControlAction:)
+                                                     name:remoteControlButtonTapped
+                                                   object:nil];
     }
 	[self.audioPlaybackController play];
 	if (!self.liveShow)
@@ -273,11 +277,6 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	{
 		[self checkIfStreamingServerIsOffline];
 	}
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(remoteControlAction:)
-                                                 name:remoteControlButtonTapped
-                                               object:nil];
 }
 
 - (void)pause
