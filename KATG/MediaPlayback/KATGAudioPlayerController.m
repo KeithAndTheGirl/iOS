@@ -301,6 +301,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 - (void)pause
 {
 	[self.avPlayer pause];
+    self.state = KATGAudioPlayerStatePaused;
 }
 
 - (void)seekToTime:(CMTime)currentTime
