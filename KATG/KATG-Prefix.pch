@@ -16,3 +16,5 @@
 	#import "constants.h"
 #import "TestFlight.h"
 #endif
+
+#define APP_VERSION [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]

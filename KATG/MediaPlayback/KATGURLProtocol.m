@@ -79,6 +79,7 @@ static NSMutableDictionary *urlsWithError = nil;
             NSLog(@"KATGURLProtocol startLoading: %@ with cookie: %@", [myRequest.URL absoluteString], myCookie);
         }
     }
+    [myRequest setValue:[NSString stringWithFormat:@"KATG iOS version %@", APP_VERSION] forHTTPHeaderField:@"User-agent"];
     connection = [[NSURLConnection alloc] initWithRequest:myRequest delegate:self];
 }
 

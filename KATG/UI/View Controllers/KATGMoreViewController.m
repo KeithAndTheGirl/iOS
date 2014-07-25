@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView.rowHeight = 54;
+    self.navigationItem.title = [NSString stringWithFormat:@"KATG app version %@", APP_VERSION];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -71,7 +72,7 @@
     else if(indexPath.row == 2) {
         if([MFMailComposeViewController canSendMail]) {
             MFMailComposeViewController *mailView = [[MFMailComposeViewController alloc] init];
-            [mailView setSubject:@"Feedback for the KATG app (iOS)"];
+            [mailView setSubject:[NSString stringWithFormat:@"Feedback for the KATG app version %@ (iOS)", APP_VERSION]];
             [mailView setToRecipients:@[@"support@keithandthegirl.com"]];
             mailView.mailComposeDelegate = self;
             [self presentViewController:mailView animated:YES completion:nil];
