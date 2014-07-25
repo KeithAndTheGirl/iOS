@@ -211,8 +211,8 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	self.duration = self.avPlayerItem.duration;
     self.availableTime = self.avPlayerItem.loadedTimeRanges;
     CMTimeRange tr = [[self.availableTime lastObject] CMTimeRangeValue];
-    TFLog(@"episode: %@, status: %i : %.1f - %.1f", [self.url lastPathComponent], (int)status, CMTimeGetSeconds(tr.start), CMTimeGetSeconds(tr.duration));
-    TFLog(@"playbackLikelyToKeepUp : %@", self.avPlayerItem.playbackLikelyToKeepUp?@"YES":@"NO");
+//    TFLog(@"episode: %@, status: %i : %.1f - %.1f", [self.url lastPathComponent], (int)status, CMTimeGetSeconds(tr.start), CMTimeGetSeconds(tr.duration));
+//    TFLog(@"playbackLikelyToKeepUp : %@", self.avPlayerItem.playbackLikelyToKeepUp?@"YES":@"NO");
     self.error = self.avPlayerItem.error?self.avPlayerItem.error:self.avPlayer.error;
 	if (status == AVPlayerItemStatusFailed)
 	{
