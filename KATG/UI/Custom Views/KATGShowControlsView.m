@@ -126,7 +126,7 @@
 			self.playButton.enabled = YES;
 			self.skipBackButton.enabled = NO;
 			self.skipForwardButton.enabled = NO;
-			self.positionSlider.enabled = NO;
+//			self.positionSlider.enabled = NO;
 			[self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
 			break;
 		}
@@ -135,16 +135,16 @@
 			self.playButton.enabled = YES;
 			self.skipBackButton.enabled = NO;
 			self.skipForwardButton.enabled = NO;
-			self.positionSlider.enabled = NO;
+//			self.positionSlider.enabled = NO;
 			[self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
 			break;
 		}
 		case KATGAudioPlayerStateLoading:
 		{
-			self.playButton.enabled = NO;
+			self.playButton.enabled = YES;
 			self.skipBackButton.enabled = NO;
 			self.skipForwardButton.enabled = NO;
-			self.positionSlider.enabled = NO;
+//			self.positionSlider.enabled = NO;
 			[self.playButton setImage:nil forState:UIControlStateNormal];
 			break;
 		}
@@ -168,10 +168,10 @@
 		}
 		case KATGAudioPlayerStateUnknown:
 		{
-			self.playButton.enabled = NO;
+			self.playButton.enabled = YES;
 			self.skipBackButton.enabled = NO;
 			self.skipForwardButton.enabled = NO;
-			self.positionSlider.enabled = NO;
+//			self.positionSlider.enabled = NO;
 			[self.playButton setImage:[UIImage imageNamed:@"play.png"] forState:UIControlStateNormal];
 			break;
 		}

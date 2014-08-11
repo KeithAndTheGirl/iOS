@@ -62,6 +62,8 @@
 
 - (void)setValue:(float)value animated:(BOOL)animated
 {
+    if(value > self.loadedValue)
+        value = self.loadedValue - 10;
 	[super setValue:value animated:animated];
 	[self updateAccessibilityValue];
 	self.currentTimeLabel.text = [self currentTimeLabelText];
@@ -193,7 +195,7 @@
 	[[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5] setFill];
 	CGRect loadedRect = CGRectMake(0.0f,
                                      0.0f,
-                                     trackRect.origin.x + trackRect.size.width*self.loadedValue/self.maximumValue,
+                                     trackRect.origin.x + self.currentThumbImage.size.width/4 + trackRect.size.width*self.loadedValue/self.maximumValue,
                                      rect.size.height);
 	[[UIBezierPath bezierPathWithRect:loadedRect] fill];
     

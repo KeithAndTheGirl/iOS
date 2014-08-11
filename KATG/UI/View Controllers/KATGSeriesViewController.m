@@ -135,7 +135,7 @@
         
         [collectionView addSubview:nowPlayingButton];
         UIEdgeInsets contentInsets = collectionView.contentInset;
-        contentInsets.top += 48;
+        contentInsets.top = 48;
         collectionView.contentInset = contentInsets;
         [collectionView setContentOffset:CGPointMake(0, collectionView.contentOffset.y-48) animated:NO];
 	}

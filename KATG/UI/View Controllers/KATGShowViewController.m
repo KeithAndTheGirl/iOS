@@ -44,8 +44,6 @@
 #import "XCDYouTubeKit.h"
 #import "KATGDownloadToken.h"
 
-#import <MediaPlayer/MediaPlayer.h>
-
 static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContext";
 
 #define kKATGShowDetailsSectionCellIdentifierImages @"kKATGShowDetailsSectionCellIdentifierImages"
@@ -66,7 +64,6 @@ typedef enum {
 
 #define KATGShowDetailsSectionMaxCount KATGShowDetailsSectionDownload+1
 
-
 @interface KATGShowViewController () <UITableViewDelegate, UITableViewDataSource, KATGShowImagesCellDelegate, KATGImagesViewControllerDelegate, KATGDownloadEpisodeCellDelegate, UIActionSheetDelegate, KATGForumCellDelegate>
 {
 	BOOL positionSliderIsDragging;
@@ -79,11 +76,11 @@ typedef enum {
 @property (nonatomic) bool shouldReloadDownload;
 
 @property (nonatomic) KATGDownloadToken *downloadToken;
+@property double downloadProgress;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @property (nonatomic) bool imagesRequested;
-
 // Handy things to check sometimes
 - (BOOL)isCurrentShow;
 
@@ -176,6 +173,16 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(readerContextChanged:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityReturned:) name:kKATGReachabilityIsReachableNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:KATGDataStoreShowDidChangeNotification object:nil];
+    
+    self.downloadProgress = 0.0;
+    if (self.show.file_url && [[NSURL fileURLWithPath:self.show.file_url] checkResourceIsReachableAndReturnError:nil])
+    {
+        NSNumber *sizeObject;
+        if ([[NSURL fileURLWithPath:self.show.file_url] getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:nil])
+        {
+            self.downloadProgress = (double)[sizeObject intValue] / [self.show.fileSize intValue];
+        }
+    }
     
     [self addPlaybackManagerKVO];
     [self addReachabilityKVO];
@@ -393,20 +400,17 @@ typedef enum {
                 }
                 else if (self.downloadToken)
                 {
-                    [self downloadButtonPressed:downloadCell];
+                    downloadCell.state = KATGDownloadEpisodeCellStateDownloading;
+                    downloadCell.progress = self.downloadProgress;
                 }
                 else if (![[KATGDataStore sharedStore] isReachable])
                 {
                     downloadCell.state = KATGDownloadEpisodeCellStateDisabled;
                 }
-                
-                if ([[[KATGPlaybackManager sharedManager] currentShow] isEqual:self.show] &&
-                    ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying ||
-                    [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateLoading)) {
-                    downloadCell.downloadButton.enabled = NO;
-                }
-                else {
-                    downloadCell.downloadButton.enabled = YES;
+                else
+                {
+                    downloadCell.state = KATGDownloadEpisodeCellStateActive;
+                    downloadCell.progress = self.downloadProgress;
                 }
                 downloadCell.showTopRule = [self.show.forum_url length] == 0;
                 cell = downloadCell;
@@ -512,7 +516,6 @@ typedef enum {
 {
 	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGCurrentTimeObserverKey options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
 	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGStateObserverKey options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
-	[[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:KATGStateAvailableTime options:NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionNew context:NULL];
     [self configureTopBar];
 }
 
@@ -520,7 +523,6 @@ typedef enum {
 {
 	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:KATGCurrentTimeObserverKey];
 	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:KATGStateObserverKey];
-	[[KATGPlaybackManager sharedManager] removeObserver:self forKeyPath:KATGStateAvailableTime];
 }
 
 #pragma mark - Reachability
@@ -560,11 +562,13 @@ typedef enum {
         {
             duration = 1.0;
         }
+        // this works while no playing
         self.controlsView.positionSlider.maximumValue = duration;
+        self.controlsView.positionSlider.loadedValue = duration*self.downloadProgress;
         self.controlsView.positionSlider.value = currentTime;
 		return;
 	}
-	if ([keyPath isEqualToString:KATGCurrentTimeObserverKey] || [keyPath isEqualToString:KATGStateAvailableTime])
+	if ([keyPath isEqualToString:KATGCurrentTimeObserverKey])
 	{
 		if (!positionSliderIsDragging)
 		{
@@ -577,22 +581,12 @@ typedef enum {
             {
                 currentTime = 0.0;
             }
-			Float64 duration = CMTimeGetSeconds([[KATGPlaybackManager sharedManager] duration]);
-			if (isnan(duration))
-			{
-				duration = [self.show.duration floatValue];
-            }
-            if (isnan(duration))
-            {
-                duration = 1.0;
-            }
-			self.controlsView.positionSlider.maximumValue = duration;
+			Float64 wholeDuration = [self.show.duration floatValue];
+            Float64 availabelDuration = CMTimeGetSeconds([[KATGPlaybackManager sharedManager] availabelDuration]);
+			
+			self.controlsView.positionSlider.maximumValue = wholeDuration;
+            self.controlsView.positionSlider.loadedValue = availabelDuration;
 			self.controlsView.positionSlider.value = currentTime;
-            
-            for(NSValue *tRange in [[KATGPlaybackManager sharedManager] availableTime]) {
-                CMTimeRange tr = [tRange CMTimeRangeValue];
-                self.controlsView.positionSlider.loadedValue = CMTimeGetSeconds(tr.start) + CMTimeGetSeconds(tr.duration);
-            }
 		}
 	}
 	else if ([keyPath isEqualToString:KATGStateObserverKey])
@@ -667,46 +661,22 @@ typedef enum {
 
 - (void)playButtonPressed:(id)sender
 {
-    if(self.needAuth) {
-        NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-        NSString *key = [def valueForKey:KATG_PLAYBACK_KEY];
-        NSString *uid = [def valueForKey:KATG_PLAYBACK_UID];
-        if(!key || !uid) {
-            KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
-            loginController.completion = (^() {
-                [self dismissViewControllerAnimated:YES completion:nil];
-                [self playButtonPressed:nil];
-            });
-            [self presentViewController:loginController animated:YES completion:nil];
-            return;
-        }
-    }
-    
-    if (self.downloadToken)
-    {
-        [[[UIAlertView alloc] initWithTitle:@"Playback Unavailable" message:@"Playback is not available while downloading." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-		return;
-    }
-	if (![[KATGDataStore sharedStore] isReachable] && ![self.show.downloaded boolValue])
-	{
-		[[[UIAlertView alloc] initWithTitle:@"Streaming Unavailable" message:@"Please connected to the internet in order to listen." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-		return;
-	}
-	if (![self isCurrentShow])
-	{
-		[[KATGPlaybackManager sharedManager] stop];
-		[[KATGPlaybackManager sharedManager] configureWithShow:self.show];
-		[[KATGPlaybackManager sharedManager] play];
-        [self updateControlStates];
-		return;
-	}
-	if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+    if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
 	{
 		[[KATGPlaybackManager sharedManager] pause];
 	}
 	else
 	{
-		[[KATGPlaybackManager sharedManager] play];
+        if (![self isCurrentShow])
+        {
+            [[KATGPlaybackManager sharedManager] stop];
+            [[KATGPlaybackManager sharedManager] configureWithShow:self.show];
+        }
+        [[KATGPlaybackManager sharedManager] play];
+        
+        if(!self.downloadToken && ![self.show.downloaded boolValue]) {
+            [self downloadEpisodeAndPlay:YES];
+        }
 	}
     [self updateControlStates];
 }
@@ -754,9 +724,6 @@ typedef enum {
 		self.controlsView.currentState = KATGAudioPlayerStateDone;
 	}
     [self.controlsView setNeedsLayout];
-    
-    //disable download/delete show button if playing
-    [self.tableView reloadData];
     
     if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateFailed) {
         NSError *error = [[KATGPlaybackManager sharedManager] getCurrentError];
@@ -983,9 +950,13 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.show.forum_url]];
 }
 
-- (void)downloadButtonPressed:(KATGDownloadEpisodeCell *)cell
+-(void)downloadButtonPressed:(id)sender {
+    [self downloadEpisodeAndPlay:NO];
+}
+
+- (void)downloadEpisodeAndPlay:(BOOL)shouldPlay
 {
-	if (cell.state == KATGDownloadEpisodeCellStateActive)
+	if (!self.downloadToken && ![self.show.downloaded boolValue])
 	{
         NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
         NSString *key = [def valueForKey:KATG_PLAYBACK_KEY];
@@ -995,32 +966,29 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
                 KATGVipLoginViewController *loginController = [[KATGVipLoginViewController alloc] init];
                 loginController.completion = (^() {
                     [self dismissViewControllerAnimated:YES completion:nil];
-                    [self downloadButtonPressed:cell];
+                    [self downloadEpisodeAndPlay:shouldPlay];
                 });
                 [self presentViewController:loginController animated:YES completion:nil];
                 return;
             }
         }
         
-		cell.state = KATGDownloadEpisodeCellStateDownloading;
-		cell.progress = 0.0f;
-        
-        //  Disable playback
-        if ([[[KATGPlaybackManager sharedManager] currentShow] isEqual:self.show] && [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
-            [[KATGPlaybackManager sharedManager] pause];
-        }
-        
 		typeof(*self) *weakSelf = self;
+        __block BOOL playFlag = shouldPlay;
 		void (^progress)(CGFloat progress) = ^(CGFloat progress) {
 			NSParameterAssert([NSThread isMainThread]);
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)
 			{
-				KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionDownload]];
-				if (downloadCell.state == KATGDownloadEpisodeCellStateDownloading)
-				{
-					downloadCell.progress = progress;
-				}
+//                if(progress > 0.01 && playFlag && [[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying) {
+//                    playFlag = NO;
+//                    [[KATGPlaybackManager sharedManager] play];
+//                }
+                weakSelf.downloadProgress = progress;
+                KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionDownload]];
+                downloadCell.progress = progress;
+                downloadCell.state = KATGDownloadEpisodeCellStateDownloading;
+                
 			}
 		};
 		self.downloadToken = [[KATGAudioDownloadManager sharedManager] downloadEpisodeAudio:self.show progress:progress completion:^(NSError *error) {
@@ -1042,38 +1010,22 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)
 			{
-				strongSelf.downloadToken = nil;
-				KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionDownload]];
-				if (downloadCell)
-				{
-					cell.state = KATGDownloadEpisodeCellStateDownloaded;
-					strongSelf.shouldReloadDownload = true;
-					[strongSelf queueReload];
-				}
-                [[KATGPlaybackManager sharedManager] stop];
+				strongSelf.shouldReloadDownload = true;
+                [strongSelf queueReload];
 			}
 		}];
         self.downloadToken.viewController = self;
 	}
-	else if (cell.state == KATGDownloadEpisodeCellStateDownloading)
+	else if (self.downloadToken && ![self.show.downloaded boolValue])
 	{
 		UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Download in progress"
-																														 delegate:self
-																										cancelButtonTitle:@"Dismiss"
-																							 destructiveButtonTitle:@"Cancel download"
-																										otherButtonTitles:nil];
-		
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Dismiss"
+                                                   destructiveButtonTitle:@"Cancel download"
+                                                        otherButtonTitles:nil];
 		[actionSheet showInView:self.view];
-		
-//		NSParameterAssert(self.downloadToken);
-//		[self.downloadToken cancel];
-//		self.downloadToken = nil;
-//		cell.state = KATGDownloadEpisodeCellStateActive;
-//		self.shouldReloadDownload = true;
-//		[self queueReload];
 	}
-    else if(cell.state == KATGDownloadEpisodeCellStateDownloaded) {
-		cell.state = KATGDownloadEpisodeCellStateActive;
+    else if([self.show.downloaded boolValue]) {
         [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:self.show];
         [[KATGPlaybackManager sharedManager] stop];
     }
@@ -1087,20 +1039,13 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 	{
 		if (self.downloadToken)
 		{
-			KATGDownloadEpisodeCell *cell = (KATGDownloadEpisodeCell *)[self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForItem:1 inSection:KATGShowDetailsSectionDownload]];
 			NSParameterAssert(self.downloadToken);
 			[[KATGAudioDownloadManager sharedManager] cancelDownloadToken:self.downloadToken];
             self.downloadToken = nil;
-			cell.state = KATGDownloadEpisodeCellStateActive;
 			self.shouldReloadDownload = true;
 			[self queueReload];
 		}
 	}
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-	
 }
 
 #pragma mark - Reachability

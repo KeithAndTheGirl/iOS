@@ -86,7 +86,7 @@
 		case KATGDownloadEpisodeCellStateActive:
 			self.downloadButton.enabled = YES;
 			_downloadProgressView.currentState = KATGDownloadProgressViewStateNotDownloaded;
-			[self.downloadButton setTitle:@"Download To Listen Later" forState:UIControlStateNormal];
+			[self.downloadButton setTitle:@"Download" forState:UIControlStateNormal];
             [self.downloadButton setImage:[UIImage imageNamed:@"DownloadIcon.png"] forState:UIControlStateNormal];
             self.downloadButton.imageEdgeInsets = UIEdgeInsetsMake(0, -8, 0, 0);
 			break;
@@ -116,18 +116,20 @@
 
 - (void)setProgress:(CGFloat)progress
 {
-	if (self.state != KATGDownloadEpisodeCellStateDownloading)
-	{
-		return;
-	}
     if(progress > 0) {
-        [self.downloadButton setTitle:[NSString stringWithFormat:@"Downloading (%2.0f%%)", progress * 100] forState:UIControlStateNormal];
+        if (self.state == KATGDownloadEpisodeCellStateDownloading)
+        {
+            [self.downloadButton setTitle:[NSString stringWithFormat:@"Downloading (%2.0f%%)", progress * 100] forState:UIControlStateNormal];
+        }
         self.downloadProgressView.downloadProgress = progress;
         self.downloadProgressView.hidden = NO;
+        self.downloadProgressView.currentState = KATGDownloadProgressViewStateDownloading;
+        [self.downloadProgressView setNeedsDisplay];
+        [self.downloadButton setImage:nil forState:UIControlStateNormal];
     }
     else {
-        [self.downloadButton setTitle:@"Downloading..." forState:UIControlStateNormal];
         self.downloadProgressView.hidden = YES;
+        self.downloadProgressView.currentState = KATGDownloadProgressViewStateNotDownloaded;
     }
 }
 
