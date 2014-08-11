@@ -661,15 +661,16 @@ typedef enum {
 
 - (void)playButtonPressed:(id)sender
 {
-    if ([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
+    if ([self isCurrentShow] && [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
 	{
 		[[KATGPlaybackManager sharedManager] pause];
 	}
 	else
 	{
-        if (![self isCurrentShow])
-        {
-            [[KATGPlaybackManager sharedManager] stop];
+        if (![self isCurrentShow]) {
+            if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+                [[KATGPlaybackManager sharedManager] stop];
+            }
             [[KATGPlaybackManager sharedManager] configureWithShow:self.show];
         }
         [[KATGPlaybackManager sharedManager] play];
@@ -980,10 +981,11 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)
 			{
-//                if(progress > 0.01 && playFlag && [[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying) {
-//                    playFlag = NO;
-//                    [[KATGPlaybackManager sharedManager] play];
-//                }
+                if(progress > 0.01 && playFlag) {
+                    playFlag = NO;
+                    if([[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying)
+                        [[KATGPlaybackManager sharedManager] play];
+                }
                 weakSelf.downloadProgress = progress;
                 KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionDownload]];
                 downloadCell.progress = progress;
@@ -1026,6 +1028,14 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 		[actionSheet showInView:self.view];
 	}
     else if([self.show.downloaded boolValue]) {
+        if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+            [[[UIAlertView alloc] initWithTitle:@"KATG"
+                                        message:@"You can't remove downloaded media while playing."
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+            return;
+        }
         [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:self.show];
         [[KATGPlaybackManager sharedManager] stop];
     }
