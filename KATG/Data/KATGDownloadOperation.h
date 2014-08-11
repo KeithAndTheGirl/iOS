@@ -20,9 +20,13 @@
 
 #import "ESHTTPOperation.h"
 
+typedef void (^KATGDownloadOperationResponseBlock)(NSURLResponse *response);
+
 @interface KATGDownloadOperation : ESHTTPOperation
 
 + (instancetype)newDownloadOperationWithRemoteURL:(NSURL *)remoteURL fileURL:(NSURL *)fileURL completion:(ESHTTPOperationCompletionBlock)completion;
 - (instancetype)initDownloadOperationWithRemoteURL:(NSURL *)remoteURL fileURL:(NSURL *)fileURL completion:(ESHTTPOperationCompletionBlock)completion;
+
+- (void)setResponseBlock:(KATGDownloadOperationResponseBlock)responseBlock;
 
 @end

@@ -20,6 +20,12 @@
 
 #import "KATGDownloadOperation.h"
 
+@interface KATGDownloadOperation ()
+
+@property (copy, nonatomic) KATGDownloadOperationResponseBlock responseBlock;
+
+@end
+
 @implementation KATGDownloadOperation
 
 + (instancetype)newDownloadOperationWithRemoteURL:(NSURL *)remoteURL fileURL:(NSURL *)fileURL completion:(ESHTTPOperationCompletionBlock)completion
@@ -86,6 +92,16 @@
 		}
 	}
 	return self;
+}
+
+- (void)setResponseBlock:(KATGDownloadOperationResponseBlock)responseBlock {
+    _responseBlock = responseBlock;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    [super connection:connection didReceiveResponse:response];
+    if(_responseBlock)
+        _responseBlock(response);
 }
 
 @end
