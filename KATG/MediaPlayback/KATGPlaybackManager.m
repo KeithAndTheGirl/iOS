@@ -234,6 +234,16 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
     [self setPlaybackInfo:currentShow];
 	if (!self.audioPlaybackController)
 	{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if([currentShow.duration intValue] == 0) {
+                AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:currentShow.media_url] options:nil];
+                CMTime audioDuration = audioAsset.duration;
+                float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+                currentShow.duration = @(audioDurationSeconds);
+                self.audioPlaybackController.totalDurationSeconds = audioDurationSeconds;
+            }
+        });
+        
 		NSURL *url;
 		if (self.liveShow)
 		{
