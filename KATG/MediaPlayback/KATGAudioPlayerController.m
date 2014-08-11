@@ -292,7 +292,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	}
 	if (self.avPlayerItem == nil)
 	{   
-        AVAsset *asset = [AVAsset assetWithURL:self.url];
+        AVURLAsset *asset = [AVURLAsset assetWithURL:self.url];
         self.avPlayerItem = [AVPlayerItem playerItemWithAsset:asset];
         NSLog(@"First region: %@", [self stringFromTime:asset.duration]);
 		if (self.avPlayerItem == nil)
