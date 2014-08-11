@@ -105,7 +105,9 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 
 - (KATGAudioPlayerState)state
 {
-	return self.audioPlaybackController.state;
+    if(self.audioPlaybackController)
+        return self.audioPlaybackController.state;
+    return _state;
 }
 
 - (void)setAudioPlaybackController:(KATGAudioPlayerController *)audioPlaybackController
@@ -262,6 +264,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 //            [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:url];
 //            [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:url];
 //            NSLog(@"Will play from URL: %@", url);
+            
             self.state = KATGAudioPlayerStateLoading;
             return;
 		}
