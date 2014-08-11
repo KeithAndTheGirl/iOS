@@ -199,14 +199,12 @@
         });
 	};
     void (^success)() = ^() {
-        [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:[fileURL path] error:nil];
         NSManagedObjectContext *context = [[KATGDataStore sharedStore] childContext];
         NSParameterAssert(context);
         [context performBlock:^{
             KATGShow *fetchedShow = [[KATGDataStore sharedStore] fetchShowWithID:episodeID context:context];
             if (fetchedShow) {
                 fetchedShow.downloaded = @YES;
-                fetchedShow.file_url = [fileURL path];
                 [[KATGDataStore sharedStore] saveChildContext:context completion:^(NSError *saveError) {
                     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
                         if (saveError) {
@@ -218,6 +216,18 @@
             }
         }];
     };
+    
+    [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:[fileURL path] error:nil];
+    NSManagedObjectContext *context = [[KATGDataStore sharedStore] childContext];
+    NSParameterAssert(context);
+    [context performBlock:^{
+        KATGShow *fetchedShow = [[KATGDataStore sharedStore] fetchShowWithID:episodeID context:context];
+        if (fetchedShow) {
+            fetchedShow.file_url = [fileURL path];
+            [[KATGDataStore sharedStore] saveChildContext:context completion:nil];
+        }
+    }];
+    
     KATGDownloadOperation *op = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:finishWithError autoRetryOf:15 retryInterval:10];
     [op setResponseBlock:^(NSURLResponse *response) {
         int downloadedSize = 0;
