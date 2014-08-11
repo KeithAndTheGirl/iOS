@@ -27,7 +27,6 @@
 @interface KATGDownloadToken : NSObject <KATGDownloadToken>
 
 @property (nonatomic, strong) KATGDownloadOperation *op;
-@property (nonatomic) CGFloat progress;
 @property (copy, nonatomic) void (^progressBlock)(CGFloat progress);
 @property (copy, nonatomic) void (^completionBlock)(NSError *error);
 @property (nonatomic, strong) id viewController;

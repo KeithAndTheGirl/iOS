@@ -38,7 +38,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 @end
 
 @implementation KATGPlaybackManager
-@dynamic duration;
+@dynamic availabelDuration;
 @dynamic currentTime;
 
 #pragma mark - KeyPathsForValuesAffecting
@@ -98,13 +98,9 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	return self.audioPlaybackController.currentTime;
 }
 
-- (CMTime)duration
+- (CMTime)availabelDuration
 {
-	return self.audioPlaybackController.duration;
-}
-
--(NSArray*)availableTime {
-    return self.audioPlaybackController.availableTime;
+	return self.audioPlaybackController.availabelDuration;
 }
 
 - (KATGAudioPlayerState)state
@@ -134,7 +130,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 
 - (Float64)durationInSeconds
 {
-	Float64 time = CMTimeGetSeconds(self.duration);
+	Float64 time = CMTimeGetSeconds(self.availabelDuration);
 	if (isnan(time))
 	{
 		time = 0.0;
@@ -252,21 +248,26 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 			//url = [NSURL URLWithString:@"http://stream.keithandthegirl.com:8000/stream/1/"];
 			NSParameterAssert(url);
 		}
-		else if ([currentShow.downloaded boolValue] && [currentShow file_url])
+		else if ([currentShow file_url])
 		{
 			url = [NSURL fileURLWithPath:currentShow.file_url];
+            NSLog(@"Start playing local file: %@", currentShow.file_url);
 		}
 		else
 		{
-            url = [NSURL URLWithString:currentShow.media_url];
-            
-            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-            
-            [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:url];
-            [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:url];
-            NSLog(@"Will play from URL: %@", url);
+//            url = [NSURL URLWithString:currentShow.media_url];
+//            
+//            NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+//            
+//            [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:url];
+//            [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:url];
+//            NSLog(@"Will play from URL: %@", url);
+            self.state = KATGAudioPlayerStateLoading;
+            return;
 		}
+        
         self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];
+        self.audioPlaybackController.totalDurationSeconds = [currentShow.duration doubleValue];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(remoteControlAction:)
@@ -350,7 +351,7 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	[self setPlaybackInfo:self.currentShow];
 }
 
-#pragma mark - 
+#pragma mark -
 
 - (void)startSaveTimer
 {
@@ -370,26 +371,10 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 - (void)saveCurrentTime
 {
 	if (!self.currentShow)
-	{
 		return;
-	}
-	KATGDataStore *store = [KATGDataStore sharedStore];
-	NSManagedObjectContext *context = [store childContext];
 	Float64 time = [self currentTimeInSeconds];
-	Float64 duration = [self durationInSeconds];
-    if(duration == 0)
-        return;
-    __block KATGShow *show = self.currentShow;
-	[context performBlock:^{
-		if (show)
-		{
-			show.lastPlaybackTime = @(time);
-			show.duration = @(duration);
-            show.lastListenedTime = [NSDate date];
-			[store saveChildContext:context completion:nil];
-            [self setPlaybackInfo:show];
-		}
-	}];
+    self.currentShow.lastPlaybackTime = @(time);
+    self.currentShow.lastListenedTime = [NSDate date];
 }
 
 - (void)setPlaybackInfo:(KATGShow *)currentShow

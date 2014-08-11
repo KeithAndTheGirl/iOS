@@ -35,7 +35,6 @@ typedef NS_ENUM(NSUInteger, KATGAudioPlayerState) {
 extern NSString * const KATGCurrentTimeObserverKey;
 extern NSString * const KATGDurationObserverKey;
 extern NSString * const KATGStateObserverKey;
-extern NSString * const KATGStateAvailableTime;
 
 @interface KATGAudioPlayerController : NSObject
 
@@ -47,8 +46,7 @@ extern NSString * const KATGStateAvailableTime;
 @property (nonatomic, strong) NSError *error;
 
 @property (nonatomic, readonly) CMTime currentTime;
-@property (nonatomic, readonly) CMTime duration;
-@property (nonatomic) NSArray *availableTime;
+@property (nonatomic) CMTime availabelDuration;
 @property (nonatomic) float totalDurationSeconds;
 
 - (void)seekToTime:(CMTime)currentTime;

@@ -247,7 +247,6 @@
 		91089D8215EAEAD700FB57C3 /* KATGAudioPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 91089D7F15EAEAD700FB57C3 /* KATGAudioPlayerController.m */; };
 		91089D8315EAEAD700FB57C3 /* KATGAudioSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 91089D8115EAEAD700FB57C3 /* KATGAudioSessionManager.m */; };
 		91089D8515EAEAE900FB57C3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91089D8415EAEAE900FB57C3 /* AVFoundation.framework */; };
-		91089D8715EAEB4200FB57C3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91089D8615EAEB4100FB57C3 /* AudioToolbox.framework */; };
 		910FCD6617237ECC003491A1 /* KATGReachabilityOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 910FCD6517237ECC003491A1 /* KATGReachabilityOperation.m */; };
 		9110F82F16E944C20014F87D /* KATGDownloadOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 9110F82E16E944C20014F87D /* KATGDownloadOperation.m */; };
 		9115C14D172E2C48002942B6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9115C14C172E2C48002942B6 /* AssetsLibrary.framework */; };
@@ -327,6 +326,7 @@
 		0157F0241960EB3C00A0A9D1 /* XCDYouTubeVideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCDYouTubeVideoPlayerViewController.h; sourceTree = "<group>"; };
 		0157F0251960EB3C00A0A9D1 /* XCDYouTubeVideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCDYouTubeVideoPlayerViewController.m; sourceTree = "<group>"; };
 		0157F02D1960EEE700A0A9D1 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		0164AFA0198E927500DD39A8 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		0171221419206CE9006D29D3 /* KATGURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGURLProtocol.h; sourceTree = "<group>"; };
 		0171221519206CE9006D29D3 /* KATGURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGURLProtocol.m; sourceTree = "<group>"; };
 		018C35B118E7E9FA00E218D8 /* KATGScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGScheduleViewController.h; path = "View Controllers/KATGScheduleViewController.h"; sourceTree = "<group>"; };
@@ -471,6 +471,7 @@
 		0198AB93186077320063947C /* KATGYouTubeTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGYouTubeTableCell.m; path = "View Controllers/KATGYouTubeTableCell.m"; sourceTree = "<group>"; };
 		0198AB95186077850063947C /* KATGYouTubeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGYouTubeTableCell.xib; path = "View Controllers/KATGYouTubeTableCell.xib"; sourceTree = "<group>"; };
 		01B1CFF6195D91EB00B2268A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		01B57BB31990713900868EF4 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		01B5A7E5197F3261001DE1FD /* KATGTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGTabBarViewController.h; path = "View Controllers/KATGTabBarViewController.h"; sourceTree = "<group>"; };
 		01B5A7E6197F3261001DE1FD /* KATGTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGTabBarViewController.m; path = "View Controllers/KATGTabBarViewController.m"; sourceTree = "<group>"; };
 		01BCE80B186C208600F096EF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -657,7 +658,6 @@
 				9123757C172DBFA500A194F2 /* EventKit.framework in Frameworks */,
 				91BB0CFC16DAD9CC00EC4DA2 /* MediaPlayer.framework in Frameworks */,
 				2280C52F1679ABA500C76D6D /* CoreMedia.framework in Frameworks */,
-				91089D8715EAEB4200FB57C3 /* AudioToolbox.framework in Frameworks */,
 				91089D8515EAEAE900FB57C3 /* AVFoundation.framework in Frameworks */,
 				91089D7C15EAE88900FB57C3 /* SystemConfiguration.framework in Frameworks */,
 				018C36E418E9525600E218D8 /* libTestFlight.a in Frameworks */,
@@ -1085,6 +1085,8 @@
 		9108996115EAE15500FB57C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				01B57BB31990713900868EF4 /* CoreAudio.framework */,
+				0164AFA0198E927500DD39A8 /* CFNetwork.framework */,
 				0157F02D1960EEE700A0A9D1 /* JavaScriptCore.framework */,
 				01EC330718A9990500156A3E /* libz.dylib */,
 				01B1CFF6195D91EB00B2268A /* MessageUI.framework */,
