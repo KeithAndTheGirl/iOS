@@ -219,6 +219,17 @@
         }];
     };
     KATGDownloadOperation *op = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:finishWithError autoRetryOf:15 retryInterval:10];
+    [op setResponseBlock:^(NSURLResponse *response) {
+        int downloadedSize = 0;
+        if ([fileURL checkResourceIsReachableAndReturnError:nil]) {
+            NSNumber *sizeObject;
+            NSError *error;
+            if ([fileURL getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:&error]) {
+                downloadedSize = [sizeObject intValue];
+            }
+        }
+        show.fileSize = @(downloadedSize+response.expectedContentLength);
+    }];
 	token = [[KATGDownloadToken alloc] initWithOperation:op];
 	NSParameterAssert(token);
 	token.progressBlock = progress;

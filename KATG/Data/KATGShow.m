@@ -38,6 +38,7 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @dynamic media_url;
 @dynamic downloaded;
 @dynamic file_url;
+@dynamic fileSize;
 @dynamic lastPlaybackTime;
 @dynamic duration;
 @dynamic lastListenedTime;
@@ -70,6 +71,20 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 //    NSLog(@"Set Duration %@ for episode %@", duration, self.episode_id);
     NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
     [[NSUserDefaults standardUserDefaults] setObject:duration forKey:key];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+-(NSNumber*)fileSize {
+    NSString *key = [NSString stringWithFormat:@"fileSize-%@", self.episode_id];
+    NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
+    //    NSLog(@"Return fileSize %@ for episode %@", value, self.episode_id);
+    return value;
+}
+
+-(void)setFileSize:(NSNumber *)fileSize {
+    //    NSLog(@"Set fileSize %@ for episode %@", duration, self.episode_id);
+    NSString *key = [NSString stringWithFormat:@"fileSize-%@", self.episode_id];
+    [[NSUserDefaults standardUserDefaults] setObject:fileSize forKey:key];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

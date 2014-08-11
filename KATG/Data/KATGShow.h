@@ -67,6 +67,7 @@ extern NSString *const KATGShowEpisodeIDAttributeName;
 
 // local values
 @property (nonatomic, retain) NSNumber *lastPlaybackTime;
+@property (nonatomic, retain) NSNumber *fileSize;
 @property (nonatomic, retain) NSNumber *duration;
 @property (nonatomic, retain) NSDate   *lastListenedTime;
 
