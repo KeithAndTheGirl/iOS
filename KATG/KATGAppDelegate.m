@@ -105,6 +105,14 @@
     [mainTabBarCtl presentViewController:showViewController animated:YES completion:nil];
 }
 
+-(void)showRootView {
+    UITabBarController *mainTabBarCtl = (UITabBarController*)self.window.rootViewController;
+    UINavigationController *showsNavigation = [mainTabBarCtl viewControllers][0];
+    [showsNavigation popToRootViewControllerAnimated:NO];
+    KATGSeriesViewController *topViewCtl = (KATGSeriesViewController*)[showsNavigation topViewController];
+    [topViewCtl reload];
+}
+
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     NSNumber *show_id = notification.userInfo[@"show"];
     NSLog(@"App state: %i, objID: %@", (int)application.applicationState, show_id);

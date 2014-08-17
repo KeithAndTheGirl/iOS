@@ -28,4 +28,6 @@
 @property (strong, nonatomic) IBOutlet KATGLiveViewController *liveController;
 @property UIBackgroundTaskIdentifier task;
 
+-(void)showRootView;
+
 @end

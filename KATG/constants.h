@@ -22,4 +22,6 @@ static NSString * const kUpcomingURIAddress		=	@"events?sanitize=true";
 
 static NSString * const kLiveShowStatusURIAddress = @"feed/live/";
 
+static NSString * const kCacheForceRefreshURIAddress = @"/cache/force-refresh";
+
 static NSString * const kFeedbackURL = @"http://www.attackwork.com/Voxback/Comment-Form-Iframe.aspx";

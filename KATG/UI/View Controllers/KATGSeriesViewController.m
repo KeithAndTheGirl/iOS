@@ -25,11 +25,18 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidChange:) name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
+    
     [self registerStateObserver];
+    spinner.hidden = [[self.fetchedResultsController fetchedObjects] count] > 0;
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextObjectsDidChangeNotification object:[[KATGDataStore sharedStore] readerContext]];
+    
     [self unregisterStateObserver];
 }
 
@@ -42,10 +49,24 @@
 
 }
 
+-(void)reload {
+    spinner.hidden = NO;
+    _fetchedResultsController = nil;
+    [collectionView reloadData];
+    [[KATGDataStore sharedStore] pollForData];
+}
+
+- (void)contextDidChange:(NSNotification *)note
+{
+    [collectionView reloadData];
+    spinner.hidden = YES;
+}
+
 #pragma mark NSFetchedResultsController
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [collectionView reloadData];
+    spinner.hidden = YES;
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
