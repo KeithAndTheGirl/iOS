@@ -532,6 +532,10 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
                     [show configureWithDictionary:episodeDictionary];
                 }
 			}
+            NSMutableArray *episodeIDs = [NSMutableArray array];
+            for(NSDictionary *episodeDictionary in shows)
+                [episodeIDs addObject:[KATGShow episodeIDForShowDictionary:episodeDictionary]];
+            [self deleteEpisodesExceptIDs:episodeIDs context:context];
 			ShowsLog(@"Processed %ld show", (long)[shows count]);
 			[self saveChildContext:context completion:nil];
 		}
@@ -727,7 +731,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	return [result lastObject];
 }
 
-- (void)deleteOldEpisodes:(NSSet *)currentShowObjectIDs context:(NSManagedObjectContext *)context
+- (void)deleteEpisodesExceptIDs:(NSArray *)currentShowObjectIDs context:(NSManagedObjectContext *)context
 {
 	NSParameterAssert(currentShowObjectIDs);
 	NSParameterAssert(context);
@@ -738,10 +742,11 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	NSFetchRequest *request = [NSFetchRequest new];
 	NSEntityDescription *entity = [NSEntityDescription entityForName:[KATGShow katg_entityName] inManagedObjectContext:context];
 	request.entity = entity;
-	request.predicate = [NSPredicate predicateWithFormat:@"NOT (self IN %@)", currentShowObjectIDs];
+	request.predicate = [NSPredicate predicateWithFormat:@"not (episode_id IN %@)", currentShowObjectIDs];
 	NSError *error;
 	NSArray *result = [context executeFetchRequest:request error:&error];
-	ShowsLog(@"Deleting %ld shows", (long)[result count]);
+
+	NSLog(@"Deleting %ld shows", (long)[result count]);
 	for (KATGShow *show in result)
 	{
 		if (show.file_url)
