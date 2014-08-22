@@ -45,15 +45,6 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @dynamic video_file_url;
 @dynamic video_thumbnail_url;
 
-+(void)clearPersistentValues {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *dictionary = [defaults dictionaryRepresentation];
-    for(NSString *key in [dictionary allKeys]) {
-        if([key hasPrefix:@"lastPlaybackTime"] || [key hasPrefix:@"duration"] || [key hasPrefix:@"lastListenedTime"])
-            [defaults removeObjectForKey:key];
-    }
-}
-
 -(NSNumber*)lastPlaybackTime {
     NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
     NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];

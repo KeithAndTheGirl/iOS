@@ -36,7 +36,6 @@
 #import "NSMutableURLRequest+ESNetworking.h"
 
 #import "AFNetworking.h"
-#import "KATGAppDelegate.h"
 
 #if DEBUG && 0
 #define EventsLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__)
@@ -113,18 +112,17 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	self = [super init];
 	if (self)
 	{
-		_baseURL = [NSURL URLWithString:kServerBaseURL];
+		[self coreDataInitialize];
 		
 		// Build queues for network and core data operations.
 		_networkQueue = [NSOperationQueue new];
 		[_networkQueue setMaxConcurrentOperationCount:10];
 		
 		_workQueue = [NSOperationQueue new];
-        
-		[self coreDataInitialize];
 		
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willTerminate:) name:UIApplicationWillTerminateNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willStart:) name:UIApplicationDidBecomeActiveNotification object:nil];
+		
+		_baseURL = [NSURL URLWithString:kServerBaseURL];
 		
 		_reachabilityForConnectionType = [Reachability reachabilityWithHostName:kReachabilityURL];
 		NSParameterAssert(_reachabilityForConnectionType);
@@ -144,6 +142,9 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	_persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
 	
 	NSURL *url = [self storeURL];
+	
+	// nuke the database on every launch
+//	[[NSFileManager defaultManager] removeItemAtURL:url error:nil];
 	
 	NSError *error = nil;
 	if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error])
@@ -242,34 +243,7 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	}];
 }
 
-- (void)willStart:(NSNotification *)notification
-{
-	NSURL *cacheRefreshURL = [self.baseURL URLByAppendingPathComponent:kCacheForceRefreshURIAddress];
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:cacheRefreshURL];
-	[request setCachePolicy:NSURLRequestReloadIgnoringCacheData];
-	ESJSONOperation *op = [ESJSONOperation
-                           newJSONOperationWithRequest:request
-                           success:^(ESJSONOperation *op, NSDictionary *JSON) {
-                               NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                               long savedRefreshDate = [defaults integerForKey:@"refresh-date"];
-                               long newRefreshDate = [JSON[@"date"] integerValue];
-                               if(savedRefreshDate == 0 || savedRefreshDate < newRefreshDate) {
-                                   [[NSFileManager defaultManager] removeItemAtURL:[self storeURL]
-                                                                             error:nil];
-                                   [self coreDataInitialize];
-                                   [KATGShow clearPersistentValues];
-                                   KATGAppDelegate *appDelegate = (KATGAppDelegate*)[[UIApplication sharedApplication] delegate];
-                                   [appDelegate showRootView];
-                                   [defaults setInteger:newRefreshDate forKey:@"refresh-date"];
-                               }
-                               
-                           } failure:^(ESJSONOperation *op) {
-                               [self handleError:op.error];
-                           }];
-	[self.networkQueue addOperations:@[op] waitUntilFinished:YES];
-}
-
-#pragma mark -
+#pragma mark - 
 
 - (void)reachabilityChanged:(NSNotification *)note
 {

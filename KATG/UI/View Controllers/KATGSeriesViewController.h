@@ -10,11 +10,8 @@
 
 @interface KATGSeriesViewController : UIViewController <NSFetchedResultsControllerDelegate> {
     IBOutlet UICollectionView *collectionView;
-    IBOutlet UIActivityIndicatorView       *spinner;
 }
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-
--(void)reload;
 
 @end

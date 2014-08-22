@@ -93,6 +93,4 @@ extern NSString *const KATGShowEpisodeIDAttributeName;
 
 - (NSString *)formattedTimestamp;
 
-+(void)clearPersistentValues;
-
 @end
