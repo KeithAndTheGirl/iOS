@@ -47,6 +47,9 @@ NSString *const KATGImageShowAttributeName = @"show";
 	{
 		ESObjectMap *map = [self objectMap];
 		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"description" outputKey:@"desc"]];
+		[map addPropertyMap:[ESPropertyMap newPropertyMapWithInputKey:@"displayorder" outputKey:@"index" transformBlock:^id(id<ESObject> object, id inputValue) {
+			return @([inputValue integerValue]);
+		}]];
 	}
 }
 

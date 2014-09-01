@@ -537,15 +537,12 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 				return;
 			}
 			NSArray *images = episodeDetails[@"images"];
-			NSUInteger index = 0;
             [self removeImagesForShow:show context:context];
 			for (NSDictionary *imageDictionary in images)
 			{
 				KATGImage *image = [self fetchOrInsertImageWithID:imageDictionary[@"pictureid"] show:show url:imageDictionary[@"media_url"] context:context];
 				if (image)
 				{
-					image.index = @(index);
-					index++;
 					[image configureWithDictionary:imageDictionary];
 				}
 			}
