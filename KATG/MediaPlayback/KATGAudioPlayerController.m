@@ -314,6 +314,8 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
         [self.avPlayer replaceCurrentItemWithPlayerItem:self.avPlayerItem];
 	KATGConfigureAudioSessionState(KATGAudioSessionStatePlayback);
 	
+    if(CMTIME_IS_VALID(_currentTime))
+        [self.avPlayer seekToTime:_currentTime];
     [self.avPlayer play];
 }
 
