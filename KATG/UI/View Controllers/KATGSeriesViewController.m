@@ -28,6 +28,11 @@
     [self registerStateObserver];
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self configureTopBar];
+}
+
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     [self unregisterStateObserver];
@@ -105,7 +110,6 @@
 #pragma mark GlobalPlayState
 -(void)registerStateObserver {
     [[KATGPlaybackManager sharedManager] addObserver:self forKeyPath:@"state" options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld) context:NULL];
-    [self configureTopBar];
 }
 
 -(void)unregisterStateObserver {
@@ -127,17 +131,20 @@
 	if ([[KATGPlaybackManager sharedManager] currentShow] &&
         [[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying)
 	{
-		UIButton *nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
-		nowPlayingButton.frame = CGRectMake(0.0f, -28.0f, 320.0f, 48.0f);
-		[nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
-        nowPlayingButton.tag = 1313;
-        
-        [collectionView addSubview:nowPlayingButton];
-        UIEdgeInsets contentInsets = collectionView.contentInset;
-        contentInsets.top = 48;
-        collectionView.contentInset = contentInsets;
-        [collectionView setContentOffset:CGPointMake(0, collectionView.contentOffset.y-48) animated:NO];
+        UIButton *nowPlayingButton = (UIButton*)[collectionView viewWithTag:1313];
+        if(!nowPlayingButton) {
+            nowPlayingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+            [nowPlayingButton setImage:[UIImage imageNamed:@"NowPlaying.png"] forState:UIControlStateNormal];
+            nowPlayingButton.frame = CGRectMake(0.0f, -28.0f, 320.0f, 48.0f);
+            [nowPlayingButton addTarget:self action:@selector(showNowPlayingEpisode) forControlEvents:UIControlEventTouchUpInside];
+            nowPlayingButton.tag = 1313;
+            
+            [collectionView addSubview:nowPlayingButton];
+            UIEdgeInsets contentInsets = collectionView.contentInset;
+            contentInsets.top = 48;
+            collectionView.contentInset = contentInsets;
+            [collectionView setContentOffset:CGPointMake(0, -48)];
+        }
 	}
 	else
 	{
@@ -145,7 +152,7 @@
         if(v) {
             [v removeFromSuperview];
             UIEdgeInsets contentInsets = collectionView.contentInset;
-            contentInsets.top -= 48;
+            contentInsets.top = 0;
             collectionView.contentInset = contentInsets;
         }
 	}
