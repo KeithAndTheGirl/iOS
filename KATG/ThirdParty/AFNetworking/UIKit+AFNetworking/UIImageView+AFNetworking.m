@@ -165,7 +165,8 @@ static char kAFResponseSerializerKey;
 }
 
 - (void)cancelImageRequestOperation {
-    [self.af_imageRequestOperation cancel];
+    if([self.af_imageRequestOperation isKindOfClass:[AFHTTPRequestOperation class]])
+        [self.af_imageRequestOperation cancel];
     self.af_imageRequestOperation = nil;
 }
 
