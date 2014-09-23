@@ -191,6 +191,7 @@
 		01F827D1195A226200BDCFBA /* star@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827CE195A226200BDCFBA /* star@2x.png */; };
 		01F827D4195A23B300BDCFBA /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D2195A23B300BDCFBA /* feedback@2x.png */; };
 		01F827D5195A23B300BDCFBA /* messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D3195A23B300BDCFBA /* messages@2x.png */; };
+		01FC49C719D1D238002F42C7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FC49C619D1D238002F42C7 /* Crashlytics.framework */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
 		227B638F172F7FBF0032FB64 /* KATGDownloadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 227B638E172F7FBF0032FB64 /* KATGDownloadProgressView.m */; };
@@ -512,6 +513,7 @@
 		01F827CE195A226200BDCFBA /* star@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star@2x.png"; sourceTree = "<group>"; };
 		01F827D2195A23B300BDCFBA /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback@2x.png"; sourceTree = "<group>"; };
 		01F827D3195A23B300BDCFBA /* messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messages@2x.png"; sourceTree = "<group>"; };
+		01FC49C619D1D238002F42C7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
 		22192ED116745FF000D2B1C1 /* TDCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCollectionView.h; path = TDCollectionView/TDCollectionView.h; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				91BB0CFC16DAD9CC00EC4DA2 /* MediaPlayer.framework in Frameworks */,
 				2280C52F1679ABA500C76D6D /* CoreMedia.framework in Frameworks */,
 				91089D8515EAEAE900FB57C3 /* AVFoundation.framework in Frameworks */,
+				01FC49C719D1D238002F42C7 /* Crashlytics.framework in Frameworks */,
 				91089D7C15EAE88900FB57C3 /* SystemConfiguration.framework in Frameworks */,
 				018C36E418E9525600E218D8 /* libTestFlight.a in Frameworks */,
 				910899A915EAE2BD00FB57C3 /* QuartzCore.framework in Frameworks */,
@@ -1189,6 +1192,7 @@
 		910899C115EAE58600FB57C3 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				01FC49C619D1D238002F42C7 /* Crashlytics.framework */,
 				0157F0141960EB3C00A0A9D1 /* XCDYouTubeKit */,
 				018C36DD18E9525600E218D8 /* TestFlightSDK3 */,
 				012B4EFE1857A2ED00B59FC5 /* AFNetworking */,
@@ -1374,6 +1378,7 @@
 				9108995A15EAE15500FB57C3 /* Sources */,
 				9108995B15EAE15500FB57C3 /* Frameworks */,
 				9108995C15EAE15500FB57C3 /* Resources */,
+				01FC49C519D1D1FD002F42C7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1555,6 +1560,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		01FC49C519D1D1FD002F42C7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 6529bbf53de23f5a315abe44c124b8b8f99e12ac e68873b628036f16a9b693e9a58c945202b3060ce8a9b336eee8e53ef294ffa2";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9108995A15EAE15500FB57C3 /* Sources */ = {
@@ -1741,6 +1762,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Keith Malley (X9RNF663RC)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KATG/ThirdParty",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
@@ -1762,6 +1787,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Keith Malley (X9RNF663RC)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KATG/ThirdParty",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
@@ -1805,6 +1834,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Keith Malley (X9RNF663RC)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/KATG/ThirdParty",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "KATG/KATG-Prefix.pch";
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
