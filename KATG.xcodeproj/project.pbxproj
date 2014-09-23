@@ -192,6 +192,7 @@
 		01F827D4195A23B300BDCFBA /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D2195A23B300BDCFBA /* feedback@2x.png */; };
 		01F827D5195A23B300BDCFBA /* messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D3195A23B300BDCFBA /* messages@2x.png */; };
 		01FC49C719D1D238002F42C7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01FC49C619D1D238002F42C7 /* Crashlytics.framework */; };
+		01FC49CA19D1ED82002F42C7 /* KATGAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC49C919D1ED82002F42C7 /* KATGAlert.m */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
 		227B638F172F7FBF0032FB64 /* KATGDownloadProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 227B638E172F7FBF0032FB64 /* KATGDownloadProgressView.m */; };
@@ -514,6 +515,8 @@
 		01F827D2195A23B300BDCFBA /* feedback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "feedback@2x.png"; sourceTree = "<group>"; };
 		01F827D3195A23B300BDCFBA /* messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messages@2x.png"; sourceTree = "<group>"; };
 		01FC49C619D1D238002F42C7 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		01FC49C819D1ED82002F42C7 /* KATGAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAlert.h; path = "Custom Views/KATGAlert.h"; sourceTree = "<group>"; };
+		01FC49C919D1ED82002F42C7 /* KATGAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAlert.m; path = "Custom Views/KATGAlert.m"; sourceTree = "<group>"; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
 		22192ED116745FF000D2B1C1 /* TDCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDCollectionView.h; path = TDCollectionView/TDCollectionView.h; sourceTree = "<group>"; };
@@ -1046,6 +1049,8 @@
 				018C35D918E94E3A00E218D8 /* KATGShowViewController.xib */,
 				0157F0111960E5A100A0A9D1 /* KATGShowPreviewCell.h */,
 				0157F0121960E5A100A0A9D1 /* KATGShowPreviewCell.m */,
+				01FC49C819D1ED82002F42C7 /* KATGAlert.h */,
+				01FC49C919D1ED82002F42C7 /* KATGAlert.m */,
 			);
 			name = "Show Details";
 			sourceTree = "<group>";
@@ -1679,6 +1684,7 @@
 				227B638F172F7FBF0032FB64 /* KATGDownloadProgressView.m in Sources */,
 				012B4F241857A2ED00B59FC5 /* AFHTTPSessionManager.m in Sources */,
 				0157F02C1960EB3C00A0A9D1 /* XCDYouTubeVideoPlayerViewController.m in Sources */,
+				01FC49CA19D1ED82002F42C7 /* KATGAlert.m in Sources */,
 				0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */,
 				0157F0131960E5A100A0A9D1 /* KATGShowPreviewCell.m in Sources */,
 				0157F0291960EB3C00A0A9D1 /* XCDYouTubePlayerScript.m in Sources */,

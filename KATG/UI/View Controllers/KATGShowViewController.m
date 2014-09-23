@@ -43,6 +43,7 @@
 #import "UIKit+AFNetworking.h"
 #import "XCDYouTubeKit.h"
 #import "KATGDownloadToken.h"
+#import "KATGAlert.h"
 
 static void * KATGReachabilityObserverContext = @"KATGReachabilityObserverContext";
 
@@ -648,7 +649,11 @@ typedef enum {
     NSError *error = [[notification userInfo] objectForKey:@"error"];
     if (error) {
         NSString *authError = [KATGURLProtocol errorForUrlString:self.show.video_file_url];
-        [[[UIAlertView alloc] initWithTitle:@"Error" message:authError?:[error localizedDescription] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil] show];
+        if(authError)
+            error = [NSError errorWithDomain:@"KATG moviePlayBackDidFinish error"
+                                        code:0
+                                    userInfo:@{NSLocalizedDescriptionKey: authError}];
+        [UIAlertView errorWithTitle:@"Error" error:error];
     }
     else {
         MPMoviePlayerController *mpc = notification.object;
@@ -738,11 +743,7 @@ typedef enum {
                               otherButtonTitles:nil] show];
         }
         else {
-            [[[UIAlertView alloc] initWithTitle:@"Playback failed"
-                                        message:[[[KATGPlaybackManager sharedManager] getCurrentError] localizedDescription]
-                                       delegate:nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil] show];
+            [UIAlertView errorWithTitle:@"Playback failed" error:[[KATGPlaybackManager sharedManager] getCurrentError]];
         }
         [[KATGPlaybackManager sharedManager] stop];
     }
@@ -1001,12 +1002,13 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
                 [[UIApplication sharedApplication] presentLocalNotificationNow:ntfy];
             }
             else {
-                NSString *msg = [NSString stringWithFormat:@"Show \"%@\" was failed to download. %@", self.show.title, [error localizedDescription]];
-                [[[UIAlertView alloc] initWithTitle:@"Download error"
-                                            message:msg
-                                           delegate:nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
+//                NSString *msg = [NSString stringWithFormat:@"Show \"%@\" was failed to download. %@", self.show.title, [error localizedDescription]];
+//                [[[UIAlertView alloc] initWithTitle:@"Download error"
+//                                            message:msg
+//                                           delegate:nil
+//                                  cancelButtonTitle:@"OK"
+//                                  otherButtonTitles:nil] show];
+                [UIAlertView errorWithTitle:@"Download error" error:error];
             }
 			NSParameterAssert([NSThread isMainThread]);
 			typeof(*self) *strongSelf = weakSelf;
