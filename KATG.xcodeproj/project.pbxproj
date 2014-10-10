@@ -154,9 +154,6 @@
 		018C36D918E94F3400E218D8 /* welcome3.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C366C18E94F3400E218D8 /* welcome3.png */; };
 		018C36DA18E94F3400E218D8 /* welcome3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 018C366D18E94F3400E218D8 /* welcome3@2x.png */; };
 		018C36DC18E94FCF00E218D8 /* KATGShowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 018C36DB18E94FCF00E218D8 /* KATGShowCell.xib */; };
-		018C36E418E9525600E218D8 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 018C36DE18E9525600E218D8 /* libTestFlight.a */; };
-		018C36E518E9525600E218D8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 018C36DF18E9525600E218D8 /* README.md */; };
-		018C36E618E9525600E218D8 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 018C36E018E9525600E218D8 /* release_notes.md */; };
 		0192D1D318721C38008B1B56 /* KATGApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0192D1D218721C38008B1B56 /* KATGApplication.m */; };
 		0198AA35185F3C240063947C /* KATGScheduleItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */; };
 		0198AB94186077320063947C /* KATGYouTubeTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0198AB93186077320063947C /* KATGYouTubeTableCell.m */; };
@@ -460,12 +457,6 @@
 		018C366C18E94F3400E218D8 /* welcome3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = welcome3.png; sourceTree = "<group>"; };
 		018C366D18E94F3400E218D8 /* welcome3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "welcome3@2x.png"; sourceTree = "<group>"; };
 		018C36DB18E94FCF00E218D8 /* KATGShowCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGShowCell.xib; path = "Custom Views/KATGShowCell.xib"; sourceTree = "<group>"; };
-		018C36DE18E9525600E218D8 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
-		018C36DF18E9525600E218D8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		018C36E018E9525600E218D8 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
-		018C36E118E9525600E218D8 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
-		018C36E218E9525600E218D8 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
-		018C36E318E9525600E218D8 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		0192D1D118721C38008B1B56 /* KATGApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGApplication.h; sourceTree = "<group>"; };
 		0192D1D218721C38008B1B56 /* KATGApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGApplication.m; sourceTree = "<group>"; };
 		0198AA34185F3C240063947C /* KATGScheduleItemTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGScheduleItemTableViewCell.xib; path = "Custom Views/KATGScheduleItemTableViewCell.xib"; sourceTree = "<group>"; };
@@ -666,7 +657,6 @@
 				91089D8515EAEAE900FB57C3 /* AVFoundation.framework in Frameworks */,
 				01FC49C719D1D238002F42C7 /* Crashlytics.framework in Frameworks */,
 				91089D7C15EAE88900FB57C3 /* SystemConfiguration.framework in Frameworks */,
-				018C36E418E9525600E218D8 /* libTestFlight.a in Frameworks */,
 				910899A915EAE2BD00FB57C3 /* QuartzCore.framework in Frameworks */,
 				9108996315EAE15500FB57C3 /* UIKit.framework in Frameworks */,
 				9108996515EAE15500FB57C3 /* Foundation.framework in Frameworks */,
@@ -955,19 +945,6 @@
 			path = TabBar;
 			sourceTree = "<group>";
 		};
-		018C36DD18E9525600E218D8 /* TestFlightSDK3 */ = {
-			isa = PBXGroup;
-			children = (
-				018C36DE18E9525600E218D8 /* libTestFlight.a */,
-				018C36DF18E9525600E218D8 /* README.md */,
-				018C36E018E9525600E218D8 /* release_notes.md */,
-				018C36E118E9525600E218D8 /* TestFlight+AsyncLogging.h */,
-				018C36E218E9525600E218D8 /* TestFlight+ManualSessions.h */,
-				018C36E318E9525600E218D8 /* TestFlight.h */,
-			);
-			path = TestFlightSDK3;
-			sourceTree = "<group>";
-		};
 		01CCD30E190D86CA00CE3956 /* VIP */ = {
 			isa = PBXGroup;
 			children = (
@@ -1199,7 +1176,6 @@
 			children = (
 				01FC49C619D1D238002F42C7 /* Crashlytics.framework */,
 				0157F0141960EB3C00A0A9D1 /* XCDYouTubeKit */,
-				018C36DD18E9525600E218D8 /* TestFlightSDK3 */,
 				012B4EFE1857A2ED00B59FC5 /* AFNetworking */,
 				22D07DC91676558D004EBEBB /* TDRoundedShadowView */,
 				22192ED016745FD300D2B1C1 /* TDCollectionView */,
@@ -1526,7 +1502,6 @@
 				01BCE80C186C208600F096EF /* Images.xcassets in Resources */,
 				018C369518E94F3400E218D8 /* indicators1@2x.png in Resources */,
 				018C368018E94F3400E218D8 /* DownloadIcon@2x.png in Resources */,
-				018C36E618E9525600E218D8 /* release_notes.md in Resources */,
 				01F827C6195A016700BDCFBA /* KATGVIPViewController.xib in Resources */,
 				018C36A018E94F3400E218D8 /* main-bg.png in Resources */,
 				018C36D618E94F3400E218D8 /* welcome1@2x.png in Resources */,
@@ -1555,7 +1530,6 @@
 				018C367118E94F3400E218D8 /* ArrowNext@2x.png in Resources */,
 				018C369718E94F3400E218D8 /* indicators2@2x.png in Resources */,
 				018C36A418E94F3400E218D8 /* play.png in Resources */,
-				018C36E518E9525600E218D8 /* README.md in Resources */,
 				018C368718E94F3400E218D8 /* get_the_guide.png in Resources */,
 				018C36C118E94F3400E218D8 /* Live.png in Resources */,
 				018C36B418E94F3400E218D8 /* ProgressFill.png in Resources */,

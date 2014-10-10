@@ -45,7 +45,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     [Crashlytics startWithAPIKey:@"6529bbf53de23f5a315abe44c124b8b8f99e12ac"];
-    [TestFlight takeOff:@"1793cbe2-d3b6-47a5-8122-d7ee9309d4eb"];
     self.task=[application beginBackgroundTaskWithExpirationHandler:^{
         NSLog(@"Expiration handler called %f",[application backgroundTimeRemaining]);
         [application endBackgroundTask:self.task];
