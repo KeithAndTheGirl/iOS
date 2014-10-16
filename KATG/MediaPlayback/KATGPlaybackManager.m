@@ -189,6 +189,11 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
     UIEvent *event = [notification object];
     switch (event.subtype) {
         case UIEventSubtypeRemoteControlTogglePlayPause:
+            if(self.state == KATGAudioPlayerStatePlaying)
+                [self pause];
+            else
+                [self play];
+            break;
         case UIEventSubtypeRemoteControlPlay:
             [self play];
             break;
@@ -198,11 +203,10 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
             break;
         case UIEventSubtypeRemoteControlNextTrack:
         case UIEventSubtypeRemoteControlBeginSeekingForward:
-            [self jumpForward];
-            break;
         case UIEventSubtypeRemoteControlPreviousTrack:
         case UIEventSubtypeRemoteControlBeginSeekingBackward:
             [self jumpBackward];
+            [self setPlaybackInfo:self.currentShow];
             break;
         default:
             break;
