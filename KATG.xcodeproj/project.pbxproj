@@ -172,6 +172,7 @@
 		01DE29CC18E567C500F87022 /* KATGWelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DE29CA18E567C500F87022 /* KATGWelcomeViewController.m */; };
 		01DE29CD18E567C500F87022 /* KATGWelcomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01DE29CB18E567C500F87022 /* KATGWelcomeViewController.xib */; };
 		01E8966018FBDE150036CAA8 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */; };
+		01E900EB19F18CA3004C1E3F /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 01E900EA19F18CA3004C1E3F /* UIRefreshControl+AFNetworking.m */; };
 		01EC330818A9990500156A3E /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 01EC330718A9990500156A3E /* libz.dylib */; };
 		01F827B61959DC8A00BDCFBA /* KATGUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F827B51959DC8A00BDCFBA /* KATGUtil.m */; };
 		01F827B91959F08000BDCFBA /* KATGMoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01F827B81959F08000BDCFBA /* KATGMoreViewController.m */; };
@@ -485,6 +486,8 @@
 		01DE29CA18E567C500F87022 /* KATGWelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGWelcomeViewController.m; path = "View Controllers/KATGWelcomeViewController.m"; sourceTree = "<group>"; };
 		01DE29CB18E567C500F87022 /* KATGWelcomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = KATGWelcomeViewController.xib; path = "View Controllers/KATGWelcomeViewController.xib"; sourceTree = "<group>"; };
 		01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		01E900E919F18CA3004C1E3F /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
+		01E900EA19F18CA3004C1E3F /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		01EC330718A9990500156A3E /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		01F827B41959DC8A00BDCFBA /* KATGUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGUtil.h; sourceTree = "<group>"; };
 		01F827B51959DC8A00BDCFBA /* KATGUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGUtil.m; sourceTree = "<group>"; };
@@ -711,6 +714,8 @@
 		012B4F121857A2ED00B59FC5 /* UIKit+AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
+				01E900E919F18CA3004C1E3F /* UIRefreshControl+AFNetworking.h */,
+				01E900EA19F18CA3004C1E3F /* UIRefreshControl+AFNetworking.m */,
 				012B4F131857A2ED00B59FC5 /* AFNetworkActivityIndicatorManager.h */,
 				012B4F141857A2ED00B59FC5 /* AFNetworkActivityIndicatorManager.m */,
 				012B4F151857A2ED00B59FC5 /* UIActivityIndicatorView+AFNetworking.h */,
@@ -1563,6 +1568,7 @@
 			files = (
 				22D07DD11676E9C6004EBEBB /* TDRoundedShadowView.m in Sources */,
 				01B5A7E7197F3261001DE1FD /* KATGTabBarViewController.m in Sources */,
+				01E900EB19F18CA3004C1E3F /* UIRefreshControl+AFNetworking.m in Sources */,
 				9108997115EAE15500FB57C3 /* main.m in Sources */,
 				9108997515EAE15500FB57C3 /* KATGAppDelegate.m in Sources */,
 				01DE29C018E3D5F200F87022 /* KATGEpisodesViewController.m in Sources */,

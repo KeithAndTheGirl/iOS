@@ -962,7 +962,6 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.attackwork.com"]];
     [manager POST:@"Voxback/Comment-Form-Iframe.aspx?VoxbackId=3&MixerCode=IEOSE&response-api=yes"
        parameters:parameters
-      cachePolicy:NSURLRequestReloadIgnoringCacheData
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               if(completion) {
                   completion([responseObject[@"error"] boolValue], responseObject[@"response"]);

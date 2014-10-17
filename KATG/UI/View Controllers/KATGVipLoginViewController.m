@@ -54,7 +54,6 @@
      [NSURL URLWithString:@"https://www.keithandthegirl.com/api/v2/"]];
     [manager POST:@"vip/authenticateuser/"
        parameters:@{@"email": login, @"password": pass}
-      cachePolicy:NSURLRequestReloadIgnoringCacheData
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
               NSLog(@"%@", responseObject);
               if([responseObject[@"Error"] integerValue] > 0) {
