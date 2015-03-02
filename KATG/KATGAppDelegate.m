@@ -28,7 +28,6 @@
 #import <MediaPlayer/MediaPlayer.h>
 
 #import "KATGSeriesViewController.h"
-#import <Crashlytics/Crashlytics.h>
 
 @protocol KATGNavBar7 <NSObject>
 
@@ -44,7 +43,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [Crashlytics startWithAPIKey:@"6529bbf53de23f5a315abe44c124b8b8f99e12ac"];
     self.task=[application beginBackgroundTaskWithExpirationHandler:^{
         NSLog(@"Expiration handler called %f",[application backgroundTimeRemaining]);
         [application endBackgroundTask:self.task];
