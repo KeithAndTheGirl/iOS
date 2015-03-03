@@ -1014,12 +1014,6 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
                 [self updateControlStates];
             }
             else {
-//                NSString *msg = [NSString stringWithFormat:@"Show \"%@\" was failed to download. %@", self.show.title, [error localizedDescription]];
-//                [[[UIAlertView alloc] initWithTitle:@"Download error"
-//                                            message:msg
-//                                           delegate:nil
-//                                  cancelButtonTitle:@"OK"
-//                                  otherButtonTitles:nil] show];
                 [UIAlertView errorWithTitle:@"Download error" error:error];
             }
 			NSParameterAssert([NSThread isMainThread]);
