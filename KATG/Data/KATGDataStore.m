@@ -720,9 +720,9 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 	NSLog(@"Deleting %ld shows", (long)[result count]);
 	for (KATGShow *show in result)
 	{
-		if (show.file_url)
+		if ([show getFilePath])
 		{
-			[[NSFileManager defaultManager] removeItemAtPath:show.file_url error:nil];
+			[[NSFileManager defaultManager] removeItemAtPath:[show getFilePath] error:nil];
 		}
 		[context deleteObject:show];
 	}

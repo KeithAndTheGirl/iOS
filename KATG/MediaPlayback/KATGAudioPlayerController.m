@@ -204,7 +204,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 			}];
 		}
 		self.currentTime = CMTimeMake(0, 0);
-		self.availabelDuration = CMTimeMake(0, 0);
+//		self.availabelDuration = CMTimeMake(0, 0);
 	}
 }
 
@@ -232,7 +232,8 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 {
 	CGFloat rate = self.avPlayer.rate;
 	AVPlayerItemStatus status = self.avPlayerItem.status;
-    self.availabelDuration = self.avPlayerItem.duration;
+    if(self.avPlayerItem.duration.value > 0)
+        self.availabelDuration = self.avPlayerItem.duration;
     self.error = self.avPlayerItem.error?self.avPlayerItem.error:self.avPlayer.error;
 	if (status == AVPlayerItemStatusFailed)
 	{

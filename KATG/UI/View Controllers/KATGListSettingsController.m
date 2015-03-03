@@ -30,7 +30,7 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     for(KATGShow *show in self.episodes) {
-        if(show.file_url)
+        if([show getFilePath])
             [self.downloadedEpisodes addObject:show];
     }
 }
@@ -151,7 +151,7 @@
         }
         else if(indexPath.row == 1) {
             for(KATGShow *show in self.selectedEpisodes) {
-                if(show.file_url)
+                if([show getFilePath])
                     [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:show];
             }
             [self.selectedEpisodes removeAllObjects];
@@ -167,7 +167,7 @@
     
     [self.downloadedEpisodes removeAllObjects];
     for(KATGShow *show in self.episodes) {
-        if(show.file_url)
+        if([show getFilePath])
             [self.downloadedEpisodes addObject:show];
     }
     [_tableView reloadData];
@@ -177,7 +177,7 @@
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if(buttonIndex == 1) {
         for(KATGShow *show in self.episodes) {
-            if(show.file_url)
+            if([show getFilePath])
                 [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:show];
         }
     }

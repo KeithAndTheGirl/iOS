@@ -76,6 +76,8 @@ extern NSString *const KATGShowEpisodeIDAttributeName;
 + (NSArray *)guestDictionariesForShowDictionary:(NSDictionary *)showDictionary;
 - (KATGShowObjectStatus)showStatusBasedOnNotification:(NSNotification *)note checkRelationships:(bool)checkRelationships;
 
+-(NSString*)getFilePath;
+
 @end
 
 @interface KATGShow (CoreDataGeneratedAccessors)

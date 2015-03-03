@@ -84,7 +84,7 @@
 }
 
 - (KATGDownloadOperation *)downloadOperationWithUrl:(NSURL*)url
-                                            fileURL:fileURL
+                                            fileURL:(NSURL*)fileURL
                                            progress:(void (^)(CGFloat progress))progress
                                             success:(void(^)())success
                                             failure:(void(^)(NSError*))failure
@@ -188,8 +188,6 @@
     [KATGUtil setCookieWithName:KATG_PLAYBACK_UID value:[[def valueForKey:KATG_PLAYBACK_UID] stringValue]  forURL:url];
     [KATGUtil setCookieWithName:KATG_PLAYBACK_KEY value:[def valueForKey:KATG_PLAYBACK_KEY]  forURL:url];
     
-    
-	NSURL *fileURL = [[self fileURLForEpisodeID:episodeID] URLByAppendingPathExtension:[url pathExtension]];
 	void (^finishWithError)(NSError *) = ^(NSError *error) {
 		[token callCompletionBlockWithError:error];
 		[self.urlToTokenMap removeObjectForKey:url];
@@ -217,24 +215,24 @@
         }];
     };
     
-    [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:[fileURL path] error:nil];
+    [[NSFileManager defaultManager] setAttributes:@{NSFileProtectionKey:NSFileProtectionCompleteUntilFirstUserAuthentication} ofItemAtPath:[show getFilePath] error:nil];
     NSManagedObjectContext *context = [[KATGDataStore sharedStore] childContext];
     NSParameterAssert(context);
     [context performBlock:^{
         KATGShow *fetchedShow = [[KATGDataStore sharedStore] fetchShowWithID:episodeID context:context];
         if (fetchedShow) {
-            fetchedShow.file_url = [fileURL path];
             [[KATGDataStore sharedStore] saveChildContext:context completion:nil];
         }
     }];
     
-    KATGDownloadOperation *op = [self downloadOperationWithUrl:url fileURL:fileURL progress:progress success:success failure:finishWithError autoRetryOf:15 retryInterval:10];
+    NSURL *fileUrl = [NSURL fileURLWithPath:[show getFilePath]];
+    KATGDownloadOperation *op = [self downloadOperationWithUrl:url fileURL:fileUrl progress:progress success:success failure:finishWithError autoRetryOf:15 retryInterval:10];
     [op setResponseBlock:^(NSURLResponse *response) {
         int downloadedSize = 0;
-        if ([fileURL checkResourceIsReachableAndReturnError:nil]) {
+        if ([fileUrl checkResourceIsReachableAndReturnError:nil]) {
             NSNumber *sizeObject;
             NSError *error;
-            if ([fileURL getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:&error]) {
+            if ([fileUrl getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:&error]) {
                 downloadedSize = [sizeObject intValue];
             }
         }
@@ -256,10 +254,10 @@
 }
 
 - (void)removeDownloadedEpisodeAudio:(KATGShow *)show {
-    if (show.file_url) {
-        [[NSFileManager defaultManager] removeItemAtPath:show.file_url error:nil];
+    NSString *filePath = [show getFilePath];
+    if (filePath) {
+        [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
         show.downloaded = @NO;
-        show.file_url = nil;
         [[KATGDataStore sharedStore] saveChildContext:[[KATGDataStore sharedStore] childContext] completion:^(NSError *saveError) {
             CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopDefaultMode, ^{
                 if (saveError)
@@ -269,27 +267,6 @@
             });
         }];
     }
-}
-
-- (NSURL *)fileURLForEpisodeID:(NSNumber *)episodeID {
-	NSParameterAssert(episodeID);
-	NSString *fileName = [NSString stringWithFormat:@"%@", episodeID];
-	NSURL *url = [[NSFileManager defaultManager] URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:nil];
-	url = [url URLByAppendingPathComponent:@"Media"];
-	BOOL isDir;
-	if (![[NSFileManager defaultManager] fileExistsAtPath:[url path] isDirectory:&isDir]) {
-		NSError *error;
-		if (![[NSFileManager defaultManager] createDirectoryAtURL:url withIntermediateDirectories:NO attributes:nil error:nil])
-		{
-			NSLog(@"%@", error);
-			return nil;
-		}
-	}
-	else {
-		NSParameterAssert(isDir);
-	}
-	url = [url URLByAppendingPathComponent:fileName];
-	return url;
 }
 
 @end

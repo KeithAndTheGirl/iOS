@@ -46,6 +46,15 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 @dynamic video_file_url;
 @dynamic video_thumbnail_url;
 
+-(NSString*)getFilePath {
+    if([[self.media_url lastPathComponent] length] == 0)
+        return nil;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *dataPath = [documentsDirectory stringByAppendingPathComponent:[self.media_url lastPathComponent]];
+    return dataPath;
+}
+
 -(NSNumber*)lastPlaybackTime {
     NSString *key = [NSString stringWithFormat:@"lastPlaybackTime-%@", self.episode_id];
     NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];

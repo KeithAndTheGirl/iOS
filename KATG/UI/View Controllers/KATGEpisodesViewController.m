@@ -137,7 +137,7 @@
     NSMutableArray *sourceArray = [NSMutableArray array];
     if(filterDownloaded) {
         for(KATGShow *show in [self.fetchedResultsController fetchedObjects])
-            if(show.file_url)
+            if([show getFilePath])
                 [sourceArray addObject:show];
     }
     else {

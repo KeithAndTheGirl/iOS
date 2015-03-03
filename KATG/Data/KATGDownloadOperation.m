@@ -36,7 +36,7 @@
 - (BOOL)exists:(NSURL *)fileURL size:(int *)size
 {
 	NSParameterAssert(size);
-	NSParameterAssert([fileURL isFileURL]);
+	NSParameterAssert([fileURL path]);
 	BOOL fileExists;
 	if ([fileURL checkResourceIsReachableAndReturnError:nil])
 	{

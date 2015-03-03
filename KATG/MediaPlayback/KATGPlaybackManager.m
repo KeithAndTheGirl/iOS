@@ -238,15 +238,15 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
     [self setPlaybackInfo:currentShow];
 	if (!self.audioPlaybackController)
 	{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if([currentShow.duration intValue] == 0) {
-                AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:currentShow.media_url] options:nil];
-                CMTime audioDuration = audioAsset.duration;
-                float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
-                currentShow.duration = @(audioDurationSeconds);
-                self.audioPlaybackController.totalDurationSeconds = audioDurationSeconds;
-            }
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            if([currentShow.duration intValue] == 0) {
+//                AVURLAsset* audioAsset = [AVURLAsset URLAssetWithURL:[NSURL URLWithString:currentShow.media_url] options:nil];
+//                CMTime audioDuration = audioAsset.duration;
+//                float audioDurationSeconds = CMTimeGetSeconds(audioDuration);
+//                currentShow.duration = @(audioDurationSeconds);
+//                self.audioPlaybackController.totalDurationSeconds = audioDurationSeconds;
+//            }
+//        });
         
 		NSURL *url;
 		if (self.liveShow)
@@ -256,10 +256,10 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 			//url = [NSURL URLWithString:@"http://stream.keithandthegirl.com:8000/stream/1/"];
 			NSParameterAssert(url);
 		}
-		else if ([currentShow file_url])
+		else if ([currentShow getFilePath])
 		{
-			url = [NSURL fileURLWithPath:currentShow.file_url];
-            NSLog(@"Start playing local file: %@", currentShow.file_url);
+			url = [NSURL fileURLWithPath:[currentShow getFilePath]];
+            NSLog(@"Start playing local file: %@", [currentShow getFilePath]);
 		}
 		else
 		{
@@ -276,7 +276,6 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 		}
         
         self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];
-        self.audioPlaybackController.totalDurationSeconds = [currentShow.duration doubleValue];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(remoteControlAction:)
@@ -357,6 +356,8 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 
 - (void)player:(KATGAudioPlayerController *)player didChangeDuration:(CMTime)duration
 {
+    self.currentShow.duration = @(CMTimeGetSeconds(duration));
+    self.audioPlaybackController.totalDurationSeconds = CMTimeGetSeconds(duration);
 	[self setPlaybackInfo:self.currentShow];
 }
 

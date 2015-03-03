@@ -176,10 +176,10 @@ typedef enum {
     [[NSNotificationCenter defaultCenter] addObserver:self.tableView selector:@selector(reloadData) name:KATGDataStoreShowDidChangeNotification object:nil];
     
     self.downloadProgress = 0.0;
-    if (self.show.file_url && [[NSURL fileURLWithPath:self.show.file_url] checkResourceIsReachableAndReturnError:nil])
+    if (self.show.downloaded && [[NSURL fileURLWithPath:[self.show getFilePath]] checkResourceIsReachableAndReturnError:nil])
     {
         NSNumber *sizeObject;
-        if ([[NSURL fileURLWithPath:self.show.file_url] getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:nil])
+        if ([[NSURL fileURLWithPath:[self.show getFilePath]] getResourceValue:&sizeObject forKey:NSURLFileSizeKey error:nil])
         {
             self.downloadProgress = (double)[sizeObject intValue] / [self.show.fileSize intValue];
         }
@@ -672,16 +672,19 @@ typedef enum {
 	}
 	else
 	{
-        if (![self isCurrentShow]) {
-            if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
-                [[KATGPlaybackManager sharedManager] stop];
-            }
-            [[KATGPlaybackManager sharedManager] configureWithShow:self.show];
-        }
-        [[KATGPlaybackManager sharedManager] play];
-        
         if(!self.downloadToken && ![self.show.downloaded boolValue]) {
+            [[KATGPlaybackManager sharedManager] stop];
+            [[KATGPlaybackManager sharedManager] configureWithShow:self.show];
             [self downloadEpisodeAndPlay:YES];
+        }
+        else {
+            if (![self isCurrentShow]) {
+                if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStatePlaying) {
+                    [[KATGPlaybackManager sharedManager] stop];
+                }
+                [[KATGPlaybackManager sharedManager] configureWithShow:self.show];
+            }
+            [[KATGPlaybackManager sharedManager] play];
         }
 	}
     [self updateControlStates];
@@ -699,7 +702,7 @@ typedef enum {
 
 - (void)sliderChanged:(id)sender
 {
-	[self seekToTimeBasedOnSlider];
+    [self seekToTimeBasedOnSlider];
 }
 
 - (void)sliderDidBeginDragging:(id)sender
@@ -716,12 +719,16 @@ typedef enum {
 - (void)seekToTimeBasedOnSlider
 {
 	CMTime currentTime = CMTimeMakeWithSeconds(self.controlsView.positionSlider.value, 1);
-	[[KATGPlaybackManager sharedManager] seekToTime:currentTime];
+    if([[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying || [self isCurrentShow])
+        [[KATGPlaybackManager sharedManager] seekToTime:currentTime];
 }
 
 - (void)updateControlStates
 {
-	if ([self isCurrentShow])
+    if (self.downloadToken) {
+        self.controlsView.currentState = KATGAudioPlayerStateLoading;
+    }
+	else if ([self isCurrentShow])
 	{
 		self.controlsView.currentState = [[KATGPlaybackManager sharedManager] state];
 	}
@@ -954,6 +961,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 
 -(void)downloadButtonPressed:(id)sender {
     [self downloadEpisodeAndPlay:NO];
+    [self updateControlStates];
 }
 
 - (void)downloadEpisodeAndPlay:(BOOL)shouldPlay
@@ -975,6 +983,8 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
             }
         }
         
+        [self.tableView scrollRectToVisible:CGRectMake(0, self.tableView.contentSize.height-1, 1, 1) animated:YES];
+        
 		typeof(*self) *weakSelf = self;
         __block BOOL playFlag = shouldPlay;
 		void (^progress)(CGFloat progress) = ^(CGFloat progress) {
@@ -982,24 +992,26 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)
 			{
-                if(progress > 0.01 && playFlag) {
-                    playFlag = NO;
-                    if([[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying)
-                        [[KATGPlaybackManager sharedManager] play];
-                }
                 weakSelf.downloadProgress = progress;
                 KATGDownloadEpisodeCell *downloadCell = (KATGDownloadEpisodeCell *)[strongSelf.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:KATGShowDetailsSectionDownload]];
                 downloadCell.progress = progress;
                 downloadCell.state = KATGDownloadEpisodeCellStateDownloading;
-                
 			}
 		};
 		self.downloadToken = [[KATGAudioDownloadManager sharedManager] downloadEpisodeAudio:self.show progress:progress completion:^(NSError *error) {
             if(!error) {
-                UILocalNotification *ntfy = [[UILocalNotification alloc] init];
-                ntfy.userInfo = @{@"show": self.show.episode_id};
-                ntfy.alertBody = [NSString stringWithFormat:@"Show \"%@\" was downloaded", self.show.title];
-                [[UIApplication sharedApplication] presentLocalNotificationNow:ntfy];
+                if(playFlag && [[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying) {
+                    [[KATGPlaybackManager sharedManager] play];
+                }
+                else {
+                    self.downloadToken = nil;
+                    
+                    UILocalNotification *ntfy = [[UILocalNotification alloc] init];
+                    ntfy.userInfo = @{@"show": self.show.episode_id};
+                    ntfy.alertBody = [NSString stringWithFormat:@"Show \"%@\" was downloaded", self.show.title];
+                    [[UIApplication sharedApplication] presentLocalNotificationNow:ntfy];
+                }
+                [self updateControlStates];
             }
             else {
 //                NSString *msg = [NSString stringWithFormat:@"Show \"%@\" was failed to download. %@", self.show.title, [error localizedDescription]];
@@ -1055,7 +1067,8 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 			[[KATGAudioDownloadManager sharedManager] cancelDownloadToken:self.downloadToken];
             self.downloadToken = nil;
 			self.shouldReloadDownload = true;
-			[self queueReload];
+            [self queueReload];
+            [self updateControlStates];
 		}
 	}
 }
