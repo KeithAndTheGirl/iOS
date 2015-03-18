@@ -27,7 +27,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>44</string>
+	<string>46</string>
 	<key>LSApplicationCategoryType</key>
 	<string>public.app-category.entertainment</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -36,6 +36,8 @@
 	<string>Doug Russell (Code) Keith and The Girl (Content)</string>
 	<key>NSMainNibFile</key>
 	<string>Application</string>
+	<key>Pushwoosh_APPID</key>
+	<string>944F1-8F950</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>OpenSans-Semibold.ttf</string>

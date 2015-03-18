@@ -20,7 +20,6 @@
 
 #import "KATGAppDelegate.h"
 #import "KATGAudioSessionManager.h"
-#import "KATGPushRegistration.h"
 #import "KATGWelcomeViewController.h"
 #import "KATGShowViewController.h"
 #import "KATGDataStore.h"
@@ -29,13 +28,15 @@
 
 #import "KATGSeriesViewController.h"
 
+#import <Pushwoosh/PushNotificationManager.h>
+
 @protocol KATGNavBar7 <NSObject>
 
 - (void)setTintColor:(UIColor *)color;
 
 @end
 
-@interface KATGAppDelegate ()
+@interface KATGAppDelegate () <PushNotificationDelegate>
 - (void)setupAppearance;
 @end
 
@@ -60,26 +61,45 @@
 		[[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound];
 	});
     
+
+    //-----------PUSHWOOSH PART-----------
+    // set custom delegate for push handling, in our case - view controller
+    PushNotificationManager * pushManager = [PushNotificationManager pushManager];
+    pushManager.delegate = self;
+    
+    // handling push on app start
+    [pushManager handlePushReceived:launchOptions];
+    
+    // make sure we count app open in Pushwoosh stats
+    [pushManager sendAppOpen];
+    
+    // register for push notifications!
+    [pushManager registerForPushNotifications];
+   
 	return YES;
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-	KATGPushRegistration *registration = [KATGPushRegistration sharedInstance];
-	registration.deviceToken = deviceToken;
-	[registration sendToken];
+// system push notification registration success callback, delegate to pushManager
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[PushNotificationManager pushManager] handlePushRegistration:deviceToken];
 }
 
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
-{
-	
+// system push notification registration error callback, delegate to pushManager
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    [[PushNotificationManager pushManager] handlePushRegistrationFailure:error];
 }
 
+// system push notifications callback, delegate to pushManager
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
-    NSArray *notifications = [def objectForKey:@"notifications"];
-    [[NSUserDefaults standardUserDefaults] setObject:[notifications arrayByAddingObject:userInfo] forKey:@"notifications"];
-    [def synchronize];
+    [[PushNotificationManager pushManager] handlePushReceived:userInfo];
+}
+
+- (void) onPushAccepted:(PushNotificationManager *)pushManager withNotification:(NSDictionary *)pushNotification {
+    NSLog(@"Push notification received");
+//    NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
+//    NSArray *notifications = [def objectForKey:@"notifications"];
+//    [[NSUserDefaults standardUserDefaults] setObject:[notifications arrayByAddingObject:pushNotification] forKey:@"notifications"];
+//    [def synchronize];
 }
 
 - (BOOL)canPresentShowControllerWithShowID:(NSNumber*)show_id {

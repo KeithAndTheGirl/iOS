@@ -190,6 +190,9 @@
 		01F827D4195A23B300BDCFBA /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D2195A23B300BDCFBA /* feedback@2x.png */; };
 		01F827D5195A23B300BDCFBA /* messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D3195A23B300BDCFBA /* messages@2x.png */; };
 		01FC49CA19D1ED82002F42C7 /* KATGAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC49C919D1ED82002F42C7 /* KATGAlert.m */; };
+		03A219851AAFA5B6005DC2D4 /* DebugEntitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03A219831AAFA5B6005DC2D4 /* DebugEntitlements.plist */; };
+		03A219861AAFA5B6005DC2D4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03A219841AAFA5B6005DC2D4 /* Entitlements.plist */; };
+		03EE89351AB928C60009CDF7 /* Pushwoosh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EE89341AB928C60009CDF7 /* Pushwoosh.framework */; };
 		03FA715E1AA418B000A5702E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03FA715D1AA418B000A5702E /* MobileCoreServices.framework */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
 		22192ED316745FF000D2B1C1 /* TDCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ED216745FF000D2B1C1 /* TDCollectionView.m */; };
@@ -252,13 +255,10 @@
 		9115C14D172E2C48002942B6 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9115C14C172E2C48002942B6 /* AssetsLibrary.framework */; };
 		9123757C172DBFA500A194F2 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9123757B172DBFA400A194F2 /* EventKit.framework */; };
 		9123757E172DBFB700A194F2 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9123757D172DBFB700A194F2 /* EventKitUI.framework */; };
-		9131561217717CE000475CAE /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9131561117717CE000475CAE /* Entitlements.plist */; };
 		919E7E7E16F24F26007B7805 /* KATGImageScalingOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 919E7E7D16F24F26007B7805 /* KATGImageScalingOperation.m */; };
 		91BB0CFC16DAD9CC00EC4DA2 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91BB0CFB16DAD9CB00EC4DA2 /* MediaPlayer.framework */; };
 		91BE199517235BAD006CD2B1 /* KATGDownloadToken.m in Sources */ = {isa = PBXBuildFile; fileRef = 91BE199417235BAC006CD2B1 /* KATGDownloadToken.m */; };
 		91C00D3616EBC2C40064A458 /* KATGImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 91C00D3516EBC2C40064A458 /* KATGImageCache.m */; };
-		91FCB68C1771774700EE9001 /* KATGPushRegistration.m in Sources */ = {isa = PBXBuildFile; fileRef = 91FCB68B1771774700EE9001 /* KATGPushRegistration.m */; };
-		91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 91FD856A177185FA0061C632 /* DebugEntitlements.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -510,6 +510,9 @@
 		01F827D3195A23B300BDCFBA /* messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messages@2x.png"; sourceTree = "<group>"; };
 		01FC49C819D1ED82002F42C7 /* KATGAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAlert.h; path = "Custom Views/KATGAlert.h"; sourceTree = "<group>"; };
 		01FC49C919D1ED82002F42C7 /* KATGAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAlert.m; path = "Custom Views/KATGAlert.m"; sourceTree = "<group>"; };
+		03A219831AAFA5B6005DC2D4 /* DebugEntitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DebugEntitlements.plist; sourceTree = "<group>"; };
+		03A219841AAFA5B6005DC2D4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		03EE89341AB928C60009CDF7 /* Pushwoosh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pushwoosh.framework; sourceTree = "<group>"; };
 		03FA715D1AA418B000A5702E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
 		22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UICollectionView+TDAdditions.m"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.m"; sourceTree = "<group>"; };
@@ -628,7 +631,6 @@
 		9115C14C172E2C48002942B6 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		9123757B172DBFA400A194F2 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		9123757D172DBFB700A194F2 /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
-		9131561117717CE000475CAE /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		919E7E7C16F24F26007B7805 /* KATGImageScalingOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGImageScalingOperation.h; sourceTree = "<group>"; };
 		919E7E7D16F24F26007B7805 /* KATGImageScalingOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGImageScalingOperation.m; sourceTree = "<group>"; };
 		91BB0CFB16DAD9CB00EC4DA2 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -637,10 +639,7 @@
 		91C00D3416EBC2C40064A458 /* KATGImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGImageCache.h; sourceTree = "<group>"; };
 		91C00D3516EBC2C40064A458 /* KATGImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGImageCache.m; sourceTree = "<group>"; };
 		91C00D3716EBC3D80064A458 /* KATGDataStore_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KATGDataStore_Internal.h; sourceTree = "<group>"; };
-		91FCB68A1771774700EE9001 /* KATGPushRegistration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGPushRegistration.h; sourceTree = "<group>"; };
-		91FCB68B1771774700EE9001 /* KATGPushRegistration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KATGPushRegistration.m; sourceTree = "<group>"; };
 		91FCB68D1771792300EE9001 /* KATGPushRegistrationKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KATGPushRegistrationKeys.h; sourceTree = "<group>"; };
-		91FD856A177185FA0061C632 /* DebugEntitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DebugEntitlements.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -649,6 +648,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				03FA715E1AA418B000A5702E /* MobileCoreServices.framework in Frameworks */,
+				03EE89351AB928C60009CDF7 /* Pushwoosh.framework in Frameworks */,
 				0157F02E1960EEE700A0A9D1 /* JavaScriptCore.framework in Frameworks */,
 				01B1CFF7195D91EB00B2268A /* MessageUI.framework in Frameworks */,
 				01EC330818A9990500156A3E /* libz.dylib in Frameworks */,
@@ -1125,11 +1125,11 @@
 		9108996B15EAE15500FB57C3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				03A219831AAFA5B6005DC2D4 /* DebugEntitlements.plist */,
+				03A219841AAFA5B6005DC2D4 /* Entitlements.plist */,
 				01E8965F18FBDE150036CAA8 /* OpenSans-Semibold.ttf */,
 				018C35FB18E94F3300E218D8 /* Images */,
 				9108996C15EAE15500FB57C3 /* KATG-Info.plist */,
-				91FD856A177185FA0061C632 /* DebugEntitlements.plist */,
-				9131561117717CE000475CAE /* Entitlements.plist */,
 				9108996D15EAE15500FB57C3 /* InfoPlist.strings */,
 				9108997015EAE15500FB57C3 /* main.m */,
 				9108997215EAE15500FB57C3 /* KATG-Prefix.pch */,
@@ -1169,8 +1169,6 @@
 				919E7E7D16F24F26007B7805 /* KATGImageScalingOperation.m */,
 				910FCD6417237ECC003491A1 /* KATGReachabilityOperation.h */,
 				910FCD6517237ECC003491A1 /* KATGReachabilityOperation.m */,
-				91FCB68A1771774700EE9001 /* KATGPushRegistration.h */,
-				91FCB68B1771774700EE9001 /* KATGPushRegistration.m */,
 				91FCB68D1771792300EE9001 /* KATGPushRegistrationKeys.h */,
 				913CE28716D5C50400CF61D2 /* Model */,
 			);
@@ -1180,6 +1178,7 @@
 		910899C115EAE58600FB57C3 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				03EE89341AB928C60009CDF7 /* Pushwoosh.framework */,
 				0157F0141960EB3C00A0A9D1 /* XCDYouTubeKit */,
 				012B4EFE1857A2ED00B59FC5 /* AFNetworking */,
 				22D07DC91676558D004EBEBB /* TDRoundedShadowView */,
@@ -1430,6 +1429,7 @@
 				018C36C018E94F3400E218D8 /* EpisodesOn@2x.png in Resources */,
 				018C368218E94F3400E218D8 /* DownloadShowButton@2x.png in Resources */,
 				01F827D4195A23B300BDCFBA /* feedback@2x.png in Resources */,
+				03A219851AAFA5B6005DC2D4 /* DebugEntitlements.plist in Resources */,
 				018C36D418E94F3400E218D8 /* tw@2x.png in Resources */,
 				018C36A918E94F3400E218D8 /* skip-forward@2x.png in Resources */,
 				018C36B818E94F3400E218D8 /* ShowHeaderBackground@2x.png in Resources */,
@@ -1492,7 +1492,6 @@
 				018C36D218E94F3400E218D8 /* TitleBackgroundVip@2x.png in Resources */,
 				018C367018E94F3400E218D8 /* ArrowNext.png in Resources */,
 				01DE29CD18E567C500F87022 /* KATGWelcomeViewController.xib in Resources */,
-				9131561217717CE000475CAE /* Entitlements.plist in Resources */,
 				018C36D718E94F3400E218D8 /* welcome2.png in Resources */,
 				018C36AD18E94F3400E218D8 /* more_of_chemda@2x.png in Resources */,
 				018C36BF18E94F3400E218D8 /* EpisodesOn.png in Resources */,
@@ -1501,7 +1500,6 @@
 				018C36B718E94F3400E218D8 /* ShowHeaderBackground.png in Resources */,
 				018C36A118E94F3400E218D8 /* main-bg@2x.png in Resources */,
 				018C368318E94F3400E218D8 /* fb.png in Resources */,
-				91FD856B177185FA0061C632 /* DebugEntitlements.plist in Resources */,
 				018C367318E94F3400E218D8 /* CheckMark@2x.png in Resources */,
 				01BCE80C186C208600F096EF /* Images.xcassets in Resources */,
 				018C369518E94F3400E218D8 /* indicators1@2x.png in Resources */,
@@ -1535,6 +1533,7 @@
 				018C369718E94F3400E218D8 /* indicators2@2x.png in Resources */,
 				018C36A418E94F3400E218D8 /* play.png in Resources */,
 				018C368718E94F3400E218D8 /* get_the_guide.png in Resources */,
+				03A219861AAFA5B6005DC2D4 /* Entitlements.plist in Resources */,
 				018C36C118E94F3400E218D8 /* Live.png in Resources */,
 				018C36B418E94F3400E218D8 /* ProgressFill.png in Resources */,
 				018C36B118E94F3400E218D8 /* NowPlaying@2x.png in Resources */,
@@ -1655,7 +1654,6 @@
 				228D44071732B9D000FA94FE /* KATGLiveShowFeedbackViewController.m in Sources */,
 				012B4F2F1857A2ED00B59FC5 /* UIImageView+AFNetworking.m in Sources */,
 				01DE296318E298ED00F87022 /* KATGSeriesViewController.m in Sources */,
-				91FCB68C1771774700EE9001 /* KATGPushRegistration.m in Sources */,
 				01CCD312190D86F600CE3956 /* KATGVipLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1697,6 +1695,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DPUSHDEVSERVER";
+				PROVISIONING_PROFILE = "ea5acc10-1b1a-4bac-a9b6-2a2ee3f3b576";
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1719,6 +1718,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "ea5acc10-1b1a-4bac-a9b6-2a2ee3f3b576";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1730,7 +1730,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = KATG/DebugEntitlements.plist;
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KATG/ThirdParty",
@@ -1740,8 +1741,9 @@
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e0fc5d27-d590-4dfc-a515-c9eca868d43c";
+				PROVISIONING_PROFILE = "ea5acc10-1b1a-4bac-a9b6-2a2ee3f3b576";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1752,7 +1754,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = KATG/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KATG/ThirdParty",
@@ -1762,8 +1765,9 @@
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "06777717-ef78-4e09-9980-a0be68374074";
+				PROVISIONING_PROFILE = "ea5acc10-1b1a-4bac-a9b6-2a2ee3f3b576";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1785,6 +1789,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "ea5acc10-1b1a-4bac-a9b6-2a2ee3f3b576";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1796,7 +1801,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = KATG/Entitlements.plist;
+				CODE_SIGN_IDENTITY = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/KATG/ThirdParty",
@@ -1806,8 +1812,9 @@
 				INFOPLIST_FILE = "KATG/KATG-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ea5acc10-1b1a-4bac-a9b6-2a2ee3f3b576";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
