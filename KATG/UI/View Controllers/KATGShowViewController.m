@@ -1003,14 +1003,13 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
                 if(playFlag && [[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying) {
                     [[KATGPlaybackManager sharedManager] play];
                 }
-                else {
-                    self.downloadToken = nil;
-                    
+                if(self.view.window == nil || [[UIApplication sharedApplication] applicationState] != UIApplicationStateActive) {
                     UILocalNotification *ntfy = [[UILocalNotification alloc] init];
                     ntfy.userInfo = @{@"show": self.show.episode_id};
                     ntfy.alertBody = [NSString stringWithFormat:@"Show \"%@\" was downloaded", self.show.title];
                     [[UIApplication sharedApplication] presentLocalNotificationNow:ntfy];
                 }
+                self.downloadToken = nil;
                 [self updateControlStates];
             }
             else {
