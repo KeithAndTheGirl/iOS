@@ -391,7 +391,9 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	{
 		episodeInfo[MPMediaItemPropertyAlbumTrackNumber] = currentShow.number;
 	}
-	UIImage *image = [UIImage imageNamed:@"iTunesArtwork"];
+    NSString *imageLink = [[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"cover-%@", currentShow.series_id]];
+    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageLink]]];
+    
 	if (image)
 	{
 		MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];

@@ -35,6 +35,7 @@
 
 -(void)layoutSubviews {
     [imageView setImageWithURL:[NSURL URLWithString:_object.cover_image_url]];
+    [[NSUserDefaults standardUserDefaults] setObject:_object.cover_image_url forKey:[NSString stringWithFormat:@"cover-%@", _object.series_id]];
     
     BOOL vip = [_object.vip_status boolValue];
     NSString *title = [NSString stringWithFormat:@"%@ %@ ", vip?@" VIP ":@"", _object.title];
