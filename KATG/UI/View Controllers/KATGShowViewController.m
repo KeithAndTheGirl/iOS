@@ -1045,6 +1045,8 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
         }
         [[KATGAudioDownloadManager sharedManager] removeDownloadedEpisodeAudio:self.show];
         [[KATGPlaybackManager sharedManager] stop];
+        self.downloadProgress = 0;
+        [self.tableView reloadData];
     }
 }
 
