@@ -721,6 +721,9 @@ typedef enum {
 	CMTime currentTime = CMTimeMakeWithSeconds(self.controlsView.positionSlider.value, 1);
     if([[KATGPlaybackManager sharedManager] state] != KATGAudioPlayerStatePlaying || [self isCurrentShow])
         [[KATGPlaybackManager sharedManager] seekToTime:currentTime];
+    if(![self isCurrentShow]) {
+        self.show.lastPlaybackTime = @(self.controlsView.positionSlider.value);
+    }
 }
 
 - (void)updateControlStates
@@ -736,6 +739,14 @@ typedef enum {
 	{
 		self.controlsView.currentState = KATGAudioPlayerStateDone;
 	}
+    
+    Float64 currentTime = [self.show.lastPlaybackTime floatValue];
+    Float64 wholeDuration = [self.show.duration floatValue];
+    Float64 availabelDuration = CMTimeGetSeconds([[KATGPlaybackManager sharedManager] availabelDuration]);
+    
+    self.controlsView.positionSlider.maximumValue = wholeDuration;
+    self.controlsView.positionSlider.loadedValue = availabelDuration;
+    self.controlsView.positionSlider.value = currentTime;
     [self.controlsView setNeedsLayout];
     
     if([[KATGPlaybackManager sharedManager] state] == KATGAudioPlayerStateFailed) {

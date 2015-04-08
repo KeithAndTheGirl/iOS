@@ -21,6 +21,7 @@
 #import "KATGShow.h"
 #import "KATGGuest.h"
 #import "KATGImage.h"
+#import <AVFoundation/AVFoundation.h>
 
 NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 
@@ -72,6 +73,12 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 -(NSNumber*)duration {
     NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
     NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
+    if(value == nil && self.downloaded) {
+        NSURL *mediaURL = [[NSURL alloc] initFileURLWithPath:[self getFilePath]];
+        AVAsset *asset = [AVAsset assetWithURL:mediaURL];
+        double value = CMTimeGetSeconds(asset.duration);
+        return @(value);
+    }
 //    NSLog(@"Return Duration %@ for episode %@", value, self.episode_id);
     return value;
 }
