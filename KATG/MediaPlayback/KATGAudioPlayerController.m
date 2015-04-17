@@ -47,6 +47,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 @property (nonatomic) id didEndObserver;
 
 @property (nonatomic) bool isApplicationActive;
+@property (nonatomic) bool pausedForAudioSessionInterruption;
 
 @property NSInteger fileSize;
 
@@ -75,6 +76,8 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 		_isApplicationActive = (bool)([[UIApplication sharedApplication] applicationState] == UIApplicationStateActive);
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(audioSessionInterrupted:) name:AVAudioSessionInterruptionNotification object:nil];
+
 	}
 	return self;
 }
@@ -93,9 +96,30 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		[self.avPlayer setRate:0.0f];
 	}
 	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationWillResignActiveNotification object:nil];
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidBecomeActiveNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:AVAudioSessionInterruptionNotification object:nil];
 }
 
+#pragma mark -
+
+- (void)audioSessionInterrupted:(NSNotification *)notification {
+    int interruptionType = [notification.userInfo[AVAudioSessionInterruptionTypeKey] intValue];
+    if (interruptionType == AVAudioSessionInterruptionTypeBegan) {
+        if (self.state == KATGAudioPlayerStatePlaying) {
+            NSLog(@"Pausing for audio session interruption");
+            self.pausedForAudioSessionInterruption = YES;
+            [self pause];
+        }
+    } else if (interruptionType == AVAudioSessionInterruptionTypeEnded) {
+        if ([notification.userInfo[AVAudioSessionInterruptionOptionKey] intValue] == AVAudioSessionInterruptionOptionShouldResume) {
+            if (self.pausedForAudioSessionInterruption) {
+                NSLog(@"Resuming after audio session interruption");
+                [self play];
+            }
+        }
+        self.pausedForAudioSessionInterruption = NO;
+    }
+}
 #pragma mark - 
 
 - (void)willResignActive:(NSNotification *)notification
