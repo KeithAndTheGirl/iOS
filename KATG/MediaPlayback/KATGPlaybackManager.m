@@ -88,7 +88,43 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 -(id)init {
     self = [super init];
     [KATGURLProtocol register];
+    
+    MPRemoteCommandCenter *rcc = [MPRemoteCommandCenter sharedCommandCenter];
+    MPSkipIntervalCommand *skipBackwardIntervalCommand = [rcc skipBackwardCommand];
+    [skipBackwardIntervalCommand setEnabled:YES];
+    [skipBackwardIntervalCommand addTarget:self action:@selector(skipBackwardEvent:)];
+    skipBackwardIntervalCommand.preferredIntervals = @[@(15)];  // Set your own interval
+    
+    MPSkipIntervalCommand *skipForwardIntervalCommand = [rcc skipForwardCommand];
+    skipForwardIntervalCommand.preferredIntervals = @[@(15)];  // Max 99
+    [skipForwardIntervalCommand setEnabled:YES];
+    [skipForwardIntervalCommand addTarget:self action:@selector(skipForwardEvent:)];
+    
+    MPRemoteCommand *pauseCommand = [rcc pauseCommand];
+    [pauseCommand setEnabled:YES];
+    [pauseCommand addTarget:self action:@selector(playOrPauseEvent:)];
+    //
+    MPRemoteCommand *playCommand = [rcc playCommand];
+    [playCommand setEnabled:YES];
+    [playCommand addTarget:self action:@selector(playOrPauseEvent:)];
+    
     return self;
+}
+
+#pragma mark - Lock screen actions
+-(void)skipBackwardEvent: (MPSkipIntervalCommandEvent *)skipEvent {
+    NSLog(@"Skip backward by %f", skipEvent.interval);
+    [self jumpBackward];
+    [self setPlaybackInfo:self.currentShow];
+}
+-(void)skipForwardEvent: (MPSkipIntervalCommandEvent *)skipEvent {
+    NSLog(@"Skip forward by %f", skipEvent.interval);
+    [self jumpForward];
+    [self setPlaybackInfo:self.currentShow];
+}
+-(void)playOrPauseEvent: (MPSkipIntervalCommandEvent *)skipEvent {
+    NSLog(@"playOrPauseEvent");
+    
 }
 
 #pragma mark - Accessors
