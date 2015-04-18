@@ -174,6 +174,7 @@
     
     if(self.bgTask == UIBackgroundTaskInvalid)
         self.bgTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
+            NSLog(@"Expiration handler called (download task) %f",[[UIApplication sharedApplication] backgroundTimeRemaining]);
             [[UIApplication sharedApplication] endBackgroundTask:self.bgTask];
             self.bgTask = UIBackgroundTaskInvalid;
         }];

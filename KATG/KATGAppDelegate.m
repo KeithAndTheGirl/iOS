@@ -44,11 +44,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.task=[application beginBackgroundTaskWithExpirationHandler:^{
-        NSLog(@"Expiration handler called %f",[application backgroundTimeRemaining]);
-        [application endBackgroundTask:self.task];
-        self.task=UIBackgroundTaskInvalid;
-    }];
+//    self.task=[application beginBackgroundTaskWithExpirationHandler:^{
+//        NSLog(@"Expiration handler called (didFinishLaunchingWithOptions) %f",[application backgroundTimeRemaining]);
+//        [application endBackgroundTask:self.task];
+//        self.task=UIBackgroundTaskInvalid;
+//    }];
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self.window makeKeyAndVisible];
     
@@ -194,7 +194,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     self.task=[application beginBackgroundTaskWithExpirationHandler:^{
-        NSLog(@"Expiration handler called %f",[application backgroundTimeRemaining]);
+        NSLog(@"Expiration handler called (applicationDidEnterBackground) %f",[application backgroundTimeRemaining]);
         [application endBackgroundTask:self.task];
         self.task=UIBackgroundTaskInvalid;
     }];
