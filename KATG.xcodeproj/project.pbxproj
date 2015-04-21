@@ -192,6 +192,7 @@
 		01FC49CA19D1ED82002F42C7 /* KATGAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC49C919D1ED82002F42C7 /* KATGAlert.m */; };
 		03A219851AAFA5B6005DC2D4 /* DebugEntitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03A219831AAFA5B6005DC2D4 /* DebugEntitlements.plist */; };
 		03A219861AAFA5B6005DC2D4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03A219841AAFA5B6005DC2D4 /* Entitlements.plist */; };
+		03BB35391AE6BAA0005AE179 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03BB35381AE6BAA0005AE179 /* Crashlytics.framework */; };
 		03EE89351AB928C60009CDF7 /* Pushwoosh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EE89341AB928C60009CDF7 /* Pushwoosh.framework */; };
 		03FA715E1AA418B000A5702E /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03FA715D1AA418B000A5702E /* MobileCoreServices.framework */; };
 		22192ECB167441CA00D2B1C1 /* UICollectionView+TDAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 22192ECA167441CA00D2B1C1 /* UICollectionView+TDAdditions.m */; };
@@ -512,6 +513,7 @@
 		01FC49C919D1ED82002F42C7 /* KATGAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAlert.m; path = "Custom Views/KATGAlert.m"; sourceTree = "<group>"; };
 		03A219831AAFA5B6005DC2D4 /* DebugEntitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DebugEntitlements.plist; sourceTree = "<group>"; };
 		03A219841AAFA5B6005DC2D4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		03BB35381AE6BAA0005AE179 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		03EE89341AB928C60009CDF7 /* Pushwoosh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pushwoosh.framework; sourceTree = "<group>"; };
 		03FA715D1AA418B000A5702E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		22192EC9167441CA00D2B1C1 /* UICollectionView+TDAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UICollectionView+TDAdditions.h"; path = "UICollectionView+TDAdditions/UICollectionView+TDAdditions.h"; sourceTree = "<group>"; };
@@ -566,7 +568,7 @@
 		9108997015EAE15500FB57C3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9108997215EAE15500FB57C3 /* KATG-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KATG-Prefix.pch"; sourceTree = "<group>"; };
 		9108997315EAE15500FB57C3 /* KATGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KATGAppDelegate.h; sourceTree = "<group>"; };
-		9108997415EAE15500FB57C3 /* KATGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KATGAppDelegate.m; sourceTree = "<group>"; };
+		9108997415EAE15500FB57C3 /* KATGAppDelegate.m */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.objc; path = KATGAppDelegate.m; sourceTree = "<group>"; };
 		9108997F15EAE15500FB57C3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		910899A815EAE2BD00FB57C3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		910899BF15EAE44C00FB57C3 /* KATG.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KATG.xcdatamodel; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 			files = (
 				03FA715E1AA418B000A5702E /* MobileCoreServices.framework in Frameworks */,
 				03EE89351AB928C60009CDF7 /* Pushwoosh.framework in Frameworks */,
+				03BB35391AE6BAA0005AE179 /* Crashlytics.framework in Frameworks */,
 				0157F02E1960EEE700A0A9D1 /* JavaScriptCore.framework in Frameworks */,
 				01B1CFF7195D91EB00B2268A /* MessageUI.framework in Frameworks */,
 				01EC330818A9990500156A3E /* libz.dylib in Frameworks */,
@@ -1178,6 +1181,7 @@
 		910899C115EAE58600FB57C3 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				03BB35381AE6BAA0005AE179 /* Crashlytics.framework */,
 				03EE89341AB928C60009CDF7 /* Pushwoosh.framework */,
 				0157F0141960EB3C00A0A9D1 /* XCDYouTubeKit */,
 				012B4EFE1857A2ED00B59FC5 /* AFNetworking */,
@@ -1363,6 +1367,7 @@
 				9108995A15EAE15500FB57C3 /* Sources */,
 				9108995B15EAE15500FB57C3 /* Frameworks */,
 				9108995C15EAE15500FB57C3 /* Resources */,
+				03BB353A1AE6BCDB005AE179 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1542,6 +1547,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		03BB353A1AE6BCDB005AE179 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 6529bbf53de23f5a315abe44c124b8b8f99e12ac e68873b628036f16a9b693e9a58c945202b3060ce8a9b336eee8e53ef294ffa2";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9108995A15EAE15500FB57C3 /* Sources */ = {

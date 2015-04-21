@@ -25,7 +25,7 @@
 #import "KATGDataStore.h"
 #import "KATGShow.h"
 #import <MediaPlayer/MediaPlayer.h>
-
+#import <Crashlytics/Crashlytics.h>
 #import "KATGSeriesViewController.h"
 
 #import <Pushwoosh/PushNotificationManager.h>
@@ -44,11 +44,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    self.task=[application beginBackgroundTaskWithExpirationHandler:^{
-//        NSLog(@"Expiration handler called (didFinishLaunchingWithOptions) %f",[application backgroundTimeRemaining]);
-//        [application endBackgroundTask:self.task];
-//        self.task=UIBackgroundTaskInvalid;
-//    }];
+    [Crashlytics startWithAPIKey:@"6529bbf53de23f5a315abe44c124b8b8f99e12ac"];
+    
     [[UIApplication sharedApplication] beginReceivingRemoteControlEvents];
     [self.window makeKeyAndVisible];
     
