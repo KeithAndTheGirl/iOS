@@ -351,7 +351,8 @@ NSString *const KATGDataStoreShowDidChangeNotification = @"KATGDataStoreShowDidC
 															   } failure:^(ESJSONOperation *op) {
 																   ShowsLog(@"Shows Download Failed %@", op.error);
 																   [self handleError:op.error];
-                                                                   failure();
+                                                                   if(failure)
+                                                                       failure();
 															   }];
 	[self.networkQueue addOperation:op];
 }

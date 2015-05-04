@@ -68,7 +68,7 @@ static NSMutableDictionary *urlsWithError = nil;
 //    [myRequest setValue:myCookie forHTTPHeaderField:@"Cookie"];
     
     if(![[myRequest.allHTTPHeaderFields allKeys] containsObject:@"Cookie"]) {
-        if([[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:myRequest.URL] count] > 0) {
+        if(myRequest.URL && [[[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:myRequest.URL] count] > 0) {
             NSMutableArray *cookiesArray = [NSMutableArray array];
             for(NSHTTPCookie *cookie in [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:myRequest.URL]) {
                 NSString *cookieString = [NSString stringWithFormat:@"%@=%@", cookie.name, cookie.value];

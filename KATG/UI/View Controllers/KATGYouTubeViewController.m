@@ -13,6 +13,7 @@
 #import "KATGPlaybackManager.h"
 #import "KATGShowViewController.h"
 #import "KATGShow.h"
+#import "XMLDictionary.h"
 
 NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
@@ -50,18 +51,23 @@ NSString *const kKATGYoutubeTableViewCellIdentifier = @"KATGYouTubeTableCell";
 
 #pragma mak logic
 // gdata.youtube.com/feeds/api/users/keithandthegirl/uploads?&v=2&max-results=50&alt=jsonc
+// www.youtube.com/feeds/videos.xml?user=keithandthegirl
 -(void)reload {
     dispatch_async(dispatch_get_main_queue(), ^(void) {
         spinnerView.hidden = [channelItems count] > 0;
 	});
-    NSDictionary *parameters = @{@"v": @"2",
-                                 @"max-results": @"50",
-                                 @"alt": @"jsonc"};
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://gdata.youtube.com"]];
-    [manager GET:@"feeds/api/users/keithandthegirl/uploads"
-      parameters:parameters
+//    NSDictionary *parameters = @{@"v": @"2",
+//                                 @"max-results": @"50",
+//                                 @"alt": @"jsonc"};
+//    AFXMLRequestOperation
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://www.youtube.com"]];
+    manager.responseSerializer = [AFXMLParserResponseSerializer new];
+    [manager.responseSerializer setAcceptableContentTypes:[NSSet setWithObject:@"application/atom+xml"]];
+    [manager GET:@"feeds/videos.xml?user=keithandthegirl"
+      parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             channelItems = responseObject[@"data"][@"items"];
+             NSDictionary *dic = [NSDictionary dictionaryWithXMLData:operation.responseData];
+             channelItems = dic[@"entry"];
              [tableView reloadData];
              spinnerView.hidden = YES;
              [refreshControl endRefreshing];

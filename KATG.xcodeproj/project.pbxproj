@@ -190,6 +190,7 @@
 		01F827D4195A23B300BDCFBA /* feedback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D2195A23B300BDCFBA /* feedback@2x.png */; };
 		01F827D5195A23B300BDCFBA /* messages@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 01F827D3195A23B300BDCFBA /* messages@2x.png */; };
 		01FC49CA19D1ED82002F42C7 /* KATGAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 01FC49C919D1ED82002F42C7 /* KATGAlert.m */; };
+		0343AA741AF7885300539FD6 /* XMLDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0343AA731AF7885300539FD6 /* XMLDictionary.m */; };
 		03A219851AAFA5B6005DC2D4 /* DebugEntitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03A219831AAFA5B6005DC2D4 /* DebugEntitlements.plist */; };
 		03A219861AAFA5B6005DC2D4 /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03A219841AAFA5B6005DC2D4 /* Entitlements.plist */; };
 		03BB35391AE6BAA0005AE179 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03BB35381AE6BAA0005AE179 /* Crashlytics.framework */; };
@@ -511,6 +512,8 @@
 		01F827D3195A23B300BDCFBA /* messages@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "messages@2x.png"; sourceTree = "<group>"; };
 		01FC49C819D1ED82002F42C7 /* KATGAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KATGAlert.h; path = "Custom Views/KATGAlert.h"; sourceTree = "<group>"; };
 		01FC49C919D1ED82002F42C7 /* KATGAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KATGAlert.m; path = "Custom Views/KATGAlert.m"; sourceTree = "<group>"; };
+		0343AA721AF7885300539FD6 /* XMLDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLDictionary.h; sourceTree = "<group>"; };
+		0343AA731AF7885300539FD6 /* XMLDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLDictionary.m; sourceTree = "<group>"; };
 		03A219831AAFA5B6005DC2D4 /* DebugEntitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DebugEntitlements.plist; sourceTree = "<group>"; };
 		03A219841AAFA5B6005DC2D4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		03BB35381AE6BAA0005AE179 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
@@ -991,6 +994,15 @@
 			name = Episodes;
 			sourceTree = "<group>";
 		};
+		0343AA711AF7885300539FD6 /* XMLDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				0343AA721AF7885300539FD6 /* XMLDictionary.h */,
+				0343AA731AF7885300539FD6 /* XMLDictionary.m */,
+			);
+			path = XMLDictionary;
+			sourceTree = "<group>";
+		};
 		22192EC71674419E00D2B1C1 /* UICollectionView+TDAdditions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1181,6 +1193,7 @@
 		910899C115EAE58600FB57C3 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				0343AA711AF7885300539FD6 /* XMLDictionary */,
 				03BB35381AE6BAA0005AE179 /* Crashlytics.framework */,
 				03EE89341AB928C60009CDF7 /* Pushwoosh.framework */,
 				0157F0141960EB3C00A0A9D1 /* XCDYouTubeKit */,
@@ -1658,6 +1671,7 @@
 				919E7E7E16F24F26007B7805 /* KATGImageScalingOperation.m in Sources */,
 				22D6BBD81716055900A48B35 /* KATGButton.m in Sources */,
 				018C35F618E94E8E00E218D8 /* KATGShowGuestCell.m in Sources */,
+				0343AA741AF7885300539FD6 /* XMLDictionary.m in Sources */,
 				018C35B418E7E9FA00E218D8 /* KATGScheduleViewController.m in Sources */,
 				012B4F251857A2ED00B59FC5 /* AFNetworkReachabilityManager.m in Sources */,
 				91BE199517235BAD006CD2B1 /* KATGDownloadToken.m in Sources */,

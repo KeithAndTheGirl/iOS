@@ -13,7 +13,7 @@
 
 - (void)configureWithDictionary:(NSDictionary *)itemDictionary {
     titleLabel.text = itemDictionary[@"title"];
-    [pictureView setImageWithURL:[NSURL URLWithString:itemDictionary[@"thumbnail"][@"sqDefault"]]];
+    [pictureView setImageWithURL:[NSURL URLWithString:itemDictionary[@"media:group"][@"media:thumbnail"][@"_url"]]];
 }
 
 @end

@@ -40,7 +40,7 @@
 	episodeInfo[MPMediaItemPropertyPodcastTitle] = @"Keith and The Girl";
 	episodeInfo[MPMediaItemPropertyMediaType] = @(MPMediaTypeAnyVideo);
 		episodeInfo[MPMediaItemPropertyTitle] = self.dataDictionary[@"title"];
-		episodeInfo[MPMediaItemPropertyPlaybackDuration] = self.dataDictionary[@"duration"];
+//		episodeInfo[MPMediaItemPropertyPlaybackDuration] = self.dataDictionary[@"duration"];
 	UIImage *image = [UIImage imageNamed:@"iTunesArtwork"];
 	if (image)
 	{
@@ -57,7 +57,7 @@
     webView.mediaPlaybackAllowsAirPlay=YES;
     webView.scrollView.bounces=NO;
     
-    NSString *linkObj= [NSString stringWithFormat:@"http://www.youtube.com/v/%@", self.dataDictionary[@"id"]];
+    NSString *linkObj= [NSString stringWithFormat:@"http://www.youtube.com/v/%@", self.dataDictionary[@"yt:videoId"]];
     NSLog(@"linkObj1_________________%@",linkObj);
     NSString *embedHTML = @"\
     <html><head>\
@@ -69,7 +69,7 @@
     [webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://youtube.com"]];
 
     nameLabel.text = self.dataDictionary[@"title"];
-    dateLabel.text = self.dataDictionary[@"recorded"];
+    dateLabel.text = [self.dataDictionary[@"published"] substringToIndex:10];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
