@@ -851,31 +851,7 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
 - (void)doReload
 {
 	NSParameterAssert([NSThread isMainThread]);
-	NSMutableIndexSet *indexSet = [NSMutableIndexSet indexSet];
-	if (self.shouldReloadDescription)
-	{
-		[indexSet addIndex:KATGShowDetailsSectionDescription];
-	}
-	if (self.shouldReloadImages)
-	{
-		[indexSet addIndex:KATGShowDetailsSectionImages];
-	}
-	if (self.shouldReloadGuests)
-	{
-		[indexSet addIndex:KATGShowDetailsSectionGuests];
-	}
-	if (self.shouldReloadDownload)
-	{
-		[indexSet addIndex:KATGShowDetailsSectionDownload];
-	}
-	if ([indexSet count] == KATGShowDetailsSectionMaxCount)
-	{
-		[self.tableView reloadData];
-	}
-	else
-	{
-		[self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationAutomatic];
-	}
+    [self.tableView reloadData];
 	[self clearReloadFlags];
 }
 
