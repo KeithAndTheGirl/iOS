@@ -91,8 +91,9 @@ static NSMutableDictionary *urlsWithError = nil;
 // overload didReceive data
 - (void)connection:(NSURLConnection *)_connection didReceiveData:(NSData *)data {
     NSString *result = [urlsWithError valueForKey:[_connection.currentRequest.URL absoluteString]];
-    if(result && [result length] == 0) {
-        [urlsWithError setObject:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    if(result && [result length] == 0 && [string length] > 0) {
+        [urlsWithError setObject:string
                           forKey:[_connection.currentRequest.URL absoluteString]];
         
 //        NSLog(@"KATGURLProtocol addError: %@ for URL: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding], [_connection.currentRequest.URL absoluteString]);
