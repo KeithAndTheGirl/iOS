@@ -132,7 +132,8 @@ static NSString *imageThumbnailCellIdentifier = @"imageThumbnailCellIdentifier";
 
 - (void)scrollToImageAtIndex:(NSInteger)index animated:(BOOL)animated
 {
-	[self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
+    if(index >= 0 && index < [self.images count])
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:animated];
 }
 
 - (UIView *)viewForImageAtIndex:(NSInteger)index
