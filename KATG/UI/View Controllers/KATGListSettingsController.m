@@ -117,7 +117,7 @@
             KATGShow *show = self.downloadedEpisodes[indexPath.row-2];
             cell.indentationLevel = 2;
             cell.textLabel.font = [UIFont systemFontOfSize:12];
-            cell.textLabel.text = show.title;
+            cell.textLabel.text = [NSString stringWithFormat:@"%@: %@", show.number, show.title];
             if([self.selectedEpisodes containsObject:show])
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             else
