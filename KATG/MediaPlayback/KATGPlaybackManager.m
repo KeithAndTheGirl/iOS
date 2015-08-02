@@ -284,15 +284,15 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 			//url = [NSURL URLWithString:@"http://stream.keithandthegirl.com:8000/stream/1/"];
 			NSParameterAssert(url);
 		}
-		else if ([currentShow getFilePath])
+		else if (currentShow.downloaded)
 		{
 			url = [NSURL fileURLWithPath:[currentShow getFilePath]];
             NSLog(@"Start playing local file: %@", [currentShow getFilePath]);
 		}
 		else
 		{
+            url = [NSURL URLWithString:currentShow.media_url];
             self.state = KATGAudioPlayerStateLoading;
-            return;
 		}
         
         self.audioPlaybackController = [KATGAudioPlayerController audioPlayerWithURL:url];
@@ -430,17 +430,17 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 	{
 		episodeInfo[MPMediaItemPropertyAlbumTrackNumber] = currentShow.number;
 	}
-    NSString *imageLink = [[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"cover-%@", currentShow.series_id]];
-    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageLink]]];
+//    NSString *imageLink = [[NSUserDefaults standardUserDefaults] valueForKey:[NSString stringWithFormat:@"cover-%@", currentShow.series_id]];
+//    UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageLink]]];
     
-	if (image)
-	{
-		MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
-		if (artwork)
-		{
-			episodeInfo[MPMediaItemPropertyArtwork] = artwork;
-		}
-	}
+//	if (image)
+//	{
+//		MPMediaItemArtwork *artwork = [[MPMediaItemArtwork alloc] initWithImage:image];
+//		if (artwork)
+//		{
+//			episodeInfo[MPMediaItemPropertyArtwork] = artwork;
+//		}
+//	}
     
 	[[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:episodeInfo];
 }

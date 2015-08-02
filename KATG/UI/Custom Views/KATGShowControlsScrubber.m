@@ -62,8 +62,8 @@
 
 - (void)setValue:(float)value animated:(BOOL)animated
 {
-    if(value > self.loadedValue)
-        value = self.loadedValue - 10;
+//    if(value > self.loadedValue)
+//        value = self.loadedValue - 10;
 	[super setValue:value animated:animated];
 	[self updateAccessibilityValue];
 	self.currentTimeLabel.text = [self currentTimeLabelText];

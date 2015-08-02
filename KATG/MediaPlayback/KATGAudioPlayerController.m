@@ -87,7 +87,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 	if (_avPlayerItem != nil)
 	{
 		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath context:KATGAudioPlayerStatusObserverContext];
-		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
+//		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
 		[[NSNotificationCenter defaultCenter] removeObserver:self.didEndObserver];
 	}
 	if (self.avPlayer != nil)
@@ -166,7 +166,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		if (_avPlayerItem != nil)
 		{
 			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath context:KATGAudioPlayerStatusObserverContext];
-			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
+//			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
 
 			[[NSNotificationCenter defaultCenter] removeObserver:self.didEndObserver];
 			self.didEndObserver = nil;
@@ -175,9 +175,9 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		if (_avPlayerItem != nil)
 		{
 			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath options:0 context:KATGAudioPlayerStatusObserverContext];
-			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerLoadedTime options:0 context:KATGAudioPlayerStatusObserverContext];
+//			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerLoadedTime options:0 context:KATGAudioPlayerStatusObserverContext];
             
-            self.availabelDuration = _avPlayerItem.asset.duration;
+//            self.availabelDuration = _avPlayerItem.asset.duration;
 			__weak KATGAudioPlayerController *weakSelf = self;
 			self.didEndObserver = [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:_avPlayerItem queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
 				weakSelf.state = KATGAudioPlayerStateDone;
@@ -200,35 +200,8 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		if (_avPlayer != nil)
 		{
 			[_avPlayer addObserver:self forKeyPath:KATGAudioPlayerRateKeyPath options:0 context:KATGAudioPlayerRateObserverContext];
-
-			__weak KATGAudioPlayerController *weakSelf = self;
-			self.timeObserver = [_avPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 10) queue:nil usingBlock:^(CMTime time) {
-				weakSelf.currentTime = time;
-                
-                if ([weakSelf.url checkResourceIsReachableAndReturnError:nil]) {
-                    AVAsset *asset = [AVAsset assetWithURL:weakSelf.url];
-                    double currentDuration = CMTimeGetSeconds(weakSelf.avPlayerItem.asset.duration);
-                    double fileDuration = CMTimeGetSeconds(asset.duration);
-                    double currentTime = CMTimeGetSeconds(weakSelf.currentTime);
-                    if((fileDuration - currentDuration > 5*60) ||
-                       (currentDuration < fileDuration-1 && currentDuration - currentTime < 10) ||
-                       (currentDuration < fileDuration-1 && fileDuration > weakSelf.totalDurationSeconds-1)) {
-                            BOOL currentlyPlaying = weakSelf.avPlayer.rate > 0;
-                            if(currentlyPlaying)
-                                [weakSelf.avPlayer pause];
-                            AVPlayerItem *newItem = [AVPlayerItem playerItemWithAsset:asset];
-                            [weakSelf.avPlayer replaceCurrentItemWithPlayerItem:newItem];
-                            [weakSelf.avPlayer seekToTime:weakSelf.currentTime];
-                            if(currentlyPlaying)
-                                [weakSelf.avPlayer play];
-                            weakSelf.avPlayerItem = newItem;
-                            NSLog(@"New length: %@", [weakSelf stringFromTime:asset.duration]);
-                    }
-                }
-			}];
 		}
 		self.currentTime = CMTimeMake(0, 0);
-//		self.availabelDuration = CMTimeMake(0, 0);
 	}
 }
 
@@ -256,8 +229,8 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 {
 	CGFloat rate = self.avPlayer.rate;
 	AVPlayerItemStatus status = self.avPlayerItem.status;
-    if(self.avPlayerItem.duration.value > 0)
-        self.availabelDuration = self.avPlayerItem.duration;
+//    if(self.avPlayerItem.duration.value > 0)
+//        self.availabelDuration = self.avPlayerItem.duration;
     self.error = self.avPlayerItem.error?self.avPlayerItem.error:self.avPlayer.error;
 	if (status == AVPlayerItemStatusFailed)
 	{
@@ -293,6 +266,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    NSLog(@"object: %@, key: %@, change: %@", object, keyPath, change);
 	if ((context == KATGAudioPlayerStatusObserverContext) ||
 	    (context == KATGAudioPlayerRateObserverContext))
 	{
@@ -319,7 +293,6 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 	{   
         AVURLAsset *asset = [AVURLAsset assetWithURL:self.url];
         self.avPlayerItem = [AVPlayerItem playerItemWithAsset:asset];
-        NSLog(@"First region: %@", [self stringFromTime:asset.duration]);
 		if (self.avPlayerItem == nil)
 		{
 			NSLog(@"Failed to create avplayeritem with URL %@", self.url);
