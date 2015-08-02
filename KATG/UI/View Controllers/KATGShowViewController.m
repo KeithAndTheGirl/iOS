@@ -989,11 +989,11 @@ NS_INLINE bool statusHasFlag(KATGShowObjectStatus status, KATGShowObjectStatus f
                     [[UIApplication sharedApplication] presentLocalNotificationNow:ntfy];
                 }
                 self.downloadToken = nil;
-                [self updateControlStates];
             }
             else {
                 [UIAlertView errorWithTitle:@"Download error" error:error];
             }
+            [self updateControlStates];
 			NSParameterAssert([NSThread isMainThread]);
 			typeof(*self) *strongSelf = weakSelf;
 			if (strongSelf)
