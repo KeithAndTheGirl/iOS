@@ -558,7 +558,7 @@ typedef enum {
         {
             currentTime = 0.0;
         }
-        Float64 duration = [self.show.duration floatValue];
+        Float64 duration = [[self.show duration] floatValue];
         if (isnan(duration))
         {
             duration = 1.0;
@@ -583,7 +583,7 @@ typedef enum {
             {
                 currentTime = 0.0;
             }
-			Float64 wholeDuration = [self.show.duration floatValue];
+            Float64 wholeDuration = [[self.show duration] floatValue];
             Float64 availabelDuration = CMTimeGetSeconds([[KATGPlaybackManager sharedManager] availabelDuration]);
 			
 			self.controlsView.positionSlider.maximumValue = wholeDuration;
@@ -735,7 +735,7 @@ typedef enum {
 	}
     
     Float64 currentTime = [self.show.lastPlaybackTime floatValue];
-    Float64 wholeDuration = [self.show.duration floatValue];
+    Float64 wholeDuration = [[self.show duration] floatValue];
     Float64 availabelDuration = CMTimeGetSeconds([[KATGPlaybackManager sharedManager] availabelDuration]);
     
     self.controlsView.positionSlider.maximumValue = wholeDuration;

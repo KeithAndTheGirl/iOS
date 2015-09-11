@@ -87,7 +87,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 	if (_avPlayerItem != nil)
 	{
 		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath context:KATGAudioPlayerStatusObserverContext];
-//		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
+		[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
 		[[NSNotificationCenter defaultCenter] removeObserver:self.didEndObserver];
 	}
 	if (self.avPlayer != nil)
@@ -166,7 +166,7 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		if (_avPlayerItem != nil)
 		{
 			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath context:KATGAudioPlayerStatusObserverContext];
-//			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
+			[_avPlayerItem removeObserver:self forKeyPath:KATGAudioPlayerLoadedTime context:KATGAudioPlayerStatusObserverContext];
 
 			[[NSNotificationCenter defaultCenter] removeObserver:self.didEndObserver];
 			self.didEndObserver = nil;
@@ -175,9 +175,8 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		if (_avPlayerItem != nil)
 		{
 			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerStatusKeyPath options:0 context:KATGAudioPlayerStatusObserverContext];
-//			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerLoadedTime options:0 context:KATGAudioPlayerStatusObserverContext];
+			[_avPlayerItem addObserver:self forKeyPath:KATGAudioPlayerLoadedTime options:0 context:KATGAudioPlayerStatusObserverContext];
             
-//            self.availabelDuration = _avPlayerItem.asset.duration;
 			__weak KATGAudioPlayerController *weakSelf = self;
 			self.didEndObserver = [[NSNotificationCenter defaultCenter] addObserverForName:AVPlayerItemDidPlayToEndTimeNotification object:_avPlayerItem queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
 				weakSelf.state = KATGAudioPlayerStateDone;
@@ -199,8 +198,13 @@ static void *KATGAudioPlayerRateObserverContext = @"RateObserverContext";
 		_avPlayer = avPlayer;
 		if (_avPlayer != nil)
 		{
-			[_avPlayer addObserver:self forKeyPath:KATGAudioPlayerRateKeyPath options:0 context:KATGAudioPlayerRateObserverContext];
+            [_avPlayer addObserver:self forKeyPath:KATGAudioPlayerRateKeyPath options:0 context:KATGAudioPlayerRateObserverContext];
+            __weak KATGAudioPlayerController *weakSelf = self;
+            self.timeObserver = [_avPlayer addPeriodicTimeObserverForInterval:CMTimeMake(1, 10) queue:nil usingBlock:^(CMTime time) {
+                weakSelf.currentTime = time;
+            }];
 		}
+
 		self.currentTime = CMTimeMake(0, 0);
 	}
 }
@@ -247,7 +251,14 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
     }
 	if (KATGFloatEqual(rate, 0.0f))
 	{
-        if(self.state != KATGAudioPlayerStateLoading) {
+        if(self.state == KATGAudioPlayerStatePlaying) {
+            [self.avPlayer prerollAtRate:1 completionHandler:^(BOOL finished) {
+                if(finished )
+                    [self.avPlayer play];
+            }];
+            self.state = KATGAudioPlayerStateLoading;
+        }
+        else if(self.state != KATGAudioPlayerStateLoading) {
             self.state = KATGAudioPlayerStatePaused;
         }
 	}
@@ -279,6 +290,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
 	}
 }
+
 
 #pragma mark - Actions
 
@@ -327,7 +339,7 @@ NS_INLINE BOOL KATGFloatEqual(float A, float B)
 - (void)seekToTime:(CMTime)currentTime
 {
 	[self.avPlayer seekToTime:currentTime];
-	_currentTime = currentTime;
+    _currentTime = currentTime;
 }
 
 @end

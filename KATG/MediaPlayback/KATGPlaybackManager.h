@@ -43,6 +43,8 @@ extern NSString *const KATGLiveShowStreamingServerOfflineNotification;
 
 - (void)seekToTime:(CMTime)currentTime;
 
+- (Float64)durationInSeconds;
+
 - (void)play;
 - (void)pause;
 

@@ -378,7 +378,6 @@ NSString *const KATGLiveShowStreamingServerOfflineNotification = @"KATGLiveShowS
 - (void)player:(KATGAudioPlayerController *)player didChangeDuration:(CMTime)duration
 {
     self.currentShow.duration = @(CMTimeGetSeconds(duration));
-    self.audioPlaybackController.totalDurationSeconds = CMTimeGetSeconds(duration);
 	[self setPlaybackInfo:self.currentShow];
 }
 

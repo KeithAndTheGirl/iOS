@@ -73,11 +73,13 @@ NSString *const KATGShowEpisodeIDAttributeName = @"episode_id";
 -(NSNumber*)duration {
     NSString *key = [NSString stringWithFormat:@"duration-%@", self.episode_id];
     NSNumber *value = [[NSUserDefaults standardUserDefaults] valueForKey:key];
-    if(value == nil && self.downloaded) {
-        NSURL *mediaURL = [[NSURL alloc] initFileURLWithPath:[self getFilePath]];
-        AVAsset *asset = [AVAsset assetWithURL:mediaURL];
-        double value = CMTimeGetSeconds(asset.duration);
-        return @(value);
+    if(value == nil) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURL *mediaURL = [NSURL URLWithString:self.media_url];
+            AVAsset *asset = [AVAsset assetWithURL:mediaURL];
+            double value = CMTimeGetSeconds(asset.duration);
+            [self setDuration:[NSNumber numberWithFloat:value]];
+        });
     }
 //    NSLog(@"Return Duration %@ for episode %@", value, self.episode_id);
     return value;
